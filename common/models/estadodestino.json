@@ -1,0 +1,53 @@
+{
+  "name": "Estadodestino",
+  "plural": "Estadodestinos",
+  "base": "PersistedModel",
+  "idInjection": false,
+  "mysql": {
+    "schema": "infogeo",
+    "table": "estadodestino"
+  },
+  "properties": {
+    "idestadodestino": {
+      "type": "Number",
+      "id": true,
+      "required": true,
+      "length": null,
+      "precision": 10,
+      "scale": 0,
+      "mysql": {
+        "columnName": "idEstadoDestino",
+        "dataType": "int",
+        "dataLength": null,
+        "dataPrecision": 10,
+        "dataScale": 0,
+        "nullable": "NO"
+      }
+    },
+    "nombreestado": {
+      "type": "String",
+      "required": true,
+      "length": 135,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "nombreEstado",
+        "dataType": "varchar",
+        "dataLength": 135,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "NO"
+      }
+    }
+  },
+  "validations": [],
+  "relations": {
+    "destinos": {
+      "type": "hasMany",
+      "model": "Destino",
+      "foreignKey": "idestadodestino"
+    }
+  },
+  "acls": [],
+  "methods": []
+}

@@ -1,0 +1,69 @@
+{
+  "name": "Audio",
+  "plural": "Audios",
+  "base": "PersistedModel",
+  "idInjection": false,
+  "mysql": {
+    "schema": "infogeo",
+    "table": "audio"
+  },
+  "properties": {
+    "idaudio": {
+      "type": "Number",
+      "id": true,
+      "required": true,
+      "length": null,
+      "precision": 10,
+      "scale": 0,
+      "mysql": {
+        "columnName": "idAudio",
+        "dataType": "int",
+        "dataLength": null,
+        "dataPrecision": 10,
+        "dataScale": 0,
+        "nullable": "NO"
+      }
+    },
+    "idbiblioteca": {
+      "type": "Number",
+      "required": true,
+      "length": null,
+      "precision": 10,
+      "scale": 0,
+      "mysql": {
+        "columnName": "idBiblioteca",
+        "dataType": "int",
+        "dataLength": null,
+        "dataPrecision": 10,
+        "dataScale": 0,
+        "nullable": "NO"
+      }
+    },
+    "ruta": {
+      "type": "String",
+      "id": false,
+      "required": true,
+      "length": 240,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "ruta",
+        "dataType": "varchar",
+        "dataLength": 240,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "NO"
+      }
+    }
+  },
+  "validations": [],
+  "relations": {
+    "textos": {
+      "type": "hasMany",
+      "model": "AudioTieneTexto",
+      "foreignKey": "idaudio"
+    }
+  },
+  "acls": [],
+  "methods": []
+}

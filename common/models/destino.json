@@ -1,0 +1,203 @@
+{
+  "name": "Destino",
+  "plural": "Destinos",
+  "base": "PersistedModel",
+  "idInjection": false,
+  "mysql": {
+    "schema": "infogeo",
+    "table": "destino"
+  },
+  "mixins": {
+    "ObjectId": true
+  },
+  "properties": {
+    "iddestino": {
+      "type": "Number",
+      "id": true,
+      "required": true,
+      "length": null,
+      "precision": 10,
+      "scale": 0,
+      "mysql": {
+        "columnName": "idDestino",
+        "dataType": "int",
+        "dataLength": null,
+        "dataPrecision": 10,
+        "dataScale": 0,
+        "nullable": "NO"
+      }
+    },
+    "idestadodestino": {
+      "type": "Number",
+      "required": true,
+      "length": null,
+      "precision": 10,
+      "scale": 0,
+      "mysql": {
+        "columnName": "idEstadoDestino",
+        "dataType": "int",
+        "dataLength": null,
+        "dataPrecision": 10,
+        "dataScale": 0,
+        "nullable": "NO"
+      }
+    },
+    "idcliente": {
+      "type": "Number",
+      "required": true,
+      "length": null,
+      "precision": 10,
+      "scale": 0,
+      "mysql": {
+        "columnName": "idCliente",
+        "dataType": "int",
+        "dataLength": null,
+        "dataPrecision": 10,
+        "dataScale": 0,
+        "nullable": "NO"
+      }
+    },
+    "idbiblioteca": {
+      "type": "Number",
+      "required": true,
+      "length": null,
+      "precision": 10,
+      "scale": 0,
+      "mysql": {
+        "columnName": "idBiblioteca",
+        "dataType": "int",
+        "dataLength": null,
+        "dataPrecision": 10,
+        "dataScale": 0,
+        "nullable": "NO"
+      }
+    },
+    "icono": {
+      "type": "String",
+      "required": true,
+      "length": 240,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "icono",
+        "dataType": "varchar",
+        "dataLength": 240,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "NO"
+      }
+    },
+    "color": {
+      "type": "String",
+      "id": false,
+      "required": true,
+      "length": 24,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "color",
+        "dataType": "varchar",
+        "dataLength": 24,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "NO"
+      }
+    },
+    "tienepanel": {
+      "type": "Number",
+      "required": true,
+      "length": null,
+      "precision": 3,
+      "scale": 0,
+      "mysql": {
+        "columnName": "tienePanel",
+        "dataType": "tinyint",
+        "dataLength": null,
+        "dataPrecision": 3,
+        "dataScale": 0,
+        "nullable": "NO"
+      }
+    },
+    "nombre": {
+      "type": "String",
+      "required": true,
+      "length": 450,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "nombre",
+        "dataType": "varchar",
+        "dataLength": 450,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "NO"
+      }
+    },
+    "tipogeometria": {
+      "type": "String",
+      "required": true,
+      "length": 1500,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "tipoGeometria",
+        "dataType": "varchar",
+        "dataLength": 1500,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "NO"
+      }
+    },
+    "geometria": {
+      "type": "String",
+      "id": false,
+      "required": true,
+      "length": null,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "geometria",
+        "dataType": "geometry",
+        "dataLength": null,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "NO"
+      }
+    }
+  },
+  "validations": [],
+  "relations": {
+    "textos": {
+      "type": "hasMany",
+      "model": "DestinoTieneTexto",
+      "foreignKey": "iddestino"
+    },
+    "bibliotecamultimedia": {
+      "type": "belongsTo",
+      "model": "Bibliotecamultimedia",
+      "foreignKey": "idbiblioteca"
+    },
+    "estado": {
+      "type": "belongsTo",
+      "model": "Estadodestino",
+      "foreignKey": "idestadodestino"
+    },
+    "cliente": {
+      "type": "belongsTo",
+      "model": "Cliente",
+      "foreignKey": "idcliente"
+    },
+    "subcategoria": {
+      "type": "belongsTo",
+      "model": "SubcategoriaTieneDestino",
+      "foreignKey": "iddestino"
+    },
+    "puntoshijos": {
+      "type": "hasMany",
+      "model": "DestinoTienePuntohijo",
+      "foreignKey": "iddestino"
+    }
+  },
+  "acls": [],
+  "methods": []
+}

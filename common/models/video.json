@@ -1,0 +1,74 @@
+{
+  "name": "Video",
+  "plural": "Videos",
+  "base": "PersistedModel",
+  "idInjection": false,
+  "mysql": {
+    "schema": "infogeo",
+    "table": "video"
+  },
+  "properties": {
+    "idvideo": {
+      "type": "Number",
+      "id": true,
+      "required": true,
+      "length": null,
+      "precision": 10,
+      "scale": 0,
+      "mysql": {
+        "columnName": "idVideo",
+        "dataType": "int",
+        "dataLength": null,
+        "dataPrecision": 10,
+        "dataScale": 0,
+        "nullable": "NO"
+      }
+    },
+    "idbiblioteca": {
+      "type": "Number",
+      "id": false,
+      "required": true,
+      "length": null,
+      "precision": 10,
+      "scale": 0,
+      "mysql": {
+        "columnName": "idBiblioteca",
+        "dataType": "int",
+        "dataLength": null,
+        "dataPrecision": 10,
+        "dataScale": 0,
+        "nullable": "NO"
+      }
+    },
+    "ruta": {
+      "type": "String",
+      "required": true,
+      "length": 240,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "ruta",
+        "dataType": "varchar",
+        "dataLength": 240,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "NO"
+      }
+    }
+  },
+  "validations": [],
+  "relations": {
+    "textos": {
+      "type": "hasMany",
+      "model": "VideoTieneTexto",
+      "foreignKey": "idvideo"
+    },
+    "audios": {
+      "type": "hasMany",
+      "model": "AudiovideoTieneLenguaje",
+      "foreignKey": "idvideo"
+    }
+  },
+  "acls": [],
+  "methods": []
+}

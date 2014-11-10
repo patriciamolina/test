@@ -1,0 +1,122 @@
+{
+  "_meta": {
+    "sources": [
+      "../common/models",
+      "./models"
+    ]
+  },
+  "User": {
+    "dataSource": "db"
+  },
+  "Application": {
+    "dataSource": "db"
+  },
+  "AccessToken": {
+    "dataSource": "db",
+    "public": false
+  },
+  "ACL": {
+    "dataSource": "db",
+    "public": false
+  },
+  "RoleMapping": {
+    "dataSource": "db",
+    "public": false
+  },
+  "Role": {
+    "dataSource": "db",
+    "public": false
+  },
+  "Audio": {
+    "dataSource": "INFOGEO",
+    "public": true
+  },
+  "Bibliotecamultimedia": {
+    "dataSource": "INFOGEO",
+    "public": true
+  },
+  "Categoria": {
+    "dataSource": "INFOGEO",
+    "public": true
+  },
+  "Cliente": {
+    "dataSource": "INFOGEO",
+    "public": true
+  },
+  "Codigoqr": {
+    "dataSource": "INFOGEO",
+    "public": true
+  },
+  "Destino": {
+    "dataSource": "INFOGEO",
+    "public": true
+  },
+  "Estadodestino": {
+    "dataSource": "INFOGEO",
+    "public": true
+  },
+  "Imagen": {
+    "dataSource": "INFOGEO",
+    "public": true
+  },
+  "Lenguaje": {
+    "dataSource": "INFOGEO",
+    "public": true
+  },
+  "Subcategoria": {
+    "dataSource": "INFOGEO",
+    "public": true
+  },
+  "Texto": {
+    "dataSource": "INFOGEO",
+    "public": true
+  },
+  "Tipotexto": {
+    "dataSource": "INFOGEO",
+    "public": true
+  },
+  "Video": {
+    "dataSource": "INFOGEO",
+    "public": true
+  },
+  "AudioTieneTexto": {
+    "dataSource": "INFOGEO",
+    "public": false
+  },
+  "AudiovideoTieneLenguaje": {
+    "dataSource": "INFOGEO",
+    "public": false
+  },
+  "CategoriaTieneTexto": {
+    "dataSource": "INFOGEO",
+    "public": false
+  },
+  "CodigoqrTieneTexto": {
+    "dataSource": "INFOGEO",
+    "public": false
+  },
+  "ImagenTieneTexto": {
+    "dataSource": "INFOGEO",
+    "public": false
+  },
+  "DestinoTieneTexto": {
+    "dataSource": "INFOGEO",
+    "public": false
+  },
+  "SubcategoriaTieneDestino": {
+    "dataSource": "INFOGEO",
+    "public": false
+  },
+  "SubcategoriaTieneTexto": {
+    "dataSource": "INFOGEO",
+    "public": false
+  },
+  "VideoTieneTexto": {
+    "dataSource": "INFOGEO",
+    "public": false
+  },
+  "DestinoTienePuntohijo": {
+    "dataSource": "INFOGEO",
+    "public": false
+  }
+}

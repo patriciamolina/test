@@ -1,0 +1,60 @@
+{
+  "name": "SubcategoriaTieneDestino",
+  "plural": "SubcategoriaTieneDestinos",
+  "base": "PersistedModel",
+  "idInjection": false,
+  "mysql": {
+    "schema": "infogeo",
+    "table": "subcategoria_tiene_destino"
+  },
+  "config,public": false,
+  "properties": {
+    "iddestino": {
+      "type": "Number",
+      "id": true,
+      "required": true,
+      "length": null,
+      "precision": 10,
+      "scale": 0,
+      "mysql": {
+        "columnName": "idDestino",
+        "dataType": "int",
+        "dataLength": null,
+        "dataPrecision": 10,
+        "dataScale": 0,
+        "nullable": "NO"
+      }
+    },
+    "idsubcategoria": {
+      "type": "Number",
+      "id": true,
+      "required": true,
+      "length": null,
+      "precision": 10,
+      "scale": 0,
+      "mysql": {
+        "columnName": "idSubCategoria",
+        "dataType": "int",
+        "dataLength": null,
+        "dataPrecision": 10,
+        "dataScale": 0,
+        "nullable": "NO"
+      }
+    }
+  },
+  "validations": [],
+  "relations": {
+    "destino": {
+      "type": "belongsTo",
+      "model": "Destino",
+      "foreignKey": "iddestino"
+    },
+    "subcategoria": {
+      "type": "belongsTo",
+      "model": "Subcategoria",
+      "foreignKey": "idsubcategoria"
+    }
+  },
+  "acls": [],
+  "methods": []
+}

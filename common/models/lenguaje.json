@@ -1,0 +1,47 @@
+{
+  "name": "Lenguaje",
+  "plural": "Lenguajes",
+  "base": "PersistedModel",
+  "idInjection": false,
+  "mysql": {
+    "schema": "infogeo",
+    "table": "lenguaje"
+  },
+  "properties": {
+    "idlenguaje": {
+      "type": "Number",
+      "id": true,
+      "required": true,
+      "length": null,
+      "precision": 10,
+      "scale": 0,
+      "mysql": {
+        "columnName": "idLenguaje",
+        "dataType": "int",
+        "dataLength": null,
+        "dataPrecision": 10,
+        "dataScale": 0,
+        "nullable": "NO"
+      }
+    },
+    "nombrelenguaje": {
+      "type": "String",
+      "required": true,
+      "length": 135,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "nombreLenguaje",
+        "dataType": "varchar",
+        "dataLength": 135,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "NO"
+      }
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": []
+}

@@ -1,0 +1,81 @@
+{
+  "name": "DestinoTieneTexto",
+  "plural": "DestinoTieneTextos",
+  "base": "PersistedModel",
+  "idInjection": false,
+  "mysql": {
+    "schema": "infogeo",
+    "table": "destino_tiene_texto"
+  },
+  "config,public": false,
+  "properties": {
+    "iddestino": {
+      "type": "Number",
+      "id": true,
+      "required": true,
+      "length": null,
+      "precision": 10,
+      "scale": 0,
+      "mysql": {
+        "columnName": "idDestino",
+        "dataType": "int",
+        "dataLength": null,
+        "dataPrecision": 10,
+        "dataScale": 0,
+        "nullable": "NO"
+      }
+    },
+    "idtexto": {
+      "type": "Number",
+      "id": true,
+      "required": true,
+      "length": null,
+      "precision": 10,
+      "scale": 0,
+      "mysql": {
+        "columnName": "idTexto",
+        "dataType": "int",
+        "dataLength": null,
+        "dataPrecision": 10,
+        "dataScale": 0,
+        "nullable": "NO"
+      }
+    },
+    "idtipotexto": {
+      "type": "Number",
+      "id": true,
+      "required": true,
+      "length": null,
+      "precision": 10,
+      "scale": 0,
+      "mysql": {
+        "columnName": "idTipoTexto",
+        "dataType": "int",
+        "dataLength": null,
+        "dataPrecision": 10,
+        "dataScale": 0,
+        "nullable": "NO"
+      }
+    }
+  },
+  "validations": [],
+  "relations": {
+    "destino": {
+      "type": "belongsTo",
+      "model": "Destino",
+      "foreignKey": "iddestino"
+    },
+    "texto": {
+      "type": "belongsTo",
+      "model": "Texto",
+      "foreignKey": "idtexto"
+    },
+    "tipotexto": {
+      "type": "belongsTo",
+      "model": "Tipotexto",
+      "foreignKey": "idtipotexto"
+    }
+  },
+  "acls": [],
+  "methods": []
+}

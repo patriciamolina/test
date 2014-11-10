@@ -1,0 +1,99 @@
+{
+  "name": "Cliente",
+  "plural": "Clientes",
+  "base": "PersistedModel",
+  "idInjection": false,
+  "mysql": {
+    "schema": "infogeo",
+    "table": "cliente"
+  },
+  "properties": {
+    "idcliente": {
+      "type": "Number",
+      "id": true,
+      "required": true,
+      "length": null,
+      "precision": 10,
+      "scale": 0,
+      "mysql": {
+        "columnName": "idCliente",
+        "dataType": "int",
+        "dataLength": null,
+        "dataPrecision": 10,
+        "dataScale": 0,
+        "nullable": "NO"
+      }
+    },
+    "nombrecliente": {
+      "type": "String",
+      "required": true,
+      "length": 360,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "nombreCliente",
+        "dataType": "varchar",
+        "dataLength": 360,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "NO"
+      }
+    },
+    "estadosuscripcion": {
+      "type": "String",
+      "required": true,
+      "length": 135,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "estadoSuscripcion",
+        "dataType": "varchar",
+        "dataLength": 135,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "NO"
+      }
+    },
+    "fechainiciosuscripcion": {
+      "type": "Date",
+      "id": false,
+      "required": true,
+      "length": null,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "fechaInicioSuscripcion",
+        "dataType": "date",
+        "dataLength": null,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "NO"
+      }
+    },
+    "fechafinsuscripcion": {
+      "type": "Date",
+      "required": true,
+      "length": null,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "fechaFinSuscripcion",
+        "dataType": "date",
+        "dataLength": null,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "NO"
+      }
+    }
+  },
+  "validations": [],
+  "relations": {
+    "destinos": {
+      "type": "hasMany",
+      "model": "Destino",
+      "foreignKey": "idcliente"
+    }
+  },
+  "acls": [],
+  "methods": []
+}

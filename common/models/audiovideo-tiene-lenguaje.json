@@ -1,0 +1,81 @@
+{
+  "name": "AudiovideoTieneLenguaje",
+  "plural": "AudiovideoTieneLenguajes",
+  "base": "PersistedModel",
+  "idInjection": false,
+  "mysql": {
+    "schema": "infogeo",
+    "table": "audiovideo_tiene_lenguaje"
+  },
+  "config,public": false,
+  "properties": {
+    "idaudio": {
+      "type": "Number",
+      "id": true,
+      "required": true,
+      "length": null,
+      "precision": 10,
+      "scale": 0,
+      "mysql": {
+        "columnName": "idAudio",
+        "dataType": "int",
+        "dataLength": null,
+        "dataPrecision": 10,
+        "dataScale": 0,
+        "nullable": "NO"
+      }
+    },
+    "idlenguaje": {
+      "type": "Number",
+      "id": true,
+      "required": true,
+      "length": null,
+      "precision": 10,
+      "scale": 0,
+      "mysql": {
+        "columnName": "idLenguaje",
+        "dataType": "int",
+        "dataLength": null,
+        "dataPrecision": 10,
+        "dataScale": 0,
+        "nullable": "NO"
+      }
+    },
+    "idvideo": {
+      "type": "Number",
+      "id": true,
+      "required": true,
+      "length": null,
+      "precision": 10,
+      "scale": 0,
+      "mysql": {
+        "columnName": "idVideo",
+        "dataType": "int",
+        "dataLength": null,
+        "dataPrecision": 10,
+        "dataScale": 0,
+        "nullable": "NO"
+      }
+    }
+  },
+  "validations": [],
+  "relations": {
+    "audio": {
+      "type": "belongsTo",
+      "model": "Audio",
+      "foreignKey": "idaudio"
+    },
+    "video": {
+      "type": "belongsTo",
+      "model": "Video",
+      "foreignKey": "idvideo"
+    },
+    "lenguaje": {
+      "type": "belongsTo",
+      "model": "Lenguaje",
+      "foreignKey": "idlenguaje"
+    }
+  },
+  "acls": [],
+  "methods": []
+}

@@ -1,0 +1,94 @@
+{
+  "name": "Subcategoria",
+  "plural": "Subcategorias",
+  "base": "PersistedModel",
+  "idInjection": false,
+  "mysql": {
+    "schema": "infogeo",
+    "table": "subcategoria"
+  },
+  "properties": {
+    "idsubcategoria": {
+      "type": "Number",
+      "id": true,
+      "required": true,
+      "length": null,
+      "precision": 10,
+      "scale": 0,
+      "mysql": {
+        "columnName": "idSubCategoria",
+        "dataType": "int",
+        "dataLength": null,
+        "dataPrecision": 10,
+        "dataScale": 0,
+        "nullable": "NO"
+      }
+    },
+    "idcategoria": {
+      "type": "Number",
+      "id": true,
+      "required": true,
+      "length": null,
+      "precision": 10,
+      "scale": 0,
+      "mysql": {
+        "columnName": "idCategoria",
+        "dataType": "int",
+        "dataLength": null,
+        "dataPrecision": 10,
+        "dataScale": 0,
+        "nullable": "NO"
+      }
+    },
+    "nombre": {
+      "type": "String",
+      "required": true,
+      "length": 450,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "nombre",
+        "dataType": "varchar",
+        "dataLength": 450,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "NO"
+      }
+    },
+    "icono": {
+      "type": "String",
+      "required": true,
+      "length": 135,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "icono",
+        "dataType": "varchar",
+        "dataLength": 135,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "NO"
+      }
+    }
+  },
+  "validations": [],
+  "relations": {
+    "textos": {
+      "type": "hasMany",
+      "model": "SubcategoriaTieneTexto",
+      "foreignKey": "idsubcategoria"
+    },
+    "destinos": {
+      "type": "hasMany",
+      "model": "SubcategoriaTieneDestino",
+      "foreignKey": "idsubcategoria"
+    },
+    "categoria": {
+      "type": "belongsTo",
+      "model": "Categoria",
+      "foreignKey": "idcategoria"
+    }
+  },
+  "acls": [],
+  "methods": []
+}

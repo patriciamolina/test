@@ -1,0 +1,73 @@
+{
+  "name": "Bibliotecamultimedia",
+  "plural": "Bibliotecasmultimedia",
+  "base": "PersistedModel",
+  "idInjection": false,
+  "mysql": {
+    "schema": "infogeo",
+    "table": "bibliotecamultimedia"
+  },
+  "properties": {
+    "idbiblioteca": {
+      "type": "Number",
+      "id": true,
+      "required": true,
+      "length": null,
+      "precision": 10,
+      "scale": 0,
+      "mysql": {
+        "columnName": "idBiblioteca",
+        "dataType": "int",
+        "dataLength": null,
+        "dataPrecision": 10,
+        "dataScale": 0,
+        "nullable": "NO"
+      }
+    },
+    "ruta": {
+      "type": "String",
+      "required": true,
+      "length": 1500,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "ruta",
+        "dataType": "varchar",
+        "dataLength": 1500,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "NO"
+      }
+    }
+  },
+  "validations": [],
+  "relations": {
+    "codigosqr": {
+      "type": "hasMany",
+      "model": "Codigoqr",
+      "foreignKey": "idbiblioteca"
+    },
+    "imagenes": {
+      "type": "hasMany",
+      "model": "Imagen",
+      "foreignKey": "idbiblioteca"
+    },
+    "videos": {
+      "type": "hasMany",
+      "model": "Video",
+      "foreignKey": "idbiblioteca"
+    },
+    "audios": {
+      "type": "hasMany",
+      "model": "Audio",
+      "foreignKey": "idbiblioteca"
+    },
+    "destino": {
+      "type": "hasMany",
+      "model": "Destino",
+      "foreignKey": "idbiblioteca"
+    }
+  },
+  "acls": [],
+  "methods": []
+}

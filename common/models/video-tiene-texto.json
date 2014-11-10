@@ -1,0 +1,81 @@
+{
+  "name": "VideoTieneTexto",
+  "plural": "VideoTieneTextos",
+  "base": "PersistedModel",
+  "idInjection": false,
+  "mysql": {
+    "schema": "infogeo",
+    "table": "video_tiene_texto"
+  },
+  "config,public": false,
+  "properties": {
+    "idvideo": {
+      "type": "Number",
+      "id": true,
+      "required": true,
+      "length": null,
+      "precision": 10,
+      "scale": 0,
+      "mysql": {
+        "columnName": "idVideo",
+        "dataType": "int",
+        "dataLength": null,
+        "dataPrecision": 10,
+        "dataScale": 0,
+        "nullable": "NO"
+      }
+    },
+    "idtexto": {
+      "type": "Number",
+      "id": true,
+      "required": true,
+      "length": null,
+      "precision": 10,
+      "scale": 0,
+      "mysql": {
+        "columnName": "idTexto",
+        "dataType": "int",
+        "dataLength": null,
+        "dataPrecision": 10,
+        "dataScale": 0,
+        "nullable": "NO"
+      }
+    },
+    "idtipotexto": {
+      "type": "Number",
+      "id": true,
+      "required": true,
+      "length": null,
+      "precision": 10,
+      "scale": 0,
+      "mysql": {
+        "columnName": "idTipoTexto",
+        "dataType": "int",
+        "dataLength": null,
+        "dataPrecision": 10,
+        "dataScale": 0,
+        "nullable": "NO"
+      }
+    }
+  },
+  "validations": [],
+  "relations": {
+    "texto": {
+      "type": "belongsTo",
+      "model": "Texto",
+      "foreignKey": "idtexto"
+    },
+    "video": {
+      "type": "belongsTo",
+      "model": "Video",
+      "foreignKey": "idvideo"
+    },
+    "tipotexto": {
+      "type": "belongsTo",
+      "model": "Tipotexto",
+      "foreignKey": "idtipotexto"
+    }
+  },
+  "acls": [],
+  "methods": []
+}

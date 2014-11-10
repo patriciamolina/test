@@ -1,0 +1,89 @@
+{
+  "name": "Categoria",
+  "plural": "Categorias",
+  "base": "PersistedModel",
+  "idInjection": false,
+  "mysql": {
+    "schema": "infogeo",
+    "table": "categoria"
+  },
+  "properties": {
+    "idcategoria": {
+      "type": "Number",
+      "id": true,
+      "required": true,
+      "length": null,
+      "precision": 10,
+      "scale": 0,
+      "mysql": {
+        "columnName": "idCategoria",
+        "dataType": "int",
+        "dataLength": null,
+        "dataPrecision": 10,
+        "dataScale": 0,
+        "nullable": "NO"
+      }
+    },
+    "nombre": {
+      "type": "String",
+      "required": true,
+      "length": 450,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "nombre",
+        "dataType": "varchar",
+        "dataLength": 450,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "NO"
+      }
+    },
+    "icono": {
+      "type": "String",
+      "required": true,
+      "length": 135,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "icono",
+        "dataType": "varchar",
+        "dataLength": 135,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "NO"
+      }
+    },
+    "color": {
+      "type": "String",
+      "id": false,
+      "required": true,
+      "length": 135,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "color",
+        "dataType": "varchar",
+        "dataLength": 135,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "NO"
+      }
+    }
+  },
+  "validations": [],
+  "relations": {
+    "textos": {
+      "type": "hasMany",
+      "model": "CategoriaTieneTexto",
+      "foreignKey": "idcategoria"
+    },
+    "subcategorias": {
+      "type": "hasMany",
+      "model": "Subcategoria",
+      "foreignKey": "idcategoria"
+    }
+  },
+  "acls": [],
+  "methods": []
+}
