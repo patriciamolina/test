@@ -1,16 +1,16 @@
 var loopback = require('loopback');
 var boot = require('loopback-boot');
 
-var http = require('http'),
-    https = require('https'),
-    path = require('path'),
-    sslConfig = require('./ssl-config'),
-    site = require('./site'),
-    httpsRedirect = require('./middleware/https-redirect');
+var http = require('http')
+    , https = require('https')
+    , path = require('path')
+    , httpsRedirect = require('./middleware/https-redirect')
+    , site = require('./site')
+    , sslCert = require('./private/ssl_cert');
 
 var httpsOptions = {
-    key: sslConfig.privateKey,
-    cert: sslConfig.certificate
+    key: sslCert.privateKey,
+    cert: sslCert.certificate
 };
 
 var app = module.exports = loopback();
@@ -23,6 +23,7 @@ app.use(loopback.compress());
 
 app.use(loopback.session({ saveUninitialized: true,
     resave: true, secret: 'keyboard cat' }));
+
 // -- Add your pre-processing middleware here --
 
 // boot scripts mount components like REST API
@@ -46,12 +47,9 @@ app.set('views', path.join(__dirname, 'views'));
 // All static middleware should be registered at the end, as all requests
 // passing the static middleware are hitting the file system
 // Example:
-//   var path = require('path');
-//   app.use(loopback.static(path.resolve(__dirname, '../client')));
+//   app.use(loopback.static(path.resolve(__dirname', '../client')));
 
-
-oauth2.authenticate(['/protected', '/api', '/me'],
-    {session: false, scope: 'email'});
+oauth2.authenticate(['/protected', '/api', '/me'], {session: false, scope: 'demo'});
 
 // Set up login/logout forms
 app.get('/login', site.loginForm);
@@ -91,42 +89,29 @@ app.use(loopback.urlNotFound());
 // The ultimate error handler.
 app.use(loopback.errorHandler());
 
-app.start = function(httpOnly) {
-    if(httpOnly === undefined) {
-        httpOnly = process.env.HTTP;
-    }
-    var server = null;
-    if(!httpOnly) {
-        server = https.createServer(httpsOptions, app);
-    } else {
-        server = http.createServer(app);
-    }
-    server.listen(app.get('port'), function() {
-        var baseUrl = (httpOnly? 'http://' : 'https://') + app.get('host') + ':' + app.get('port');
-        app.emit('started', baseUrl);
-        console.log('LoopBack server listening @ %s%s', baseUrl, '/');
-    });
-    return server;
-};
+app.start = function() {
+    var port = app.get('port');
 
-/*app.start = function() {
-  // start the web server
-  return app.listen(function() {
-    app.emit('started');
-    console.log('Web server listening at: %s', app.get('url'));
-  });
-};*/
+    http.createServer(app).listen(port, function() {
+        console.log('Web server listening at: %s', 'http://localhost:3000/');
+        https.createServer(httpsOptions, app).listen(httpsPort, function() {
+            app.emit('started');
+            console.log('Web server listening at: %s', app.get('url'));
+        });
+    });
+
+};
 
 // start the server if `$ node server.js`
 if (require.main === module) {
-  app.start();
+    app.start();
 }
 
 function signupTestUserAndApp() {
 // Create a dummy user and client app
-    app.models.User.create({username: 'faguayo',
-        password: '17118682k',
-        email: 'faguayo@datactil.com'}, function(err, user) {
+    app.models.User.create({username: 'bob',
+        password: 'secret',
+        email: 'foo@bar.com'}, function(err, user) {
 
         if (!err) {
             console.log('User registered: username=%s password=%s',
@@ -144,7 +129,7 @@ function signupTestUserAndApp() {
             user.id,
             'demo-app',
             {
-                publicKey: sslConfig.certificate
+                publicKey: sslCert.certificate
             },
             function(err, demo) {
                 if (err) {
