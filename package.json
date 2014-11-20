@@ -1,6 +1,6 @@
 {
   "name": "barmanapi",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "main": "server/server.js",
   "scripts": {
     "pretest": "jshint ."
@@ -19,6 +19,8 @@
     "loopback-connector-mysql": "^1.4.7",
     "loopback-datasource-juggler": "^2.7.0",
     "metrics": "^0.1.8",
+    "passport": "^0.2.1",
+    "request": "^2.48.0",
     "serve-favicon": "^2.0.1"
   },
   "optionalDependencies": {
