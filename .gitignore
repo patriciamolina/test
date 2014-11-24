@@ -1,2 +1,3 @@
-node_modules
+barman-api/node_modules
+gateway-barman-api/node_modules
 .idea
