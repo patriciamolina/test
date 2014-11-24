@@ -6,25 +6,25 @@
     ]
   },
   "User": {
-    "dataSource": "db"
+    "dataSource": "INFOSESION"
   },
   "Application": {
-    "dataSource": "db"
+    "dataSource": "INFOSESION"
   },
   "AccessToken": {
-    "dataSource": "db",
+    "dataSource": "INFOSESION",
     "public": false
   },
   "ACL": {
-    "dataSource": "db",
+    "dataSource": "INFOSESION",
     "public": false
   },
   "RoleMapping": {
-    "dataSource": "db",
+    "dataSource": "INFOSESION",
     "public": false
   },
   "Role": {
-    "dataSource": "db",
+    "dataSource": "INFOSESION",
     "public": false
   }
 }

@@ -72,7 +72,7 @@ app.use(loopback.static(path.join(__dirname, '../client/public')));
 
 app.use('/admin', loopback.static(path.join(__dirname, '../client/admin')));
 
-signupTestUserAndApp();
+//signupTestUserAndApp();
 
 var rateLimiting = require('./middleware/rate-limiting');
 app.use(rateLimiting({limit: 100, interval: 60000}));

@@ -2,5 +2,14 @@
   "db": {
     "name": "db",
     "connector": "memory"
+  },
+  "INFOSESION": {
+    "host": "localhost",
+    "port": 3333,
+    "database": "infosesion",
+    "password": "",
+    "name": "INFOSESION",
+    "user": "root",
+    "connector": "mysql"
   }
 }
