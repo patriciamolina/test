@@ -12,7 +12,7 @@
     "dataSource": "INFOSESION"
   },
   "AccessToken": {
-    "dataSource": "INFOSESION",
+    "dataSource": "db",
     "public": false
   },
   "ACL": {
@@ -20,7 +20,7 @@
     "public": false
   },
   "RoleMapping": {
-    "dataSource": "INFOSESION",
+    "dataSource": "db",
     "public": false
   },
   "Role": {

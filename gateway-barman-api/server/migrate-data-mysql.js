@@ -4,6 +4,6 @@
 var server = require('./server');
 var dataSource = server.dataSources.INFOSESION;
 
-dataSource.automigrate(['User', 'Application', 'Role', 'ACL', 'RoleMapping', 'AccessToken'], function(er) {
+dataSource.automigrate(['User', 'Application', 'Role', 'ACL'], function(er) {
     if (er) throw er;
 });
