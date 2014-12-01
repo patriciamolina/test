@@ -43,7 +43,7 @@
   },
   "Cliente": {
     "dataSource": "INFOGEO",
-    "public": true
+    "public": false
   },
   "Codigoqr": {
     "dataSource": "INFOGEO",

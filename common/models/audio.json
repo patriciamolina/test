@@ -64,6 +64,20 @@
       "foreignKey": "idaudio"
     }
   },
-  "acls": [],
+    "acls": [
+        {
+            "accessType": "*",
+            "principalType": "ROLE",
+            "principalId": "$everyone",
+            "permission": "DENY"
+        },
+        {
+            "accessType": "READ",
+            "principalType": "ROLE",
+            "principalId": "admin",
+            "permission": "ALLOW",
+            "property": "find"
+        }
+    ],
   "methods": []
 }
