@@ -11,5 +11,14 @@
     "name": "INFOGEO",
     "user": "root",
     "connector": "mysql"
+  },
+  "INFOSESION": {
+    "host": "localhost",
+    "port": 3333,
+    "database": "infosesion",
+    "password": "",
+    "name": "INFOSESION",
+    "user": "root",
+    "connector": "mysql"
   }
 }

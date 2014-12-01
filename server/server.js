@@ -1,6 +1,16 @@
 var loopback = require('loopback');
 var boot = require('loopback-boot');
 
+var http = require('http')
+    , https = require('https')
+    , path = require('path')
+    , sslCert = require('./private/ssl_cert');
+
+var httpsOptions = {
+    key: sslCert.privateKey,
+    cert: sslCert.certificate
+};
+
 var app = module.exports = loopback();
 
 // Set up the /favicon.ico
@@ -10,6 +20,9 @@ app.use(loopback.favicon());
 app.use(loopback.compress());
 
 // -- Add your pre-processing middleware here --
+// -- Add your pre-processing middleware here --
+var bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // boot scripts mount components like REST API
 boot(app, __dirname);
@@ -20,6 +33,10 @@ boot(app, __dirname);
 // Example:
 //   var path = require('path');
 //   app.use(loopback.static(path.resolve(__dirname, '../client')));
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'html');
+app.engine('html', require('ejs').renderFile);
+app.set('json spaces', 2); //pretty print json responses
 
 // Requests that get this far won't be handled
 // by any middleware. Convert them into a 404 error
@@ -30,11 +47,16 @@ app.use(loopback.urlNotFound());
 app.use(loopback.errorHandler());
 
 app.start = function() {
-  // start the web server
-  return app.listen(function() {
-    app.emit('started');
-    console.log('Web server listening at: %s', app.get('url'));
-  });
+    var port = app.get('port');
+    var portHttps = app.get('port-https');
+    http.createServer(app).listen(port, function() {
+        var url = 'http://' + app.get('host') + ':' + app.get('port') + '/';
+        console.log('Web server listening at: %s', url);
+        https.createServer(httpsOptions, app).listen(portHttps, function() {
+            app.emit('started');
+            console.log('Web server listening at: %s', app.get('url'));
+        });
+    });
 };
 
 // start the server if `$ node server.js`
