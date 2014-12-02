@@ -14,7 +14,7 @@ var httpsOptions = {
 var app = module.exports = loopback();
 
 // Set up the /favicon.ico
-app.use(loopback.favicon());
+app.use(loopback.favicon(__dirname + '/resources/favicon.jpg'));
 
 // request pre-processing middleware
 app.use(loopback.compress());
