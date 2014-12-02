@@ -206,9 +206,15 @@
           "permission": "DENY"
       },
       {
-          "accessType": "READ",
+          "accessType": "*",
           "principalType": "ROLE",
           "principalId": "admin",
+          "permission": "ALLOW"
+      },
+      {
+          "accessType": "READ",
+          "principalType": "ROLE",
+          "principalId": "lector",
           "permission": "ALLOW",
           "property": "find"
       }

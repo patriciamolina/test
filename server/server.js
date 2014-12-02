@@ -4,7 +4,9 @@ var boot = require('loopback-boot');
 var http = require('http')
     , https = require('https')
     , path = require('path')
-    , sslCert = require('./private/ssl_cert');
+    , sslCert = require('./private/ssl_cert')
+    , alterModels = require('./Utils/alterModels.js')
+    , router = require('./Utils/routes.js');
 
 var httpsOptions = {
     key: sslCert.privateKey,
@@ -23,6 +25,9 @@ app.use(loopback.compress());
 // -- Add your pre-processing middleware here --
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
+
+//routes
+router(app);
 
 // boot scripts mount components like REST API
 boot(app, __dirname);
@@ -47,6 +52,7 @@ app.use(loopback.urlNotFound());
 app.use(loopback.errorHandler());
 
 app.start = function() {
+    alterModels(app);
     var port = app.get('port');
     var portHttps = app.get('port-https');
     http.createServer(app).listen(port, function() {
