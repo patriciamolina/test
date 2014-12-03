@@ -5,7 +5,6 @@ module.exports = function(app) {
         ,   findDestinos = Destino.find
         ,   User = app.models.User
         ,   Utils = require('../index');
-        ;
 
     function findNada(filter, cb) {
         Destino.find = findDestinos;
@@ -55,6 +54,8 @@ module.exports = function(app) {
                     if(ctx.req.query['filter'] !== undefined) {
                         if(ctx.req.query.filter['include'] !== undefined)
                             query['include'] = ctx.req.query.filter.include;
+                            if(Utils.getSizeJson(query.include) > 1)
+                                query.include = Utils.jsonorder(query.include);
                         if(ctx.req.query.filter['fields'] !== undefined)
                             query['fields'] = ctx.req.query.filter.fields;
                         if(ctx.req.query.filter['limit'] !== undefined)
@@ -82,6 +83,7 @@ module.exports = function(app) {
                     }else{
                         query['where'] = {idcliente:cliente.idcliente};
                     }
+                    Utils.jsonorder(query);
                     console.log(query);
                     Destino.find(query, function(err, destinos){
                         ctx.result = destinos;
