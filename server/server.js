@@ -5,8 +5,7 @@ var http = require('http')
     , https = require('https')
     , path = require('path')
     , sslCert = require('./private/ssl_cert')
-    , alterModels = require('./Utils/dirAlterModels/alterDestinos.js')
-    , router = require('./Utils/routes.js');
+    , Utils = require('./Utils');
 
 var httpsOptions = {
     key: sslCert.privateKey,
@@ -27,7 +26,7 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 
 //routes
-router(app);
+Utils.routes(app);
 
 // boot scripts mount components like REST API
 boot(app, __dirname);
@@ -52,7 +51,7 @@ app.use(loopback.urlNotFound());
 app.use(loopback.errorHandler());
 
 app.start = function() {
-    alterModels(app);
+    Utils.alterModels(app);
     var port = app.get('port');
     var portHttps = app.get('port-https');
     http.createServer(app).listen(port, function() {

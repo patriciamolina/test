@@ -14,5 +14,8 @@ utils.jsonextend = function jsonextend(target) {
         return target;
     };
 
+utils.alterModels = require('./alterModels.js');
+utils.routes = require('./routes.js');
+
 module.exports = utils;
 

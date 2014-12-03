@@ -3,8 +3,15 @@
  */
 module.exports = function(app) {
 
-    var alterDestinos = require ('dirAlterModels/alterDestinos.js')
-        ;
+    var fs = require("fs");
 
-    alterDestinos(app);
+    fs.readdir('./Utils/dirAlterModels', function(err, files) {
+        if (err) {
+            throw err;
+        }
+        files.forEach(function(file) {
+            var alter = require ('./dirAlterModels/' + file);
+            alter(app);
+        });
+    });
 };

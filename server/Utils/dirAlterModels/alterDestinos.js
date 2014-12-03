@@ -4,7 +4,7 @@ module.exports = function(app) {
         ,   Cliente = app.models.Cliente
         ,   findDestinos = Destino.find
         ,   User = app.models.User
-        ,   Utils = require('../utils');
+        ,   Utils = require('../index');
         ;
 
     function findNada(filter, cb) {
@@ -82,7 +82,7 @@ module.exports = function(app) {
                     }else{
                         query['where'] = {idcliente:cliente.idcliente};
                     }
-
+                    console.log(query);
                     Destino.find(query, function(err, destinos){
                         ctx.result = destinos;
                         Destino.find = findNada;
