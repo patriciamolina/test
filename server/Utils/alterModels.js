@@ -1,7 +1,17 @@
 module.exports = function(app) {
+
     var    Destino = app.models.Destino
         ,   Cliente = app.models.Cliente
-        ,   User = app.models.User;
+        ,   findDestinos = Destino.find
+        ,   User = app.models.User
+        ;
+
+    function findNada(filter, cb) {
+        Destino.find = findDestinos;
+        cb(null,{});
+    }
+
+    Destino.find = findNada;
 
     Destino.afterRemote('find', function (ctx, affectedModelInstance, next) {
 
@@ -38,9 +48,9 @@ module.exports = function(app) {
                         ctx.result = {data: ctx.result};
                         return next(new Error('could not find a valid user'));
                     }
-                    console.log(ctx.req);
                     Destino.find({  include: { textos: [ 'texto', 'tipotexto' ]}, where: {idcliente:cliente.idcliente}}, function(err, destinos){
                         ctx.result = destinos;
+                        Destino.find = findNada;
                         next();
                     });
                 });
