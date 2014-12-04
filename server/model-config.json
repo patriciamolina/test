@@ -5,30 +5,34 @@
       "./models"
     ]
   },
-    "User": {
-        "dataSource": "INFOSESION",
-        "public" : false
-    },
-    "Application": {
-        "dataSource": "INFOSESION",
-        "public" : false
-    },
-    "AccessToken": {
-        "dataSource": "db",
-        "public": false
-    },
-    "ACL": {
-        "dataSource": "INFOSESION",
-        "public": false
-    },
-    "RoleMapping": {
-        "dataSource": "INFOSESION",
-        "public": false
-    },
-    "Role": {
-        "dataSource": "INFOSESION",
-        "public": false
-    },
+  "User": {
+    "dataSource": "db",
+    "public": false
+  },
+  "Customer": {
+    "dataSource": "INFOSESION",
+    "public": true
+  },
+  "Application": {
+    "dataSource": "INFOSESION",
+    "public": false
+  },
+  "AccessToken": {
+    "dataSource": "db",
+    "public": false
+  },
+  "ACL": {
+    "dataSource": "INFOSESION",
+    "public": false
+  },
+  "RoleMapping": {
+    "dataSource": "INFOSESION",
+    "public": false
+  },
+  "Role": {
+    "dataSource": "INFOSESION",
+    "public": false
+  },
   "Audio": {
     "dataSource": "INFOGEO",
     "public": true

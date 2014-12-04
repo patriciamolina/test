@@ -24,10 +24,10 @@ module.exports = function(app) {
   router.post('/resources', function(req, res) {
     var username = req.body.username;
     var password = req.body.password;
-    app.models.User.login({
+    app.models.Customer.login({
         username: username,
       password: password
-    }, 'user', function(err, token) {
+    }, 'customer', function(err, token) {
       if (token !== undefined) {
           token = token.toJSON();
           if (err) {
@@ -38,7 +38,7 @@ module.exports = function(app) {
               });
           } else {
               res.render('resources', {
-                  username: token.user.username,
+                  username: username,
                   accessToken: token.id
               });
           }
@@ -55,7 +55,7 @@ module.exports = function(app) {
   router.get('/logout', function(req, res) {
     var AccessToken = app.models.AccessToken;
     var token = new AccessToken({id: req.query.access_token});
-    app.models.User.logout(token.accessToken, function (err) {
+    app.models.Customer.logout(token.accessToken, function (err) {
           console.log(err || 'Logged out');
     });
     token.destroy();

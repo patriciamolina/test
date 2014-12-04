@@ -24,17 +24,10 @@ utils.getSizeJson = function (jsonElement){
     return count;
 };
 
-utils.jsonorder = function (jsonElement){
-    var target = [];
-    console.log(utils.getSizeJson(jsonElement));
-    for (var prop in jsonElement) {
-        target[prop] = jsonElement[prop] ;
-    }
-    return target;
-};
-
 utils.alterModels = require('./alterModels.js');
 utils.routes = require('./routes.js');
+utils.migrateData = require('./migrate-data-mysql.js');
+utils.createRole = require('./create-role.js');
 
 module.exports = utils;
 

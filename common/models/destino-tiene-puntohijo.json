@@ -59,26 +59,26 @@
   },
   "validations": [],
   "relations": {
-      "padre": {
-          "type": "belongsTo",
-          "model": "Destino",
-          "foreignKey": "iddestino"
-      }
+    "padre": {
+      "type": "belongsTo",
+      "model": "Destino",
+      "foreignKey": "iddestino"
+    }
   },
-    "acls": [
-        {
-            "accessType": "*",
-            "principalType": "ROLE",
-            "principalId": "$everyone",
-            "permission": "DENY"
-        },
-        {
-            "accessType": "READ",
-            "principalType": "ROLE",
-            "principalId": "admin",
-            "permission": "ALLOW",
-            "property": "find"
-        }
-    ],
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW",
+      "property": "find"
+    }
+  ],
   "methods": []
 }
