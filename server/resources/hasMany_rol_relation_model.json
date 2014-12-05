@@ -1,0 +1,127 @@
+,
+    {
+        "principalType": "ROLE",
+        "principalId": "ADMIN",
+        "permission": "ALLOW",
+        "property": "__count__puntoshijos"
+    },
+    {
+        "principalType": "ROLE",
+        "principalId": "ADMIN",
+        "permission": "ALLOW",
+        "property": "__create__puntoshijos"
+    },
+    {
+        "principalType": "ROLE",
+        "principalId": "ADMIN",
+        "permission": "ALLOW",
+        "property": "__delete__puntoshijos"
+    },
+    {
+        "principalType": "ROLE",
+        "principalId": "ADMIN",
+        "permission": "ALLOW",
+        "property": "__destroyById__puntoshijos"
+    },
+    {
+        "principalType": "ROLE",
+        "principalId": "ADMIN",
+        "permission": "ALLOW",
+        "property": "__findById__puntoshijos"
+    },
+    {
+        "principalType": "ROLE",
+        "principalId": "ADMIN",
+        "permission": "ALLOW",
+        "property": "__get__puntoshijos"
+    },
+    {
+        "principalType": "ROLE",
+        "principalId": "ADMIN",
+        "permission": "ALLOW",
+        "property": "__updateById__puntoshijos"
+    },
+	  {
+	      "principalType": "ROLE",
+	      "principalId": "SUPERADMIN",
+	      "permission": "ALLOW",
+	      "property": "__count__puntoshijos"
+	  },
+	  {
+	      "principalType": "ROLE",
+	      "principalId": "SUPERADMIN",
+	      "permission": "ALLOW",
+	      "property": "__create__puntoshijos"
+	  },
+	  {
+	      "principalType": "ROLE",
+	      "principalId": "SUPERADMIN",
+	      "permission": "ALLOW",
+	      "property": "__delete__puntoshijos"
+	  },
+	  {
+	      "principalType": "ROLE",
+	      "principalId": "SUPERADMIN",
+	      "permission": "ALLOW",
+	      "property": "__destroyById__puntoshijos"
+	  },
+	  {
+	      "principalType": "ROLE",
+	      "principalId": "SUPERADMIN",
+	      "permission": "ALLOW",
+	      "property": "__findById__puntoshijos"
+	  },
+	  {
+	      "principalType": "ROLE",
+	      "principalId": "SUPERADMIN",
+	      "permission": "ALLOW",
+	      "property": "__get__puntoshijos"
+	  },
+	  {
+	      "principalType": "ROLE",
+	      "principalId": "SUPERADMIN",
+	      "permission": "ALLOW",
+	      "property": "__updateById__puntoshijos"
+	  },
+    {
+        "principalType": "ROLE",
+        "principalId": "LECTOR",
+        "permission": "ALLOW",
+        "property": "__count__puntoshijos"
+    },
+    {
+        "principalType": "ROLE",
+        "principalId": "LECTOR",
+        "permission": "ALLOW",
+        "property": "__findById__puntoshijos"
+    },
+    {
+        "principalType": "ROLE",
+        "principalId": "LECTOR",
+        "permission": "ALLOW",
+        "property": "__get__puntoshijos"
+    },
+    {
+        "principalType": "ROLE",
+        "principalId": "ESCRITOR",
+        "permission": "ALLOW",
+        "property": "__create__puntoshijos"
+    },
+    {
+        "principalType": "ROLE",
+        "principalId": "ESCRITOR",
+        "permission": "ALLOW",
+        "property": "__delete__puntoshijos"
+    },
+    {
+        "principalType": "ROLE",
+        "principalId": "ESCRITOR",
+        "permission": "ALLOW",
+        "property": "__destroyById__puntoshijos"
+    },
+    {
+        "principalType": "ROLE",
+        "principalId": "ESCRITOR",
+        "permission": "ALLOW",
+        "property": "__updateById__puntoshijos"
+    }

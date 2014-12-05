@@ -1,0 +1,19 @@
+,
+      {
+          "principalType": "ROLE",
+          "principalId": "ADMIN",
+          "permission": "ALLOW",
+          "property": "__get__bibliotecamultimedia"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "SUPERADMIN",
+          "permission": "ALLOW",
+          "property": "__get__bibliotecamultimedia"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "LECTOR",
+          "permission": "ALLOW",
+          "property": "__get__bibliotecamultimedia"
+      }
