@@ -3,17 +3,17 @@
           "principalType": "ROLE",
           "principalId": "ADMIN",
           "permission": "ALLOW",
-          "property": "__get__bibliotecamultimedia"
+          "property": "__get__texto"
       },
       {
           "principalType": "ROLE",
           "principalId": "SUPERADMIN",
           "permission": "ALLOW",
-          "property": "__get__bibliotecamultimedia"
+          "property": "__get__texto"
       },
       {
           "principalType": "ROLE",
           "principalId": "LECTOR",
           "permission": "ALLOW",
-          "property": "__get__bibliotecamultimedia"
+          "property": "__get__texto"
       }

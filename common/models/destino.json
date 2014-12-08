@@ -157,11 +157,11 @@
       "scale": null,
       "mysql": {
         "columnName": "geometria",
-        "dataType": "geometry",
-        "dataLength": null,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "NO"
+          "dataType": "text",
+          "dataLength": 65535,
+          "dataPrecision": null,
+          "dataScale": null,
+          "nullable": "NO"
       }
     }
   },
@@ -173,7 +173,7 @@
       "foreignKey": "iddestino"
     },
     "bibliotecamultimedia": {
-      "type": "belongsTo",
+      "type": "hasOne",
       "model": "Bibliotecamultimedia",
       "foreignKey": "idbiblioteca"
     },

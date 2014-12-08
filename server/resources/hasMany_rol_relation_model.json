@@ -3,125 +3,125 @@
         "principalType": "ROLE",
         "principalId": "ADMIN",
         "permission": "ALLOW",
-        "property": "__count__puntoshijos"
+        "property": "__count__destinos"
     },
     {
         "principalType": "ROLE",
         "principalId": "ADMIN",
         "permission": "ALLOW",
-        "property": "__create__puntoshijos"
+        "property": "__create__destinos"
     },
     {
         "principalType": "ROLE",
         "principalId": "ADMIN",
         "permission": "ALLOW",
-        "property": "__delete__puntoshijos"
+        "property": "__delete__destinos"
     },
     {
         "principalType": "ROLE",
         "principalId": "ADMIN",
         "permission": "ALLOW",
-        "property": "__destroyById__puntoshijos"
+        "property": "__destroyById__destinos"
     },
     {
         "principalType": "ROLE",
         "principalId": "ADMIN",
         "permission": "ALLOW",
-        "property": "__findById__puntoshijos"
+        "property": "__findById__destinos"
     },
     {
         "principalType": "ROLE",
         "principalId": "ADMIN",
         "permission": "ALLOW",
-        "property": "__get__puntoshijos"
+        "property": "__get__destinos"
     },
     {
         "principalType": "ROLE",
         "principalId": "ADMIN",
         "permission": "ALLOW",
-        "property": "__updateById__puntoshijos"
+        "property": "__updateById__destinos"
     },
 	  {
 	      "principalType": "ROLE",
 	      "principalId": "SUPERADMIN",
 	      "permission": "ALLOW",
-	      "property": "__count__puntoshijos"
+	      "property": "__count__destinos"
 	  },
 	  {
 	      "principalType": "ROLE",
 	      "principalId": "SUPERADMIN",
 	      "permission": "ALLOW",
-	      "property": "__create__puntoshijos"
+	      "property": "__create__destinos"
 	  },
 	  {
 	      "principalType": "ROLE",
 	      "principalId": "SUPERADMIN",
 	      "permission": "ALLOW",
-	      "property": "__delete__puntoshijos"
+	      "property": "__delete__destinos"
 	  },
 	  {
 	      "principalType": "ROLE",
 	      "principalId": "SUPERADMIN",
 	      "permission": "ALLOW",
-	      "property": "__destroyById__puntoshijos"
+	      "property": "__destroyById__destinos"
 	  },
 	  {
 	      "principalType": "ROLE",
 	      "principalId": "SUPERADMIN",
 	      "permission": "ALLOW",
-	      "property": "__findById__puntoshijos"
+	      "property": "__findById__destinos"
 	  },
 	  {
 	      "principalType": "ROLE",
 	      "principalId": "SUPERADMIN",
 	      "permission": "ALLOW",
-	      "property": "__get__puntoshijos"
+	      "property": "__get__destinos"
 	  },
 	  {
 	      "principalType": "ROLE",
 	      "principalId": "SUPERADMIN",
 	      "permission": "ALLOW",
-	      "property": "__updateById__puntoshijos"
+	      "property": "__updateById__destinos"
 	  },
     {
         "principalType": "ROLE",
         "principalId": "LECTOR",
         "permission": "ALLOW",
-        "property": "__count__puntoshijos"
+        "property": "__count__destinos"
     },
     {
         "principalType": "ROLE",
         "principalId": "LECTOR",
         "permission": "ALLOW",
-        "property": "__findById__puntoshijos"
+        "property": "__findById__destinos"
     },
     {
         "principalType": "ROLE",
         "principalId": "LECTOR",
         "permission": "ALLOW",
-        "property": "__get__puntoshijos"
+        "property": "__get__destinos"
     },
     {
         "principalType": "ROLE",
         "principalId": "ESCRITOR",
         "permission": "ALLOW",
-        "property": "__create__puntoshijos"
+        "property": "__create__destinos"
     },
     {
         "principalType": "ROLE",
         "principalId": "ESCRITOR",
         "permission": "ALLOW",
-        "property": "__delete__puntoshijos"
+        "property": "__delete__destinos"
     },
     {
         "principalType": "ROLE",
         "principalId": "ESCRITOR",
         "permission": "ALLOW",
-        "property": "__destroyById__puntoshijos"
+        "property": "__destroyById__destinos"
     },
     {
         "principalType": "ROLE",
         "principalId": "ESCRITOR",
         "permission": "ALLOW",
-        "property": "__updateById__puntoshijos"
+        "property": "__updateById__destinos"
     }
