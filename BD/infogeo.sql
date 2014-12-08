@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost:3333
--- Tiempo de generaci√≥n: 21-11-2014 a las 21:50:29
+-- Tiempo de generaci√≥n: 08-12-2014 a las 17:47:05
 -- Versi√≥n del servidor: 5.5.24-log
--- Versi√≥n de PHP: 5.3.13
+-- Versi√≥n de PHP: 5.4.3
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -19,9 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `infogeo`
 --
-
-CREATE DATABASE IF NOT EXISTS `infogeo` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `infogeo`;
 
 -- --------------------------------------------------------
 
@@ -1187,14 +1184,15 @@ CREATE TABLE IF NOT EXISTS `cliente` (
   `fechaInicioSuscripcion` date NOT NULL,
   `fechaFinSuscripcion` date NOT NULL,
   PRIMARY KEY (`idCliente`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- Volcado de datos para la tabla `cliente`
 --
 
 INSERT INTO `cliente` (`idCliente`, `nombreCliente`, `estadoSuscripcion`, `fechaInicioSuscripcion`, `fechaFinSuscripcion`) VALUES
-(1, 'SERNATUR_AYSEN', '1', '2014-05-16', '2018-01-01');
+(1, 'SERNATUR_AYSEN', '1', '2014-05-16', '2018-01-01'),
+(2, 'prueba', '1', '2014-12-07', '2015-01-11');
 
 -- --------------------------------------------------------
 
@@ -1245,1045 +1243,1047 @@ CREATE TABLE IF NOT EXISTS `destino` (
   `tienePanel` tinyint(1) NOT NULL DEFAULT '0',
   `nombre` varchar(150) NOT NULL,
   `tipoGeometria` varchar(500) NOT NULL,
-  `geometria` geometry DEFAULT NULL,
+  `geom` geometry DEFAULT NULL,
+  `geometria` text NOT NULL,
   PRIMARY KEY (`idDestino`),
   KEY `fk_Destino_Cliente1_idx` (`idCliente`),
   KEY `fk_Destino_BibliotecaMultimedia1_idx` (`idBiblioteca`),
   KEY `fk_Destino_EstadoDestino1_idx` (`idEstadoDestino`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1178 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1189 ;
 
 --
 -- Volcado de datos para la tabla `destino`
 --
 
-INSERT INTO `destino` (`idDestino`, `idEstadoDestino`, `idCliente`, `idBiblioteca`, `icono`, `color`, `tienePanel`, `nombre`, `tipoGeometria`, `geometria`) VALUES
-(1, 2, 1, 1, '1', '0x00C3BA', 1, 'EMTREX', 'POINT', '\0\0\0\0\0\0\0???zR?^?I??'),
-(2, 2, 1, 2, '1', '0x00C3BA', 1, 'TURISMO VENTISQUERO', 'POINT', '\0\0\0\0\0\0\0??W?R?$(~???'),
-(3, 2, 1, 3, '1', '0x00C3BA', 1, 'BUSES JOSEFINA', 'POINT', '\0\0\0\0\0\0\0,e?R?o???F?'),
-(4, 2, 1, 4, '1', '0x00C3BA', 1, 'DON LUIS', 'POINT', '\0\0\0\0\0\0\0?I+R?4??7???'),
-(5, 2, 1, 5, '1', '0x00C3BA', 1, 'DON SEBA', 'POINT', '\0\0\0\0\0\0\0u?VR?RI??&??'),
-(6, 2, 1, 6, '1', '0x00C3BA', 1, 'HUGO LOPEZ', 'POINT', '\0\0\0\0\0\0\0]m??R??n????'),
-(7, 2, 1, 7, '1', '0x00C3BA', 1, 'MINI BUSES DON DARIO', 'POINT', '\0\0\0\0\0\0\0???R?m??{??'),
-(8, 2, 1, 8, '1', '0x00C3BA', 1, 'PATAGONIA MOVIL EXPRESS', 'POINT', '\0\0\0\0\0\0\0?}8gR?V-??'),
-(9, 2, 1, 9, '1', '0x00C3BA', 1, 'TEHUELCHE PATAGONIA TOUR ', 'POINT', '\0\0\0\0\0\0\0?S„•õR??K7??'),
-(10, 2, 1, 10, '1', '0x00C3BA', 1, 'TRANSPORTE JL E.I.R.L.', 'POINT', '\0\0\0\0\0\0\0??g??R?R''?????'),
-(11, 2, 1, 11, '1', '0x00C3BA', 1, 'TURISMO R√çO IBA√ëEZ', 'POINT', '\0\0\0\0\0\0\0??9#R??yXG?'),
-(12, 2, 1, 12, '1', '0x00C3BA', 1, 'CASA DEL TURISTA', 'POINT', '\0\0\0\0\0\0\0?t$+R??:??G?'),
-(13, 2, 1, 13, '1', '0x00C3BA', 1, 'ARTETUR', 'POINT', '\0\0\0\0\0\0\0?Pk?wR?b???F?'),
-(14, 2, 1, 14, '1', '0xEEBA42', 1, 'ALBERGUE EL MOSCO', 'POINT', '\0\0\0\0\0\0\0?C?l?R?]?x;H?'),
-(15, 2, 1, 15, '1', '0xEEBA42', 1, 'CAMPAMENTO √ëANDU', 'POINT', '\0\0\0\0\0\0\05^?I??0L?\nFEG?'),
-(16, 2, 1, 16, '1', '0xEEBA42', 1, 'ECO HOSTEL UN DESTINO NO TUR√çSTICO', 'POINT', '\0\0\0\0\0\0\0b???R?KY?8?G?'),
-(17, 2, 1, 17, '1', '0xEEBA42', 1, 'HOSPEDAJE CHAITEN', 'POINT', '\0\0\0\0\0\0\0r??R?›µ?|?H?'),
-(18, 2, 1, 18, '1', '0xEEBA42', 1, 'HOSPEDAJE COYHAIQUE', 'POINT', '\0\0\0\0\0\0\0???R??????'),
-(19, 2, 1, 19, '1', '0xEEBA42', 1, 'HOSPEDAJE DON SANTIAGO', 'POINT', '\0\0\0\0\0\0\0]?C??R???e??F?'),
-(20, 2, 1, 20, '1', '0xEEBA42', 1, 'HOSPEDAJE EVELYN', 'POINT', '\0\0\0\0\0\0\0U0*?$R??????)F?'),
-(21, 2, 1, 21, '1', '0xEEBA42', 1, 'HOSPEDAJE LA ARAUCARIA', 'POINT', '\0\0\0\0\0\0\0??y?R?U0*?G?'),
-(22, 2, 1, 22, '1', '0xEEBA42', 1, 'HOSPEDAJE MARIA ELBA', 'POINT', '\0\0\0\0\0\0\0?J?R??bX??'),
-(23, 2, 1, 23, '1', '0xEEBA42', 1, 'HOSTAL AGUSTO GROSSE', 'POINT', '\0\0\0\0\0\0\0???#R??EGr)F?'),
-(24, 2, 1, 24, '1', '0xEEBA42', 1, 'KOOCH', 'POINT', '\0\0\0\0\0\0\0Tt$??R?RI??&??'),
-(25, 2, 1, 25, '1', '0xEEBA42', 1, 'PATAGONIA HOSTEL', 'POINT', '\0\0\0\0\0\0\0???R??*??F?'),
-(26, 2, 1, 26, '1', '0xEEBA42', 1, 'AIRE PATAGON', 'POINT', '\0\0\0\0\0\0\0?6\ZR??????'),
-(27, 2, 1, 27, '1', '0xEEBA42', 1, 'ALTO MELIMOYU BED AND BREAKFAST', 'POINT', '\0\0\0\0\0\0\0?? °R??5^?I?E?'),
-(28, 2, 1, 28, '1', '0xEEBA42', 1, 'AONKEN', 'POINT', '\0\0\0\0\0\0\0??3?R?~8gD??'),
-(29, 2, 1, 29, '1', '0xEEBA42', 1, 'BELLAVISTA', 'POINT', '\0\0\0\0\0\0\0?3??+R????\F?'),
-(30, 2, 1, 30, '1', '0xEEBA42', 1, 'CABA√ëAS GUIBEL', 'POINT', '\0\0\0\0\0\0\0?}8gR?R???F?'),
-(31, 2, 1, 31, '1', '0xEEBA42', 1, 'CECI', 'POINT', '\0\0\0\0\0\0\0j???R?z?,C??'),
-(32, 2, 1, 32, '1', '0xEEBA42', 1, 'COMUY-HUAPI', 'POINT', '\0\0\0\0\0\0\0\0o??R??l??)F?'),
-(33, 2, 1, 33, '1', '0xEEBA42', 1, 'EL GRINGO', 'POINT', '\0\0\0\0\0\0\0L?\nF%-R???,lG?'),
-(34, 2, 1, 34, '1', '0xEEBA42', 1, 'HOSPEDAJE ANA LUZ', 'POINT', '\0\0\0\0\0\0\0/?%R?*???G?'),
-(35, 2, 1, 35, '1', '0xEEBA42', 1, 'HOSPEDAJE ANCUD', 'POINT', '\0\0\0\0\0\0\0?}8gR?R???F?'),
-(36, 2, 1, 36, '1', '0xEEBA42', 1, 'HOSPEDAJE ANDREITA', 'POINT', '\0\0\0\0\0\0\0D?l?	R?9???G?'),
-(37, 2, 1, 37, '1', '0xEEBA42', 1, 'HOSPEDAJE AZOCAR', 'POINT', '\0\0\0\0\0\0\0????R??7????'),
-(38, 2, 1, 38, '1', '0xEEBA42', 1, 'HOSPEDAJE BAQUEDANO', 'POINT', '\0\0\0\0\0\0\0*??R?U0*???'),
-(39, 2, 1, 39, '1', '0xEEBA42', 1, 'HOSPEDAJE BOSQUE PATAGON', 'POINT', '\0\0\0\0\0\0\0?S„•õR?ƒ±.n???'),
-(40, 2, 1, 40, '1', '0xEEBA42', 1, 'HOSPEDAJE BRISAS DEL LAGO', 'POINT', '\0\0\0\0\0\0\0??5^??M?J?G?'),
-(41, 2, 1, 41, '1', '0xEEBA42', 1, 'HOSPEDAJE BUENA VISTA', 'POINT', '\0\0\0\0\0\0\0?K?5R??0?	?G?'),
-(42, 2, 1, 42, '1', '0xEEBA42', 1, 'HOSPEDAJE CORNER PATAGONIA', 'POINT', '\0\0\0\0\0\0\0?S„•õR?+???'),
-(43, 2, 1, 43, '1', '0xEEBA42', 1, 'HOSPEDAJE DANIELA', 'POINT', '\0\0\0\0\0\0\0?S?R?E????'),
-(44, 2, 1, 44, '1', '0xEEBA42', 1, 'HOSPEDAJE DEL RIO', 'POINT', '\0\0\0\0\0\0\0????bR? A??G?'),
-(45, 2, 1, 45, '1', '0xEEBA42', 1, 'HOSPEDAJE DON FRANCISCO', 'POINT', '\0\0\0\0\0\0\0????Q?v??%G?'),
-(46, 2, 1, 46, '1', '0xEEBA42', 1, 'HOSPEDAJE DON NIBA', 'POINT', '\0\0\0\0\0\0\0????	R?V????G?'),
-(47, 2, 1, 47, '1', '0xEEBA42', 1, 'HOSPEDAJE DONDE MERY', 'POINT', '\0\0\0\0\0\0\0??{?R??Q⁄≥F?'),
-(48, 2, 1, 48, '1', '0xEEBA42', 1, 'HOSPEDAJE DO√ëA ENRIQUETA', 'POINT', '\0\0\0\0\0\0\0?4??R?E????'),
-(49, 2, 1, 49, '1', '0xEEBA42', 1, 'HOSPEDAJE E Y B', 'POINT', '\0\0\0\0\0\0\0F??_R?}??b??'),
-(50, 2, 1, 50, '1', '0xEEBA42', 1, 'HOSPEDAJE EBEN EZER', 'POINT', '\0\0\0\0\0\0\04??@???????G?'),
-(51, 2, 1, 51, '1', '0xEEBA42', 1, 'HOSPEDAJE EL CATA', 'POINT', '\0\0\0\0\0\0\0?????Q?Y?8?%G?'),
-(52, 2, 1, 52, '1', '0xEEBA42', 1, 'HOSPEDAJE EL RODEO', 'POINT', '\0\0\0\0\0\0\0u?\nR??&¬Ü?G?'),
-(53, 2, 1, 53, '1', '0xEEBA42', 1, 'HOSPEDAJE ELY', 'POINT', '\0\0\0\0\0\0\0#J{?/R?T„•õ?F?'),
-(54, 2, 1, 54, '1', '0xEEBA42', 1, 'HOSPEDAJE FABIANA', 'POINT', '\0\0\0\0\0\0\0@a?#R?y?1<H?'),
-(55, 2, 1, 55, '1', '0xEEBA42', 1, 'HOSPEDAJE GLORIA', 'POINT', '\0\0\0\0\0\0\0?.n??Q??|a2%G?'),
-(56, 2, 1, 56, '1', '0xEEBA42', 1, 'HOSPEDAJE GYSELLE', 'POINT', '\0\0\0\0\0\0\0?ƒ±.bR??t???'),
-(57, 2, 1, 57, '1', '0xEEBA42', 1, 'HOSPEDAJE JANITO', 'POINT', '\0\0\0\0\0\0\0L?\nF%-R??.n?lG?'),
-(58, 2, 1, 58, '1', '0xEEBA42', 1, 'HOSPEDAJE KAMY', 'POINT', '\0\0\0\0\0\0\0???????EG?'),
-(59, 2, 1, 59, '1', '0xEEBA42', 1, 'HOSPEDAJE LA CASONA', 'POINT', '\0\0\0\0\0\0\0??h??[B>?DG?'),
-(60, 2, 1, 60, '1', '0xEEBA42', 1, 'HOSPEDAJE LA PRINCESITA', 'POINT', '\0\0\0\0\0\0\0#?~j$R??h"l?G?'),
-(61, 2, 1, 61, '1', '0xEEBA42', 1, 'HOSPEDAJE LAGO CASTOR', 'POINT', '\0\0\0\0\0\0\0d;??R???^??'),
-(62, 2, 1, 62, '1', '0xEEBA42', 1, 'HOSPEDAJE LAS ROSAS', 'POINT', '\0\0\0\0\0\0\0???#R???7?)F?'),
-(63, 2, 1, 63, '1', '0xEEBA42', 1, 'HOSPEDAJE LOS LUGARE√ëOS', 'POINT', '\0\0\0\0\0\0\0?JY?R?6<?R???'),
-(64, 2, 1, 64, '1', '0xEEBA42', 1, 'HOSPEDAJE LUCY', 'POINT', '\0\0\0\0\0\0\0??j+R????PG?'),
-(65, 2, 1, 65, '1', '0xEEBA42', 1, 'HOSPEDAJE MARLUZ 2', 'POINT', '\0\0\0\0\0\0\0*:??R?}??b??'),
-(66, 2, 1, 66, '1', '0xEEBA42', 1, 'HOSPEDAJE NORMI', 'POINT', '\0\0\0\0\0\0\0???`R??????'),
-(67, 2, 1, 67, '1', '0xEEBA42', 1, 'HOSPEDAJE PAOLA', 'POINT', '\0\0\0\0\0\0\08gDio$R?\r???G?'),
-(68, 2, 1, 68, '1', '0xEEBA42', 1, 'HOSPEDAJE PATAGONIA', 'POINT', '\0\0\0\0\0\0\0)?«∫R???G??'),
-(69, 2, 1, 69, '1', '0xEEBA42', 1, 'HOSPEDAJE ROSITA', 'POINT', '\0\0\0\0\0\0\0?J??Q?>yX?5%G?'),
-(70, 2, 1, 70, '1', '0xEEBA42', 1, 'HOSPEDAJE SANTA TERESITA', 'POINT', '\0\0\0\0\0\0\0K?4????›ì?EG?'),
-(71, 2, 1, 71, '1', '0xEEBA42', 1, 'HOSPEDAJE SRA NATHY', 'POINT', '\0\0\0\0\0\0\0?N—ëR???i?F?'),
-(72, 2, 1, 72, '1', '0xEEBA42', 1, 'HOSPEDAJE VENTISQUEROS', 'POINT', '\0\0\0\0\0\0\0?>W[?#R???7?)F?'),
-(73, 2, 1, 73, '1', '0xEEBA42', 1, 'HOSTAL DO√ëA ELOISA', 'POINT', '\0\0\0\0\0\0\0?j+?R?+???'),
-(74, 2, 1, 74, '1', '0xEEBA42', 1, 'HOSTAL MARIA ESTER', 'POINT', '\0\0\0\0\0\0\0???rR?D?????'),
-(75, 2, 1, 75, '1', '0xEEBA42', 1, 'HOSTAL SALAMANDRAS', 'POINT', '\0\0\0\0\0\0\0?e??R??????'),
-(76, 2, 1, 76, '1', '0xEEBA42', 1, 'KOI-AIKE', 'POINT', '\0\0\0\0\0\0\0???|R??W??F?'),
-(77, 2, 1, 77, '1', '0xEEBA42', 1, 'LA PERLA DEL LAGO', 'POINT', '\0\0\0\0\0\0\0?.?!-R????lG?'),
-(78, 2, 1, 78, '1', '0xEEBA42', 1, 'PATAGONIA HOUSE ', 'POINT', '\0\0\0\0\0\0\0O??eR??9#J{??'),
-(79, 2, 1, 79, '1', '0xEEBA42', 1, 'PUERTO CRISTAL', 'POINT', '\0\0\0\0\0\0\0''????Q?&S???'),
-(80, 2, 1, 80, '1', '0xEEBA42', 1, 'RAICES', 'POINT', '\0\0\0\0\0\0\0„•õ?R??:p?F?'),
-(81, 2, 1, 81, '1', '0xEEBA42', 1, 'RESIDENCIAL ESTILO', 'POINT', '\0\0\0\0\0\0\0<N—ë\\bR??z6???'),
-(82, 2, 1, 82, '1', '0xEEBA42', 1, 'RESIDENCIAL ZURITA', 'POINT', '\0\0\0\0\0\0\0 ?_bR??(\\??G?'),
-(83, 2, 1, 83, '1', '0xEEBA42', 1, 'RIO BAKER', 'POINT', '\0\0\0\0\0\0\0??R???|–≥??'),
-(84, 2, 1, 84, '1', '0xEEBA42', 1, 'APARHOTEL TEHUELCHE NATURA', 'POINT', '\0\0\0\0\0\0\0[???R???k	???'),
-(85, 2, 1, 85, '1', '0xEEBA42', 1, 'APARTHOTEL LA CASCADA', 'POINT', '\0\0\0\0\0\0\08gDio,R???…≥F?'),
-(86, 2, 1, 86, '1', '0xEEBA42', 1, 'HOSPEDAJE CAMPO LINDO', 'POINT', '\0\0\0\0\0\0\0(???Q??:M??F?'),
-(87, 2, 1, 87, '1', '0xEEBA42', 1, 'HOSPEDAJE CECILIA', 'POINT', '\0\0\0\0\0\0\0K?=?%R?o???G?'),
-(88, 2, 1, 88, '1', '0xEEBA42', 1, 'HOSPEDAJE COCHRANE', 'POINT', '\0\0\0\0\0\0\0?@??$R??h"l?G?'),
-(89, 2, 1, 89, '1', '0xEEBA42', 1, 'HOSPEDAJE EMMANUEL', 'POINT', '\0\0\0\0\0\0\0????Q???›ì?%G?'),
-(90, 2, 1, 90, '1', '0xEEBA42', 1, 'LA POSADA DEL VIAJERO', 'POINT', '\0\0\0\0\0\0\0KY?8?Q?4??@??F?'),
-(91, 2, 1, 91, '1', '0xEEBA42', 1, 'RUTA 7', 'POINT', '\0\0\0\0\0\0\0E??	R?<?R?!?F?'),
-(92, 2, 1, 92, '1', '0xEEBA42', 1, 'CABA√ëA SCARLETT', 'POINT', '\0\0\0\0\0\0\0???bR?vq\r?G?'),
-(93, 2, 1, 93, '1', '0xEEBA42', 1, 'CABA√ëAS BUENA VISTA', 'POINT', '\0\0\0\0\0\0\0??{?R??????G?'),
-(94, 2, 1, 94, '1', '0xEEBA42', 1, 'CABA√ëAS CARRETERA AUSTRAL', 'POINT', '\0\0\0\0\0\0\0?^)?+R???@??G?'),
-(95, 2, 1, 95, '1', '0xEEBA42', 1, 'CABA√ëAS EL PIONERO ROBERTO BECERRA', 'POINT', '\0\0\0\0\0\0\0?\\?C?aR??G???'),
-(96, 2, 1, 96, '1', '0xEEBA42', 1, 'CABA√ëAS IZ SNOVA', 'POINT', '\0\0\0\0\0\0\0&S????Y?8?EG?'),
-(97, 2, 1, 97, '1', '0xEEBA42', 1, 'CABA√ëAS J &amp; B', 'POINT', '\0\0\0\0\0\0\0mV}??*R??C??PG?'),
-(98, 2, 1, 98, '1', '0xEEBA42', 1, 'CABA√ëAS KELA', 'POINT', '\0\0\0\0\0\0\0e?+R?''¬Ü?W:G?'),
-(99, 2, 1, 99, '1', '0xEEBA42', 1, 'CABA√ëAS LA RUKA', 'POINT', '\0\0\0\0\0\0\0?0?*	R???B?F?'),
-(100, 2, 1, 100, '1', '0xEEBA42', 1, 'CABA√ëAS LAFQUEN', 'POINT', '\0\0\0\0\0\0\0?????????G?'),
-(101, 2, 1, 101, '1', '0xEEBA42', 1, 'CABA√ëAS LAS RUEDAS', 'POINT', '\0\0\0\0\0\0\0k+???R??5^?I<H?'),
-(102, 2, 1, 102, '1', '0xEEBA42', 1, 'CABA√ëAS LOS ALAMOS', 'POINT', '\0\0\0\0\0\0\0 c?BR???7???'),
-(103, 2, 1, 103, '1', '0xEEBA42', 1, 'CABA√ëAS LOS √ëADIS', 'POINT', '\0\0\0\0\0\0\0????R?TR''???G?'),
-(104, 2, 1, 104, '1', '0xEEBA42', 1, 'CABA√ëAS PARCELA DO√ëA LEO', 'POINT', '\0\0\0\0\0\0\0?0?*?Q?L?\nF%%G?'),
-(105, 2, 1, 105, '1', '0xEEBA42', 1, 'CABA√ëAS PEN√çNSULA LA FLORIDA', 'POINT', '\0\0\0\0\0\0\02??R??HP<H?'),
-(106, 2, 1, 106, '1', '0xEEBA42', 1, 'CABA√ëAS SEIS LAGUNAS ', 'POINT', '\0\0\0\0\0\0\0?Z”º?R?gDio?F?'),
-(107, 2, 1, 107, '1', '0xEEBA42', 1, 'DREAMCATCHER LAGO CARO', 'POINT', '\0\0\0\0\0\0\0#?~jR??K7??'),
-(108, 2, 1, 108, '1', '0xEEBA42', 1, 'AONIKENK', 'POINT', '\0\0\0\0\0\0\0??h"?J??Zd;GU?'),
-(109, 2, 1, 109, '1', '0xEEBA42', 1, 'CABA√ëA COSTANERA', 'POINT', '\0\0\0\0\0\0\0?≈è1+R?\0o??G?'),
-(110, 2, 1, 110, '1', '0xEEBA42', 1, 'CABA√ëA EL ARRIERO', 'POINT', '\0\0\0\0\0\0\0?V%R?\0?~?:?G?'),
-(111, 2, 1, 111, '1', '0xEEBA42', 1, 'CABA√ëA EL COLONO', 'POINT', '\0\0\0\0\0\0\0??r\ZR??Pk?w?E?'),
-(112, 2, 1, 112, '1', '0xEEBA42', 1, 'CABA√ëA EL MOSCO', 'POINT', '\0\0\0\0\0\0\0?C?l?R?]?x;H?'),
-(113, 2, 1, 113, '1', '0xEEBA42', 1, 'CABA√ëA ENRIQUE¬¥S', 'POINT', '\0\0\0\0\0\0\0$(~??+R?????\F?'),
-(114, 2, 1, 114, '1', '0xEEBA42', 1, 'CABA√ëA LOS ALAMOS', 'POINT', '\0\0\0\0\0\0\0?V?R?\ZQ?|??'),
-(115, 2, 1, 115, '1', '0xEEBA42', 1, 'CABA√ëA SANTA TERESITA', 'POINT', '\0\0\0\0\0\0\0? °E?+R?"??u?\F?'),
-(116, 2, 1, 116, '1', '0xEEBA42', 1, 'CABA√ëAS ANA LUZ', 'POINT', '\0\0\0\0\0\0\0/?%R?*???G?'),
-(117, 2, 1, 117, '1', '0xEEBA42', 1, 'CABA√ëAS ANTU√â', 'POINT', '\0\0\0\0\0\0\0a2U0*-R?y?1lG?'),
-(118, 2, 1, 118, '1', '0xEEBA42', 1, 'CABA√ëAS AUSTRAL', 'POINT', '\0\0\0\0\0\0\0?y?:\nR??St$?G?'),
-(119, 2, 1, 119, '1', '0xEEBA42', 1, 'CABA√ëAS AYELEN', 'POINT', '\0\0\0\0\0\0\0??Mb,R??K??F?'),
-(120, 2, 1, 120, '1', '0xEEBA42', 1, 'CABA√ëAS AYEL√âN', 'POINT', '\0\0\0\0\0\0\0?5^?IR??:??F?'),
-(121, 2, 1, 121, '1', '0xEEBA42', 1, 'CABA√ëAS BELLAVISTA', 'POINT', '\0\0\0\0\0\0\0?i???????G?'),
-(122, 2, 1, 122, '1', '0xEEBA42', 1, 'CABA√ëAS BOPP HOUSE', 'POINT', '\0\0\0\0\0\0\0???vR?5?EG??'),
-(123, 2, 1, 123, '1', '0xEEBA42', 1, 'CABA√ëAS BORDELAGO', 'POINT', '\0\0\0\0\0\0\09EGr??Q????%G?'),
-(124, 2, 1, 124, '1', '0xEEBA42', 1, 'CABA√ëAS BRELLENTHIN', 'POINT', '\0\0\0\0\0\0\0?W[??$R?‘ö???G?'),
-(125, 2, 1, 125, '1', '0xEEBA42', 1, 'CABA√ëAS CHILE CHICO', 'POINT', '\0\0\0\0\0\0\0B>????€ä?e?DG?'),
-(126, 2, 1, 126, '1', '0xEEBA42', 1, 'CABA√ëAS CHOFITA', 'POINT', '\0\0\0\0\0\0\0q\r?R?????F?'),
-(127, 2, 1, 127, '1', '0xEEBA42', 1, 'CABA√ëAS CUMBRES NEVADAS', 'POINT', '\0\0\0\0\0\0\0d]?R???y???'),
-(128, 2, 1, 128, '1', '0xEEBA42', 1, 'CABA√ëAS DENDAL', 'POINT', '\0\0\0\0\0\0\0?#???,R???q??F?'),
-(129, 2, 1, 129, '1', '0xEEBA42', 1, 'CABA√ëAS DON JOAQUIN', 'POINT', '\0\0\0\0\0\0\0??yR????F?'),
-(130, 2, 1, 130, '1', '0xEEBA42', 1, 'CABA√ëAS DON MARCELO', 'POINT', '\0\0\0\0\0\0\0ÿÅsF?????G?'),
-(131, 2, 1, 131, '1', '0xEEBA42', 1, 'CABA√ëAS DON NIBA', 'POINT', '\0\0\0\0\0\0\0????	R?V????G?'),
-(132, 2, 1, 132, '1', '0xEEBA42', 1, 'CABA√ëAS ECA', 'POINT', '\0\0\0\0\0\0\0*:??$R??!??u?G?'),
-(133, 2, 1, 133, '1', '0xEEBA42', 1, 'CABA√ëAS EL BOMBERO', 'POINT', '\0\0\0\0\0\0\0TR''??$R???Áå†G?'),
-(134, 2, 1, 134, '1', '0xEEBA42', 1, 'CABA√ëAS EL TRIANGULO', 'POINT', '\0\0\0\0\0\0\0?St$?+R???7??\F?'),
-(135, 2, 1, 135, '1', '0xEEBA42', 1, 'CABA√ëAS EL TROPERO', 'POINT', '\0\0\0\0\0\0\0??5^\nR??St$?G?'),
-(136, 2, 1, 136, '1', '0xEEBA42', 1, 'CABA√ëAS EL VIAJERO', 'POINT', '\0\0\0\0\0\0\0?u?=R?HP???'),
-(137, 2, 1, 137, '1', '0xEEBA42', 1, 'CABA√ëAS ELIZABETH', 'POINT', '\0\0\0\0\0\0\0???#R??EGr)F?'),
-(138, 2, 1, 138, '1', '0xEEBA42', 1, 'CABA√ëAS EMMANUEL', 'POINT', '\0\0\0\0\0\0\0$????Q?K?=?%G?'),
-(139, 2, 1, 139, '1', '0xEEBA42', 1, 'CABA√ëAS ESCUDO', 'POINT', '\0\0\0\0\0\0\0p_?R??	??F?'),
-(140, 2, 1, 140, '1', '0xEEBA42', 1, 'CABA√ëAS ESTEFANI', 'POINT', '\0\0\0\0\0\0\0?46R?)?r?0??'),
-(141, 2, 1, 141, '1', '0xEEBA42', 1, 'CABA√ëAS ESTRELLA DEL SUR', 'POINT', '\0\0\0\0\0\0\0?&¬Ü?#R?(??)F?'),
-(142, 2, 1, 142, '1', '0xEEBA42', 1, 'CABA√ëAS FACUNDO', 'POINT', '\0\0\0\0\0\0\0;??????~j?DG?'),
-(143, 2, 1, 143, '1', '0xEEBA42', 1, 'CABA√ëAS FERNY', 'POINT', '\0\0\0\0\0\0\0?1w-!+R??j+?OG?'),
-(144, 2, 1, 144, '1', '0xEEBA42', 1, 'CABA√ëAS GABRIELA MISTRAL', 'POINT', '\0\0\0\0\0\0\0È∑Ø?R??e?F?'),
-(145, 2, 1, 145, '1', '0xEEBA42', 1, 'CABA√ëAS HERVILA', 'POINT', '\0\0\0\0\0\0\0?????%R??uq\r?G?'),
-(146, 2, 1, 146, '1', '0xEEBA42', 1, 'CABA√ëAS HUIMPALAY', 'POINT', '\0\0\0\0\0\0\0?8?mR?\rq???F?'),
-(147, 2, 1, 147, '1', '0xEEBA42', 1, 'CABA√ëAS JAVI', 'POINT', '\0\0\0\0\0\0\0???bR???S?G?'),
-(148, 2, 1, 148, '1', '0xEEBA42', 1, 'CABA√ëAS LA CASCADA', 'POINT', '\0\0\0\0\0\0\0?e?c],R?????F?'),
-(149, 2, 1, 149, '1', '0xEEBA42', 1, 'CABA√ëAS LA ESQUINA', 'POINT', '\0\0\0\0\0\0\0	?c????EG?'),
-(150, 2, 1, 150, '1', '0xEEBA42', 1, 'CABA√ëAS LA ESTANCIA', 'POINT', '\0\0\0\0\0\0\0?J?R?o????'),
-(151, 2, 1, 151, '1', '0xEEBA42', 1, 'CABA√ëAS LA ESTRELLA', 'POINT', '\0\0\0\0\0\0\0?t$+R?„•õ?PG?'),
-(152, 2, 1, 152, '1', '0xEEBA42', 1, 'CABA√ëAS LA PASARELA', 'POINT', '\0\0\0\0\0\0\0x$(~R?f?c]?F?'),
-(153, 2, 1, 153, '1', '0xEEBA42', 1, 'CABA√ëAS LA RINCONADA', 'POINT', '\0\0\0\0\0\0\0???-R?y?1lG?'),
-(154, 2, 1, 154, '1', '0xEEBA42', 1, 'CABA√ëAS LAGO ELIZALDE', 'POINT', '\0\0\0\0\0\0\0??C?lR?jM?F?'),
-(155, 2, 1, 155, '1', '0xEEBA42', 1, 'CABA√ëAS LAGO ROSSELOT', 'POINT', '\0\0\0\0\0\0\0??HR?????E?'),
-(156, 2, 1, 156, '1', '0xEEBA42', 1, 'CABA√ëAS LAGO TAMANGO', 'POINT', '\0\0\0\0\0\0\0)\\??R????N@??'),
-(157, 2, 1, 157, '1', '0xEEBA42', 1, 'CABA√ëAS LO DE ROCCO', 'POINT', '\0\0\0\0\0\0\0?6\ZR?≈è1w-??'),
-(158, 2, 1, 158, '1', '0xEEBA42', 1, 'CABA√ëAS LOLY', 'POINT', '\0\0\0\0\0\0\0xz?,C,R?A????F?'),
-(159, 2, 1, 159, '1', '0xEEBA42', 1, 'CABA√ëAS LOS ARRAYANES', 'POINT', '\0\0\0\0\0\0\0???R??:pŒà?F?'),
-(160, 2, 1, 160, '1', '0xEEBA42', 1, 'CABA√ëAS LOS COIHUES LODGE', 'POINT', '\0\0\0\0\0\0\0(~??kR?^K?=?E?'),
-(161, 2, 1, 161, '1', '0xEEBA42', 1, 'CABA√ëAS LOS PINOS', 'POINT', '\0\0\0\0\0\0\0?3??7R??3??7??'),
-(162, 2, 1, 162, '1', '0xEEBA42', 1, 'CABA√ëAS LUCY', 'POINT', '\0\0\0\0\0\0\0?{?+R??H?}PG?'),
-(163, 2, 1, 163, '1', '0xEEBA42', 1, 'CABA√ëAS LUCY', 'POINT', '\0\0\0\0\0\0\0\\??(R???u???'),
-(164, 2, 1, 164, '1', '0xEEBA42', 1, 'CABA√ëAS MARIA CLARA', 'POINT', '\0\0\0\0\0\0\0??:MR?6?>W[??'),
-(165, 2, 1, 165, '1', '0xEEBA42', 1, 'Caba√±as Maria Ines', 'POINT', '\0\0\0\0\0\0\0S?!?u%R?Zd;ﬂüG?'),
-(166, 2, 1, 166, '1', '0xEEBA42', 1, 'CABA√ëAS MARLO', 'POINT', '\0\0\0\0\0\0\0È∑Ø?R??JY??G?'),
-(167, 2, 1, 167, '1', '0xEEBA42', 1, 'Caba√±as Martina', 'POINT', '\0\0\0\0\0\0\0??K+R?\0o??G?'),
-(168, 2, 1, 168, '1', '0xEEBA42', 1, 'CABA√ëAS MI RUCA', 'POINT', '\0\0\0\0\0\0\0`?"?R???sF?E?'),
-(169, 2, 1, 169, '1', '0xEEBA42', 1, 'CABA√ëAS MICHAY', 'POINT', '\0\0\0\0\0\0\0]?x+R??%‰Éû]F?'),
-(170, 2, 1, 170, '1', '0xEEBA42', 1, 'CABA√ëAS MIRADOR', 'POINT', '\0\0\0\0\0\0\0Gr??R?”º???'),
-(171, 2, 1, 171, '1', '0xEEBA42', 1, 'CABA√ëAS MIRADOR DEL RIO', 'POINT', '\0\0\0\0\0\0\0???R?[B>??E?'),
-(172, 2, 1, 172, '1', '0xEEBA42', 1, 'CABA√ëAS NATHALY', 'POINT', '\0\0\0\0\0\0\0}–≥Y?R???E?'),
-(173, 2, 1, 173, '1', '0xEEBA42', 1, 'CABA√ëAS NOMADA', 'POINT', '\0\0\0\0\0\0\0u?V??h???EG?'),
-(174, 2, 1, 174, '1', '0xEEBA42', 1, 'CABA√ëAS PAOLA', 'POINT', '\0\0\0\0\0\0\08gDio$R?\r???G?'),
-(175, 2, 1, 175, '1', '0xEEBA42', 1, 'CABA√ëAS PARQUE TUR√çSTICO PIEDRA DEL INDIO', 'POINT', '\0\0\0\0\0\0\0?VR???????'),
-(176, 2, 1, 176, '1', '0xEEBA42', 1, 'CABA√ëAS PATAGON EXPLORADOR', 'POINT', '\0\0\0\0\0\0\0??z6+R?????OG?'),
-(177, 2, 1, 177, '1', '0xEEBA42', 1, 'CABA√ëAS PATAGONIA PARAISO', 'POINT', '\0\0\0\0\0\0\0^K?=R??????'),
-(178, 2, 1, 178, '1', '0xEEBA42', 1, 'CABA√ëAS PIE DE MONTE', 'POINT', '\0\0\0\0\0\0\0>yX?5R?2w-!??'),
-(179, 2, 1, 179, '1', '0xEEBA42', 1, 'CABA√ëAS PORTAL DEL MAR', 'POINT', '\0\0\0\0\0\0\0?3??+R?w-!?\F?'),
-(180, 2, 1, 180, '1', '0xEEBA42', 1, 'CABA√ëAS PUENTE ROSSELOT', 'POINT', '\0\0\0\0\0\0\0?|–≥YR?	?c?E?'),
-(181, 2, 1, 181, '1', '0xEEBA42', 1, 'CABA√ëAS QUEULAT', 'POINT', '\0\0\0\0\0\0\0???rR?????F?'),
-(182, 2, 1, 182, '1', '0xEEBA42', 1, 'CABA√ëAS QUIYANGO', 'POINT', '\0\0\0\0\0\0\0??@??R?lxz?,;H?'),
-(183, 2, 1, 183, '1', '0xEEBA42', 1, 'CABA√ëAS R Y C', 'POINT', '\0\0\0\0\0\0\0+??›ì+R??G?^F?'),
-(184, 2, 1, 184, '1', '0xEEBA42', 1, 'CABA√ëAS RINCON SURE√ëO', 'POINT', '\0\0\0\0\0\0\0??R??????'),
-(185, 2, 1, 185, '1', '0xEEBA42', 1, 'CABA√ëAS RIO AYSEN', 'POINT', '\0\0\0\0\0\0\0bX9?,R?\\ A??F?'),
-(186, 2, 1, 186, '1', '0xEEBA42', 1, 'CABA√ëAS RIO BAGUALES', 'POINT', '\0\0\0\0\0\0\0\\ A?R?o?≈è??'),
-(187, 2, 1, 187, '1', '0xEEBA42', 1, 'CABA√ëAS R√çO EXPLORADORES', 'POINT', '\0\0\0\0\0\0\0??y+R??j+?OG?'),
-(188, 2, 1, 188, '1', '0xEEBA42', 1, 'CABA√ëAS RIO PASCUA', 'POINT', '\0\0\0\0\0\0\0????#R?Dio?)F?'),
-(189, 2, 1, 189, '1', '0xEEBA42', 1, 'CABA√ëAS ROSSBACH', 'POINT', '\0\0\0\0\0\0\0-???R???u?)F?'),
-(190, 2, 1, 190, '1', '0xEEBA42', 1, 'CABA√ëAS RUSTICA', 'POINT', '\0\0\0\0\0\0\0?G?R?8?????'),
-(191, 2, 1, 191, '1', '0xEEBA42', 1, 'CABA√ëAS SAN GABRIEL', 'POINT', '\0\0\0\0\0\0\0?C?l?R?]m??;H?'),
-(192, 2, 1, 192, '1', '0xEEBA42', 1, 'CABA√ëAS SOL Y LUNA', 'POINT', '\0\0\0\0\0\0\0e?`TR#R?d?K»üG?'),
-(193, 2, 1, 193, '1', '0xEEBA42', 1, 'CABA√ëAS SUR AUSTRAL', 'POINT', '\0\0\0\0\0\0\0??$R?*:???G?'),
-(194, 2, 1, 194, '1', '0xEEBA42', 1, 'CABA√ëAS SUR AUSTRAL', 'POINT', '\0\0\0\0\0\0\0???R?Íï≤q?E?'),
-(195, 2, 1, 195, '1', '0xEEBA42', 1, 'CABA√ëAS TIERRA NUEVA', 'POINT', '\0\0\0\0\0\0\0\rq???R?o????'),
-(196, 2, 1, 196, '1', '0xEEBA42', 1, 'CABA√ëAS TIO NINO', 'POINT', '\0\0\0\0\0\0\0??MbR?6?N?F?'),
-(197, 2, 1, 197, '1', '0xEEBA42', 1, 'CABA√ëAS ULKANTUN-KO', 'POINT', '\0\0\0\0\0\0\0‰ÉûÕ™+R?=,‘ö?F?'),
-(198, 2, 1, 198, '1', '0xEEBA42', 1, 'Caba√±as Valle Exploradores', 'POINT', '\0\0\0\0\0\0\0OjM+R??j+?OG?'),
-(199, 2, 1, 199, '1', '0xEEBA42', 1, 'CABA√ëAS VENTISQUEROS', 'POINT', '\0\0\0\0\0\0\0??1R?$(~???'),
-(200, 2, 1, 200, '1', '0xEEBA42', 1, 'CABA√ëAS VIENTOS DEL SUR', 'POINT', '\0\0\0\0\0\0\0?(\\??R?NbX9?E?'),
-(201, 2, 1, 201, '1', '0xEEBA42', 1, 'CABA√ëAS Y QUINCHO CERRO GILBERTO', 'POINT', '\0\0\0\0\0\0\0?È∑Ø+R?>yX?5]F?'),
-(202, 2, 1, 202, '1', '0xEEBA42', 1, 'CABA√ëS ROGERI', 'POINT', '\0\0\0\0\0\0\0[B>?$R?O??e?G?'),
-(203, 2, 1, 203, '1', '0xEEBA42', 1, 'DEPARTAMENTOS OLICER', 'POINT', '\0\0\0\0\0\0\0?B?i???VEG?'),
-(204, 2, 1, 204, '1', '0xEEBA42', 1, 'DON ROBERTO', 'POINT', '\0\0\0\0\0\0\0O@a?R????\F?'),
-(205, 2, 1, 205, '1', '0xEEBA42', 1, 'EL SALMON', 'POINT', '\0\0\0\0\0\0\02??R?F???F?'),
-(206, 2, 1, 206, '1', '0xEEBA42', 1, 'ENTRE PATAGONES', 'POINT', '\0\0\0\0\0\0\0??@??R???'';H?'),
-(207, 2, 1, 207, '1', '0xEEBA42', 1, 'HOSPEDAJE GUIBEL', 'POINT', '\0\0\0\0\0\0\0?}8gR?R???F?'),
-(208, 2, 1, 208, '1', '0xEEBA42', 1, 'HOSTAL ESPA√ëOL', 'POINT', '\0\0\0\0\0\0\0?.n?R???u???'),
-(209, 2, 1, 209, '1', '0xEEBA42', 1, 'HOSTERIA PUERTO BERTRAND', 'POINT', '\0\0\0\0\0\0\0?K75R??c??G?'),
-(210, 2, 1, 210, '1', '0xEEBA42', 1, 'JUANITA', 'POINT', '\0\0\0\0\0\0\0???R?S?!?u)F?'),
-(211, 2, 1, 211, '1', '0xEEBA42', 1, 'KON - AIKEN TURISMO', 'POINT', '\0\0\0\0\0\0\0??h??[B>?DG?'),
-(212, 2, 1, 212, '1', '0xEEBA42', 1, 'LA CASONA', 'POINT', '\0\0\0\0\0\0\0sh??R?e?G?'),
-(213, 2, 1, 213, '1', '0xEEBA42', 1, 'LA SIRENA', 'POINT', '\0\0\0\0\0\0\0Œà??R???y?F?'),
-(214, 2, 1, 214, '1', '0xEEBA42', 1, 'LAGO NEGRO LODGE', 'POINT', '\0\0\0\0\0\0\0≈è1w-R??Z”º?E?'),
-(215, 2, 1, 215, '1', '0xEEBA42', 1, 'LAS HORQUETAS', 'POINT', '\0\0\0\0\0\0\0?^)?R??Pk?w??'),
-(216, 2, 1, 216, '1', '0xEEBA42', 1, 'MY TECHO', 'POINT', '\0\0\0\0\0\0\0?[ A?R?&S???'),
-(217, 2, 1, 217, '1', '0xEEBA42', 1, 'PATAGONIA GREEN', 'POINT', '\0\0\0\0\0\0\0$???~+R?????F?'),
-(218, 2, 1, 218, '1', '0xEEBA42', 1, 'PATAGONIAVENTURA', 'POINT', '\0\0\0\0\0\0\0?≈è1R??5?N??'),
-(219, 2, 1, 219, '1', '0xEEBA42', 1, 'REFUGIO DEL POLLUX', 'POINT', '\0\0\0\0\0\0\0?H?}R?\Z?[ A??'),
-(220, 2, 1, 220, '1', '0xEEBA42', 1, 'TERRA LUNA LODGE', 'POINT', '\0\0\0\0\0\0\0NbX9,R??~j?tkG?'),
-(221, 2, 1, 221, '1', '0xEEBA42', 1, 'AREA DE CAMPING PUDU', 'POINT', '\0\0\0\0\0\0\0&S?*R????QG?'),
-(222, 2, 1, 222, '1', '0xEEBA42', 1, 'BAQUEANOS DE LA PATAGONIA', 'POINT', '\0\0\0\0\0\0\0?0?*R?À°E??rG?'),
-(223, 2, 1, 223, '1', '0xEEBA42', 1, 'CABA√ëAS BON', 'POINT', '\0\0\0\0\0\0\0Íï≤qR?+??F?'),
-(224, 2, 1, 224, '1', '0xEEBA42', 1, 'CAMPING ALBORADA', 'POINT', '\0\0\0\0\0\0\0c?B>R??QI????'),
-(225, 2, 1, 225, '1', '0xEEBA42', 1, 'CAMPING AYEL√âN', 'POINT', '\0\0\0\0\0\0\0?5^?IR??:??F?'),
-(226, 2, 1, 226, '1', '0xEEBA42', 1, 'CAMPING BELLAVISTA', 'POINT', '\0\0\0\0\0\0\0?	?+R????|PG?'),
-(227, 2, 1, 227, '1', '0xEEBA42', 1, 'CAMPING CECILIA', 'POINT', '\0\0\0\0\0\0\0K?=?%R?o???G?'),
-(228, 2, 1, 228, '1', '0xEEBA42', 1, 'CAMPING COCHRANE', 'POINT', '\0\0\0\0\0\0\07?A`?R??JY??G?'),
-(229, 2, 1, 229, '1', '0xEEBA42', 1, 'CAMPING DE LA PATAGONIA', 'POINT', '\0\0\0\0\0\0\0V-???⁄¨?\\mEG?'),
-(230, 2, 1, 230, '1', '0xEEBA42', 1, 'CAMPING DON FRNACISCO', 'POINT', '\0\0\0\0\0\0\0????Q?v??%G?'),
-(231, 2, 1, 231, '1', '0xEEBA42', 1, 'CAMPING DON OMAR ', 'POINT', '\0\0\0\0\0\0\0??@??Q????G?'),
-(232, 2, 1, 232, '1', '0xEEBA42', 1, 'CAMPING EL MOSCO', 'POINT', '\0\0\0\0\0\0\0?C?l?R?]?x;H?'),
-(233, 2, 1, 233, '1', '0xEEBA42', 1, 'CAMPING EMANUEL', 'POINT', '\0\0\0\0\0\0\0aTR''??Q???H??'),
-(234, 2, 1, 234, '1', '0xEEBA42', 1, 'CAMPING GETZEMANI', 'POINT', '\0\0\0\0\0\0\0?6\Z$R???|–≥)F?'),
-(235, 2, 1, 235, '1', '0xEEBA42', 1, 'CAMPING LA ARAUCARIA', 'POINT', '\0\0\0\0\0\0\0??y?R?U0*?G?'),
-(236, 2, 1, 236, '1', '0xEEBA42', 1, 'CAMPING LA CABA√ëITA', 'POINT', '\0\0\0\0\0\0\0?Pk?w?Q?x$(~$G?'),
-(237, 2, 1, 237, '1', '0xEEBA42', 1, 'CAMPING LA PANCHA', 'POINT', '\0\0\0\0\0\0\0b???R??Q??F?'),
-(238, 2, 1, 238, '1', '0xEEBA42', 1, 'CAMPING LA SIRENA', 'POINT', '\0\0\0\0\0\0\0Œà??R???y?F?'),
-(239, 2, 1, 239, '1', '0xEEBA42', 1, 'CAMPING LO DE ROCCO', 'POINT', '\0\0\0\0\0\0\0?6\ZR?≈è1w-??'),
-(240, 2, 1, 240, '1', '0xEEBA42', 1, 'CAMPING LO DEL ALE', 'POINT', '\0\0\0\0\0\0\0??y?Q?⁄¨?\\mEG?'),
-(241, 2, 1, 241, '1', '0xEEBA42', 1, 'CAMPING LOS √ëIRES (LAGO O&#x27;HIGGINS)', 'POINT', '\0\0\0\0\0\0\0??g??R?]?x;H?'),
-(242, 2, 1, 242, '1', '0xEEBA42', 1, 'CAMPING NO ME OLVIDES', 'POINT', '\0\0\0\0\0\0\0??|–≥??h"lxzEG?'),
-(243, 2, 1, 243, '1', '0xEEBA42', 1, 'CAMPING PUERTO CRISTAL', 'POINT', '\0\0\0\0\0\0\0''????S?&S???'),
-(244, 2, 1, 244, '1', '0xEEBA42', 1, 'CAMPING SRA NATHY', 'POINT', '\0\0\0\0\0\0\0?N—ëR???i?F?'),
-(245, 2, 1, 245, '1', '0xEEBA42', 1, 'CAMPING VIENTOS DEL SUR', 'POINT', '\0\0\0\0\0\0\0?(\\??R?NbX9?E?'),
-(246, 2, 1, 246, '1', '0xEEBA42', 1, 'CENTRO ECO FAMILIAR LAGUNA ESMERALDA', 'POINT', '\0\0\0\0\0\0\0?(?r?$R?Dio??G?'),
-(247, 2, 1, 247, '1', '0xEEBA42', 1, 'ECO CAMPING PLAYA ARRAYANES', 'POINT', '\0\0\0\0\0\0\0u?V"R?????$F?'),
-(248, 2, 1, 248, '1', '0xEEBA42', 1, 'ECO CAMPING UN DESTINO NO TUR√çSTICO', 'POINT', '\0\0\0\0\0\0\0??\Z/?R?9EGr?oG?'),
-(249, 2, 1, 205, '1', '0xEEBA42', 1, 'EL SALMON', 'POINT', '\0\0\0\0\0\0\02??R?F???F?'),
-(250, 2, 1, 249, '1', '0xEEBA42', 1, 'LAS TONINAS', 'POINT', '\0\0\0\0\0\0\0?t?&R?)?r?09F?'),
-(251, 2, 1, 250, '1', '0xEEBA42', 1, 'COYHAIQUE RIVER LODGE', 'POINT', '\0\0\0\0\0\0\0??E?Q?x$(??'),
-(252, 2, 1, 251, '1', '0xEEBA42', 1, 'EL  MIRADOR DE GUADAL', 'POINT', '\0\0\0\0\0\0\0F??_,R???:MlG?'),
-(253, 2, 1, 252, '1', '0xEEBA42', 1, 'EL PANGUE LODGE', 'POINT', '\0\0\0\0\0\0\0??q?R???n?F?'),
-(254, 2, 1, 253, '1', '0xEEBA42', 1, 'GREEN BAKER LODGE', 'POINT', '\0\0\0\0\0\0\0F??_4R?L7?A`?G?'),
-(255, 2, 1, 254, '1', '0xEEBA42', 1, 'LA PASARELA LODGE ', 'POINT', '\0\0\0\0\0\0\0x$(~R?f?c]?F?'),
-(256, 2, 1, 255, '1', '0xEEBA42', 1, 'LODGE EL ENSUE√ëO', 'POINT', '\0\0\0\0\0\0\0???R?=\n◊£p?E?'),
-(257, 2, 1, 256, '1', '0xEEBA42', 1, 'LODGE PATAGONIA ACRES ', 'POINT', '\0\0\0\0\0\0\0?\Z?[R??0?*XG?'),
-(258, 2, 1, 257, '1', '0xEEBA42', 1, 'PATAGONIA BAY', 'POINT', '\0\0\0\0\0\0\0?u?-R????;G?'),
-(259, 2, 1, 258, '1', '0xEEBA42', 1, 'PATAGONIAN BADECAMP LODGE', 'POINT', '\0\0\0\0\0\0\0???N@R??K7??'),
-(260, 2, 1, 259, '1', '0xEEBA42', 1, 'POSADA ESTUARIO QUEULAT', 'POINT', '\0\0\0\0\0\0\0H?}8#R????CF?'),
-(261, 2, 1, 260, '1', '0xEEBA42', 1, 'PUYUHUAPI LODGE SPA', 'POINT', '\0\0\0\0\0\0\0?/L?\n&R?d]?8F?'),
-(262, 2, 1, 261, '1', '0xEEBA42', 1, 'ROBINSON CRUSOE DEEP PATAGONIA', 'POINT', '\0\0\0\0\0\0\0]?C??R?$???~;H?'),
-(263, 2, 1, 262, '1', '0x00C7F6', 1, 'EL PASCUA', 'POINT', '\0\0\0\0\0\0\0U0*?$R??????)F?'),
-(264, 2, 1, 263, '1', '0x00C7F6', 1, 'POSADA QUEULAT', 'POINT', '\0\0\0\0\0\0\0H?}8#R????CF?'),
-(265, 2, 1, 264, '1', '0x00C7F6', 1, 'SERVICIO GASTRONOMICO PATAGONIA', 'POINT', '\0\0\0\0\0\0\0?}8g,R????F?'),
-(266, 2, 1, 265, '1', '0x00C7F6', 1, 'EL CHE&#x27;F', 'POINT', '\0\0\0\0\0\0\0?ƒ±.??w??\Z/EG?'),
-(267, 2, 1, 266, '1', '0x00C7F6', 1, 'PATAGONI-K MATE &amp; EXPEDICIONES', 'POINT', '\0\0\0\0\0\0\0???R?k+??›≥F?'),
-(268, 2, 1, 267, '1', '0xEEBA42', 1, 'CABA√ëAS AUSTRAL', 'POINT', '\0\0\0\0\0\0\0Q?|a??M?J?G?'),
-(269, 2, 1, 170, '1', '0xEEBA42', 1, 'CABA√ëAS MIRADOR', 'POINT', '\0\0\0\0\0\0\0Gr??R?”º???'),
-(270, 2, 1, 268, '1', '0xEEBA42', 1, 'CABA√ëAS Y HOSTAL SAN SEBASTIAN', 'POINT', '\0\0\0\0\0\0\0\\ A?R?o?≈è??'),
-(271, 2, 1, 269, '1', '0xEEBA42', 1, 'CABA√ëAS YAGAN', 'POINT', '\0\0\0\0\0\0\0?0?	\ZR??G??E?'),
-(272, 2, 1, 270, '1', '0xEEBA42', 1, 'DEPARTAMENTO BELLAVISTA', 'POINT', '\0\0\0\0\0\0\0?3??+R????\F?'),
-(273, 2, 1, 271, '1', '0xEEBA42', 1, 'DEPARTAMENTO RYC', 'POINT', '\0\0\0\0\0\0\0+??›ì+R??G?^F?'),
-(274, 2, 1, 272, '1', '0xEEBA42', 1, 'DEPARTAMENTO ULKANTUN-KO', 'POINT', '\0\0\0\0\0\0\0‰ÉûÕ™+R?=,‘ö?F?'),
-(275, 2, 1, 273, '1', '0xEEBA42', 1, 'DEPARTAMENTOS LA CASCADA', 'POINT', '\0\0\0\0\0\0\0+??,R?$???~?F?'),
-(276, 2, 1, 274, '1', '0xEEBA42', 1, 'DEPARTAMENTOS MARIA CLARA', 'POINT', '\0\0\0\0\0\0\0?yXR?o????'),
-(277, 2, 1, 275, '1', '0xEEBA42', 1, 'DEPARTAMENTOS NORMITA', 'POINT', '\0\0\0\0\0\0\0???N@R?a?+e??'),
-(278, 2, 1, 276, '1', '0xEEBA42', 1, 'DEPARTAMENTOS SANTA TERESITA', 'POINT', '\0\0\0\0\0\0\0? °E?+R?"??u?\F?'),
-(279, 2, 1, 277, '1', '0xEEBA42', 1, 'EL GUAIRAO', 'POINT', '\0\0\0\0\0\0\0??q?+R??%‰Éû]F?'),
-(280, 2, 1, 278, '1', '0xEEBA42', 1, 'DEPARTAMENTO LOS PINOS', 'POINT', '\0\0\0\0\0\0\0?t$+R???OG?'),
-(281, 2, 1, 279, '1', '0xEEBA42', 1, 'DEPARTAMENTOS AUSTRAL', 'POINT', '\0\0\0\0\0\0\0???????rh??G?'),
-(282, 2, 1, 280, '1', '0xEEBA42', 1, 'HACIENDA TRES LAGOS', 'POINT', '\0\0\0\0\0\0\0	?c2R?\nh"lxrG?'),
-(283, 2, 1, 281, '1', '0xEEBA42', 1, 'ISABEL', 'POINT', '\0\0\0\0\0\0\0?Mb$R??????)F?'),
-(284, 2, 1, 282, '1', '0xEEBA42', 1, 'MIRADOR DEL RIO', 'POINT', '\0\0\0\0\0\0\0???R?[B>??E?'),
-(285, 2, 1, 283, '1', '0xEEBA42', 1, 'CANTO DEL CHUCAO', 'POINT', '\0\0\0\0\0\0\0TR''??,R????F?'),
-(286, 2, 1, 284, '1', '0xEEBA42', 1, 'CASA LUDWIG', 'POINT', '\0\0\0\0\0\0\0O??e?#R??W??F?'),
-(287, 2, 1, 285, '1', '0xEEBA42', 1, 'DARKA RESIDENCIAL', 'POINT', '\0\0\0\0\0\0\0lxz?,+R?U0*?PG?'),
-(288, 2, 1, 286, '1', '0xEEBA42', 1, 'DAVIMAR', 'POINT', '\0\0\0\0\0\0\0??j+R???:]F?'),
-(289, 2, 1, 287, '1', '0xEEBA42', 1, 'DON JUANITO', 'POINT', '\0\0\0\0\0\0\0l	??g+R?vq\r?F?'),
-(290, 2, 1, 288, '1', '0xEEBA42', 1, 'BRISAS DEL SUR', 'POINT', '\0\0\0\0\0\0\0;pŒà?R????\Z??'),
-(291, 2, 1, 289, '1', '0xEEBA42', 1, 'EL ENCANTO', 'POINT', '\0\0\0\0\0\0\0??›ì?\rR?d?K?F?'),
-(292, 2, 1, 290, '1', '0xEEBA42', 1, 'EL INDIO', 'POINT', '\0\0\0\0\0\0\0x??#?@R??E???v@'),
-(293, 2, 1, 291, '1', '0xEEBA42', 1, 'EL MIRADOR', 'POINT', '\0\0\0\0\0\0\0''1??Q?;pŒà?F?'),
-(294, 2, 1, 292, '1', '0xEEBA42', 1, 'HOSPEDAJE BELLAVISTA', 'POINT', '\0\0\0\0\0\0\0?t$+R??!??uPG?'),
-(295, 2, 1, 293, '1', '0xEEBA42', 1, 'HOSPEDAJE CORDILLERA', 'POINT', '\0\0\0\0\0\0\0??#R??6\Z?;H?'),
-(296, 2, 1, 294, '1', '0xEEBA42', 1, 'HOSPEDAJE DON KICHO', 'POINT', '\0\0\0\0\0\0\0?{?+R?r???OG?'),
-(297, 2, 1, 295, '1', '0xEEBA42', 1, 'HOSPEDAJE DO√ëA ESTER', 'POINT', '\0\0\0\0\0\0\0b???R??s??G?'),
-(298, 2, 1, 296, '1', '0xEEBA42', 1, 'HOSPEDAJE DO√ëA NURY', 'POINT', '\0\0\0\0\0\0\0]m??#R????)F?'),
-(299, 2, 1, 297, '1', '0xEEBA42', 1, 'HOSPEDAJE EL BOMBERO', 'POINT', '\0\0\0\0\0\0\0TR''??$R???Áå†G?'),
-(300, 2, 1, 298, '1', '0xEEBA42', 1, 'HOSPEDAJE EL CHILCO', 'POINT', '\0\0\0\0\0\0\0????R?1?*??E?'),
-(301, 2, 1, 299, '1', '0xEEBA42', 1, 'HOSPEDAJE EL LAGUITO', 'POINT', '\0\0\0\0\0\0\0?!?uq+R??H?}]F?'),
-(302, 2, 1, 300, '1', '0xEEBA42', 1, 'HOSPEDAJE EL NEVADO', 'POINT', '\0\0\0\0\0\0\0????R?Dio???'),
-(303, 2, 1, 301, '1', '0xEEBA42', 1, 'HOSPEDAJE ESTEFANI', 'POINT', '\0\0\0\0\0\0\0??W?R?$(~???'),
-(304, 2, 1, 302, '1', '0xEEBA42', 1, 'HOSPEDAJE JAVIERA', 'POINT', '\0\0\0\0\0\0\0–≥Y??????EG?'),
-(305, 2, 1, 303, '1', '0xEEBA42', 1, 'HOSPEDAJE LA CASCADA', 'POINT', '\0\0\0\0\0\0\0z?,C+R?_)??G?'),
-(306, 2, 1, 304, '1', '0xEEBA42', 1, 'HOSPEDAJE LA UNI√ìN', 'POINT', '\0\0\0\0\0\0\0j?t??Q??R?!?%G?'),
-(307, 2, 1, 305, '1', '0xEEBA42', 1, 'HOSPEDAJE MAR CLARA', 'POINT', '\0\0\0\0\0\0\0?e?c],R??p=\n◊≥F?'),
-(308, 2, 1, 306, '1', '0xEEBA42', 1, 'HOSPEDAJE MARLUZ', 'POINT', '\0\0\0\0\0\0\0x$(~R?}??b??'),
-(309, 2, 1, 307, '1', '0xEEBA42', 1, 'HOSPEDAJE MIRIAM', 'POINT', '\0\0\0\0\0\0\0W??''+R??6\ZPG?'),
-(310, 2, 1, 308, '1', '0xEEBA42', 1, 'HOSPEDAJE TIA LETY', 'POINT', '\0\0\0\0\0\0\0???R???3??E?'),
-(311, 2, 1, 309, '1', '0xEEBA42', 1, 'HOSPEDAJE VALENTINA', 'POINT', '\0\0\0\0\0\0\0???#R??????)F?'),
-(312, 2, 1, 310, '1', '0xEEBA42', 1, 'HOSPEDAJE Y RESIDENCIAL SAN SEBASTIAN', 'POINT', '\0\0\0\0\0\0\09???+R?x??#?\\F?'),
-(313, 2, 1, 311, '1', '0xEEBA42', 1, 'HOSPEDAJE ZINNIA', 'POINT', '\0\0\0\0\0\0\0?C??R???y???'),
-(314, 2, 1, 312, '1', '0xEEBA42', 1, 'HOSTAL  DON OMAR', 'POINT', '\0\0\0\0\0\0\0??@??Q????G?'),
-(315, 2, 1, 313, '1', '0xEEBA42', 1, 'HOSTAL  EL GAUCHO', 'POINT', '\0\0\0\0\0\0\0??n?R??????'),
-(316, 2, 1, 314, '1', '0xEEBA42', 1, 'HOSTAL ALEMANA', 'POINT', '\0\0\0\0\0\0\0??#R?aTR''?)F?'),
-(317, 2, 1, 315, '1', '0xEEBA42', 1, 'HOSTAL BON', 'POINT', '\0\0\0\0\0\0\0_?LR?)?r?0??'),
-(318, 2, 1, 316, '1', '0xEEBA42', 1, 'HOSTAL CERRO EL ESCUDO', 'POINT', '\0\0\0\0\0\0\0V-??R???N@??'),
-(319, 2, 1, 317, '1', '0xEEBA42', 1, 'HOSTAL COSTANERA', 'POINT', '\0\0\0\0\0\0\0?c]?+R??3??OG?'),
-(320, 2, 1, 318, '1', '0xEEBA42', 1, 'HOSTAL DON LUIS', 'POINT', '\0\0\0\0\0\0\02U0*?#R?????)F?'),
-(321, 2, 1, 319, '1', '0xEEBA42', 1, 'HOSTAL DON SANTIAGO', 'POINT', '\0\0\0\0\0\0\0]?C??R???e??F?'),
-(322, 2, 1, 320, '1', '0xEEBA42', 1, 'HOSTAL EL PUESTO', 'POINT', '\0\0\0\0\0\0\0z6?>W+R?\0\0\0\0\0PG?'),
-(323, 2, 1, 321, '1', '0xEEBA42', 1, 'HOSTAL ESMERALDA', 'POINT', '\0\0\0\0\0\0\0?V%R?9?m4?G?'),
-(324, 2, 1, 322, '1', '0xEEBA42', 1, 'HOSTAL FITZ ROY', 'POINT', '\0\0\0\0\0\0\0?C?l?R?\\??(<H?'),
-(325, 2, 1, 323, '1', '0xEEBA42', 1, 'HOSTAL GLADYS', 'POINT', '\0\0\0\0\0\0\0#J{?/R??^)?F?'),
-(326, 2, 1, 324, '1', '0xEEBA42', 1, 'HOSTAL LA VICTORIA', 'POINT', '\0\0\0\0\0\0\0f??????rh??G?'),
-(327, 2, 1, 325, '1', '0xEEBA42', 1, 'HOSTAL LAS QUINTAS', 'POINT', '\0\0\0\0\0\0\0]m??R?R''?????'),
-(328, 2, 1, 326, '1', '0xEEBA42', 1, 'HOSTAL LATITUD 47 SUR', 'POINT', '\0\0\0\0\0\0\0#?~j$R?q????G?'),
-(329, 2, 1, 327, '1', '0xEEBA42', 1, 'HOSTAL LICARAYEN', 'POINT', '\0\0\0\0\0\0\0??W?R?bX9???'),
-(330, 2, 1, 328, '1', '0xEEBA42', 1, 'HOSTAL OLICER', 'POINT', '\0\0\0\0\0\0\0?B?i???VEG?'),
-(331, 2, 1, 329, '1', '0xEEBA42', 1, 'HOSTAL PATAGONIA LIVE', 'POINT', '\0\0\0\0\0\0\0*:??R?`vO??'),
-(332, 2, 1, 330, '1', '0xEEBA42', 1, 'HOSTAL PORVENIR', 'POINT', '\0\0\0\0\0\0\0?"?bR????G?'),
-(333, 2, 1, 331, '1', '0xEEBA42', 1, 'HOSTAL QUIYANGO', 'POINT', '\0\0\0\0\0\0\0??@??R?lxz?,;H?'),
-(334, 2, 1, 332, '1', '0xEEBA42', 1, 'HOSTAL VIENTO SUR', 'POINT', '\0\0\0\0\0\0\0io??R??w??#??'),
-(335, 2, 1, 333, '1', '0xEEBA42', 1, 'HOSTAL Y RESIDENCIAL DON LUIS', 'POINT', '\0\0\0\0\0\0\0I??&?Q?M?J?G?'),
-(336, 2, 1, 334, '1', '0xEEBA42', 1, 'HOSTAL Y RESIDENCIAL KUYEN', 'POINT', '\0\0\0\0\0\0\0io??R??????'),
-(337, 2, 1, 335, '1', '0xEEBA42', 1, 'HOSTERIA EL GAUCHO', 'POINT', '\0\0\0\0\0\0\0?St$?+R?!?rh?]F?'),
-(338, 2, 1, 336, '1', '0xEEBA42', 1, 'HOSTERIA JEINIMENI', 'POINT', '\0\0\0\0\0\0\0??????h"lxzEG?'),
-(339, 2, 1, 337, '1', '0xEEBA42', 1, 'HOSTERIA VILLARRICA', 'POINT', '\0\0\0\0\0\0\0n??\nR?V-??G?'),
-(340, 2, 1, 338, '1', '0xEEBA42', 1, 'JANITO', 'POINT', '\0\0\0\0\0\0\06<?R\nR???G?'),
-(341, 2, 1, 339, '1', '0xEEBA42', 1, 'LA PAZ', 'POINT', '\0\0\0\0\0\0\0B`?"+R?r???OG?'),
-(342, 2, 1, 340, '1', '0xEEBA42', 1, 'LA POSADA DEL CAMIONERO¬†', 'POINT', '\0\0\0\0\0\0\02U0*?+R?33333?F?'),
-(343, 2, 1, 341, '1', '0xEEBA42', 1, 'LOS LIRIOS, RAUL MARIN BALMACEDA', 'POINT', '\0\0\0\0\0\0\0??0?=R??Zd??'),
-(344, 2, 1, 342, '1', '0xEEBA42', 1, 'PIONEROS DEL CARRERA', 'POINT', '\0\0\0\0\0\0\0???+R?Gr??G?'),
-(345, 2, 1, 343, '1', '0xEEBA42', 1, 'RESIDENCIAL AUSTRAL', 'POINT', '\0\0\0\0\0\0\0?y?:\nR??St$?G?'),
-(346, 2, 1, 344, '1', '0xEEBA42', 1, 'RESIDENCIAL CARRERA', 'POINT', '\0\0\0\0\0\0\0????R??????'),
-(347, 2, 1, 345, '1', '0xEEBA42', 1, 'RESIDENCIAL CERO A CERO', 'POINT', '\0\0\0\0\0\0\0?8?m$R?TR''???G?'),
-(348, 2, 1, 346, '1', '0xEEBA42', 1, 'RESIDENCIAL CORDILLERA', 'POINT', '\0\0\0\0\0\0\0????R?[???E?'),
-(349, 2, 1, 347, '1', '0xEEBA42', 1, 'RESIDENCIAL COSTANERA', 'POINT', '\0\0\0\0\0\0\0fffffbR??V}???'),
-(350, 2, 1, 348, '1', '0xEEBA42', 1, 'RESIDENCIAL DO√ëA JUANITA', 'POINT', '\0\0\0\0\0\0\0???R?6?>W[)F?'),
-(351, 2, 1, 349, '1', '0xEEBA42', 1, 'RESIDENCIAL EL ARRIERO', 'POINT', '\0\0\0\0\0\0\0?V%R?\0?~?:?G?'),
-(352, 2, 1, 350, '1', '0xEEBA42', 1, 'RESIDENCIAL EL FOGON', 'POINT', '\0\0\0\0\0\0\0>???$R?c?B>?G?'),
-(353, 2, 1, 351, '1', '0xEEBA42', 1, 'RESIDENCIAL EL VIAJERO', 'POINT', '\0\0\0\0\0\0\0?u?=R?HP???'),
-(354, 2, 1, 352, '1', '0xEEBA42', 1, 'RESIDENCIAL ENRIQUE¬¥S', 'POINT', '\0\0\0\0\0\0\0$(~??+R?????\F?'),
-(355, 2, 1, 353, '1', '0xEEBA42', 1, 'RESIDENCIAL HIELO SUR', 'POINT', '\0\0\0\0\0\0\0?ƒ±.bR? ?_??'),
-(356, 2, 1, 354, '1', '0xEEBA42', 1, 'RESIDENCIAL HORSTMEYER', 'POINT', '\0\0\0\0\0\0\0+???%@???7@'),
-(357, 2, 1, 355, '1', '0xEEBA42', 1, 'RESIDENCIAL KATITA', 'POINT', '\0\0\0\0\0\0\0?C??$R?|a2U?G?'),
-(358, 2, 1, 356, '1', '0xEEBA42', 1, 'RESIDENCIAL LA CENTRAL', 'POINT', '\0\0\0\0\0\0\0a?+-R?\\??(lG?'),
-(359, 2, 1, 357, '1', '0xEEBA42', 1, 'RESIDENCIAL LA HOGARE√ëA', 'POINT', '\0\0\0\0\0\0\0?B>?Q?i\0o?EG?'),
-(360, 2, 1, 358, '1', '0xEEBA42', 1, 'RESIDENCIAL LA SURE√ëA', 'POINT', '\0\0\0\0\0\0\0???R?,‘ö???'),
-(361, 2, 1, 359, '1', '0xEEBA42', 1, 'RESIDENCIAL LO DE ROCCO', 'POINT', '\0\0\0\0\0\0\0?6\ZR?≈è1w-??'),
-(362, 2, 1, 360, '1', '0xEEBA42', 1, 'RESIDENCIAL MA√ëIHUALES', 'POINT', '\0\0\0\0\0\0\0?bX	R????F?'),
-(363, 2, 1, 361, '1', '0xEEBA42', 1, 'RESIDENCIAL MARIANELA', 'POINT', '\0\0\0\0\0\0\0W[???R?B>??:G?'),
-(364, 2, 1, 362, '1', '0xEEBA42', 1, 'RESIDENCIAL MARISEL', 'POINT', '\0\0\0\0\0\0\0??R?j?t??E?'),
-(365, 2, 1, 363, '1', '0xEEBA42', 1, 'RESIDENCIAL MONICA', 'POINT', '\0\0\0\0\0\0\0???|R?6?N?F?'),
-(366, 2, 1, 364, '1', '0xEEBA42', 1, 'RESIDENCIAL NORMITA', 'POINT', '\0\0\0\0\0\0\0???N@R?a?+e??'),
-(367, 2, 1, 365, '1', '0xEEBA42', 1, 'RESIDENCIAL PANCHITA', 'POINT', '\0\0\0\0\0\0\0‰ÉûÕ™+R???⁄ä?]F?'),
-(368, 2, 1, 366, '1', '0xEEBA42', 1, 'RESIDENCIAL PASARELA', 'POINT', '\0\0\0\0\0\0\0??y+R?h"lxz]F?'),
-(369, 2, 1, 367, '1', '0xEEBA42', 1, 'RESIDENCIAL PATAGONIA', 'POINT', '\0\0\0\0\0\0\0Z??⁄ä-R?q???8G?'),
-(370, 2, 1, 368, '1', '0xEEBA42', 1, 'RESIDENCIAL PUERTO VARAS', 'POINT', '\0\0\0\0\0\0\0?H?}R???G??'),
-(371, 2, 1, 369, '1', '0xEEBA42', 1, 'RESIDENCIAL RAFITA', 'POINT', '\0\0\0\0\0\0\046<?????:EG?'),
-(372, 2, 1, 370, '1', '0xEEBA42', 1, 'RESIDENCIAL SANTA TERESITA', 'POINT', '\0\0\0\0\0\0\0? °E?+R?"??u?\F?'),
-(373, 2, 1, 371, '1', '0xEEBA42', 1, 'RESIDENCIAL SUR AUSTRAL', 'POINT', '\0\0\0\0\0\0\0??$R?*:???G?'),
-(374, 2, 1, 372, '1', '0xEEBA42', 1, 'RESIDENCIAL VALDERAS', 'POINT', '\0\0\0\0\0\0\0???R??N—ë?E?'),
-(375, 2, 1, 373, '1', '0xEEBA42', 1, 'RESTORAN Y RESIDENCIAL CAMPANARIO', 'POINT', '\0\0\0\0\0\0\0?Q?R?O@a?H?'),
-(376, 2, 1, 374, '1', '0xEEBA42', 1, 'SANTA EDUVINA VASQUEZ BALDEVENITO', 'POINT', '\0\0\0\0\0\0\0-!??Q?t???F?'),
-(377, 2, 1, 375, '1', '0xEEBA42', 1, 'CASA ORELLANA', 'POINT', '\0\0\0\0\0\0\0[B>?$R??0?*?G?'),
-(378, 2, 1, 376, '1', '0xEEBA42', 1, 'HOSPEDAJE ANA', 'POINT', '\0\0\0\0\0\0\0?~?:p?Q?-???F?'),
-(379, 2, 1, 377, '1', '0xEEBA42', 1, 'HOSPEDAJE EL MICHAY', 'POINT', '\0\0\0\0\0\0\0\ZQ?|\rR?d?K?F?'),
-(380, 2, 1, 378, '1', '0xEEBA42', 1, 'HOSPEDAJE EL PASO', 'POINT', '\0\0\0\0\0\0\0/??\rR??:??F?'),
-(381, 2, 1, 379, '1', '0xEEBA42', 1, 'HOSPEDAJE PUERTO AGUIRRE', 'POINT', '\0\0\0\0\0\0\0?R?!?aR??0?*?F?'),
-(382, 2, 1, 380, '1', '0xEEBA42', 1, 'HOSTAL ALACALUF', 'POINT', '\0\0\0\0\0\0\0?`TR''DR?)\\??@G?'),
-(383, 2, 1, 381, '1', '0xEEBA42', 1, 'HOSTAL DON ADAN', 'POINT', '\0\0\0\0\0\0\0Y??0bR???r??'),
-(384, 2, 1, 382, '1', '0xEEBA42', 1, 'HOSTAL MAR√çA ESTER 2', 'POINT', '\0\0\0\0\0\0\00*??R??????'),
-(385, 2, 1, 383, '1', '0xEEBA42', 1, 'SAN SEBASTIAN', 'POINT', '\0\0\0\0\0\0\0?Zd;???›ì??RF?'),
-(386, 2, 1, 384, '1', '0xEEBA42', 1, 'TEHUELCHE PATAGONIA LODGE ', 'POINT', '\0\0\0\0\0\0\0p_?R????n??'),
-(387, 2, 1, 385, '1', '0xEEBA42', 1, 'CABA√ëAS QUEITAO PATAGONIA', 'POINT', '\0\0\0\0\0\0\0?>W[?+R??	??F?'),
-(388, 2, 1, 277, '1', '0xEEBA42', 1, 'EL GUAIRAO', 'POINT', '\0\0\0\0\0\0\0??q?+R??%‰Éû]F?'),
-(389, 2, 1, 386, '1', '0xEEBA42', 1, 'HOSPEDAJE PATAGONIA', 'POINT', '\0\0\0\0\0\0\0?6\Z?#R??J?<H?'),
-(390, 2, 1, 387, '1', '0xEEBA42', 1, 'HOSTAL MICHAY', 'POINT', '\0\0\0\0\0\0\0$(~??+R?[B>?\\F?'),
-(391, 2, 1, 388, '1', '0xEEBA42', 1, 'HOSTERIA CARRETERA AUSTRAL', 'POINT', '\0\0\0\0\0\0\0???#R??????)F?'),
-(392, 2, 1, 389, '1', '0xEEBA42', 1, 'HOSTERIA CARRETERA AUSTRAL', 'POINT', '\0\0\0\0\0\0\0?^)?+R???@??G?'),
-(393, 2, 1, 390, '1', '0xEEBA42', 1, 'HOSTERIA COPIHUE PATAGON', 'POINT', '\0\0\0\0\0\0\0s??R?????E?'),
-(394, 2, 1, 391, '1', '0xEEBA42', 1, 'HOSTER√çA DE LA PATAGONIA', 'POINT', '\0\0\0\0\0\0\0V-???⁄¨?\\mEG?'),
-(395, 2, 1, 392, '1', '0xEEBA42', 1, 'HOSTERIA EL MOSCO', 'POINT', '\0\0\0\0\0\0\0?C?l?R?]?x;H?'),
-(396, 2, 1, 393, '1', '0xEEBA42', 1, 'HOSTERIA LA CASONA', 'POINT', '\0\0\0\0\0\0\0?St$?#R?''1?*F?'),
-(397, 2, 1, 394, '1', '0xEEBA42', 1, 'HOSTERIA LA CASONA', 'POINT', '\0\0\0\0\0\0\0sh??R?e?G?'),
-(398, 2, 1, 395, '1', '0xEEBA42', 1, 'HOSTERIA LOS PINOS', 'POINT', '\0\0\0\0\0\0\0z?,C+R?Zd;?G?'),
-(399, 2, 1, 396, '1', '0xEEBA42', 1, 'HOSTER√çA POSADA DEL R√çO', 'POINT', '\0\0\0\0\0\0\0È∑Ø????&¬ÜGG?'),
-(400, 2, 1, 397, '1', '0xEEBA42', 1, 'HOSTERIA RAYEN', 'POINT', '\0\0\0\0\0\0\0gDio?R?????E?'),
-(401, 2, 1, 398, '1', '0xEEBA42', 1, 'HOSTERIA VALLE DEL PALENA, RAUL MARIN BALMACEDA', 'POINT', '\0\0\0\0\0\0\0Tt$??<R??{???'),
-(402, 2, 1, 399, '1', '0xEEBA42', 1, 'MONCHITO', 'POINT', '\0\0\0\0\0\0\0?⁄ä?e+R???S?F?'),
-(403, 2, 1, 400, '1', '0xEEBA42', 1, 'CABA√ëAS TERRAZAS DEL PALENA', 'POINT', '\0\0\0\0\0\0\0??R?????E?'),
-(404, 2, 1, 401, '1', '0xEEBA42', 1, 'CINCO RIOS LODGE', 'POINT', '\0\0\0\0\0\0\0???R???ﬂæ??'),
-(405, 2, 1, 402, '1', '0xEEBA42', 1, 'ESPACIO Y TIEMPO - HOTEL DE MONTA√ëA', 'POINT', '\0\0\0\0\0\0\0=?U??R??e?c]?E?'),
-(406, 2, 1, 403, '1', '0xEEBA42', 1, 'HOSTAL BELISARIO JARA', 'POINT', '\0\0\0\0\0\0\09?m4R?(~??k??'),
-(407, 2, 1, 404, '1', '0xEEBA42', 1, 'HOSTERIA COYHAIQUE', 'POINT', '\0\0\0\0\0\0\0????R???N@??'),
-(408, 2, 1, 405, '1', '0xEEBA42', 1, 'HOTEL AUSTRAL', 'POINT', '\0\0\0\0\0\0\0?uq\rR???rh??'),
-(409, 2, 1, 406, '1', '0xEEBA42', 1, 'HOTEL AUSTRAL', 'POINT', '\0\0\0\0\0\0\0u?V???u?EG?'),
-(410, 2, 1, 407, '1', '0xEEBA42', 1, 'HOTEL AYSEN PATAGONIA', 'POINT', '\0\0\0\0\0\0\0?@??,R??J??F?'),
-(411, 2, 1, 408, '1', '0xEEBA42', 1, 'HOTEL CAICAHUE', 'POINT', '\0\0\0\0\0\0\0?0?*,R??~j?t?F?'),
-(412, 2, 1, 409, '1', '0xEEBA42', 1, 'HOTEL DIEGO DE ALMAGRO', 'POINT', '\0\0\0\0\0\0\0?(?r?R??Y???F?'),
-(413, 2, 1, 410, '1', '0xEEBA42', 1, 'HOTEL DREAMS PATAGONIA', 'POINT', '\0\0\0\0\0\0\0?~j?R?+???'),
-(414, 2, 1, 411, '1', '0xEEBA42', 1, 'HOTEL EL RELOJ', 'POINT', '\0\0\0\0\0\0\0??V?R?p_???'),
-(415, 2, 1, 412, '1', '0xEEBA42', 1, 'HOTEL LOBERIAS DEL SUR', 'POINT', '\0\0\0\0\0\0\0???`4R?=?U??F?'),
-(416, 2, 1, 413, '1', '0xEEBA42', 1, 'HOTEL LOS √ëIRES', 'POINT', '\0\0\0\0\0\0\0??,R??JY???'),
-(417, 2, 1, 414, '1', '0xEEBA42', 1, 'HOTEL LOYOLA', 'POINT', '\0\0\0\0\0\0\0??_?R??EGr??'),
-(418, 2, 1, 415, '1', '0xEEBA42', 1, 'HOTEL PLAZA', 'POINT', '\0\0\0\0\0\0\0?1?,R?k+??›≥F?'),
-(419, 2, 1, 416, '1', '0xEEBA42', 1, 'HOTEL PLAZA', 'POINT', '\0\0\0\0\0\0\0?n????[B>?DG?'),
-(420, 2, 1, 417, '1', '0xEEBA42', 1, 'HOTEL TERRAZAS DEL PALENA', 'POINT', '\0\0\0\0\0\0\0??R?????E?'),
-(421, 2, 1, 418, '1', '0xEEBA42', 1, 'HOTEL ULTIMO PARAISO', 'POINT', '\0\0\0\0\0\0\08gDio$R???Áå†G?'),
-(422, 2, 1, 419, '1', '0xEEBA42', 1, 'HOTEL VENTURA', 'POINT', '\0\0\0\0\0\0\0;?????[”º?EG?'),
-(423, 2, 1, 420, '1', '0xEEBA42', 1, 'HOTEL WELLMANN', 'POINT', '\0\0\0\0\0\0\0?4??$R??\Z?[?G?'),
-(424, 2, 1, 421, '1', '0xEEBA42', 1, 'HOTELERA SAN RAFAEL', 'POINT', '\0\0\0\0\0\0\0???R??@????'),
-(425, 2, 1, 422, '1', '0xEEBA42', 1, 'N√ìMADES HOTEL BOUTIQUE', 'POINT', '\0\0\0\0\0\0\0??1R?F??_??'),
-(426, 2, 1, 217, '1', '0xEEBA42', 1, 'PATAGONIA GREEN', 'POINT', '\0\0\0\0\0\0\0$???~+R?????F?'),
-(427, 2, 1, 423, '1', '0xEEBA42', 1, 'HOTEL QUEITAO PATAGONIA', 'POINT', '\0\0\0\0\0\0\0?>W[?+R??	??F?'),
-(428, 2, 1, 424, '1', '0xDE007B', 1, 'OIT SERNATUR', 'POINT', '\0\0\0\0\0\0\0a2U0*=R????N@??'),
-(429, 2, 1, 425, '1', '0xDE007B', 1, 'OIT SERNATUR', 'POINT', '\0\0\0\0\0\0\0	?c?Q???ﬂæF?'),
-(430, 2, 1, 426, '1', '0xDE007B', 1, 'OIT SERNATUR', 'POINT', '\0\0\0\0\0\0\0s??R?Œ™?V?E?'),
-(431, 2, 1, 427, '1', '0xDE007B', 1, 'OIT SERNATUR', 'POINT', '\0\0\0\0\0\0\0+??#R??????)F?'),
-(432, 2, 1, 428, '1', '0xDE007B', 1, 'OIT SERNATUR', 'POINT', '\0\0\0\0\0\0\0?ﬂæ?+R??V]F?'),
-(433, 2, 1, 429, '1', '0xDE007B', 1, 'OIT SERNATUR', 'POINT', '\0\0\0\0\0\0\0?bX	R?gDio??'),
-(434, 2, 1, 430, '1', '0xDE007B', 1, 'OIT SERNATUR', 'POINT', '\0\0\0\0\0\0\0?N—ë,R?N—ë\\??F?'),
-(435, 2, 1, 431, '1', '0xDE007B', 1, 'OIT SERNATUR', 'POINT', '\0\0\0\0\0\0\0 c?B\nR???C?lG?'),
-(436, 2, 1, 432, '1', '0xDE007B', 1, 'OIT SERNATUR', 'POINT', '\0\0\0\0\0\0\0???&+R?????OG?'),
-(437, 2, 1, 433, '1', '0xDE007B', 1, 'OIT SERNATUR', 'POINT', '\0\0\0\0\0\0\0?V}???È∑Ø?G?'),
-(438, 2, 1, 434, '1', '0xDE007B', 1, 'OIT SERNATUR', 'POINT', '\0\0\0\0\0\0\0‘ö??$R???Áå†G?'),
-(439, 2, 1, 435, '1', '0xDE007B', 1, 'OIT SERNATUR', 'POINT', '\0\0\0\0\0\0\0? °E?#R?TR''??@H?'),
-(440, 2, 1, 436, '1', '0xDE007B', 1, 'OIT SERNATUR', 'POINT', '\0\0\0\0\0\0\0jM?R?)\\????'),
-(441, 2, 1, 437, '1', '0x00C7F6', 1, 'CASITA DE CAMPO', 'POINT', '\0\0\0\0\0\0\07?A`?R?''¬Ü?W?G?'),
-(442, 2, 1, 438, '1', '0xEEBA42', 1, 'RESIDENCIAL IBA√ëEZ', 'POINT', '\0\0\0\0\0\0\0?Q?Q????G?'),
-(443, 2, 1, 439, '1', '0xEEBA42', 1, 'RESIDENCIAL MARIA', 'POINT', '\0\0\0\0\0\0\0-???Q??%‰Éû%G?'),
-(444, 2, 1, 440, '1', '0x00C7F6', 1, 'EL RINC√ìN DE MIRNA', 'POINT', '\0\0\0\0\0\0\0?~j????HP??'),
-(445, 2, 1, 441, '1', '0x00C7F6', 1, 'PARRILLAS DON JOAQU√çN', 'POINT', '\0\0\0\0\0\0\0Z??⁄äR???◊Å??'),
-(446, 2, 1, 217, '1', '0x00C7F6', 1, 'PATAGONIA GREEN', 'POINT', '\0\0\0\0\0\0\0$???~+R?????F?'),
-(447, 2, 1, 442, '1', '0x00C7F6', 1, 'QUINCHO DE DON NO√â', 'POINT', '\0\0\0\0\0\0\0J+?R?L7?A`?F?'),
-(448, 2, 1, 443, '1', '0x00C7F6', 1, 'QUINCHO LAS ALPACAS', 'POINT', '\0\0\0\0\0\0\0\Z?[ A%R??*?‘±F?'),
-(449, 2, 1, 444, '1', '0x00C7F6', 1, 'RESTAURANT ENTRE AMIGOS', 'POINT', '\0\0\0\0\0\0\0!?rh?R?R???F?'),
-(450, 2, 1, 445, '1', '0x00C7F6', 1, 'RESTAURANT Y CABA√ëAS ENTRE PATAGONES', 'POINT', '\0\0\0\0\0\0\0??@??R???'';H?'),
-(451, 2, 1, 446, '1', '0x00C7F6', 1, 'SAN GABRIEL', 'POINT', '\0\0\0\0\0\0\0????#R??6\Z?;H?'),
-(452, 2, 1, 447, '1', '0x00C7F6', 1, 'SIN RESERVA', 'POINT', '\0\0\0\0\0\0\0Gx$R?}?5^???'),
-(453, 2, 1, 448, '1', '0x00C7F6', 1, 'ADA`S CAFE RESTAURANT', 'POINT', '\0\0\0\0\0\0\0[B>?$R?O??e?G?'),
-(454, 2, 1, 449, '1', '0x00C7F6', 1, 'CAFE REFER', 'POINT', '\0\0\0\0\0\0\0_?L????rh??G?'),
-(455, 2, 1, 450, '1', '0x00C7F6', 1, 'CAFE RESTAURANT ANTU MAPU', 'POINT', '\0\0\0\0\0\0\0ÿÅsF???w-!?G?'),
-(456, 2, 1, 451, '1', '0x00C7F6', 1, 'EL MUELLE CAFE - RESTAURANT', 'POINT', '\0\0\0\0\0\0\0???R?(??)F?'),
-(457, 2, 1, 402, '1', '0x00C7F6', 1, 'ESPACIO Y TIEMPO - HOTEL DE MONTA√ëA', 'POINT', '\0\0\0\0\0\0\0=?U??R??e?c]?E?'),
-(458, 2, 1, 452, '1', '0x00C7F6', 1, 'LA MERCE', 'POINT', '\0\0\0\0\0\0\0vq\r?Q?46<EG?'),
-(459, 2, 1, 453, '1', '0x00C7F6', 1, 'LOS MA√ëIOS DEL QUEULAT', 'POINT', '\0\0\0\0\0\0\0??◊Å#R?o??)F?'),
-(460, 2, 1, 454, '1', '0x00C7F6', 1, 'MI CASITA DE TE', 'POINT', '\0\0\0\0\0\0\0?(\\??R??1??E?'),
-(461, 2, 1, 455, '1', '0x00C7F6', 1, 'RESTAURANT EL FOGON', 'POINT', '\0\0\0\0\0\0\0???n??i\0o?EG?'),
-(462, 2, 1, 456, '1', '0x00C7F6', 1, 'RESTAURANT TUR√çSTICO ', 'POINT', '\0\0\0\0\0\0\0??$R?p_??G?'),
-(463, 2, 1, 457, '1', '0x00C7F6', 1, 'RESTAURANT YAMILY Y BEATRIZ', 'POINT', '\0\0\0\0\0\0\0Qk?w???0*??G?'),
-(464, 2, 1, 458, '1', '0x00C7F6', 1, 'RESTAURANTE KAIKE', 'POINT', '\0\0\0\0\0\0\0|?k??0?''EG?'),
-(465, 2, 1, 459, '1', '0x00C7F6', 1, 'RESTAURANTE SABORES LOCALES', 'POINT', '\0\0\0\0\0\0\0?? °EbR???Y??'),
-(466, 2, 1, 460, '1', '0x00C7F6', 1, 'RESTORANT LA COSTANERA DE PUERTO GUADAL', 'POINT', '\0\0\0\0\0\0\0i\0o?-R?? °E?kG?'),
-(467, 2, 1, 461, '1', '0x00C7F6', 1, 'RUCA MANQUE', 'POINT', '\0\0\0\0\0\0\0???+R??3??OG?'),
-(468, 2, 1, 462, '1', '0x00C7F6', 1, 'TAMANGO RESTAURANT', 'POINT', '\0\0\0\0\0\0\0?6\ZI??_?LEU?'),
-(469, 2, 1, 463, '1', '0x00C7F6', 1, 'CAF√â DE MAYO', 'POINT', '\0\0\0\0\0\0\0???R???N@??'),
-(470, 2, 1, 464, '1', '0x00C7F6', 1, 'CAFE MONTANA', 'POINT', '\0\0\0\0\0\0\0?HPR?b???F?'),
-(471, 2, 1, 465, '1', '0x00C7F6', 1, 'CAFE REAGGAL', 'POINT', '\0\0\0\0\0\0\0?????>???DG?'),
-(472, 2, 1, 466, '1', '0x00C7F6', 1, 'CAFETERIA Y CHOCOLATERIA LA OVEJITA', 'POINT', '\0\0\0\0\0\0\0\n◊£p=I?a?+EU?'),
-(473, 2, 1, 467, '1', '0x00C7F6', 1, 'CAMELLO PATAGON', 'POINT', '\0\0\0\0\0\0\0NbX9R???k	???'),
-(474, 2, 1, 468, '1', '0x00C7F6', 1, 'FITZ ROY CAFE', 'POINT', '\0\0\0\0\0\0\0#?~jR?)?r?0??'),
-(475, 2, 1, 469, '1', '0x00C7F6', 1, 'FORASTERO CAFE', 'POINT', '\0\0\0\0\0\0\0x??#?,R?$????F?'),
-(476, 2, 1, 470, '1', '0x00C7F6', 1, 'CAFE ROSSBACH', 'POINT', '\0\0\0\0\0\0\09?m4$R?}?5^?)F?'),
-(477, 2, 1, 471, '1', '0xEEBA42', 1, 'HOTEL Y CABA√ëAS MORALEDA', 'POINT', '\0\0\0\0\0\0\0Gr??R???1ÊÆµF?'),
-(478, 2, 1, 472, '1', '0xEEBA42', 1, 'VILLARRICA', 'POINT', '\0\0\0\0\0\0\0n??\nR?V-??G?'),
-(479, 2, 1, 473, '1', '0x00C3BA', 1, 'BUEN VIAJE', 'POINT', '\0\0\0\0\0\0\0NbX9R?????F?'),
-(480, 2, 1, 474, '1', '0x00C3BA', 1, 'CABALGATA AVENTURA', 'POINT', '\0\0\0\0\0\0\0??1R?H??G?'),
-(481, 2, 1, 475, '1', '0x00C3BA', 1, 'C√ÅMARA DE TURISMO DE COYHAIQUE', 'POINT', '\0\0\0\0\0\0\0?h"lR?+???'),
-(482, 2, 1, 476, '1', '0x00C3BA', 1, 'CASA DEL TURISMO RURAL', 'POINT', '\0\0\0\0\0\0\0?h"lR?+???');
-INSERT INTO `destino` (`idDestino`, `idEstadoDestino`, `idCliente`, `idBiblioteca`, `icono`, `color`, `tienePanel`, `nombre`, `tipoGeometria`, `geometria`) VALUES
-(483, 2, 1, 477, '1', '0x00C3BA', 1, 'COYHAIQUE RIVER TOUR OPERADOR', 'POINT', '\0\0\0\0\0\0\0$(~?}S?V????F?'),
-(484, 2, 1, 478, '1', '0x00C3BA', 1, 'CRISTHOPHER PI√ëEIRA CONCHA', 'POINT', '\0\0\0\0\0\0\0??KR??????'),
-(485, 2, 1, 479, '1', '0x00C3BA', 1, 'DESTINO PATAGONIA', 'POINT', '\0\0\0\0\0\0\08gDi+R?-???G?'),
-(486, 2, 1, 480, '1', '0x00C3BA', 1, 'EMA MORALES', 'POINT', '\0\0\0\0\0\0\0??0?R?5?EG??'),
-(487, 2, 1, 481, '1', '0x00C3BA', 1, 'ENPATAGONIA TURISMO', 'POINT', '\0\0\0\0\0\0\0??3?R???{?F?'),
-(488, 2, 1, 206, '1', '0x00C3BA', 1, 'ENTRE PATAGONES', 'POINT', '\0\0\0\0\0\0\0??@??R???'';H?'),
-(489, 2, 1, 482, '1', '0x00C3BA', 1, 'EXPERIENCIA AUSTRAL', 'POINT', '\0\0\0\0\0\0\0????#R??????)F?'),
-(490, 2, 1, 483, '1', '0x00C3BA', 1, 'FRANCISCO CROXATTO', 'POINT', '\0\0\0\0\0\0\0z6?>W+R?\0\0\0\0\0PG?'),
-(491, 2, 1, 484, '1', '0x00C3BA', 1, 'GEOTURISMO PATAGONIA', 'POINT', '\0\0\0\0\0\0\0???`R?o???F?'),
-(492, 2, 1, 485, '1', '0x00C3BA', 1, 'GONZALO AGUILERA', 'POINT', '\0\0\0\0\0\0\0?JY?,R???◊Å?F?'),
-(493, 2, 1, 486, '1', '0x00C3BA', 1, 'GRAN PATAGONIA', 'POINT', '\0\0\0\0\0\0\0\\ A?R?S?!?u??'),
-(494, 2, 1, 487, '1', '0x00C3BA', 1, 'GUILLERMO CIFUENTES QUINTANILLA', 'POINT', '\0\0\0\0\0\0\0?~?:pR?4??7???'),
-(495, 2, 1, 488, '1', '0x00C3BA', 1, 'HECTOR SUBIABRE SEPULVEDA', 'POINT', '\0\0\0\0\0\0\0?}8gR?B>????'),
-(496, 2, 1, 489, '1', '0x00C3BA', 1, 'HUENTEC√ì', 'POINT', '\0\0\0\0\0\0\0??*R?”º?QG?'),
-(497, 2, 1, 490, '1', '0x00C3BA', 1, 'JULIO MEIER TRUJILLO', 'POINT', '\0\0\0\0\0\0\0???`R?EGr???'),
-(498, 2, 1, 491, '1', '0x00C3BA', 1, 'K√ÅPENKE E.I.R.L.', 'POINT', '\0\0\0\0\0\0\0]m??R?&S????'),
-(499, 2, 1, 492, '1', '0x00C3BA', 1, 'KARLA MORALES SANDOVAL', 'POINT', '\0\0\0\0\0\0\0?xR??????'),
-(500, 2, 1, 493, '1', '0x00C3BA', 1, 'PARQUE AIKEN', 'POINT', '\0\0\0\0\0\0\0?È∑Ø/R?|?k?F?'),
-(501, 2, 1, 494, '1', '0x00C3BA', 1, 'PATAGONA RAFTING', 'POINT', '\0\0\0\0\0\0\0?|–≥YR??????'),
-(502, 2, 1, 495, '1', '0x00C3BA', 1, 'PATAGONIA GREEN', 'POINT', '\0\0\0\0\0\0\0???*R?=?U??F?'),
-(503, 2, 1, 496, '1', '0x00C3BA', 1, 'PATAGONIAXPRESS', 'POINT', '\0\0\0\0\0\0\0?B?i??0?''EG?'),
-(504, 2, 1, 497, '1', '0x00C3BA', 1, 'PURAPATAGONIA', 'POINT', '\0\0\0\0\0\0\0?HPR?7?A`?F?'),
-(505, 2, 1, 498, '1', '0x00C3BA', 1, 'RODRIGO MANSILLA HERNANDEZ', 'POINT', '\0\0\0\0\0\0\0??QI?R?P??n??'),
-(506, 2, 1, 499, '1', '0x00C3BA', 1, 'SOUTH ANGLERS', 'POINT', '\0\0\0\0\0\0\0n4??@R?&S????'),
-(507, 2, 1, 500, '1', '0x00C3BA', 1, 'SOY PATAGON', 'POINT', '\0\0\0\0\0\0\0????R?p_???'),
-(508, 2, 1, 501, '1', '0x00C3BA', 1, 'STEFFEN - AVENTURA', 'POINT', '\0\0\0\0\0\0\0??y?bR??\\?C???'),
-(509, 2, 1, 502, '1', '0x00C3BA', 1, 'TEHUELCHE PATAGONIA TOUR', 'POINT', '\0\0\0\0\0\0\0?S„•õR?S??:??'),
-(510, 2, 1, 503, '1', '0x00C3BA', 1, 'THE BRITISH GUIDE', 'POINT', '\0\0\0\0\0\0\0A??R?”º???'),
-(511, 2, 1, 504, '1', '0x00C3BA', 1, 'THE PATAGONIAN EXPERIENCE', 'POINT', '\0\0\0\0\0\0\0????R?+???'),
-(512, 2, 1, 505, '1', '0x00C3BA', 1, 'TRAVEL CITY AROUND', 'POINT', '\0\0\0\0\0\0\0??\Z/?R?O@a?F?'),
-(513, 2, 1, 506, '1', '0x00C3BA', 1, 'TURISMO ANULEN', 'POINT', '\0\0\0\0\0\0\0???R?&S???'),
-(514, 2, 1, 507, '1', '0x00C3BA', 1, 'TURISMO DESCUBREPATAGONIA', 'POINT', '\0\0\0\0\0\0\0Íï≤qR?b???F?'),
-(515, 2, 1, 508, '1', '0x00C3BA', 1, 'TURISMO PATAGONIA MARMOL TOUR', 'POINT', '\0\0\0\0\0\0\0???R?m??{??'),
-(516, 2, 1, 509, '1', '0x00C3BA', 1, 'TURISMO Y CONSTRUCCION BLACKTROUT EIRL', 'POINT', '\0\0\0\0\0\0\0.?!??R??Y???F?'),
-(517, 2, 1, 510, '1', '0x00C3BA', 1, 'VALLE LEONES', 'POINT', '\0\0\0\0\0\0\0????*R?7?A`?G?'),
-(518, 2, 1, 511, '1', '0x00C3BA', 1, 'VILLA O&#x27;HIGGINS EXPEDICIONES', 'POINT', '\0\0\0\0\0\0\0??V?R????H?'),
-(519, 2, 1, 512, '1', '0x00C3BA', 1, 'VULTURPATAGONIA', 'POINT', '\0\0\0\0\0\0\0?&¬Ü?#R?@a?;H?'),
-(520, 2, 1, 513, '1', '0x00C3BA', 1, 'AVENTURAYSEN.CL', 'POINT', '\0\0\0\0\0\0\0~8gD	R???''??'),
-(521, 2, 1, 514, '1', '0x00C3BA', 1, 'GU√çA DE PESCA ANDREAS MANSTEIN', 'POINT', '\0\0\0\0\0\0\0#?~jR??K7??'),
-(522, 2, 1, 515, '1', '0x00C3BA', 1, 'MARK ROY', 'POINT', '\0\0\0\0\0\0\0Íï≤qR????F?'),
-(523, 2, 1, 516, '1', '0x00C3BA', 1, 'MARTA GU√çA DE TURISMO', 'POINT', '\0\0\0\0\0\0\0V-??R????~???'),
-(524, 2, 1, 517, '1', '0x00C3BA', 1, 'PATAGONE TRAVELLING', 'POINT', '\0\0\0\0\0\0\0?V}??Q???Z”º??'),
-(525, 2, 1, 518, '1', '0x00C3BA', 1, 'SOUTHERN LATITUDES FLY FISHING &amp; TOURS', 'POINT', '\0\0\0\0\0\0\0??ﬂæ?Q?[”º???'),
-(526, 2, 1, 519, '1', '0x00C3BA', 1, 'SOUTH TRAIL', 'POINT', '\0\0\0\0\0\0\02w-!R??????'),
-(527, 2, 1, 520, '1', '0x00C3BA', 1, 'FRANCO JAVIER CAYUPI CUEVAS', 'POINT', '\0\0\0\0\0\0\0??\\m?Q?vOj?F?'),
-(528, 2, 1, 521, '1', '0x00C3BA', 1, 'GU√çA REGIONAL SANDRA CARCAMO', 'POINT', '\0\0\0\0\0\0\0???,R?@a??F?'),
-(529, 2, 1, 522, '1', '0x00C3BA', 1, 'JORGE LEPIO OYARZUN', 'POINT', '\0\0\0\0\0\0\0??V?R?%??C?F?'),
-(530, 2, 1, 523, '1', '0x00C3BA', 1, 'JIMMY LAZARO VALD√âS BAIGORRIA', 'POINT', '\0\0\0\0\0\0\0Íï≤q$R??U????G?'),
-(531, 2, 1, 524, '1', '0x00C3BA', 1, 'ELISABETH DE R√çO √ëADIS', 'POINT', '\0\0\0\0\0\0\0?7?A<R?;????G?'),
-(532, 2, 1, 525, '1', '0x00C3BA', 1, 'TROLLING PESCA CON MOSCA', 'POINT', '\0\0\0\0\0\0\0???Q??1?DG?'),
-(533, 2, 1, 526, '1', '0x00C3BA', 1, 'FELIPE RAILEN', 'POINT', '\0\0\0\0\0\0\0z6?>+R?\0?~?:PG?'),
-(534, 2, 1, 527, '1', '0x00C3BA', 1, 'AGUAHIELO EXPEDICIONES', 'POINT', '\0\0\0\0\0\0\0€ä?e?4R?F%u?G?'),
-(535, 2, 1, 528, '1', '0x00C3BA', 1, 'ALMA PATAGONICA EXPEDICIONES', 'POINT', '\0\0\0\0\0\0\0??KR?`?"?F?'),
-(536, 2, 1, 529, '1', '0x00C3BA', 1, 'ANDES PATAGONICOS', 'POINT', '\0\0\0\0\0\0\0|?k\nR??m4???'),
-(537, 2, 1, 530, '1', '0x00C3BA', 1, 'ARTEMIO BENEDICTO RUIZ FUENTES', 'POINT', '\0\0\0\0\0\0\05?EGbR?X9????'),
-(538, 2, 1, 531, '1', '0x00C3BA', 1, 'AVENTURA TEHUELCHE', 'POINT', '\0\0\0\0\0\0\0q???R?_?Q??'),
-(539, 2, 1, 513, '1', '0x00C3BA', 1, 'AVENTURAYSEN.CL', 'POINT', '\0\0\0\0\0\0\0~8gD	R???''??'),
-(540, 2, 1, 532, '1', '0x00C3BA', 1, 'AYSEN RIVERS OUTFITTER', 'POINT', '\0\0\0\0\0\0\0M?tR??????'),
-(541, 2, 1, 533, '1', '0x00C3BA', 1, 'BAKER PATAGONIA AVENTURA', 'POINT', '\0\0\0\0\0\0\07\Z?[ 5R?`vO?G?'),
-(542, 2, 1, 534, '1', '0x00C3BA', 1, 'BORDE R√çO TORTEL', 'POINT', '\0\0\0\0\0\0\0C?i?bR?+??G?'),
-(543, 2, 1, 535, '1', '0x00C3BA', 1, 'CINCO RIOS CHILE', 'POINT', '\0\0\0\0\0\0\0Íï≤qR?EGr???'),
-(544, 2, 1, 536, '1', '0x00C3BA', 1, 'CLUB DE MONTA√ëA ANDINO PATAGONICO', 'POINT', '\0\0\0\0\0\0\0?7?AR?''1???'),
-(545, 2, 1, 537, '1', '0x00C3BA', 1, 'COYHAIQUE RIVER GUIDES', 'POINT', '\0\0\0\0\0\0\0?Pk?wR?@a???'),
-(546, 2, 1, 538, '1', '0x00C3BA', 1, 'DIVISADERO TURISMO', 'POINT', '\0\0\0\0\0\0\0??R?›µ?|?F?'),
-(547, 2, 1, 539, '1', '0x00C3BA', 1, 'DON SEBA', 'POINT', '\0\0\0\0\0\0\0''¬Ü?WR?RI??&??'),
-(548, 2, 1, 540, '1', '0x00C3BA', 1, 'ECO EXPLORADORES PATAGONIA', 'POINT', '\0\0\0\0\0\0\0OjMR??????'),
-(549, 2, 1, 541, '1', '0x00C3BA', 1, 'EL PANGUE LODGE', 'POINT', '\0\0\0\0\0\0\0???vR?bX9?F?'),
-(550, 2, 1, 542, '1', '0x00C3BA', 1, 'EL RASTRO EXCURSIONES', 'POINT', '\0\0\0\0\0\0\0"?uq%R?„•õ??G?'),
-(551, 2, 1, 543, '1', '0x00C3BA', 1, 'ENTRE AGUAS EXCURSIONES', 'POINT', '\0\0\0\0\0\0\0o???R?[B>??E?'),
-(552, 2, 1, 544, '1', '0x00C3BA', 1, 'ESCUELA DE KAYAK EXPLORA EXPEDICION PATAGONIA CHILE', 'POINT', '\0\0\0\0\0\0\0?e?c]R?lxz?,??'),
-(553, 2, 1, 545, '1', '0x00C3BA', 1, 'EXCURSIONES JAVIER VILLEGAS', 'POINT', '\0\0\0\0\0\0\0}?5^?R?xz?,C?E?'),
-(554, 2, 1, 546, '1', '0x00C3BA', 1, 'EXPEDCIONES PATAGONIA LANDEROS C', 'POINT', '\0\0\0\0\0\0\04??7?bR?z6?>??'),
-(555, 2, 1, 547, '1', '0x00C3BA', 1, 'EXPEDICIONES COYHAIQUE FLY FISHING - PESCA CON MOSCA', 'POINT', '\0\0\0\0\0\0\0???`R?EGr???'),
-(556, 2, 1, 548, '1', '0x00C3BA', 1, 'EXPEDICIONES OC√âANO ANDINO', 'POINT', '\0\0\0\0\0\0\0x$(~R?@a???'),
-(557, 2, 1, 549, '1', '0x00C3BA', 1, 'EXPLORASUR EXCURSIONES', 'POINT', '\0\0\0\0\0\0\00*??R???e?cUG?'),
-(558, 2, 1, 550, '1', '0x00C3BA', 1, 'GEOSUR EXPEDICIONES', 'POINT', '\0\0\0\0\0\0\0???`R?o???F?'),
-(559, 2, 1, 253, '1', '0x00C3BA', 1, 'GREEN BAKER LODGE', 'POINT', '\0\0\0\0\0\0\0F??_4R?L7?A`?G?'),
-(560, 2, 1, 551, '1', '0x00C3BA', 1, 'HACIENDA TRES LAGOS', 'POINT', '\0\0\0\0\0\0\0C?i?2R??r?0?rG?'),
-(561, 2, 1, 552, '1', '0x00C3BA', 1, 'INVERSIONES RUMBO PATAG√ìN LIMITADA', 'POINT', '\0\0\0\0\0\0\0??E?Q?x$(??'),
-(562, 2, 1, 553, '1', '0x00C3BA', 1, 'JULIO MEIER JR.', 'POINT', '\0\0\0\0\0\0\0???`R?EGr???'),
-(563, 2, 1, 554, '1', '0x00C3BA', 1, 'LAPO EXPEDICIONES', 'POINT', '\0\0\0\0\0\0\0H?}8+R???KPG?'),
-(564, 2, 1, 555, '1', '0x00C3BA', 1, 'LATITUD 47 LTDA.', 'POINT', '\0\0\0\0\0\0\0??C?l+R??j+?OG?'),
-(565, 2, 1, 556, '1', '0x00C3BA', 1, 'LOS JUACOS', 'POINT', '\0\0\0\0\0\0\0???R?_)??F?'),
-(566, 2, 1, 557, '1', '0x00C3BA', 1, 'MARCO BECERRA', 'POINT', '\0\0\0\0\0\0\0??W?R???i?F?'),
-(567, 2, 1, 558, '1', '0x00C3BA', 1, 'MEJOR EN BICI', 'POINT', '\0\0\0\0\0\0\0\r???$R?*:???G?'),
-(568, 2, 1, 559, '1', '0x00C3BA', 1, 'NOEL VIDAL LANDEROS', 'POINT', '\0\0\0\0\0\0\0?c?bR?«∫????'),
-(569, 2, 1, 560, '1', '0x00C3BA', 1, 'ONIXPATAGONIA', 'POINT', '\0\0\0\0\0\0\0F%u?$R??0?*?G?'),
-(570, 2, 1, 561, '1', '0x00C3BA', 1, 'PASEOS NAUTICOS EL PIONERO', 'POINT', '\0\0\0\0\0\0\0?N—ë,R?O??e??F?'),
-(571, 2, 1, 562, '1', '0x00C3BA', 1, 'PATAGONIA ACTIVA', 'POINT', '\0\0\0\0\0\0\0??.????u?EG?'),
-(572, 2, 1, 563, '1', '0x00C3BA', 1, 'PATAGONIA RIDERS', 'POINT', '\0\0\0\0\0\0\0o???R???q?cG?'),
-(573, 2, 1, 564, '1', '0x00C3BA', 1, 'PATAGONIA SILVESTRE', 'POINT', '\0\0\0\0\0\0\0;M?\rR?vq\r?F?'),
-(574, 2, 1, 565, '1', '0x00C3BA', 1, 'PATAGONIAN BASECAMP', 'POINT', '\0\0\0\0\0\0\0^K?=R??J?4??'),
-(575, 2, 1, 566, '1', '0x00C3BA', 1, 'PATAGONI-K EXPEDICIONES', 'POINT', '\0\0\0\0\0\0\0???R???\F?'),
-(576, 2, 1, 567, '1', '0x00C3BA', 1, 'PATO KAYAK EXPEDICIONES', 'POINT', '\0\0\0\0\0\0\08gDiR??C????'),
-(577, 2, 1, 568, '1', '0x00C3BA', 1, 'PESCA EL CALAFATE', 'POINT', '\0\0\0\0\0\0\0U0*?R??sF????'),
-(578, 2, 1, 79, '1', '0x00C3BA', 1, 'PUERTO CRISTAL', 'POINT', '\0\0\0\0\0\0\0''????Q?&S???'),
-(579, 2, 1, 569, '1', '0x00C3BA', 1, 'SENDEROS PATAGONIA', 'POINT', '\0\0\0\0\0\0\0C?i?\nR??>W[?G?'),
-(580, 2, 1, 570, '1', '0x00C3BA', 1, 'TOLIN FISHING TRIPS', 'POINT', '\0\0\0\0\0\0\0???rR???\0o??'),
-(581, 2, 1, 571, '1', '0x00C3BA', 1, 'TRANSPORTE ARRATIA', 'POINT', '\0\0\0\0\0\0\0W[????d]???'),
-(582, 2, 1, 572, '1', '0x00C3BA', 1, 'TRIBU PATAGONIA E.I.R.L.', 'POINT', '\0\0\0\0\0\0\0?V?+R????rPG?'),
-(583, 2, 1, 573, '1', '0x00C3BA', 1, 'TSONEK EXPEDICIONES', 'POINT', '\0\0\0\0\0\0\0??#R?????:H?'),
-(584, 2, 1, 574, '1', '0x00C3BA', 1, 'TURISMO COCHRANE PATAGONIA', 'POINT', '\0\0\0\0\0\0\09?m4$R?9????G?'),
-(585, 2, 1, 575, '1', '0x00C3BA', 1, 'TURISMO KALEM', 'POINT', '\0\0\0\0\0\0\0???-R?\\??(lG?'),
-(586, 2, 1, 576, '1', '0x00C3BA', 1, 'TURISMO RIO EXPLORADORES -  EMTREX', 'POINT', '\0\0\0\0\0\0\0???zR?^?I??'),
-(587, 2, 1, 577, '1', '0x00C3BA', 1, 'TURISMO RURAL LOS VALLES', 'POINT', '\0\0\0\0\0\0\0F???R?‘ö???E?'),
-(588, 2, 1, 578, '1', '0x00C3BA', 1, 'VALESKA FORMANTEL', 'POINT', '\0\0\0\0\0\0\0??W?R???e??F?'),
-(589, 2, 1, 579, '1', '0x00C3BA', 1, 'VIENTOS DEL SUR', 'POINT', '\0\0\0\0\0\0\0/n??R?xz?,C?E?'),
-(590, 2, 1, 580, '1', '0x00C3BA', 1, 'YAGAN EXPEDITIONS &quot;CANOTAJE&quot;', 'POINT', '\0\0\0\0\0\0\0?0?	\ZR??G??E?'),
-(591, 2, 1, 581, '1', '0x00C3BA', 1, 'EL PUESTO EXPEDICIONES', 'POINT', '\0\0\0\0\0\0\033333+R?????OG?'),
-(592, 2, 1, 582, '1', '0x00C3BA', 1, 'EXCURSIONES EL CONDOR', 'POINT', '\0\0\0\0\0\0\0ÿ∂(?A?@??K?0@'),
-(593, 2, 1, 583, '1', '0x00C3BA', 1, 'EXCURSIONES MARAN-ATHA', 'POINT', '\0\0\0\0\0\0\0?	?+R?\0o??G?'),
-(594, 2, 1, 584, '1', '0x00C3BA', 1, 'EXCURSIONES RUTA M.A.S.', 'POINT', '\0\0\0\0\0\0\0??5^\nR?»ò???G?'),
-(595, 2, 1, 585, '1', '0x00C3BA', 1, 'KAWELYEK EXPEDICIONES', 'POINT', '\0\0\0\0\0\0\0≈è1w-=R??Y???E?'),
-(596, 2, 1, 586, '1', '0xE54265', 1, 'ANIVERSARIO DE LA CIUDAD DE COYHAIQUE', 'POINT', '\0\0\0\0\0\0\0|a2UR?”º???'),
-(597, 2, 1, 587, '1', '0xE54265', 1, 'ANIVERSARIO DE LA CIUDAD DE PUERTO AYS√âN', 'POINT', '\0\0\0\0\0\0\0bX9?,R?@?ﬂæ?F?'),
-(598, 2, 1, 588, '1', '0xE54265', 1, 'ANIVERSARIO DE LA COMUNA DE MA√ëIHUALES', 'POINT', '\0\0\0\0\0\0\0??rh	R?u??F?'),
-(599, 2, 1, 589, '1', '0xE54265', 1, 'ANIVERSARIO SEMANA DE PUERTO AGUIRRE', 'POINT', '\0\0\0\0\0\0\0?+??aR?M?J??'),
-(600, 2, 1, 590, '1', '0x007C9D', 1, '√ÅREA DE PROTECCI√ìN CERRO HUEMULES', 'POINT', '\0\0\0\0\0\0\0v??\rR??''???'),
-(601, 2, 1, 591, '1', '0x007C9D', 1, 'ARTESAN√çA EN CER√ÅMICA DE PUERTO INGENIERO IB√Å√ëEZ', 'POINT', '\0\0\0\0\0\0\0?Mb?Q???&S%G?'),
-(602, 2, 1, 592, '1', '0x007C9D', 1, 'BAH√çA EXPLORADORES', 'POINT', '\0\0\0\0\0\0\0W??''_R?-!?&G?'),
-(603, 2, 1, 593, '1', '0x007C9D', 1, 'BAH√çA JARA', 'POINT', '\0\0\0\0\0\0\0?s??Q?????>G?'),
-(604, 2, 1, 594, '1', '0x007C9D', 1, 'BAH√çA MURTA', 'POINT', '\0\0\0\0\0\0\0;M?\r+R?Q?|a:G?'),
-(605, 2, 1, 595, '1', '0x007C9D', 1, 'BALMACEDA', 'POINT', '\0\0\0\0\0\0\0?@??????_???'),
-(606, 2, 1, 596, '1', '0x007C9D', 1, 'BOSQUE PETRIFICADO CERRO BAYO', 'POINT', '\0\0\0\0\0\0\0???`R???????F?'),
-(607, 2, 1, 597, '1', '0x007C9D', 1, 'CALETA BUZETA', 'POINT', '\0\0\0\0\0\0\0?sF??fR?K?=?H?'),
-(608, 2, 1, 598, '1', '0x007C9D', 1, 'CALETA TORTEL (ZT)', 'POINT', '\0\0\0\0\0\0\0???nbR??Õ™???'),
-(609, 2, 1, 599, '1', '0x007C9D', 1, 'CAMINO COYHAIQUE - PUERTO AYS√âN', 'POINT', '\0\0\0\0\0\0\0?I+R?V???ÿøF?'),
-(610, 2, 1, 600, '1', '0x007C9D', 1, 'CAMINO LA JUNTA - LAGO VERDE', 'POINT', '\0\0\0\0\0\0\0?_?rR??EGrF?'),
-(611, 2, 1, 601, '1', '0x007C9D', 1, 'CAMINO LA JUNTA - PUERTO RA√öL MAR√çN BALMACEDA', 'POINT', '\0\0\0\0\0\0\0?C??$R???:MF?'),
-(612, 2, 1, 602, '1', '0x007C9D', 1, 'CAMINO PUERTO TRANQUILO - BAH√çA EXPLORADORES', 'POINT', '\0\0\0\0\0\0\0pŒà?@R????MBG?'),
-(613, 2, 1, 603, '1', '0x007C9D', 1, 'CAMPAMENTO MINERO PUERTO CRISTAL (MH)', 'POINT', '\0\0\0\0\0\0\0?J?4R?+??HG?'),
-(614, 2, 1, 604, '1', '0x007C9D', 1, 'CAMPO DE HIELO NORTE', 'POINT', '\0\0\0\0\0\0\0???_R?\r???xG?'),
-(615, 2, 1, 605, '1', '0x007C9D', 1, 'CAMPO DE HIELO SUR', 'POINT', '\0\0\0\0\0\0\0??9#bR??H?}mH?'),
-(616, 2, 1, 606, '1', '0x007C9D', 1, 'CANAL BAKER', 'POINT', '\0\0\0\0\0\0\0??\0oqR?mV}???G?'),
-(617, 2, 1, 607, '1', '0x007C9D', 1, 'CANAL COSTA', 'POINT', '\0\0\0\0\0\0\0??^eR?o???F?'),
-(618, 2, 1, 608, '1', '0x007C9D', 1, 'CANAL DEL CHACAO', 'POINT', '\0\0\0\0\0\0\0<N—ë\\jR?a2U0*F?'),
-(619, 2, 1, 609, '1', '0x007C9D', 1, 'CANAL ELEFANTES', 'POINT', '\0\0\0\0\0\0\0~??k	qR????z6G?'),
-(620, 2, 1, 610, '1', '0x007C9D', 1, 'CANAL ERRAZURIZ', 'POINT', '\0\0\0\0\0\0\0j?t?tR??rh??F?'),
-(621, 2, 1, 611, '1', '0x007C9D', 1, 'CANAL MESSIER', 'POINT', '\0\0\0\0\0\0\0-??ÔßÆR???S?G?'),
-(622, 2, 1, 612, '1', '0x007C9D', 1, 'CANAL MORALEDA', 'POINT', '\0\0\0\0\0\0\0???`R?????lF?'),
-(623, 2, 1, 613, '1', '0x007C9D', 1, 'CANAL PUYUHUAPI', 'POINT', '\0\0\0\0\0\0\0R???R?$???~cF?'),
-(624, 2, 1, 614, '1', '0x007C9D', 1, 'CANAL REFUGIO', 'POINT', '\0\0\0\0\0\0\0??HHR???⁄ä??E?'),
-(625, 2, 1, 615, '1', '0x007C9D', 1, 'CANAL STEFFENS', 'POINT', '\0\0\0\0\0\0\0???|lR???_??'),
-(626, 2, 1, 616, '1', '0x007C9D', 1, 'CAPILLA DE M√ÅRMOL (SN)', 'POINT', '\0\0\0\0\0\0\0+??›ì''R??c]?SG?'),
-(627, 2, 1, 617, '1', '0xE54265', 1, 'CARRERA DE AVENTURA- DESAF√çO AYS√âN INVERNAL', 'POINT', '\0\0\0\0\0\0\0q???R?EGr???'),
-(628, 2, 1, 618, '1', '0xE54265', 1, 'CARRERA DE AVENTURA- DESAF√çO AYS√âN VERANO', 'POINT', '\0\0\0\0\0\0\0?e?c]R??????'),
-(629, 2, 1, 619, '1', '0x007C9D', 1, 'CASCADA DE LA VIRGEN', 'POINT', '\0\0\0\0\0\0\0?Q?R?&S??F?'),
-(630, 2, 1, 620, '1', '0x007C9D', 1, 'CASCADA VELO DE LA NOVIA', 'POINT', '\0\0\0\0\0\0\0??{?R??I+?F?'),
-(631, 2, 1, 621, '1', '0x007C9D', 1, 'CENTRAL HIDROEL√âCTRICA R√çO LOS PALOS', 'POINT', '\0\0\0\0\0\0\0??\0o-R??Mb?F?'),
-(632, 2, 1, 622, '1', '0x007C9D', 1, 'CENTRO DE VISITANTES RESERVA NACIONAL R√çO SIMPSON', 'POINT', '\0\0\0\0\0\0\0??R??????F?'),
-(633, 2, 1, 623, '1', '0x007C9D', 1, 'CERRO CACHET', 'POINT', '\0\0\0\0\0\0\0???cR?]?C???'),
-(634, 2, 1, 624, '1', '0x007C9D', 1, 'CERRO CASTILLO', 'POINT', '\0\0\0\0\0\0\0vq\r?R?‰ÉûÕ™G?'),
-(635, 2, 1, 625, '1', '0x007C9D', 1, 'CERRO MANO NEGRA', 'POINT', '\0\0\0\0\0\0\0?L?J?Q???z6?F?'),
-(636, 2, 1, 626, '1', '0x007C9D', 1, 'CERRO PARED NORTE', 'POINT', '\0\0\0\0\0\0\0"??u?R??«∫??G?'),
-(637, 2, 1, 627, '1', '0x007C9D', 1, 'CERRO PARED SUR', 'POINT', '\0\0\0\0\0\0\0:??H_R?u??G?'),
-(638, 2, 1, 628, '1', '0x007C9D', 1, 'CHILE CHICO', 'POINT', '\0\0\0\0\0\0\0n4??@???.?!EG?'),
-(639, 2, 1, 629, '1', '0x007C9D', 1, 'COCHRANE', 'POINT', '\0\0\0\0\0\0\0M?\rO?$R???n??G?'),
-(640, 2, 1, 630, '1', '0x007C9D', 1, 'CONFLUENCIA R√çOS BAKER Y NEF', 'POINT', '\0\0\0\0\0\0\0?+??1R?‰ÉûÕ™?G?'),
-(641, 2, 1, 631, '1', '0x007C9D', 1, 'COYHAIQUE', 'POINT', '\0\0\0\0\0\0\0??MbR?”º???'),
-(642, 2, 1, 632, '1', '0x007C9D', 1, 'CUEVA R√çO PEDREGOSO (MA)', 'POINT', '\0\0\0\0\0\0\0a2U0*?????z^G?'),
-(643, 2, 1, 633, '1', '0xE54265', 1, 'ENCUENTRO COSTUMBRISTA &quot;LA TRILLA COMO LO HAC√çA MI ABUELO&quot;', 'POINT', '\0\0\0\0\0\0\0?.n??Q?0L?\nF%G?'),
-(644, 2, 1, 634, '1', '0xE54265', 1, 'ENCUENTRO COSTUMBRISTA &quot;TROPEANDO PARA NO OLVIDAR&quot;', 'POINT', '\0\0\0\0\0\0\0???R??.n?<H?'),
-(645, 2, 1, 635, '1', '0xE54265', 1, 'ENCUENTRO COSTUMBRISTA RESCATANDO TRADICIONES DE VILLA CERRO CASTILLO', 'POINT', '\0\0\0\0\0\0\0?? °E\nR?»ò???G?'),
-(646, 2, 1, 636, '1', '0x007C9D', 1, 'ESCUELA ANTIGUA DE CERRO CASTILLO (MH)', 'POINT', '\0\0\0\0\0\0\0—ë\\?C\nR?r??G?'),
-(647, 2, 1, 637, '1', '0x007C9D', 1, 'ESTANCIA BA√ëO NUEVO', 'POINT', '\0\0\0\0\0\0\0R???Q??c??F?'),
-(648, 2, 1, 638, '1', '0x007C9D', 1, 'ESTANCIA R√çO CISNES', 'POINT', '\0\0\0\0\0\0\0Gr??Q?9????F?'),
-(649, 2, 1, 639, '1', '0x007C9D', 1, 'ESTERO BERNARDO', 'POINT', '\0\0\0\0\0\0\0Gx$?R?;M?\r?H?'),
-(650, 2, 1, 640, '1', '0x007C9D', 1, 'ESTERO DE QUITRALCO (SN)', 'POINT', '\0\0\0\0\0\0\0o???R???????'),
-(651, 2, 1, 641, '1', '0x007C9D', 1, 'ESTERO STEELE', 'POINT', '\0\0\0\0\0\0\0?j+?_R?vq\r?rH?'),
-(652, 2, 1, 642, '1', '0xE54265', 1, 'EXPOCERVEZA', 'POINT', '\0\0\0\0\0\0\0?N—ëR?p_???'),
-(653, 2, 1, 643, '1', '0xE54265', 1, 'EXPOPATAGONIA', 'POINT', '\0\0\0\0\0\0\0o??R?????F?'),
-(654, 2, 1, 644, '1', '0x007C9D', 1, 'FACHINAL', 'POINT', '\0\0\0\0\0\0\0t$???R??V}FG?'),
-(655, 2, 1, 645, '1', '0xE54265', 1, 'FERIA DEL TERRITORIO CHELENKO', 'POINT', '\0\0\0\0\0\0\09EGr??Q??|–≥Y%G?'),
-(656, 2, 1, 646, '1', '0xE54265', 1, 'FESTIVAL CAMPERO EN EL LAGO POLLUX', 'POINT', '\0\0\0\0\0\0\0?Pk?w?Q??V???'),
-(657, 2, 1, 647, '1', '0xE54265', 1, 'FESTIVAL DE CINE DE LA PATAGONIA', 'POINT', '\0\0\0\0\0\0\01?ZR??????'),
-(658, 2, 1, 648, '1', '0xE54265', 1, 'FESTIVAL DE JINETEADAS Y FOLKLORE', 'POINT', '\0\0\0\0\0\0\0«∫???Q?vOj%G?'),
-(659, 2, 1, 649, '1', '0xE54265', 1, 'FESTIVAL DE LA VOZ DE CHILE CHICO', 'POINT', '\0\0\0\0\0\0\0\n◊£p=??[”º?EG?'),
-(660, 2, 1, 650, '1', '0xE54265', 1, 'FESTIVAL GASTRON√ìMICO LOS FIORDOS DE DARWIN', 'POINT', '\0\0\0\0\0\0\0⁄¨?\\maR?"??u?F?'),
-(661, 2, 1, 651, '1', '0xE54265', 1, 'FESTIVAL GLACIARES DEL SUR - ANIVERSARIO DE VILLA O&#x27;HIGGINS', 'POINT', '\0\0\0\0\0\0\0???#R???g??H?'),
-(662, 2, 1, 652, '1', '0xE54265', 1, 'FESTIVAL INTERNACIONAL DE JINETEADAS Y FESTIVAL COSTUMBRISTA', 'POINT', '\0\0\0\0\0\0\0Q?|a?Q?X9??F?'),
-(663, 2, 1, 653, '1', '0xE54265', 1, 'FESTIVAL INTERNACIONAL DE JINETEADAS Y FIESTA DE LA CARRETERA AUSTRAL', 'POINT', '\0\0\0\0\0\0\0}??b\rR??>W[?_F?'),
-(664, 2, 1, 654, '1', '0xE54265', 1, 'FESTIVAL INTERNACIONAL DEL CABALLO VILLA LA TAPERA', 'POINT', '\0\0\0\0\0\0\0???Q??r?0?RF?'),
-(665, 2, 1, 655, '1', '0xE54265', 1, 'FIESTA CAMPESINA VILLA MA√ëIHUALES', 'POINT', '\0\0\0\0\0\0\0?e??	R???⁄ä??F?'),
-(666, 2, 1, 656, '1', '0xE54265', 1, 'FIESTA COSTUMBRISTA &quot;ENTRE CURANTO Y KUCHEN&quot;', 'POINT', '\0\0\0\0\0\0\0?:??R???\0o)F?'),
-(667, 2, 1, 657, '1', '0xE54265', 1, 'FIESTA COSTUMBRISTA COCHRANE', 'POINT', '\0\0\0\0\0\0\0x??#?$R???Áå†G?'),
-(668, 2, 1, 658, '1', '0xE54265', 1, 'FIESTA DE LOS R√çOS', 'POINT', '\0\0\0\0\0\0\0R???R?Íï≤q?E?'),
-(669, 2, 1, 659, '1', '0xE54265', 1, 'FIESTA DEL ARREO', 'POINT', '\0\0\0\0\0\0\0tF??+R?—ë\\?C:G?'),
-(670, 2, 1, 660, '1', '0xE54265', 1, 'FIESTA DEL MAR DE PUERTO RA√öL MAR√çN BALMACEDA', 'POINT', '\0\0\0\0\0\0\0i\0o?=R??N@a??'),
-(671, 2, 1, 661, '1', '0x007C9D', 1, 'FIORDO AYS√âN', 'POINT', '\0\0\0\0\0\0\0?z6?:R??h"l?F?'),
-(672, 2, 1, 662, '1', '0x007C9D', 1, 'FIORDO OFHIDRO', 'POINT', '\0\0\0\0\0\0\0Y?8?}R?[???H?'),
-(673, 2, 1, 663, '1', '0x007C9D', 1, 'GLACIAR MOSCO', 'POINT', '\0\0\0\0\0\0\0?>W[?R??_?H?'),
-(674, 2, 1, 664, '1', '0xE54265', 1, 'ICE FEST PATAG√ìNICO', 'POINT', '\0\0\0\0\0\0\0????\nR?6?>W[	G?'),
-(675, 2, 1, 665, '1', '0x007C9D', 1, 'ISLA BYRON', 'POINT', '\0\0\0\0\0\0\0*:??????›ì???'),
-(676, 2, 1, 666, '1', '0x007C9D', 1, 'ISLA DE LOS MUERTOS (MH)', 'POINT', '\0\0\0\0\0\0\0?JY?dR??5^?I??'),
-(677, 2, 1, 667, '1', '0x007C9D', 1, 'ISLA HUEMULES', 'POINT', '\0\0\0\0\0\0\0?s?nR?;M?\r?F?'),
-(678, 2, 1, 668, '1', '0x007C9D', 1, 'ISLA JAMES', 'POINT', '\0\0\0\0\0\0\0????R?4??@?zF?'),
-(679, 2, 1, 669, '1', '0x007C9D', 1, 'ISLA JECHICA', 'POINT', '\0\0\0\0\0\0\0??~vR?bX9?8F?'),
-(680, 2, 1, 670, '1', '0x007C9D', 1, 'ISLA KENT', 'POINT', '\0\0\0\0\0\0\0n???R??|a2?F?'),
-(681, 2, 1, 671, '1', '0x007C9D', 1, 'ISLA NALCAYEC', 'POINT', '\0\0\0\0\0\0\0??◊ÅoR??G?G?'),
-(682, 2, 1, 672, '1', '0x007C9D', 1, 'ISLA ROJAS', 'POINT', '\0\0\0\0\0\0\0?MbpR??Q?F?'),
-(683, 2, 1, 673, '1', '0x007C9D', 1, 'ISLA SIMPSON', 'POINT', '\0\0\0\0\0\0\0?@??tR?}??b??'),
-(684, 2, 1, 674, '1', '0xE54265', 1, 'JINETEADA INTERNACIONAL', 'POINT', '\0\0\0\0\0\0\0"lxz?,R?y?1?F?'),
-(685, 2, 1, 675, '1', '0xE54265', 1, 'LA FIESTA DEL &quot;PESCAO&#x27; FRITO&quot; EN PUERTO CISNES', 'POINT', '\0\0\0\0\0\0\0?St$?+R?[”º?]F?'),
-(686, 2, 1, 676, '1', '0x007C9D', 1, 'LA JUNTA', 'POINT', '\0\0\0\0\0\0\0gDio?R??8?m?E?'),
-(687, 2, 1, 677, '1', '0x007C9D', 1, 'LAGO ALEGRE', 'POINT', '\0\0\0\0\0\0\0”º?!R???N@H?'),
-(688, 2, 1, 678, '1', '0x007C9D', 1, 'LAGO ALTO', 'POINT', '\0\0\0\0\0\0\0??n?R??:p?G?'),
-(689, 2, 1, 679, '1', '0x007C9D', 1, 'LAGO ATRAVESADO', 'POINT', '\0\0\0\0\0\0\0??\\m?R??C????'),
-(690, 2, 1, 680, '1', '0x007C9D', 1, 'LAGO BAYO', 'POINT', '\0\0\0\0\0\0\046<?FR??G?>G?'),
-(691, 2, 1, 681, '1', '0x007C9D', 1, 'LAGO BERTRAND', 'POINT', '\0\0\0\0\0\0\0&S?6R??V?{G?'),
-(692, 2, 1, 682, '1', '0x007C9D', 1, 'LAGO BRICE√ëO', 'POINT', '\0\0\0\0\0\0\0?e?R?Z??⁄ä%H?'),
-(693, 2, 1, 683, '1', '0x007C9D', 1, 'LAGO BROWN', 'POINT', '\0\0\0\0\0\0\0??\Z/?R????~??G?'),
-(694, 2, 1, 684, '1', '0x007C9D', 1, 'LAGO CARO', 'POINT', '\0\0\0\0\0\0\046<!R????F?'),
-(695, 2, 1, 685, '1', '0x007C9D', 1, 'LAGO CASTOR', 'POINT', '\0\0\0\0\0\0\0???Q???›ì???'),
-(696, 2, 1, 686, '1', '0x007C9D', 1, 'LAGO CENTRAL', 'POINT', '\0\0\0\0\0\0\0x??#?R??H?}G?'),
-(697, 2, 1, 687, '1', '0x007C9D', 1, 'LAGO CHACABUCO', 'POINT', '\0\0\0\0\0\0\0?|–≥Y1R?46<?G?'),
-(698, 2, 1, 688, '1', '0x007C9D', 1, 'LAGO CHRISTIE', 'POINT', '\0\0\0\0\0\0\0?H?}R???H?'),
-(699, 2, 1, 689, '1', '0x007C9D', 1, 'LAGO CIERVO', 'POINT', '\0\0\0\0\0\0\0L7?A`)R?1?Z<H?'),
-(700, 2, 1, 690, '1', '0x007C9D', 1, 'LAGO CISNES', 'POINT', '\0\0\0\0\0\0\0?m4?''R?U???N8H?'),
-(701, 2, 1, 691, '1', '0x007C9D', 1, 'LAGO COCHRANE', 'POINT', '\0\0\0\0\0\0\0?0?*R?@?ﬂæ?G?'),
-(702, 2, 1, 692, '1', '0x007C9D', 1, 'LAGO C√ìNDOR', 'POINT', '\0\0\0\0\0\0\0}??b=R???\0o??'),
-(703, 2, 1, 693, '1', '0x007C9D', 1, 'LAGO DESIERTO', 'POINT', '\0\0\0\0\0\0\0\n◊£p=R??«∫??F?'),
-(704, 2, 1, 694, '1', '0x007C9D', 1, 'LAGO ELIZALDE', 'POINT', '\0\0\0\0\0\0\01?ZR??1???'),
-(705, 2, 1, 695, '1', '0x007C9D', 1, 'LAGO ESMERALDA', 'POINT', '\0\0\0\0\0\0\0?\\?C?%R?F??_?G?'),
-(706, 2, 1, 696, '1', '0x007C9D', 1, 'LAGO FR√çO', 'POINT', '\0\0\0\0\0\0\0b???Q??yX???'),
-(707, 2, 1, 697, '1', '0x007C9D', 1, 'LAGO GENERAL CARRERA (ZOIT)', 'POINT', '\0\0\0\0\0\0\0?HP,R?\\??(dG?'),
-(708, 2, 1, 698, '1', '0x007C9D', 1, 'LAGO JUNCAL', 'POINT', '\0\0\0\0\0\0\0F%u?,R?lxz?,?G?'),
-(709, 2, 1, 699, '1', '0x007C9D', 1, 'LAGO LA PALOMA', 'POINT', '\0\0\0\0\0\0\0??^R?''¬Ü?W??'),
-(710, 2, 1, 700, '1', '0x007C9D', 1, 'LAGO LAPPARENT', 'POINT', '\0\0\0\0\0\0\0\0\0\0\0\0R?=\n◊£pG?'),
-(711, 2, 1, 701, '1', '0x007C9D', 1, 'LAGO LAS ARDILLAS', 'POINT', '\0\0\0\0\0\0\0??3?R?M?\rO?G?'),
-(712, 2, 1, 702, '1', '0x007C9D', 1, 'LAGO LEONES', 'POINT', '\0\0\0\0\0\0\0??GR??yX?]G?'),
-(713, 2, 1, 703, '1', '0x007C9D', 1, 'LAGO LOS PALOS', 'POINT', '\0\0\0\0\0\0\0???QI-R??\Z?[?F?'),
-(714, 2, 1, 704, '1', '0x007C9D', 1, 'LAGO MISTERIOSO', 'POINT', '\0\0\0\0\0\0\0???????%‰Éû?F?'),
-(715, 2, 1, 705, '1', '0x007C9D', 1, 'LAGO MONREAL O AZUL', 'POINT', '\0\0\0\0\0\0\0?È∑ØR??1w-!?F?'),
-(716, 2, 1, 706, '1', '0x007C9D', 1, 'LAGO NEGRO', 'POINT', '\0\0\0\0\0\0\0m??{2R?l	??gsG?'),
-(717, 2, 1, 707, '1', '0x007C9D', 1, 'LAGO NORTE', 'POINT', '\0\0\0\0\0\0\03ƒ±.n????’áF?'),
-(718, 2, 1, 708, '1', '0x007C9D', 1, 'LAGO O&#x27;HIGGINS', 'POINT', '\0\0\0\0\0\0\0???#R?jM?H?'),
-(719, 2, 1, 709, '1', '0x007C9D', 1, 'LAGO PLOMO', 'POINT', '\0\0\0\0\0\0\0[”º?9R?‰ÉûÕ™G?'),
-(720, 2, 1, 710, '1', '0x007C9D', 1, 'LAGO POLLUX', 'POINT', '\0\0\0\0\0\0\0??@??Q???(\\??'),
-(721, 2, 1, 711, '1', '0x007C9D', 1, 'LAGO PORTALES', 'POINT', '\0\0\0\0\0\0\0X9??&R???Z”º??'),
-(722, 2, 1, 712, '1', '0x007C9D', 1, 'LAGO QUETRU', 'POINT', '\0\0\0\0\0\0\0^?IGR????rH?'),
-(723, 2, 1, 713, '1', '0x007C9D', 1, 'LAGO RIESCO', 'POINT', '\0\0\0\0\0\0\0?.?!-R?>????F?'),
-(724, 2, 1, 714, '1', '0x007C9D', 1, 'LAGO RISOPATRON', 'POINT', '\0\0\0\0\0\0\0R''???!R??q??#F?'),
-(725, 2, 1, 715, '1', '0x007C9D', 1, 'LAGO ROSSELOT', 'POINT', '\0\0\0\0\0\0\0@a?R??r?0?F?'),
-(726, 2, 1, 716, '1', '0x007C9D', 1, 'LAGO TRANQUILO', 'POINT', '\0\0\0\0\0\0\0L7?A`1R??Zd;OG?'),
-(727, 2, 1, 717, '1', '0x007C9D', 1, 'LAGO VERDE', 'POINT', '\0\0\0\0\0\0\0??k	??Q????r F?'),
-(728, 2, 1, 718, '1', '0x007C9D', 1, 'LAGO YULTON', 'POINT', '\0\0\0\0\0\0\0?#???<R???QI??F?'),
-(729, 2, 1, 719, '1', '0x007C9D', 1, 'LAGUNA COFR√â', 'POINT', '\0\0\0\0\0\0\0e?`TR/R?e?`TRG?'),
-(730, 2, 1, 720, '1', '0x007C9D', 1, 'LAGUNA SAN RAFAEL', 'POINT', '\0\0\0\0\0\0\0t???R?h"lxzUG?'),
-(731, 2, 1, 721, '1', '0x007C9D', 1, 'LAGUNA VERDE CHILE CHICO', 'POINT', '\0\0\0\0\0\0\0?t$R????lG?'),
-(732, 2, 1, 722, '1', '0x007C9D', 1, 'LAGUNA VERDE R√çO IB√Å√ëEZ', 'POINT', '\0\0\0\0\0\0\0?Z”º?R?=\n◊£pG?'),
-(733, 2, 1, 723, '1', '0x007C9D', 1, 'LAS MANOS DE CERRO CASTILLO', 'POINT', '\0\0\0\0\0\0\0???R?«∫??G?'),
-(734, 2, 1, 724, '1', '0x007C9D', 1, 'MALLIN GRANDE', 'POINT', '\0\0\0\0\0\0\0}?5^?R????]G?'),
-(735, 2, 1, 725, '1', '0x007C9D', 1, 'MELINKA', 'POINT', '\0\0\0\0\0\0\0O@a?R??Y???E?'),
-(736, 2, 1, 726, '1', '0x007C9D', 1, 'MONTE CAY', 'POINT', '\0\0\0\0\0\0\0???1?R??St$??F?'),
-(737, 2, 1, 727, '1', '0x007C9D', 1, 'MONTE FITZ ROY', 'POINT', '\0\0\0\0\0\0\0???vCR?Tt$???H?'),
-(738, 2, 1, 728, '1', '0x007C9D', 1, 'MONTE MENTOLAT', 'POINT', '\0\0\0\0\0\0\0?C??DR??HP?XF?'),
-(739, 2, 1, 729, '1', '0x007C9D', 1, 'MONTE SAN LORENZO', 'POINT', '\0\0\0\0\0\0\0??^R?3ƒ±.n??'),
-(740, 2, 1, 730, '1', '0x007C9D', 1, 'MONTE SAN VALENT√çN', 'POINT', '\0\0\0\0\0\0\0??GYR???ﬂæVG?'),
-(741, 2, 1, 731, '1', '0x007C9D', 1, 'MONUMENTO AL OVEJERO', 'POINT', '\0\0\0\0\0\0\0?MbR?~??k	??'),
-(742, 2, 1, 732, '1', '0x007C9D', 1, 'MONUMENTO NATURAL CINCO HERMANAS', 'POINT', '\0\0\0\0\0\0\0)?r?0QR???3?F?'),
-(743, 2, 1, 733, '1', '0x007C9D', 1, 'MONUMENTO NATURAL DOS LAGUNAS', 'POINT', '\0\0\0\0\0\0\0??\\m?Q?[”º???'),
-(744, 2, 1, 734, '1', '0x007C9D', 1, 'MUSEO REGIONAL DE LA PATAGONIA CENTRAL', 'POINT', '\0\0\0\0\0\0\0?H?}R??(?r???'),
-(745, 2, 1, 735, '1', '0x007C9D', 1, 'PARQUE AIKEN DEL SUR', 'POINT', '\0\0\0\0\0\0\0???R?jM??'),
-(746, 2, 1, 736, '1', '0x007C9D', 1, 'PARQUE NACIONAL BERNARDO O&#x27;HIGGINS', 'POINT', '\0\0\0\0\0\0\0À°E??R???K_H?'),
-(747, 2, 1, 737, '1', '0x007C9D', 1, 'PARQUE NACIONAL ISLA GUAMBLIN', 'POINT', '\0\0\0\0\0\0\0?0?	???:??F?'),
-(748, 2, 1, 738, '1', '0x007C9D', 1, 'PARQUE NACIONAL ISLA MAGDALENA', 'POINT', '\0\0\0\0\0\0\0?_?R?\\??(\\F?'),
-(749, 2, 1, 739, '1', '0x007C9D', 1, 'PARQUE NACIONAL LAGUNA SAN RAFAEL', 'POINT', '\0\0\0\0\0\0\0?R?!?iR?c?B>`G?'),
-(750, 2, 1, 740, '1', '0x007C9D', 1, 'PARQUE NACIONAL QUEULAT', 'POINT', '\0\0\0\0\0\0\0?#???R?8gDi?F?'),
-(751, 2, 1, 741, '1', '0x007C9D', 1, 'PASO SAN CARLOS O LUCAS BRIDGE', 'POINT', '\0\0\0\0\0\0\0R???R?^K?=??'),
-(752, 2, 1, 742, '1', '0x007C9D', 1, 'PEN√çNSULA DE MELIMOYU', 'POINT', '\0\0\0\0\0\0\0Gr??R????F?'),
-(753, 2, 1, 743, '1', '0x007C9D', 1, 'PIEDRA DEL CONDE', 'POINT', '\0\0\0\0\0\0\0??Q???W?G?'),
-(754, 2, 1, 744, '1', '0x007C9D', 1, 'PIEDRA DEL INDIO', 'POINT', '\0\0\0\0\0\0\0???R?aTR''???'),
-(755, 2, 1, 745, '1', '0x007C9D', 1, 'PIEDRA EL GATO', 'POINT', '\0\0\0\0\0\0\0?:??R???EWF?'),
-(756, 2, 1, 746, '1', '0x007C9D', 1, 'PUENTE PRESIDENTE IB√Å√ëEZ (MH)', 'POINT', '\0\0\0\0\0\0\0+??+R???…≥F?'),
-(757, 2, 1, 747, '1', '0x007C9D', 1, 'PUERTO AGUIRRE', 'POINT', '\0\0\0\0\0\0\0}??baR??V?F?'),
-(758, 2, 1, 748, '1', '0x007C9D', 1, 'PUERTO AYS√âN', 'POINT', '\0\0\0\0\0\0\0????,R????F?'),
-(759, 2, 1, 749, '1', '0x007C9D', 1, 'PUERTO BERTRAND', 'POINT', '\0\0\0\0\0\0\0?0?*5R???y??G?'),
-(760, 2, 1, 750, '1', '0x007C9D', 1, 'PUERTO BONITO', 'POINT', '\0\0\0\0\0\0\0≈è1w-eR?:??H?F?'),
-(761, 2, 1, 751, '1', '0x007C9D', 1, 'PUERTO CHACABUCO', 'POINT', '\0\0\0\0\0\0\0??4R?HP??F?'),
-(762, 2, 1, 752, '1', '0x007C9D', 1, 'PUERTO CISNES', 'POINT', '\0\0\0\0\0\0\0d;??+R?L?\nF%]F?'),
-(763, 2, 1, 753, '1', '0x007C9D', 1, 'PUERTO GUADAL', 'POINT', '\0\0\0\0\0\0\0??N@-R??1?lG?'),
-(764, 2, 1, 754, '1', '0x007C9D', 1, 'PUERTO INGENIERO IB√Å√ëEZ', 'POINT', '\0\0\0\0\0\0\0d]??Q?!?V%G?'),
-(765, 2, 1, 755, '1', '0x007C9D', 1, 'PUERTO RA√öL MAR√çN BALMACEDA', 'POINT', '\0\0\0\0\0\0\0\rq???R?A????'),
-(766, 2, 1, 756, '1', '0x007C9D', 1, 'PUERTO R√çO TRANQUILO', 'POINT', '\0\0\0\0\0\0\0s??+R?Zd;?G?'),
-(767, 2, 1, 757, '1', '0x007C9D', 1, 'PUERTO S√ÅNCHEZ', 'POINT', '\0\0\0\0\0\0\0i\0o?%R?$(~??KG?'),
-(768, 2, 1, 758, '1', '0x007C9D', 1, 'PUERTO YUNGAY', 'POINT', '\0\0\0\0\0\0\0?@??TR?‰ÉûÕ™?G?'),
-(769, 2, 1, 759, '1', '0x007C9D', 1, 'PUYUHUAPI', 'POINT', '\0\0\0\0\0\0\0???#R??????)F?'),
-(770, 2, 1, 760, '1', '0xE54265', 1, 'RAID SOLIDARIO CLUB DE LEONES', 'POINT', '\0\0\0\0\0\0\0#?~jR?+???'),
-(771, 2, 1, 761, '1', '0x007C9D', 1, 'RESERVA NACIONAL CERRO CASTILLO', 'POINT', '\0\0\0\0\0\0\0?p=\n?R?s??G?'),
-(772, 2, 1, 762, '1', '0x007C9D', 1, 'RESERVA NACIONAL COYHAIQUE', 'POINT', '\0\0\0\0\0\0\0???QR??+e??'),
-(773, 2, 1, 763, '1', '0x007C9D', 1, 'RESERVA NACIONAL KATALALIXAR', 'POINT', '\0\0\0\0\0\0\0????R???HH?'),
-(774, 2, 1, 764, '1', '0x007C9D', 1, 'RESERVA NACIONAL LAGO CARLOTA', 'POINT', '\0\0\0\0\0\0\0_)??Q???:EF?'),
-(775, 2, 1, 765, '1', '0x007C9D', 1, 'RESERVA NACIONAL LAGO JEINEMENI', 'POINT', '\0\0\0\0\0\0\0&‰Éû?nR????eG?'),
-(776, 2, 1, 766, '1', '0x007C9D', 1, 'RESERVA NACIONAL LAGO LAS TORRES', 'POINT', '\0\0\0\0\0\0\0?[ A?R?V????F?'),
-(777, 2, 1, 767, '1', '0x007C9D', 1, 'RESERVA NACIONAL LAGO ROSSELOT', 'POINT', '\0\0\0\0\0\0\0?c]?R???y?F?'),
-(778, 2, 1, 768, '1', '0x007C9D', 1, 'RESERVA NACIONAL LAGO TAMANGO', 'POINT', '\0\0\0\0\0\0\0??R?R????'),
-(779, 2, 1, 769, '1', '0x007C9D', 1, 'RESERVA NACIONAL LAS GUAITECAS', 'POINT', '\0\0\0\0\0\0\0Íï≤q|R? ?_?F?'),
-(780, 2, 1, 770, '1', '0x007C9D', 1, 'RESERVA NACIONAL MA√ëIHUALES', 'POINT', '\0\0\0\0\0\0\033333R???h"?F?'),
-(781, 2, 1, 771, '1', '0x007C9D', 1, 'RESERVA NACIONAL R√çO SIMPSON', 'POINT', '\0\0\0\0\0\0\0!?rh?R?Gx$?F?'),
-(782, 2, 1, 772, '1', '0x007C9D', 1, 'RESERVA NACIONAL TRAPANANDA', 'POINT', '\0\0\0\0\0\0\0?St$???y?1?F?'),
-(783, 2, 1, 773, '1', '0x007C9D', 1, 'R√çO AYS√âN', 'POINT', '\0\0\0\0\0\0\0◊£p=\n+R??!?uq?F?'),
-(784, 2, 1, 774, '1', '0x007C9D', 1, 'R√çO BAKER', 'POINT', '\0\0\0\0\0\0\0?=?UCR????G?'),
-(785, 2, 1, 775, '1', '0x007C9D', 1, 'R√çO BLANCO', 'POINT', '\0\0\0\0\0\0\0	?^)+R??p=\n?F?'),
-(786, 2, 1, 776, '1', '0x007C9D', 1, 'R√çO BRAVO', 'POINT', '\0\0\0\0\0\0\0jM?DR????H?'),
-(787, 2, 1, 777, '1', '0x007C9D', 1, 'R√çO CISNES', 'POINT', '\0\0\0\0\0\0\0\r??? R?9EGr?WF?'),
-(788, 2, 1, 778, '1', '0x007C9D', 1, 'R√çO COYHAIQUE', 'POINT', '\0\0\0\0\0\0\0?*??R???n???'),
-(789, 2, 1, 779, '1', '0x007C9D', 1, 'R√çO DE LA COLONIA', 'POINT', '\0\0\0\0\0\0\0H?}8;R???@???'),
-(790, 2, 1, 780, '1', '0x007C9D', 1, 'R√çO FIGUEROA', 'POINT', '\0\0\0\0\0\0\0?E??R?È∑ØF?'),
-(791, 2, 1, 781, '1', '0x007C9D', 1, 'R√çO LA PALOMA', 'POINT', '\0\0\0\0\0\0\0??z6R??"???'),
-(792, 2, 1, 782, '1', '0x007C9D', 1, 'R√çO LOS PALOS', 'POINT', '\0\0\0\0\0\0\0???-R?Y?8??F?'),
-(793, 2, 1, 783, '1', '0x007C9D', 1, 'R√çO MA√ëIHUALES', 'POINT', '\0\0\0\0\0\0\0:#J{?R?^K?=?F?'),
-(794, 2, 1, 784, '1', '0x007C9D', 1, 'R√çO MAYER', 'POINT', '\0\0\0\0\0\0\0@a?R?R''???!H?'),
-(795, 2, 1, 785, '1', '0x007C9D', 1, 'R√çO MOSCO', 'POINT', '\0\0\0\0\0\0\0?A`?"R?!?V=H?'),
-(796, 2, 1, 786, '1', '0x007C9D', 1, 'R√çO √ëIREHUAO', 'POINT', '\0\0\0\0\0\0\0C?6?????'),
-(797, 2, 1, 787, '1', '0x007C9D', 1, 'R√çO PALENA', 'POINT', '\0\0\0\0\0\0\0	??g?6R?	?^)??'),
-(798, 2, 1, 788, '1', '0x007C9D', 1, 'R√çO PASCUA', 'POINT', '\0\0\0\0\0\0\0?G?NR?i\0o?H?'),
-(799, 2, 1, 789, '1', '0x007C9D', 1, 'R√çO SIMPSON', 'POINT', '\0\0\0\0\0\0\0??_?R?a?+??'),
-(800, 2, 1, 790, '1', '0x007C9D', 1, 'RUTA AUSTRAL COCHRANE', 'POINT', '\0\0\0\0\0\0\0??&R?????G?'),
-(801, 2, 1, 791, '1', '0x007C9D', 1, 'RUTA AUSTRAL COYHAIQUE', 'POINT', '\0\0\0\0\0\0\0q???R?e???'),
-(802, 2, 1, 792, '1', '0x007C9D', 1, 'RUTA AUSTRAL LA JUNTA', 'POINT', '\0\0\0\0\0\0\0D???R??W[???E?'),
-(803, 2, 1, 793, '1', '0xE54265', 1, 'RUTA DEL HUEMUL, COCHRANE', 'POINT', '\0\0\0\0\0\0\0‘ö??$R?c?y?G?'),
-(804, 2, 1, 794, '1', '0x007C9D', 1, 'SALTO R√çO BAKER', 'POINT', '\0\0\0\0\0\0\0????BR?OjM??'),
-(805, 2, 1, 795, '1', '0x007C9D', 1, 'SALTO R√çO IB√Å√ëEZ', 'POINT', '\0\0\0\0\0\0\0?6\Z??Q?b???G?'),
-(806, 2, 1, 796, '1', '0x007C9D', 1, 'SECTOR SEIS LAGUNAS', 'POINT', '\0\0\0\0\0\0\0?@??R??\\?C???'),
-(807, 2, 1, 797, '1', '0xE54265', 1, 'SEMANA DE PUERTO CINES', 'POINT', '\0\0\0\0\0\0\0???+R??V]F?'),
-(808, 2, 1, 798, '1', '0xE54265', 1, 'SEMANA DEL PIONERO', 'POINT', '\0\0\0\0\0\0\0F??_R?a2U0*??'),
-(809, 2, 1, 799, '1', '0xE54265', 1, 'SEMANA LAGOVERDINA', 'POINT', '\0\0\0\0\0\0\06<?R?Q?????F?'),
-(810, 2, 1, 800, '1', '0x007C9D', 1, 'SENDEROS RA√öL MAR√çN BALMACEDA SECTOR 1', 'POINT', '\0\0\0\0\0\0\0???Z?R??C?l?E?'),
-(811, 2, 1, 801, '1', '0x007C9D', 1, 'SENDEROS RA√öL MAR√çN BALMACEDA SECTOR 2', 'POINT', '\0\0\0\0\0\0\0E??=R?M?\rO???'),
-(812, 2, 1, 802, '1', '0x007C9D', 1, 'SENO GALA', 'POINT', '\0\0\0\0\0\0\0\Z?[ AIR???k	?F?'),
-(813, 2, 1, 803, '1', '0x007C9D', 1, 'SENO QUEULAT', 'POINT', '\0\0\0\0\0\0\0???&R?V-???F?'),
-(814, 2, 1, 804, '1', '0x007C9D', 1, 'VALLE DEL R√çO MIRTA', 'POINT', '\0\0\0\0\0\0\0n4??@R??J?4??'),
-(815, 2, 1, 805, '1', '0x007C9D', 1, 'VALLE LAGUNAS', 'POINT', '\0\0\0\0\0\0\0_?L?R??*??F?'),
-(816, 2, 1, 806, '1', '0x007C9D', 1, 'VALLE PANGAL', 'POINT', '\0\0\0\0\0\0\09?m4(R???Ã¨F?'),
-(817, 2, 1, 807, '1', '0x007C9D', 1, 'VALLE R√çO CHACABUCO', 'POINT', '\0\0\0\0\0\0\0„•õ?R?J+??G?'),
-(818, 2, 1, 808, '1', '0x007C9D', 1, 'VALLE R√çO MULLER', 'POINT', '\0\0\0\0\0\0\0Œà??R?A??KG?'),
-(819, 2, 1, 809, '1', '0x007C9D', 1, 'VALLE R√çO SIMPSON', 'POINT', '\0\0\0\0\0\0\0?Õ™?R?fffff??'),
-(820, 2, 1, 810, '1', '0x007C9D', 1, 'VENTISQUERO ARENALES', 'POINT', '\0\0\0\0\0\0\0-???R???V??'),
-(821, 2, 1, 811, '1', '0x007C9D', 1, 'VENTISQUERO CACHET', 'POINT', '\0\0\0\0\0\0\0V-?UR??q???G?'),
-(822, 2, 1, 812, '1', '0x007C9D', 1, 'VENTISQUERO CHICO', 'POINT', '\0\0\0\0\0\0\0$(~?ER??%‰Éû?H?'),
-(823, 2, 1, 813, '1', '0x007C9D', 1, 'VENTISQUERO COLGANTE QUEULAT', 'POINT', '\0\0\0\0\0\0\0?46 R??3??7F?'),
-(824, 2, 1, 814, '1', '0x007C9D', 1, 'VENTISQUERO EXPLORADORES', 'POINT', '\0\0\0\0\0\0\0???KR?D?l?AG?'),
-(825, 2, 1, 815, '1', '0x007C9D', 1, 'VENTISQUERO JORGE MONTT', 'POINT', '\0\0\0\0\0\0\0(~??k]R??K7)H?'),
-(826, 2, 1, 816, '1', '0x007C9D', 1, 'VENTISQUERO LA COLONIA', 'POINT', '\0\0\0\0\0\0\0j???PR??W[???G?'),
-(827, 2, 1, 817, '1', '0x007C9D', 1, 'VENTISQUERO LEONES', 'POINT', '\0\0\0\0\0\0\0J{?/LNR???0?G?'),
-(828, 2, 1, 818, '1', '0x007C9D', 1, 'VENTISQUERO NEF', 'POINT', '\0\0\0\0\0\0\0??~NR???.??G?'),
-(829, 2, 1, 819, '1', '0x007C9D', 1, 'VENTISQUERO O&#x27;HIGGINS', 'POINT', '\0\0\0\0\0\0\0"??u?R??:M?uH?'),
-(830, 2, 1, 820, '1', '0x007C9D', 1, 'VENTISQUERO PARED NORTE', 'POINT', '\0\0\0\0\0\0\0?:??R?K?=??G?'),
-(831, 2, 1, 821, '1', '0x007C9D', 1, 'VENTISQUERO PARED SUR', 'POINT', '\0\0\0\0\0\0\0???N@WR??6\Z?G?'),
-(832, 2, 1, 822, '1', '0x007C9D', 1, 'VENTISQUERO SAN QUINT√çN', 'POINT', '\0\0\0\0\0\0\0~8gD}R?a2U0*qG?'),
-(833, 2, 1, 823, '1', '0x007C9D', 1, 'VENTISQUERO SAN RAFAEL', 'POINT', '\0\0\0\0\0\0\0?+??uR?j?t?XG?'),
-(834, 2, 1, 824, '1', '0x007C9D', 1, 'VENTISQUERO SOLER', 'POINT', '\0\0\0\0\0\0\07?A`?R????9sG?'),
-(835, 2, 1, 825, '1', '0x007C9D', 1, 'VENTISQUERO STEFFENS', 'POINT', '\0\0\0\0\0\0\0$(~?mR???????'),
-(836, 2, 1, 826, '1', '0x007C9D', 1, 'VILLA AMENGUAL', 'POINT', '\0\0\0\0\0\0\0/??\rR????_F?'),
-(837, 2, 1, 827, '1', '0x007C9D', 1, 'VILLA CERRO CASTILLO', 'POINT', '\0\0\0\0\0\0\0''????R??>W[?G?'),
-(838, 2, 1, 828, '1', '0x007C9D', 1, 'VILLA LA TAPERA', 'POINT', '\0\0\0\0\0\0\0I.?!???\nh"lxRF?'),
-(839, 2, 1, 829, '1', '0x007C9D', 1, 'VILLA MA√ëIHUALES', 'POINT', '\0\0\0\0\0\0\0??e?c	R? ?_?F?'),
-(840, 2, 1, 830, '1', '0x007C9D', 1, 'VILLA O&#x27;HIGGINS', 'POINT', '\0\0\0\0\0\0\02??R????;H?'),
-(841, 2, 1, 831, '1', '0x007C9D', 1, 'VOLC√ÅN HUDSON', 'POINT', '\0\0\0\0\0\0\00L?\nFAR???W???'),
-(842, 2, 1, 832, '1', '0x007C9D', 1, 'VOLC√ÅN MACA', 'POINT', '\0\0\0\0\0\0\0?,?R?!?rh??F?'),
-(843, 2, 1, 833, '1', '0x007C9D', 1, 'VOLC√ÅN MELIMOYU', 'POINT', '\0\0\0\0\0\0\0???7R??HP?F?'),
-(844, 2, 1, 834, '1', '0x008A66', 1, 'R√çO PALENA', 'POINT', '\0\0\0\0\0\0\0,e?7R?F???E?'),
-(845, 2, 1, 835, '1', '0x008A66', 1, 'PARQUE NACIONAL QUEULAT', 'POINT', '\0\0\0\0\0\0\0]?xR?!?V5F?'),
-(846, 2, 1, 836, '1', '0x008A66', 1, 'CERRO CASTILLO', 'POINT', '\0\0\0\0\0\0\02U0*?R?????G?'),
-(847, 2, 1, 837, '1', '0x008A66', 1, 'LAGUNA SAN RAFAEL', 'POINT', '\0\0\0\0\0\0\0?z6?zR??|–≥YUG?'),
-(848, 2, 1, 838, '1', '0x008A66', 1, 'LAGO GENERAL CARRERA', 'POINT', '\0\0\0\0\0\0\0Tt$???Q??K79G?'),
-(849, 2, 1, 839, '1', '0x008A66', 1, 'R√çO BAKER', 'POINT', '\0\0\0\0\0\0\0#J{?/XR?V-??'),
-(850, 2, 1, 840, '1', '0x008A66', 1, 'CALETA TORTEL', 'POINT', '\0\0\0\0\0\0\0??1`R???S?G?'),
-(851, 2, 1, 841, '1', '0x008A66', 1, 'CAMPO DE HIELO SAN VALENT√çN', 'POINT', '\0\0\0\0\0\0\0???cR?⁄¨?\\m]G?'),
-(852, 2, 1, 842, '1', '0x008A66', 1, 'CAMPO DE HIELO NORTE', 'POINT', '\0\0\0\0\0\0\0??7??R?P??n?G?'),
-(853, 2, 1, 843, '1', '0x008A66', 1, 'CAMPO DE HIELO SUR', 'POINT', '\0\0\0\0\0\0\0??\\m?R??c?RH?'),
-(854, 2, 1, 844, '1', '0x008A66', 1, 'VILLA OHIGGINS', 'POINT', '\0\0\0\0\0\0\02??R????;H?'),
-(855, 2, 1, 845, '1', '0x005679', 0, 'INFORMACIONES MELINKA', 'POINT', '\0\0\0\0\0\0\0j???pR?[???E?'),
-(856, 2, 1, 846, '1', '0x005679', 0, 'INFORMACIONES PUERTO AYSEN', 'POINT', '\0\0\0\0\0\0\0@a?+R???h"?F?'),
-(857, 2, 1, 847, '1', '0x005679', 0, 'INFORMACIONES PUERTO CHACABUCO', 'POINT', '\0\0\0\0\0\0\0??H4R??9#J?F?'),
-(858, 2, 1, 848, '1', '0x005679', 0, 'INFORMACIONES CHILE CHICO', 'POINT', '\0\0\0\0\0\0\0x$(??Zd;?EG?'),
-(859, 2, 1, 849, '1', '0x005679', 0, 'INFORMACIONES PUERTO RA√öL MAR√çN', 'POINT', '\0\0\0\0\0\0\07?A`?R???j??'),
-(860, 2, 1, 850, '1', '0x005679', 0, 'INFORMACIONES LA JUNTA', 'POINT', '\0\0\0\0\0\0\0F%u\ZR???E?'),
-(861, 2, 1, 851, '1', '0x005679', 0, 'INFORMACIONES LAGO VERDE', 'POINT', '\0\0\0\0\0\0\0?~?:p?Q?t???F?'),
-(862, 2, 1, 852, '1', '0x005679', 0, 'INFORMACIONES PUYUHUAPI', 'POINT', '\0\0\0\0\0\0\0?:??R????)F?'),
-(863, 2, 1, 853, '1', '0x005679', 0, 'INFORMACIONES PUERTO CISNES', 'POINT', '\0\0\0\0\0\0\0HP?s+R???&S]F?'),
-(864, 2, 1, 854, '1', '0x005679', 0, 'INFORMACIONES MA√ëIHUALES', 'POINT', '\0\0\0\0\0\0\0??G	R??<,‘ö?F?'),
-(865, 2, 1, 855, '1', '0x005679', 0, 'INFORMACIONES COYHAIQUE', 'POINT', '\0\0\0\0\0\0\0Gx$R?D?l???'),
-(866, 2, 1, 856, '1', '0x005679', 0, 'INFORMACIONES CERRO CASTILLO', 'POINT', '\0\0\0\0\0\0\0}–≥Y?	R?\0o??G?'),
-(867, 2, 1, 857, '1', '0x005679', 0, 'INFORMACIONES PUERTO IBA√ëEZ', 'POINT', '\0\0\0\0\0\0\0?J??Q????%G?'),
-(868, 2, 1, 858, '1', '0x005679', 0, 'INFORMACIONES BAH√çA MURTA', 'POINT', '\0\0\0\0\0\0\0%u?+R???~:G?'),
-(869, 2, 1, 859, '1', '0x005679', 0, 'INFORMACIONES PUERTO SANCHEZ', 'POINT', '\0\0\0\0\0\0\0€ä?e?$R?2??G?'),
-(870, 2, 1, 860, '1', '0x005679', 0, 'INFORMACIONES PUERTO TRANQUILO', 'POINT', '\0\0\0\0\0\0\0???9+R?«∫??PG?'),
-(871, 2, 1, 861, '1', '0x005679', 0, 'INFORMACIONES COCHRANE', 'POINT', '\0\0\0\0\0\0\0?Z”º?R??(?r??G?'),
-(872, 2, 1, 862, '1', '0x005679', 0, 'INFORMACIONES TORTEL', 'POINT', '\0\0\0\0\0\0\0????aR??t???'),
-(873, 2, 1, 863, '1', '0x005679', 0, 'INFORMACIONES VILLA O&#x27;HIGGINS', 'POINT', '\0\0\0\0\0\0\0O@a?R??Q?H?'),
-(874, 2, 1, 864, '1', '0x005679', 0, 'BENCINERA PUERTO CHACABUCO', 'POINT', '\0\0\0\0\0\0\0M?t4R?l	??g?F?'),
-(875, 2, 1, 865, '1', '0x005679', 0, 'BENCINERA BALMACEDA', 'POINT', '\0\0\0\0\0\0\0?U?????x$(~??'),
-(876, 2, 1, 866, '1', '0x005679', 0, 'BENCINERA LA JUNTA', 'POINT', '\0\0\0\0\0\0\0F%u\ZR???E?'),
-(877, 2, 1, 867, '1', '0x005679', 0, 'BENCINERA PUYUHUAPI', 'POINT', '\0\0\0\0\0\0\0?:??R????)F?'),
-(878, 2, 1, 868, '1', '0x005679', 0, 'BENCINERA PUERTO CISNES', 'POINT', '\0\0\0\0\0\0\0HP?s+R???&S]F?'),
-(879, 2, 1, 869, '1', '0x005679', 0, 'BENCINERA MA√ëIHUALES', 'POINT', '\0\0\0\0\0\0\0??G	R??<,‘ö?F?'),
-(880, 2, 1, 870, '1', '0x005679', 0, 'BENCINERA COYHAIQUE', 'POINT', '\0\0\0\0\0\0\0Gx$R?D?l???'),
-(881, 2, 1, 871, '1', '0x005679', 0, 'BENCINERA PUERTO AYSEN', 'POINT', '\0\0\0\0\0\0\0@a?+R???h"?F?'),
-(882, 2, 1, 872, '1', '0x005679', 0, 'BENCINERA CHILE CHICO', 'POINT', '\0\0\0\0\0\0\0x$(??Zd;?EG?'),
-(883, 2, 1, 873, '1', '0x005679', 0, 'BENCINERA PUERTO TRANQUILO', 'POINT', '\0\0\0\0\0\0\0???9+R?«∫??PG?'),
-(884, 2, 1, 874, '1', '0x005679', 0, 'BENCINERA PUERTO GUADAL', 'POINT', '\0\0\0\0\0\0\0p_?-R???W?lG?'),
-(885, 2, 1, 875, '1', '0x005679', 0, 'BENCINERA COCHRANE', 'POINT', '\0\0\0\0\0\0\0?Z”º?R??(?r??G?'),
-(886, 2, 1, 876, '1', '0x005679', 0, 'BENCINERA VILLA O&#x27;HIGGINS', 'POINT', '\0\0\0\0\0\0\0O@a?R??Q?H?'),
-(887, 2, 1, 877, '1', '0x005679', 0, 'BANCO PUERTO CISNES', 'POINT', '\0\0\0\0\0\0\0HP?s+R???&S]F?'),
-(888, 2, 1, 878, '1', '0x005679', 0, 'BANCO MA√ëIHUALES', 'POINT', '\0\0\0\0\0\0\0??G	R??<,‘ö?F?'),
-(889, 2, 1, 879, '1', '0x005679', 0, 'BANCO COYHAIQUE', 'POINT', '\0\0\0\0\0\0\0Gx$R?D?l???'),
-(890, 2, 1, 880, '1', '0x005679', 0, 'BANCO PUERTO AYSEN', 'POINT', '\0\0\0\0\0\0\0@a?+R???h"?F?'),
-(891, 2, 1, 881, '1', '0x005679', 0, 'BANCO CHILE CHICO', 'POINT', '\0\0\0\0\0\0\0x$(??Zd;?EG?'),
-(892, 2, 1, 882, '1', '0x005679', 0, 'BANCO COCHRANE', 'POINT', '\0\0\0\0\0\0\0?Z”º?R??(?r??G?'),
-(893, 2, 1, 883, '1', '0x005679', 0, 'INTERNET LA JUNTA', 'POINT', '\0\0\0\0\0\0\0F%u\ZR???E?'),
-(894, 2, 1, 884, '1', '0x005679', 0, 'INTERNET LAGO VERDE', 'POINT', '\0\0\0\0\0\0\0?~?:p?Q?t???F?'),
-(895, 2, 1, 885, '1', '0x005679', 0, 'INTERNET PUYUHUAPI', 'POINT', '\0\0\0\0\0\0\0?:??R????)F?'),
-(896, 2, 1, 886, '1', '0x005679', 0, 'INTERNET PUERTO CISNES', 'POINT', '\0\0\0\0\0\0\0HP?s+R???&S]F?'),
-(897, 2, 1, 887, '1', '0x005679', 0, 'INTERNET VILLA AMENGUAL', 'POINT', '\0\0\0\0\0\0\0?????\rR?9???_F?'),
-(898, 2, 1, 888, '1', '0x005679', 0, 'INTERNET COYHAIQUE', 'POINT', '\0\0\0\0\0\0\0Gx$R?D?l???'),
-(899, 2, 1, 889, '1', '0x005679', 0, 'INTERNET PUERTO AYSEN', 'POINT', '\0\0\0\0\0\0\0@a?+R???h"?F?'),
-(900, 2, 1, 890, '1', '0x005679', 0, 'INTERNET CERRO CASTILLO', 'POINT', '\0\0\0\0\0\0\0}–≥Y?	R?\0o??G?'),
-(901, 2, 1, 891, '1', '0x005679', 0, 'INTERNET PUERTO IBA√ëEZ', 'POINT', '\0\0\0\0\0\0\0?J??Q????%G?'),
-(902, 2, 1, 892, '1', '0x005679', 0, 'INTERNET BAH√çA MURTA', 'POINT', '\0\0\0\0\0\0\0%u?+R???~:G?'),
-(903, 2, 1, 893, '1', '0x005679', 0, 'INTERNET CHILE CHICO', 'POINT', '\0\0\0\0\0\0\0x$(??Zd;?EG?'),
-(904, 2, 1, 894, '1', '0x005679', 0, 'INTERNET PUERTO SANCHEZ', 'POINT', '\0\0\0\0\0\0\0€ä?e?$R?2??G?'),
-(905, 2, 1, 895, '1', '0x005679', 0, 'INTERNET PUERTO TRANQUILO', 'POINT', '\0\0\0\0\0\0\0???9+R?«∫??PG?'),
-(906, 2, 1, 896, '1', '0x005679', 0, 'INTERNET PUERTO GUADAL', 'POINT', '\0\0\0\0\0\0\0p_?-R???W?lG?'),
-(907, 2, 1, 897, '1', '0x005679', 0, 'INTERNET COCHRANE', 'POINT', '\0\0\0\0\0\0\0?Z”º?R??(?r??G?'),
-(908, 2, 1, 898, '1', '0x005679', 0, 'INTERNET TORTEL', 'POINT', '\0\0\0\0\0\0\0????aR??t???'),
-(909, 2, 1, 899, '1', '0x005679', 0, 'INTERNET VILLA O&#x27;HIGGINS', 'POINT', '\0\0\0\0\0\0\0O@a?R??Q?H?'),
-(910, 2, 1, 900, '1', '0x005679', 0, 'TEL√âFONO PUERTO RA√öL MAR√çN', 'POINT', '\0\0\0\0\0\0\07?A`?R???j??'),
-(911, 2, 1, 901, '1', '0x005679', 0, 'TEL√âFONO LA JUNTA', 'POINT', '\0\0\0\0\0\0\0F%u\ZR???E?'),
-(912, 2, 1, 902, '1', '0x005679', 0, 'TEL√âFONO LAGO VERDE', 'POINT', '\0\0\0\0\0\0\0?~?:p?Q?t???F?'),
-(913, 2, 1, 903, '1', '0x005679', 0, 'TEL√âFONO PUYUHUAPI', 'POINT', '\0\0\0\0\0\0\0?:??R????)F?'),
-(914, 2, 1, 904, '1', '0x005679', 0, 'TEL√âFONO PUERTO CISNES', 'POINT', '\0\0\0\0\0\0\0HP?s+R???&S]F?'),
-(915, 2, 1, 905, '1', '0x005679', 0, 'TEL√âFONO VILLA AMENGUAL', 'POINT', '\0\0\0\0\0\0\0?????\rR?9???_F?'),
-(916, 2, 1, 906, '1', '0x005679', 0, 'TEL√âFONO MA√ëIHUALES', 'POINT', '\0\0\0\0\0\0\0??G	R??<,‘ö?F?'),
-(917, 2, 1, 907, '1', '0x005679', 0, 'TEL√âFONO COYHAIQUE', 'POINT', '\0\0\0\0\0\0\0Gx$R?D?l???'),
-(918, 2, 1, 908, '1', '0x005679', 0, 'TEL√âFONO PUERTO AYSEN', 'POINT', '\0\0\0\0\0\0\0@a?+R???h"?F?'),
-(919, 2, 1, 909, '1', '0x005679', 0, 'TEL√âFONO CERRO CASTILLO', 'POINT', '\0\0\0\0\0\0\0}–≥Y?	R?\0o??G?'),
-(920, 2, 1, 910, '1', '0x005679', 0, 'TEL√âFONO PUERTO IBA√ëEZ', 'POINT', '\0\0\0\0\0\0\0?J??Q????%G?'),
-(921, 2, 1, 911, '1', '0x005679', 0, 'TEL√âFONO BAH√çA MURTA', 'POINT', '\0\0\0\0\0\0\0%u?+R???~:G?'),
-(922, 2, 1, 912, '1', '0x005679', 0, 'TEL√âFONO CHILE CHICO', 'POINT', '\0\0\0\0\0\0\0x$(??Zd;?EG?'),
-(923, 2, 1, 913, '1', '0x005679', 0, 'TEL√âFONO PUERTO SANCHEZ', 'POINT', '\0\0\0\0\0\0\0€ä?e?$R?2??G?'),
-(924, 2, 1, 914, '1', '0x005679', 0, 'TEL√âFONO PUERTO TRANQUILO', 'POINT', '\0\0\0\0\0\0\0???9+R?«∫??PG?'),
-(925, 2, 1, 915, '1', '0x005679', 0, 'TEL√âFONO PUERTO BERTRAND', 'POINT', '\0\0\0\0\0\0\0??0?5R?????G?'),
-(926, 2, 1, 916, '1', '0x005679', 0, 'TEL√âFONO PUERTO GUADAL', 'POINT', '\0\0\0\0\0\0\0p_?-R???W?lG?'),
-(927, 2, 1, 917, '1', '0x005679', 0, 'TEL√âFONO COCHRANE', 'POINT', '\0\0\0\0\0\0\0?Z”º?R??(?r??G?'),
-(928, 2, 1, 918, '1', '0x005679', 0, 'TEL√âFONO TORTEL', 'POINT', '\0\0\0\0\0\0\0????aR??t???'),
-(929, 2, 1, 919, '1', '0x005679', 0, 'TEL√âFONO VILLA O&#x27;HIGGINS', 'POINT', '\0\0\0\0\0\0\0O@a?R??Q?H?'),
-(930, 2, 1, 920, '1', '0x005679', 0, 'CELULAR PUERTO RA√öL MAR√çN', 'POINT', '\0\0\0\0\0\0\07?A`?R???j??'),
-(931, 2, 1, 921, '1', '0x005679', 0, 'CELULAR LA JUNTA', 'POINT', '\0\0\0\0\0\0\0F%u\ZR???E?'),
-(932, 2, 1, 922, '1', '0x005679', 0, 'CELULAR LAGO VERDE', 'POINT', '\0\0\0\0\0\0\0?~?:p?Q?t???F?'),
-(933, 2, 1, 923, '1', '0x005679', 0, 'CELULAR PUYUHUAPI', 'POINT', '\0\0\0\0\0\0\0?:??R????)F?'),
-(934, 2, 1, 924, '1', '0x005679', 0, 'CELULAR PUERTO CISNES', 'POINT', '\0\0\0\0\0\0\0HP?s+R???&S]F?'),
-(935, 2, 1, 925, '1', '0x005679', 0, 'CELULAR VILLA AMENGUAL', 'POINT', '\0\0\0\0\0\0\0?????\rR?9???_F?'),
-(936, 2, 1, 926, '1', '0x005679', 0, 'CELULAR MA√ëIHUALES', 'POINT', '\0\0\0\0\0\0\0??G	R??<,‘ö?F?'),
-(937, 2, 1, 927, '1', '0x005679', 0, 'CELULAR COYHAIQUE', 'POINT', '\0\0\0\0\0\0\0Gx$R?D?l???'),
-(938, 2, 1, 928, '1', '0x005679', 0, 'CELULAR PUERTO AYSEN', 'POINT', '\0\0\0\0\0\0\0@a?+R???h"?F?'),
-(939, 2, 1, 929, '1', '0x005679', 0, 'CELULAR CERRO CASTILLO', 'POINT', '\0\0\0\0\0\0\0}–≥Y?	R?\0o??G?'),
-(940, 2, 1, 930, '1', '0x005679', 0, 'CELULAR PUERTO IBA√ëEZ', 'POINT', '\0\0\0\0\0\0\0?J??Q????%G?'),
-(941, 2, 1, 931, '1', '0x005679', 0, 'CELULAR BAH√çA MURTA', 'POINT', '\0\0\0\0\0\0\0%u?+R???~:G?'),
-(942, 2, 1, 932, '1', '0x005679', 0, 'CELULAR CHILE CHICO', 'POINT', '\0\0\0\0\0\0\0x$(??Zd;?EG?'),
-(943, 2, 1, 933, '1', '0x005679', 0, 'CELULAR PUERTO SANCHEZ', 'POINT', '\0\0\0\0\0\0\0€ä?e?$R?2??G?'),
-(944, 2, 1, 934, '1', '0x005679', 0, 'CELULAR PUERTO TRANQUILO', 'POINT', '\0\0\0\0\0\0\0???9+R?«∫??PG?'),
-(945, 2, 1, 935, '1', '0x005679', 0, 'CELULAR PUERTO BERTRAND', 'POINT', '\0\0\0\0\0\0\0??0?5R?????G?'),
-(946, 2, 1, 936, '1', '0x005679', 0, 'CELULAR PUERTO GUADAL', 'POINT', '\0\0\0\0\0\0\0p_?-R???W?lG?'),
-(947, 2, 1, 937, '1', '0x005679', 0, 'CELULAR COCHRANE', 'POINT', '\0\0\0\0\0\0\0?Z”º?R??(?r??G?'),
-(948, 2, 1, 938, '1', '0x005679', 0, 'CELULAR TORTEL', 'POINT', '\0\0\0\0\0\0\0????aR??t???'),
-(949, 2, 1, 939, '1', '0x005679', 0, 'CELULAR VILLA O&#x27;HIGGINS', 'POINT', '\0\0\0\0\0\0\0O@a?R??Q?H?'),
-(950, 2, 1, 940, '1', '0x005679', 0, 'SUPERMERCADO PUERTO RA√öL MAR√çN', 'POINT', '\0\0\0\0\0\0\07?A`?R???j??');
-INSERT INTO `destino` (`idDestino`, `idEstadoDestino`, `idCliente`, `idBiblioteca`, `icono`, `color`, `tienePanel`, `nombre`, `tipoGeometria`, `geometria`) VALUES
-(951, 2, 1, 941, '1', '0x005679', 0, 'SUPERMERCADO LA JUNTA', 'POINT', '\0\0\0\0\0\0\0F%u\ZR???E?'),
-(952, 2, 1, 942, '1', '0x005679', 0, 'SUPERMERCADO LAGO VERDE', 'POINT', '\0\0\0\0\0\0\0?~?:p?Q?t???F?'),
-(953, 2, 1, 943, '1', '0x005679', 0, 'SUPERMERCADO PUYUHUAPI', 'POINT', '\0\0\0\0\0\0\0?:??R????)F?'),
-(954, 2, 1, 944, '1', '0x005679', 0, 'SUPERMERCADO PUERTO CISNES', 'POINT', '\0\0\0\0\0\0\0HP?s+R???&S]F?'),
-(955, 2, 1, 945, '1', '0x005679', 0, 'SUPERMERCADO VILLA AMENGUAL', 'POINT', '\0\0\0\0\0\0\0?????\rR?9???_F?'),
-(956, 2, 1, 946, '1', '0x005679', 0, 'SUPERMERCADO MA√ëIHUALES', 'POINT', '\0\0\0\0\0\0\0??G	R??<,‘ö?F?'),
-(957, 2, 1, 947, '1', '0x005679', 0, 'SUPERMERCADO COYHAIQUE', 'POINT', '\0\0\0\0\0\0\0Gx$R?D?l???'),
-(958, 2, 1, 948, '1', '0x005679', 0, 'SUPERMERCADO PUERTO AYSEN', 'POINT', '\0\0\0\0\0\0\0@a?+R???h"?F?'),
-(959, 2, 1, 949, '1', '0x005679', 0, 'SUPERMERCADO CERRO CASTILLO', 'POINT', '\0\0\0\0\0\0\0}–≥Y?	R?\0o??G?'),
-(960, 2, 1, 950, '1', '0x005679', 0, 'SUPERMERCADO PUERTO IBA√ëEZ', 'POINT', '\0\0\0\0\0\0\0?J??Q????%G?'),
-(961, 2, 1, 951, '1', '0x005679', 0, 'SUPERMERCADO BAH√çA MURTA', 'POINT', '\0\0\0\0\0\0\0%u?+R???~:G?'),
-(962, 2, 1, 952, '1', '0x005679', 0, 'SUPERMERCADO CHILE CHICO', 'POINT', '\0\0\0\0\0\0\0x$(??Zd;?EG?'),
-(963, 2, 1, 953, '1', '0x005679', 0, 'SUPERMERCADO PUERTO TRANQUILO', 'POINT', '\0\0\0\0\0\0\0???9+R?«∫??PG?'),
-(964, 2, 1, 954, '1', '0x005679', 0, 'SUPERMERCADO PUERTO BERTRAND', 'POINT', '\0\0\0\0\0\0\0??0?5R?????G?'),
-(965, 2, 1, 955, '1', '0x005679', 0, 'SUPERMERCADO PUERTO GUADAL', 'POINT', '\0\0\0\0\0\0\0p_?-R???W?lG?'),
-(966, 2, 1, 956, '1', '0x005679', 0, 'SUPERMERCADO COCHRANE', 'POINT', '\0\0\0\0\0\0\0?Z”º?R??(?r??G?'),
-(967, 2, 1, 957, '1', '0x005679', 0, 'SUPERMERCADO TORTEL', 'POINT', '\0\0\0\0\0\0\0????aR??t???'),
-(968, 2, 1, 958, '1', '0x005679', 0, 'SUPERMERCADO VILLA O&#x27;HIGGINS', 'POINT', '\0\0\0\0\0\0\0O@a?R??Q?H?'),
-(969, 2, 1, 959, '1', '0x005679', 0, 'TALLER LA JUNTA', 'POINT', '\0\0\0\0\0\0\0F%u\ZR???E?'),
-(970, 2, 1, 960, '1', '0x005679', 0, 'TALLER LAGO VERDE', 'POINT', '\0\0\0\0\0\0\0?~?:p?Q?t???F?'),
-(971, 2, 1, 961, '1', '0x005679', 0, 'TALLER PUYUHUAPI', 'POINT', '\0\0\0\0\0\0\0?:??R????)F?'),
-(972, 2, 1, 962, '1', '0x005679', 0, 'TALLER PUERTO CISNES', 'POINT', '\0\0\0\0\0\0\0HP?s+R???&S]F?'),
-(973, 2, 1, 963, '1', '0x005679', 0, 'TALLER VILLA AMENGUAL', 'POINT', '\0\0\0\0\0\0\0?????\rR?9???_F?'),
-(974, 2, 1, 964, '1', '0x005679', 0, 'TALLER MA√ëIHUALES', 'POINT', '\0\0\0\0\0\0\0??G	R??<,‘ö?F?'),
-(975, 2, 1, 965, '1', '0x005679', 0, 'TALLER COYHAIQUE', 'POINT', '\0\0\0\0\0\0\0Gx$R?D?l???'),
-(976, 2, 1, 966, '1', '0x005679', 0, 'TALLER PUERTO AYSEN', 'POINT', '\0\0\0\0\0\0\0@a?+R???h"?F?'),
-(977, 2, 1, 967, '1', '0x005679', 0, 'TALLER CERRO CASTILLO', 'POINT', '\0\0\0\0\0\0\0}–≥Y?	R?\0o??G?'),
-(978, 2, 1, 968, '1', '0x005679', 0, 'TALLER PUERTO IBA√ëEZ', 'POINT', '\0\0\0\0\0\0\0?J??Q????%G?'),
-(979, 2, 1, 969, '1', '0x005679', 0, 'TALLER BAH√çA MURTA', 'POINT', '\0\0\0\0\0\0\0%u?+R???~:G?'),
-(980, 2, 1, 970, '1', '0x005679', 0, 'TALLER CHILE CHICO', 'POINT', '\0\0\0\0\0\0\0x$(??Zd;?EG?'),
-(981, 2, 1, 971, '1', '0x005679', 0, 'TALLER PUERTO TRANQUILO', 'POINT', '\0\0\0\0\0\0\0???9+R?«∫??PG?'),
-(982, 2, 1, 972, '1', '0x005679', 0, 'TALLER PUERTO GUADAL', 'POINT', '\0\0\0\0\0\0\0p_?-R???W?lG?'),
-(983, 2, 1, 973, '1', '0x005679', 0, 'TALLER COCHRANE', 'POINT', '\0\0\0\0\0\0\0?Z”º?R??(?r??G?'),
-(984, 2, 1, 974, '1', '0x005679', 0, 'TALLE VILLA O&#x27;HIGGINS', 'POINT', '\0\0\0\0\0\0\0O@a?R??Q?H?'),
-(985, 2, 1, 975, '1', '0x005679', 0, 'CARABINEROS PUERTO RA√öL MAR√çN', 'POINT', '\0\0\0\0\0\0\07?A`?R???j??'),
-(986, 2, 1, 976, '1', '0x005679', 0, 'CARABINEROS LA JUNTA', 'POINT', '\0\0\0\0\0\0\0F%u\ZR???E?'),
-(987, 2, 1, 977, '1', '0x005679', 0, 'CARABINEROS LAGO VERDE', 'POINT', '\0\0\0\0\0\0\0?~?:p?Q?t???F?'),
-(988, 2, 1, 978, '1', '0x005679', 0, 'CARABINEROS PUYUHUAPI', 'POINT', '\0\0\0\0\0\0\0?:??R????)F?'),
-(989, 2, 1, 979, '1', '0x005679', 0, 'CARABINEROS PUERTO CISNES', 'POINT', '\0\0\0\0\0\0\0HP?s+R???&S]F?'),
-(990, 2, 1, 980, '1', '0x005679', 0, 'CARABINEROS MA√ëIHUALES', 'POINT', '\0\0\0\0\0\0\0??G	R??<,‘ö?F?'),
-(991, 2, 1, 981, '1', '0x005679', 0, 'CARABINEROS COYHAIQUE', 'POINT', '\0\0\0\0\0\0\0Gx$R?D?l???'),
-(992, 2, 1, 982, '1', '0x005679', 0, 'CARABINEROS PUERTO AYSEN', 'POINT', '\0\0\0\0\0\0\0@a?+R???h"?F?'),
-(993, 2, 1, 983, '1', '0x005679', 0, 'CARABINEROS CERRO CASTILLO', 'POINT', '\0\0\0\0\0\0\0}–≥Y?	R?\0o??G?'),
-(994, 2, 1, 984, '1', '0x005679', 0, 'CARABINEROS PUERTO IBA√ëEZ', 'POINT', '\0\0\0\0\0\0\0?J??Q????%G?'),
-(995, 2, 1, 985, '1', '0x005679', 0, 'CARABINEROS BAH√çA MURTA', 'POINT', '\0\0\0\0\0\0\0%u?+R???~:G?'),
-(996, 2, 1, 986, '1', '0x005679', 0, 'CARABINEROS CHILE CHICO', 'POINT', '\0\0\0\0\0\0\0x$(??Zd;?EG?'),
-(997, 2, 1, 987, '1', '0x005679', 0, 'CARABINEROS PUERTO TRANQUILO', 'POINT', '\0\0\0\0\0\0\0???9+R?«∫??PG?'),
-(998, 2, 1, 988, '1', '0x005679', 0, 'CARABINEROS PUERTO GUADAL', 'POINT', '\0\0\0\0\0\0\0p_?-R???W?lG?'),
-(999, 2, 1, 989, '1', '0x005679', 0, 'CARABINEROS COCHRANE', 'POINT', '\0\0\0\0\0\0\0?Z”º?R??(?r??G?'),
-(1000, 2, 1, 990, '1', '0x005679', 0, 'CARABINEROS TORTEL', 'POINT', '\0\0\0\0\0\0\0????aR??t???'),
-(1001, 2, 1, 991, '1', '0x005679', 0, 'CARABINEROS VILLA O&#x27;HIGGINS', 'POINT', '\0\0\0\0\0\0\0O@a?R??Q?H?'),
-(1002, 2, 1, 992, '1', '0x005679', 1, 'A VINTAGE RENT A CAR', 'POINT', '\0\0\0\0\0\0\0\0\0\0\0??A\0\0\0\0h>&A'),
-(1003, 2, 1, 993, '1', '0x005679', 1, 'RENT A CAR JRPFEIFFER EIRL', 'POINT', '\0\0\0\0\0\0\0\0\0\0?A?A\0\0\0\0?&A'),
-(1004, 2, 1, 994, '1', '0x005679', 1, 'RENT A CAR SAN MARTIN', 'POINT', '\0\0\0\0\0\0\0\0\0\0??RA\0\0\0\0?&A'),
-(1005, 2, 1, 995, '1', '0x005679', 1, 'TRAEGER RENT A CAR', 'POINT', '\0\0\0\0\0\0\0\0\0\0\0??A\0\0\0\0?&A'),
-(1006, 2, 1, 996, '1', '0x005679', 1, 'PATAGONIAXPRESS', 'POINT', '\0\0\0\0\0\0\0\0\0\0??RA\0\0\0\0??A'),
-(1159, 2, 1, 997, '1', '0x005679', 0, 'SERVICIOS M√âDICOS PUERTO RA√öL MAR√çN', 'POINT', '\0\0\0\0\0\0\07?A`?R???j??'),
-(1160, 2, 1, 998, '1', '0x005679', 0, 'SERVICIOS M√âDICOS LA JUNTA', 'POINT', '\0\0\0\0\0\0\0F%u\ZR???E?'),
-(1161, 2, 1, 999, '1', '0x005679', 0, 'SERVICIOS M√âDICOS LAGO VERDE', 'POINT', '\0\0\0\0\0\0\0?~?:p?Q?t???F?'),
-(1162, 2, 1, 1000, '1', '0x005679', 0, 'SERVICIOS M√âDICOS PUYUHUAPI', 'POINT', '\0\0\0\0\0\0\0?:??R????)F?'),
-(1163, 2, 1, 1001, '1', '0x005679', 0, 'SERVICIOS M√âDICOS PUERTO CISNES', 'POINT', '\0\0\0\0\0\0\0HP?s+R???&S]F?'),
-(1164, 2, 1, 1002, '1', '0x005679', 0, 'SERVICIOS M√âDICOS VILLA AMENGUAL', 'POINT', '\0\0\0\0\0\0\0?????\rR?9???_F?'),
-(1165, 2, 1, 1003, '1', '0x005679', 0, 'SERVICIOS M√âDICOS MA√ëIHUALES', 'POINT', '\0\0\0\0\0\0\0??G	R??<,‘ö?F?'),
-(1166, 2, 1, 1004, '1', '0x005679', 0, 'SERVICIOS M√âDICOS COYHAIQUE', 'POINT', '\0\0\0\0\0\0\0Gx$R?D?l???'),
-(1167, 2, 1, 1005, '1', '0x005679', 0, 'SERVICIOS M√âDICOS PUERTO AYSEN', 'POINT', '\0\0\0\0\0\0\0@a?+R???h"?F?'),
-(1168, 2, 1, 1006, '1', '0x005679', 0, 'SERVICIOS M√âDICOS CERRO CASTILLO', 'POINT', '\0\0\0\0\0\0\0}–≥Y?	R?\0o??G?'),
-(1169, 2, 1, 1007, '1', '0x005679', 0, 'SERVICIOS M√âDICOS PUERTO IBA√ëEZ', 'POINT', '\0\0\0\0\0\0\0?J??Q????%G?'),
-(1170, 2, 1, 1008, '1', '0x005679', 0, 'SERVICIOS M√âDICOS BAH√çA MURTA', 'POINT', '\0\0\0\0\0\0\0%u?+R???~:G?'),
-(1171, 2, 1, 1009, '1', '0x005679', 0, 'SERVICIOS M√âDICOS CHILE CHICO', 'POINT', '\0\0\0\0\0\0\0x$(??Zd;?EG?'),
-(1172, 2, 1, 1010, '1', '0x005679', 0, 'SERVICIOS M√âDICOS PUERTO TRANQUILO', 'POINT', '\0\0\0\0\0\0\0???9+R?«∫??PG?'),
-(1173, 2, 1, 1011, '1', '0x005679', 0, 'SERVICIOS M√âDICOS PUERTO BERTRAND', 'POINT', '\0\0\0\0\0\0\0??0?5R?????G?'),
-(1174, 2, 1, 1012, '1', '0x005679', 0, 'SERVICIOS M√âDICOS PUERTO GUADAL', 'POINT', '\0\0\0\0\0\0\0p_?-R???W?lG?'),
-(1175, 2, 1, 1013, '1', '0x005679', 0, 'SERVICIOS M√âDICOS COCHRANE', 'POINT', '\0\0\0\0\0\0\0?Z”º?R??(?r??G?'),
-(1176, 2, 1, 1014, '1', '0x005679', 0, 'SERVICIOS M√âDICOS TORTEL', 'POINT', '\0\0\0\0\0\0\0????aR??t???'),
-(1177, 2, 1, 1015, '1', '0x005679', 0, 'SERVICIOS M√âDICOS VILLA O&#x27;HIGGINS', 'POINT', '\0\0\0\0\0\0\0O@a?R??Q?H?');
+INSERT INTO `destino` (`idDestino`, `idEstadoDestino`, `idCliente`, `idBiblioteca`, `icono`, `color`, `tienePanel`, `nombre`, `tipoGeometria`, `geom`, `geometria`) VALUES
+(1, 2, 1, 1, '1', '0x00C3BA', 1, 'EMTREX', 'POINT', '\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0?\0\0\0\0\0\0?\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0@\0\0\0\0\0\0@', ''),
+(2, 2, 1, 2, '1', '0x00C3BA', 1, 'TURISMO VENTISQUERO', 'POINT', '\0\0\0\0\0\0\0áßW 2R¿$(~å…F¿', ''),
+(3, 2, 1, 3, '1', '0x00C3BA', 1, 'BUSES JOSEFINA', 'POINT', '\0\0\0\0\0\0\0,e‚XR¿oÉ¿ …F¿', ''),
+(4, 2, 1, 4, '1', '0x00C3BA', 1, 'DON LUIS', 'POINT', '\0\0\0\0\0\0\0∫I+R¿4¢¥7¯ F¿', ''),
+(5, 2, 1, 5, '1', '0x00C3BA', 1, 'DON SEBA', 'POINT', '\0\0\0\0\0\0\0uìVR¿RIùÄ& F¿', ''),
+(6, 2, 1, 6, '1', '0x00C3BA', 1, 'HUGO LOPEZ', 'POINT', '\0\0\0\0\0\0\0]m≈˛≤R¿ònÉ¿ F¿', ''),
+(7, 2, 1, 7, '1', '0x00C3BA', 1, 'MINI BUSES DON DARIO', 'POINT', '\0\0\0\0\0\0\0…Â?§R¿m≈˛≤{ F¿', ''),
+(8, 2, 1, 8, '1', '0x00C3BA', 1, 'PATAGONIA MOVIL EXPRESS', 'POINT', '\0\0\0\0\0\0\0ø}8gR¿V- F¿', ''),
+(9, 2, 1, 9, '1', '0x00C3BA', 1, 'TEHUELCHE PATAGONIA TOUR ', 'POINT', '\0\0\0\0\0\0\0¯S„•õR¿ß∆K7…F¿', ''),
+(10, 2, 1, 10, '1', '0x00C3BA', 1, 'TRANSPORTE JL E.I.R.L.', 'POINT', '\0\0\0\0\0\0\0˘†g≥ÍR¿R''†â∞…F¿', ''),
+(11, 2, 1, 11, '1', '0x00C3BA', 1, 'TURISMO R√çO IBA√ëEZ', 'POINT', '\0\0\0\0\0\0\0ÓÎ¿9#R¿Ÿ=yXG¿', ''),
+(12, 2, 1, 12, '1', '0x00C3BA', 1, 'CASA DEL TURISTA', 'POINT', '\0\0\0\0\0\0\0ÛéSt$+R¿«):íÀOG¿', ''),
+(13, 2, 1, 13, '1', '0x00C3BA', 1, 'ARTETUR', 'POINT', '\0\0\0\0\0\0\0±PköwR¿b°÷4Ô»F¿', ''),
+(14, 2, 1, 14, '1', '0xEEBA42', 1, 'ALBERGUE EL MOSCO', 'POINT', '\0\0\0\0\0\0\0ñCãlÁ#R¿]‹Fx;H¿', ''),
+(15, 2, 1, 15, '1', '0xEEBA42', 1, 'CAMPAMENTO √ëANDU', 'POINT', '\0\0\0\0\0\0\05^∫IÓQ¿0L¶\nFEG¿', ''),
+(16, 2, 1, 16, '1', '0xEEBA42', 1, 'ECO HOSTEL UN DESTINO NO TUR√çSTICO', 'POINT', '\0\0\0\0\0\0\0b°÷4Ô,R¿KYÜ8÷mG¿', ''),
+(17, 2, 1, 17, '1', '0xEEBA42', 1, 'HOSPEDAJE CHAITEN', 'POINT', '\0\0\0\0\0\0\0r˘È∑#R¿›µÑ|–;H¿', ''),
+(18, 2, 1, 18, '1', '0xEEBA42', 1, 'HOSPEDAJE COYHAIQUE', 'POINT', '\0\0\0\0\0\0\0∏ØÁåR¿Ô…√B≠…F¿', ''),
+(19, 2, 1, 19, '1', '0xEEBA42', 1, 'HOSPEDAJE DON SANTIAGO', 'POINT', '\0\0\0\0\0\0\0]˛C˙ÌR¿ã˝e˜‰…F¿', ''),
+(20, 2, 1, 20, '1', '0xEEBA42', 1, 'HOSPEDAJE EVELYN', 'POINT', '\0\0\0\0\0\0\0U0*©$R¿öôôôô)F¿', ''),
+(21, 2, 1, 21, '1', '0xEEBA42', 1, 'HOSPEDAJE LA ARAUCARIA', 'POINT', '\0\0\0\0\0\0\0µ¶y«	R¿U0*©G¿', ''),
+(22, 2, 1, 22, '1', '0xEEBA42', 1, 'HOSPEDAJE MARIA ELBA', 'POINT', '\0\0\0\0\0\0\0åJÍR¿”MbX…F¿', ''),
+(23, 2, 1, 23, '1', '0xEEBA42', 1, 'HOSTAL AGUSTO GROSSE', 'POINT', '\0\0\0\0\0\0\0…Â?§#R¿Ô8EGr)F¿', ''),
+(24, 2, 1, 24, '1', '0xEEBA42', 1, 'KOOCH', 'POINT', '\0\0\0\0\0\0\0Tt$óˇR¿RIùÄ& F¿', ''),
+(25, 2, 1, 25, '1', '0xEEBA42', 1, 'PATAGONIA HOSTEL', 'POINT', '\0\0\0\0\0\0\0∏ÖÎQR¿ô*ï‘…F¿', ''),
+(26, 2, 1, 26, '1', '0xEEBA42', 1, 'AIRE PATAGON', 'POINT', '\0\0\0\0\0\0\0Î‚6\ZR¿”ﬁ‡ì…F¿', ''),
+(27, 2, 1, 27, '1', '0xEEBA42', 1, 'ALTO MELIMOYU BED AND BREAKFAST', 'POINT', '\0\0\0\0\0\0\0É¿ °R¿?5^∫I¸E¿', ''),
+(28, 2, 1, 28, '1', '0xEEBA42', 1, 'AONKEN', 'POINT', '\0\0\0\0\0\0\0øú3¢R¿~8gD…F¿', ''),
+(29, 2, 1, 29, '1', '0xEEBA42', 1, 'BELLAVISTA', 'POINT', '\0\0\0\0\0\0\0ú3¢¥+R¿ÕÃÃÃÃ\\F¿', ''),
+(30, 2, 1, 30, '1', '0xEEBA42', 1, 'CABA√ëAS GUIBEL', 'POINT', '\0\0\0\0\0\0\0ø}8gR¿R∏ÖÎ…F¿', ''),
+(31, 2, 1, 31, '1', '0xEEBA42', 1, 'CECI', 'POINT', '\0\0\0\0\0\0\0jﬁqäéR¿z•,CÀF¿', ''),
+(32, 2, 1, 32, '1', '0xEEBA42', 1, 'COMUY-HUAPI', 'POINT', '\0\0\0\0\0\0\0\0oÅ≈#R¿ãlÁ˚©)F¿', ''),
+(33, 2, 1, 33, '1', '0xEEBA42', 1, 'EL GRINGO', 'POINT', '\0\0\0\0\0\0\0L¶\nF%-R¿¿Ïû<,lG¿', ''),
+(34, 2, 1, 34, '1', '0xEEBA42', 1, 'HOSPEDAJE ANA LUZ', 'POINT', '\0\0\0\0\0\0\0/›$%R¿*©–D†G¿', ''),
+(35, 2, 1, 35, '1', '0xEEBA42', 1, 'HOSPEDAJE ANCUD', 'POINT', '\0\0\0\0\0\0\0ø}8gR¿R∏ÖÎ…F¿', ''),
+(36, 2, 1, 36, '1', '0xEEBA42', 1, 'HOSPEDAJE ANDREITA', 'POINT', '\0\0\0\0\0\0\0DãlÁ˚	R¿9¥»væG¿', ''),
+(37, 2, 1, 37, '1', '0xEEBA42', 1, 'HOSPEDAJE AZOCAR', 'POINT', '\0\0\0\0\0\0\0õÊßËR¿µ7¯¬d F¿', ''),
+(38, 2, 1, 38, '1', '0xEEBA42', 1, 'HOSPEDAJE BAQUEDANO', 'POINT', '\0\0\0\0\0\0\0*©–DR¿U0*©»F¿', ''),
+(39, 2, 1, 39, '1', '0xEEBA42', 1, 'HOSPEDAJE BOSQUE PATAGON', 'POINT', '\0\0\0\0\0\0\0¯S„•õR¿ƒ±.n£…F¿', ''),
+(40, 2, 1, 40, '1', '0xEEBA42', 1, 'HOSPEDAJE BRISAS DEL LAGO', 'POINT', '\0\0\0\0\0\0\0Ó|?5^ÓQ¿MåJÍDG¿', ''),
+(41, 2, 1, 41, '1', '0xEEBA42', 1, 'HOSPEDAJE BUENA VISTA', 'POINT', '\0\0\0\0\0\0\0Ã]K»5R¿“\0ﬁ	ÇG¿', ''),
+(42, 2, 1, 42, '1', '0xEEBA42', 1, 'HOSPEDAJE CORNER PATAGONIA', 'POINT', '\0\0\0\0\0\0\0¯S„•õR¿+á…F¿', ''),
+(43, 2, 1, 43, '1', '0xEEBA42', 1, 'HOSPEDAJE DANIELA', 'POINT', '\0\0\0\0\0\0\0œ˜S„•R¿EÿÙJ…F¿', ''),
+(44, 2, 1, 44, '1', '0xEEBA42', 1, 'HOSPEDAJE DEL RIO', 'POINT', '\0\0\0\0\0\0\0ôªñêbR¿ AÒcÃÂG¿', ''),
+(45, 2, 1, 45, '1', '0xEEBA42', 1, 'HOSPEDAJE DON FRANCISCO', 'POINT', '\0\0\0\0\0\0\0±øÏû<¸Q¿v‡ú•%G¿', ''),
+(46, 2, 1, 46, '1', '0xEEBA42', 1, 'HOSPEDAJE DON NIBA', 'POINT', '\0\0\0\0\0\0\0†â∞·È	R¿Vü´≠ÿG¿', ''),
+(47, 2, 1, 47, '1', '0xEEBA42', 1, 'HOSPEDAJE DONDE MERY', 'POINT', '\0\0\0\0\0\0\0ˇ≤{Ú∞,R¿ŒQ⁄≥F¿', ''),
+(48, 2, 1, 48, '1', '0xEEBA42', 1, 'HOSPEDAJE DO√ëA ENRIQUETA', 'POINT', '\0\0\0\0\0\0\0∆m4Ä∑R¿EÿÙJ…F¿', ''),
+(49, 2, 1, 49, '1', '0xEEBA42', 1, 'HOSPEDAJE E Y B', 'POINT', '\0\0\0\0\0\0\0Fîˆ_R¿}Æ∂b…F¿', ''),
+(50, 2, 1, 50, '1', '0xEEBA42', 1, 'HOSPEDAJE EBEN EZER', 'POINT', '\0\0\0\0\0\0\04Ä∑@ÇÓQ¿˜‰a°÷DG¿', ''),
+(51, 2, 1, 51, '1', '0xEEBA42', 1, 'HOSPEDAJE EL CATA', 'POINT', '\0\0\0\0\0\0\0π¸áÙ€˚Q¿YÜ8÷≈%G¿', ''),
+(52, 2, 1, 52, '1', '0xEEBA42', 1, 'HOSPEDAJE EL RODEO', 'POINT', '\0\0\0\0\0\0\0uö\nR¿Å&¬ÜßG¿', ''),
+(53, 2, 1, 53, '1', '0xEEBA42', 1, 'HOSPEDAJE ELY', 'POINT', '\0\0\0\0\0\0\0#J{É/R¿T„•õƒ»F¿', ''),
+(54, 2, 1, 54, '1', '0xEEBA42', 1, 'HOSPEDAJE FABIANA', 'POINT', '\0\0\0\0\0\0\0@a√”#R¿yÈ&1<H¿', ''),
+(55, 2, 1, 55, '1', '0xEEBA42', 1, 'HOSPEDAJE GLORIA', 'POINT', '\0\0\0\0\0\0\0≤.n£¸Q¿⁄|a2%G¿', ''),
+(56, 2, 1, 56, '1', '0xEEBA42', 1, 'HOSPEDAJE GYSELLE', 'POINT', '\0\0\0\0\0\0\0 2ƒ±.bR¿ºtìÊG¿', ''),
+(57, 2, 1, 57, '1', '0xEEBA42', 1, 'HOSPEDAJE JANITO', 'POINT', '\0\0\0\0\0\0\0L¶\nF%-R¿≤.n£lG¿', ''),
+(58, 2, 1, 58, '1', '0xEEBA42', 1, 'HOSPEDAJE KAMY', 'POINT', '\0\0\0\0\0\0\0ÖÎQ∏ÓQ¿∞Áå(EG¿', ''),
+(59, 2, 1, 59, '1', '0xEEBA42', 1, 'HOSPEDAJE LA CASONA', 'POINT', '\0\0\0\0\0\0\0ï‘	hÓQ¿[B>ËŸDG¿', ''),
+(60, 2, 1, 60, '1', '0xEEBA42', 1, 'HOSPEDAJE LA PRINCESITA', 'POINT', '\0\0\0\0\0\0\0#€˘~j$R¿’	h"l†G¿', ''),
+(61, 2, 1, 61, '1', '0xEEBA42', 1, 'HOSPEDAJE LAGO CASTOR', 'POINT', '\0\0\0\0\0\0\0d;ﬂOçR¿öû^…F¿', ''),
+(62, 2, 1, 62, '1', '0xEEBA42', 1, 'HOSPEDAJE LAS ROSAS', 'POINT', '\0\0\0\0\0\0\0≤ùÔß∆#R¿®∆K7â)F¿', ''),
+(63, 2, 1, 63, '1', '0xEEBA42', 1, 'HOSPEDAJE LOS LUGARE√ëOS', 'POINT', '\0\0\0\0\0\0\0ÒÙJYÜR¿6<ΩRñ…F¿', ''),
+(64, 2, 1, 64, '1', '0xEEBA42', 1, 'HOSPEDAJE LUCY', 'POINT', '\0\0\0\0\0\0\0œf’Áj+R¿πçPG¿', ''),
+(65, 2, 1, 65, '1', '0xEEBA42', 1, 'HOSPEDAJE MARLUZ 2', 'POINT', '\0\0\0\0\0\0\0*:íÀR¿}Æ∂b…F¿', ''),
+(66, 2, 1, 66, '1', '0xEEBA42', 1, 'HOSPEDAJE NORMI', 'POINT', '\0\0\0\0\0\0\0¯¬d™`R¿µ˚ÀÓ…F¿', ''),
+(67, 2, 1, 67, '1', '0xEEBA42', 1, 'HOSPEDAJE PAOLA', 'POINT', '\0\0\0\0\0\0\08gDio$R¿\r‡-ê†G¿', ''),
+(68, 2, 1, 68, '1', '0xEEBA42', 1, 'HOSPEDAJE PATAGONIA', 'POINT', '\0\0\0\0\0\0\0)À«∫R¿·zÆG…F¿', ''),
+(69, 2, 1, 69, '1', '0xEEBA42', 1, 'HOSPEDAJE ROSITA', 'POINT', '\0\0\0\0\0\0\0åJÍ¸Q¿>yX®5%G¿', ''),
+(70, 2, 1, 70, '1', '0xEEBA42', 1, 'HOSPEDAJE SANTA TERESITA', 'POINT', '\0\0\0\0\0\0\0KÍ4ÓQ¿ˆó›ìáEG¿', ''),
+(71, 2, 1, 71, '1', '0xEEBA42', 1, 'HOSPEDAJE SRA NATHY', 'POINT', '\0\0\0\0\0\0\0Õ;N—ëR¿ƒB≠iﬁ…F¿', ''),
+(72, 2, 1, 72, '1', '0xEEBA42', 1, 'HOSPEDAJE VENTISQUEROS', 'POINT', '\0\0\0\0\0\0\0´>W[±#R¿®∆K7â)F¿', ''),
+(73, 2, 1, 73, '1', '0xEEBA42', 1, 'HOSTAL DO√ëA ELOISA', 'POINT', '\0\0\0\0\0\0\0’Áj+ˆR¿+á…F¿', ''),
+(74, 2, 1, 74, '1', '0xEEBA42', 1, 'HOSTAL MARIA ESTER', 'POINT', '\0\0\0\0\0\0\0úƒ ∞rR¿D˙ÌÎ¿…F¿', ''),
+(75, 2, 1, 75, '1', '0xEEBA42', 1, 'HOSTAL SALAMANDRAS', 'POINT', '\0\0\0\0\0\0\0˛e˜‰aR¿˚ÀÓ…√ F¿', ''),
+(76, 2, 1, 76, '1', '0xEEBA42', 1, 'KOI-AIKE', 'POINT', '\0\0\0\0\0\0\0∆‹µÑ|R¿®W 2ƒ…F¿', ''),
+(77, 2, 1, 77, '1', '0xEEBA42', 1, 'LA PERLA DEL LAGO', 'POINT', '\0\0\0\0\0\0\0ÈH.ˇ!-R¿±øÏû<lG¿', ''),
+(78, 2, 1, 78, '1', '0xEEBA42', 1, 'PATAGONIA HOUSE ', 'POINT', '\0\0\0\0\0\0\0OØîeR¿¡9#J{ÀF¿', ''),
+(79, 2, 1, 79, '1', '0xEEBA42', 1, 'PUERTO CRISTAL', 'POINT', '\0\0\0\0\0\0\0''†â∞·˝Q¿&S£ F¿', ''),
+(80, 2, 1, 80, '1', '0xEEBA42', 1, 'RAICES', 'POINT', '\0\0\0\0\0\0\0„•õƒ R¿˚:pŒ»F¿', ''),
+(81, 2, 1, 81, '1', '0xEEBA42', 1, 'RESIDENCIAL ESTILO', 'POINT', '\0\0\0\0\0\0\0<N—ë\\bR¿ëz6´ÊG¿', ''),
+(82, 2, 1, 82, '1', '0xEEBA42', 1, 'RESIDENCIAL ZURITA', 'POINT', '\0\0\0\0\0\0\0 “o_bR¿ˆ(\\è¬ÂG¿', ''),
+(83, 2, 1, 83, '1', '0xEEBA42', 1, 'RIO BAKER', 'POINT', '\0\0\0\0\0\0\0?∆R¿∂Ñ|–≥…F¿', ''),
+(84, 2, 1, 84, '1', '0xEEBA42', 1, 'APARHOTEL TEHUELCHE NATURA', 'POINT', '\0\0\0\0\0\0\0[±øÏûR¿åπk	˘»F¿', ''),
+(85, 2, 1, 85, '1', '0xEEBA42', 1, 'APARTHOTEL LA CASCADA', 'POINT', '\0\0\0\0\0\0\08gDio,R¿˚ÀÓ…≥F¿', ''),
+(86, 2, 1, 86, '1', '0xEEBA42', 1, 'HOSPEDAJE CAMPO LINDO', 'POINT', '\0\0\0\0\0\0\0(µ¶ıQ¿ì:MÑïF¿', ''),
+(87, 2, 1, 87, '1', '0xEEBA42', 1, 'HOSPEDAJE CECILIA', 'POINT', '\0\0\0\0\0\0\0K»=õ%R¿oÖ…T°G¿', ''),
+(88, 2, 1, 88, '1', '0xEEBA42', 1, 'HOSPEDAJE COCHRANE', 'POINT', '\0\0\0\0\0\0\0∏@Ç‚«$R¿’	h"l†G¿', ''),
+(89, 2, 1, 89, '1', '0xEEBA42', 1, 'HOSPEDAJE EMMANUEL', 'POINT', '\0\0\0\0\0\0\0Îsµ˚˚Q¿ˆó›ìá%G¿', ''),
+(90, 2, 1, 90, '1', '0xEEBA42', 1, 'LA POSADA DEL VIAJERO', 'POINT', '\0\0\0\0\0\0\0KYÜ8÷ÌQ¿4Ä∑@Ç¢F¿', ''),
+(91, 2, 1, 91, '1', '0xEEBA42', 1, 'RUTA 7', 'POINT', '\0\0\0\0\0\0\0EÿÙJ	R¿<ΩRñ!ñF¿', ''),
+(92, 2, 1, 92, '1', '0xEEBA42', 1, 'CABA√ëA SCARLETT', 'POINT', '\0\0\0\0\0\0\0äé‰ÚbR¿vq\r‡ÂG¿', ''),
+(93, 2, 1, 93, '1', '0xEEBA42', 1, 'CABA√ëAS BUENA VISTA', 'POINT', '\0\0\0\0\0\0\0≈˛≤{Ú4R¿ôªñêÇG¿', ''),
+(94, 2, 1, 94, '1', '0xEEBA42', 1, 'CABA√ëAS CARRETERA AUSTRAL', 'POINT', '\0\0\0\0\0\0\0û^)À+R¿Ä∑@Ç‚OG¿', ''),
+(95, 2, 1, 95, '1', '0xEEBA42', 1, 'CABA√ëAS EL PIONERO ROBERTO BECERRA', 'POINT', '\0\0\0\0\0\0\0í\\˛C˙aR¿ÆG·zÊG¿', ''),
+(96, 2, 1, 96, '1', '0xEEBA42', 1, 'CABA√ëAS IZ SNOVA', 'POINT', '\0\0\0\0\0\0\0&S£íÓQ¿YÜ8÷≈EG¿', ''),
+(97, 2, 1, 97, '1', '0xEEBA42', 1, 'CABA√ëAS J &amp; B', 'POINT', '\0\0\0\0\0\0\0mV}Æ∂*R¿˛C˙ÌÎPG¿', ''),
+(98, 2, 1, 98, '1', '0xEEBA42', 1, 'CABA√ëAS KELA', 'POINT', '\0\0\0\0\0\0\0e‚X+R¿''¬ÜßW:G¿', ''),
+(99, 2, 1, 99, '1', '0xEEBA42', 1, 'CABA√ëAS LA RUKA', 'POINT', '\0\0\0\0\0\0\0æ0ô*	R¿ÃÓ…√BïF¿', ''),
+(100, 2, 1, 100, '1', '0xEEBA42', 1, 'CABA√ëAS LAFQUEN', 'POINT', '\0\0\0\0\0\0\0ä∞·ÈïÓQ¿ÕÃÃÃÃDG¿', ''),
+(101, 2, 1, 101, '1', '0xEEBA42', 1, 'CABA√ëAS LAS RUEDAS', 'POINT', '\0\0\0\0\0\0\0k+ˆó›#R¿?5^∫I<H¿', ''),
+(102, 2, 1, 102, '1', '0xEEBA42', 1, 'CABA√ëAS LOS ALAMOS', 'POINT', '\0\0\0\0\0\0\0 cÓZBR¿®∆K7â…F¿', ''),
+(103, 2, 1, 103, '1', '0xEEBA42', 1, 'CABA√ëAS LOS √ëADIS', 'POINT', '\0\0\0\0\0\0\0õÊßË$R¿TR''†â†G¿', ''),
+(104, 2, 1, 104, '1', '0xEEBA42', 1, 'CABA√ëAS PARCELA DO√ëA LEO', 'POINT', '\0\0\0\0\0\0\0æ0ô*¸Q¿L¶\nF%%G¿', ''),
+(105, 2, 1, 105, '1', '0xEEBA42', 1, 'CABA√ëAS PEN√çNSULA LA FLORIDA', 'POINT', '\0\0\0\0\0\0\02ÊÆ%‰#R¿HP<H¿', ''),
+(106, 2, 1, 106, '1', '0xEEBA42', 1, 'CABA√ëAS SEIS LAGUNAS ', 'POINT', '\0\0\0\0\0\0\0ÜZ”º„R¿gDio›F¿', ''),
+(107, 2, 1, 107, '1', '0xEEBA42', 1, 'DREAMCATCHER LAGO CARO', 'POINT', '\0\0\0\0\0\0\0#€˘~jR¿ß∆K7…F¿', ''),
+(108, 2, 1, 108, '1', '0xEEBA42', 1, 'AONIKENK', 'POINT', '\0\0\0\0\0\0\0ï‘	h"¸J¿¨Zd;GU¿', ''),
+(109, 2, 1, 109, '1', '0xEEBA42', 1, 'CABA√ëA COSTANERA', 'POINT', '\0\0\0\0\0\0\0Å≈è1+R¿\0oÅ≈OG¿', ''),
+(110, 2, 1, 110, '1', '0xEEBA42', 1, 'CABA√ëA EL ARRIERO', 'POINT', '\0\0\0\0\0\0\0ìV%R¿\0ë~˚:†G¿', ''),
+(111, 2, 1, 111, '1', '0xEEBA42', 1, 'CABA√ëA EL COLONO', 'POINT', '\0\0\0\0\0\0\0Áå(Ì\r\ZR¿±Pköw¸E¿', ''),
+(112, 2, 1, 112, '1', '0xEEBA42', 1, 'CABA√ëA EL MOSCO', 'POINT', '\0\0\0\0\0\0\0ñCãlÁ#R¿]‹Fx;H¿', ''),
+(113, 2, 1, 113, '1', '0xEEBA42', 1, 'CABA√ëA ENRIQUE¬¥S', 'POINT', '\0\0\0\0\0\0\0$(~åπ+R¿˜‰a°÷\\F¿', ''),
+(114, 2, 1, 114, '1', '0xEEBA42', 1, 'CABA√ëA LOS ALAMOS', 'POINT', '\0\0\0\0\0\0\0–’VÏ/R¿\ZQ⁄|…F¿', ''),
+(115, 2, 1, 115, '1', '0xEEBA42', 1, 'CABA√ëA SANTA TERESITA', 'POINT', '\0\0\0\0\0\0\0¡ °E∂+R¿"˝ˆu‡\\F¿', ''),
+(116, 2, 1, 116, '1', '0xEEBA42', 1, 'CABA√ëAS ANA LUZ', 'POINT', '\0\0\0\0\0\0\0/›$%R¿*©–D†G¿', ''),
+(117, 2, 1, 117, '1', '0xEEBA42', 1, 'CABA√ëAS ANTU√â', 'POINT', '\0\0\0\0\0\0\0a2U0*-R¿yÈ&1lG¿', ''),
+(118, 2, 1, 118, '1', '0xEEBA42', 1, 'CABA√ëAS AUSTRAL', 'POINT', '\0\0\0\0\0\0\0ßy«):\nR¿èSt$óG¿', ''),
+(119, 2, 1, 119, '1', '0xEEBA42', 1, 'CABA√ëAS AYELEN', 'POINT', '\0\0\0\0\0\0\0™Ò“Mb,R¿Ã]K»µF¿', ''),
+(120, 2, 1, 120, '1', '0xEEBA42', 1, 'CABA√ëAS AYEL√âN', 'POINT', '\0\0\0\0\0\0\0?5^∫IR¿«):íÀ«F¿', ''),
+(121, 2, 1, 121, '1', '0xEEBA42', 1, 'CABA√ëAS BELLAVISTA', 'POINT', '\0\0\0\0\0\0\0≠iﬁqäÓQ¿ÕÃÃÃÃDG¿', ''),
+(122, 2, 1, 122, '1', '0xEEBA42', 1, 'CABA√ëAS BOPP HOUSE', 'POINT', '\0\0\0\0\0\0\0¨≠ÿ_vR¿5Ô8EG F¿', ''),
+(123, 2, 1, 123, '1', '0xEEBA42', 1, 'CABA√ëAS BORDELAGO', 'POINT', '\0\0\0\0\0\0\09EGr˘˚Q¿Á˚©Ò“%G¿', ''),
+(124, 2, 1, 124, '1', '0xEEBA42', 1, 'CABA√ëAS BRELLENTHIN', 'POINT', '\0\0\0\0\0\0\0?W[±ø$R¿‘öÊß†G¿', ''),
+(125, 2, 1, 125, '1', '0xEEBA42', 1, 'CABA√ëAS CHILE CHICO', 'POINT', '\0\0\0\0\0\0\0B>ËŸ¨ÓQ¿€ä˝e˜DG¿', ''),
+(126, 2, 1, 126, '1', '0xEEBA42', 1, 'CABA√ëAS CHOFITA', 'POINT', '\0\0\0\0\0\0\0q\r‡-R¿˝áÙ€◊…F¿', ''),
+(127, 2, 1, 127, '1', '0xEEBA42', 1, 'CABA√ëAS CUMBRES NEVADAS', 'POINT', '\0\0\0\0\0\0\0d]‹FR¿µ¶y«) F¿', ''),
+(128, 2, 1, 128, '1', '0xEEBA42', 1, 'CABA√ëAS DENDAL', 'POINT', '\0\0\0\0\0\0\0£#π¸á,R¿ñ≤q¨≥F¿', ''),
+(129, 2, 1, 129, '1', '0xEEBA42', 1, 'CABA√ëAS DON JOAQUIN', 'POINT', '\0\0\0\0\0\0\0µ¶yR¿˚ÀÓ…ÀF¿', ''),
+(130, 2, 1, 130, '1', '0xEEBA42', 1, 'CABA√ëAS DON MARCELO', 'POINT', '\0\0\0\0\0\0\0ÿÅsFîÓQ¿?∆DG¿', ''),
+(131, 2, 1, 131, '1', '0xEEBA42', 1, 'CABA√ëAS DON NIBA', 'POINT', '\0\0\0\0\0\0\0†â∞·È	R¿Vü´≠ÿG¿', ''),
+(132, 2, 1, 132, '1', '0xEEBA42', 1, 'CABA√ëAS ECA', 'POINT', '\0\0\0\0\0\0\0*:íÀ$R¿ˇ!˝ˆu†G¿', ''),
+(133, 2, 1, 133, '1', '0xEEBA42', 1, 'CABA√ëAS EL BOMBERO', 'POINT', '\0\0\0\0\0\0\0TR''†â$R¿∏ØÁå†G¿', ''),
+(134, 2, 1, 134, '1', '0xEEBA42', 1, 'CABA√ëAS EL TRIANGULO', 'POINT', '\0\0\0\0\0\0\0èSt$ó+R¿¢¥7¯¬\\F¿', ''),
+(135, 2, 1, 135, '1', '0xEEBA42', 1, 'CABA√ëAS EL TROPERO', 'POINT', '\0\0\0\0\0\0\0Ó|?5^\nR¿èSt$óG¿', ''),
+(136, 2, 1, 136, '1', '0xEEBA42', 1, 'CABA√ëAS EL VIAJERO', 'POINT', '\0\0\0\0\0\0\0˜u‡ú=R¿HP¸„E¿', ''),
+(137, 2, 1, 137, '1', '0xEEBA42', 1, 'CABA√ëAS ELIZABETH', 'POINT', '\0\0\0\0\0\0\0≤ùÔß∆#R¿Ô8EGr)F¿', ''),
+(138, 2, 1, 138, '1', '0xEEBA42', 1, 'CABA√ëAS EMMANUEL', 'POINT', '\0\0\0\0\0\0\0$π¸áÙ˚Q¿K»=õ%G¿', ''),
+(139, 2, 1, 139, '1', '0xEEBA42', 1, 'CABA√ëAS ESCUDO', 'POINT', '\0\0\0\0\0\0\0p_ŒR¿ﬁ	äèF¿', ''),
+(140, 2, 1, 140, '1', '0xEEBA42', 1, 'CABA√ëAS ESTEFANI', 'POINT', '\0\0\0\0\0\0\0Í46R¿)Ì\ræ0…F¿', ''),
+(141, 2, 1, 141, '1', '0xEEBA42', 1, 'CABA√ëAS ESTRELLA DEL SUR', 'POINT', '\0\0\0\0\0\0\0Å&¬Üß#R¿(µ¶)F¿', ''),
+(142, 2, 1, 142, '1', '0xEEBA42', 1, 'CABA√ëAS FACUNDO', 'POINT', '\0\0\0\0\0\0\0;ﬂOçóÓQ¿€˘~jºDG¿', ''),
+(143, 2, 1, 143, '1', '0xEEBA42', 1, 'CABA√ëAS FERNY', 'POINT', '\0\0\0\0\0\0\0ê1w-!+R¿’Áj+ˆOG¿', ''),
+(144, 2, 1, 144, '1', '0xEEBA42', 1, 'CABA√ëAS GABRIELA MISTRAL', 'POINT', '\0\0\0\0\0\0\0È∑ØÁR¿‘+e‚»F¿', ''),
+(145, 2, 1, 145, '1', '0xEEBA42', 1, 'CABA√ëAS HERVILA', 'POINT', '\0\0\0\0\0\0\0öôôôô%R¿éuq\r†G¿', ''),
+(146, 2, 1, 146, '1', '0xEEBA42', 1, 'CABA√ëAS HUIMPALAY', 'POINT', '\0\0\0\0\0\0\0Ü8÷≈mR¿\rq¨ã€»F¿', ''),
+(147, 2, 1, 147, '1', '0xEEBA42', 1, 'CABA√ëAS JAVI', 'POINT', '\0\0\0\0\0\0\0•Ω¡bR¿ŸŒ˜S„ÂG¿', ''),
+(148, 2, 1, 148, '1', '0xEEBA42', 1, 'CABA√ëAS LA CASCADA', 'POINT', '\0\0\0\0\0\0\0ïeàc],R¿≤ùÔß∆≥F¿', ''),
+(149, 2, 1, 149, '1', '0xEEBA42', 1, 'CABA√ëAS LA ESQUINA', 'POINT', '\0\0\0\0\0\0\0	äcÓQ¿∞Áå(EG¿', ''),
+(150, 2, 1, 150, '1', '0xEEBA42', 1, 'CABA√ëAS LA ESTANCIA', 'POINT', '\0\0\0\0\0\0\0åJÍR¿oÖ…T…F¿', ''),
+(151, 2, 1, 151, '1', '0xEEBA42', 1, 'CABA√ëAS LA ESTRELLA', 'POINT', '\0\0\0\0\0\0\0ÛéSt$+R¿„•õƒ PG¿', ''),
+(152, 2, 1, 152, '1', '0xEEBA42', 1, 'CABA√ëAS LA PASARELA', 'POINT', '\0\0\0\0\0\0\0x$(~R¿fàc]‹∆F¿', ''),
+(153, 2, 1, 153, '1', '0xEEBA42', 1, 'CABA√ëAS LA RINCONADA', 'POINT', '\0\0\0\0\0\0\0˛‘xÈ&-R¿yÈ&1lG¿', ''),
+(154, 2, 1, 154, '1', '0xEEBA42', 1, 'CABA√ëAS LAGO ELIZALDE', 'POINT', '\0\0\0\0\0\0\0ÅïCãlR¿jMÛé„F¿', ''),
+(155, 2, 1, 155, '1', '0xEEBA42', 1, 'CABA√ëAS LAGO ROSSELOT', 'POINT', '\0\0\0\0\0\0\0éHR¿ÁßËH˛E¿', ''),
+(156, 2, 1, 156, '1', '0xEEBA42', 1, 'CABA√ëAS LAGO TAMANGO', 'POINT', '\0\0\0\0\0\0\0)\\è¬ıR¿¡®§N@ÀF¿', ''),
+(157, 2, 1, 157, '1', '0xEEBA42', 1, 'CABA√ëAS LO DE ROCCO', 'POINT', '\0\0\0\0\0\0\0Î‚6\ZR¿≈è1w-…F¿', ''),
+(158, 2, 1, 158, '1', '0xEEBA42', 1, 'CABA√ëAS LOLY', 'POINT', '\0\0\0\0\0\0\0xz•,C,R¿AÇ‚«ò≥F¿', ''),
+(159, 2, 1, 159, '1', '0xEEBA42', 1, 'CABA√ëAS LOS ARRAYANES', 'POINT', '\0\0\0\0\0\0\0Ω„…)R¿˚:pŒà≤F¿', ''),
+(160, 2, 1, 160, '1', '0xEEBA42', 1, 'CABA√ëAS LOS COIHUES LODGE', 'POINT', '\0\0\0\0\0\0\0(~åπkR¿^K»=˚E¿', ''),
+(161, 2, 1, 161, '1', '0xEEBA42', 1, 'CABA√ëAS LOS PINOS', 'POINT', '\0\0\0\0\0\0\0ú3¢¥7R¿ú3¢¥7»F¿', ''),
+(162, 2, 1, 162, '1', '0xEEBA42', 1, 'CABA√ëAS LUCY', 'POINT', '\0\0\0\0\0\0\0≥{Ú∞P+R¿ÄHø}PG¿', ''),
+(163, 2, 1, 163, '1', '0xEEBA42', 1, 'CABA√ëAS LUCY', 'POINT', '\0\0\0\0\0\0\0\\è¬ı(R¿˝ˆu‡ú…F¿', ''),
+(164, 2, 1, 164, '1', '0xEEBA42', 1, 'CABA√ëAS MARIA CLARA', 'POINT', '\0\0\0\0\0\0\0£í:MR¿6´>W[…F¿', ''),
+(165, 2, 1, 165, '1', '0xEEBA42', 1, 'Caba√±as Maria Ines', 'POINT', '\0\0\0\0\0\0\0Sñ!éu%R¿Zd;ﬂüG¿', ''),
+(166, 2, 1, 166, '1', '0xEEBA42', 1, 'CABA√ëAS MARLO', 'POINT', '\0\0\0\0\0\0\0È∑ØÁ$R¿ÒÙJYÜ†G¿', ''),
+(167, 2, 1, 167, '1', '0xEEBA42', 1, 'Caba√±as Martina', 'POINT', '\0\0\0\0\0\0\0ûÔß∆K+R¿\0oÅ≈OG¿', ''),
+(168, 2, 1, 168, '1', '0xEEBA42', 1, 'CABA√ëAS MI RUCA', 'POINT', '\0\0\0\0\0\0\0`Â–"€R¿‹◊ÅsF¸E¿', ''),
+(169, 2, 1, 169, '1', '0xEEBA42', 1, 'CABA√ëAS MICHAY', 'POINT', '\0\0\0\0\0\0\0]‹Fx+R¿Ø%‰Éû]F¿', ''),
+(170, 2, 1, 170, '1', '0xEEBA42', 1, 'CABA√ëAS MIRADOR', 'POINT', '\0\0\0\0\0\0\0Gr˘ÈR¿”º„…F¿', ''),
+(171, 2, 1, 171, '1', '0xEEBA42', 1, 'CABA√ëAS MIRADOR DEL RIO', 'POINT', '\0\0\0\0\0\0\0Á˚©Ò“R¿[B>ËŸ¸E¿', ''),
+(172, 2, 1, 172, '1', '0xEEBA42', 1, 'CABA√ëAS NATHALY', 'POINT', '\0\0\0\0\0\0\0}–≥YıR¿?∆¸E¿', ''),
+(173, 2, 1, 173, '1', '0xEEBA42', 1, 'CABA√ëAS NOMADA', 'POINT', '\0\0\0\0\0\0\0uìVÓQ¿hëÌ|?EG¿', ''),
+(174, 2, 1, 174, '1', '0xEEBA42', 1, 'CABA√ëAS PAOLA', 'POINT', '\0\0\0\0\0\0\08gDio$R¿\r‡-ê†G¿', ''),
+(175, 2, 1, 175, '1', '0xEEBA42', 1, 'CABA√ëAS PARQUE TUR√çSTICO PIEDRA DEL INDIO', 'POINT', '\0\0\0\0\0\0\0ìVR¿‡-ê†¯…F¿', ''),
+(176, 2, 1, 176, '1', '0xEEBA42', 1, 'CABA√ëAS PATAGON EXPLORADOR', 'POINT', '\0\0\0\0\0\0\0óêz6+R¿π¸áÙ€OG¿', ''),
+(177, 2, 1, 177, '1', '0xEEBA42', 1, 'CABA√ëAS PATAGONIA PARAISO', 'POINT', '\0\0\0\0\0\0\0^K»=R¿˛‘xÈ&…F¿', ''),
+(178, 2, 1, 178, '1', '0xEEBA42', 1, 'CABA√ëAS PIE DE MONTE', 'POINT', '\0\0\0\0\0\0\0>yX®5R¿2w-!ÃF¿', ''),
+(179, 2, 1, 179, '1', '0xEEBA42', 1, 'CABA√ëAS PORTAL DEL MAR', 'POINT', '\0\0\0\0\0\0\0ú3¢¥+R¿w-!Ù\\F¿', ''),
+(180, 2, 1, 180, '1', '0xEEBA42', 1, 'CABA√ëAS PUENTE ROSSELOT', 'POINT', '\0\0\0\0\0\0\0Ö|–≥YR¿	äcÓ˙E¿', ''),
+(181, 2, 1, 181, '1', '0xEEBA42', 1, 'CABA√ëAS QUEULAT', 'POINT', '\0\0\0\0\0\0\0úƒ ∞rR¿õÊßË»F¿', ''),
+(182, 2, 1, 182, '1', '0xEEBA42', 1, 'CABA√ëAS QUIYANGO', 'POINT', '\0\0\0\0\0\0\0Ä∑@Ç‚#R¿lxz•,;H¿', ''),
+(183, 2, 1, 183, '1', '0xEEBA42', 1, 'CABA√ëAS R Y C', 'POINT', '\0\0\0\0\0\0\0+ˆó›ì+R¿ÆG·z^F¿', ''),
+(184, 2, 1, 184, '1', '0xEEBA42', 1, 'CABA√ëAS RINCON SURE√ëO', 'POINT', '\0\0\0\0\0\0\0…Â?R¿‡ú•Ω…F¿', ''),
+(185, 2, 1, 185, '1', '0xEEBA42', 1, 'CABA√ëAS RIO AYSEN', 'POINT', '\0\0\0\0\0\0\0bX9¥,R¿\\ AÒc¥F¿', ''),
+(186, 2, 1, 186, '1', '0xEEBA42', 1, 'CABA√ëAS RIO BAGUALES', 'POINT', '\0\0\0\0\0\0\0\\ AÒcR¿oÅ≈è…F¿', ''),
+(187, 2, 1, 187, '1', '0xEEBA42', 1, 'CABA√ëAS R√çO EXPLORADORES', 'POINT', '\0\0\0\0\0\0\0µ¶y+R¿’Áj+ˆOG¿', ''),
+(188, 2, 1, 188, '1', '0xEEBA42', 1, 'CABA√ëAS RIO PASCUA', 'POINT', '\0\0\0\0\0\0\0π¸áÙ€#R¿DioÖ)F¿', ''),
+(189, 2, 1, 189, '1', '0xEEBA42', 1, 'CABA√ëAS ROSSBACH', 'POINT', '\0\0\0\0\0\0\0-≤ùÔ#R¿˝ˆu‡ú)F¿', ''),
+(190, 2, 1, 190, '1', '0xEEBA42', 1, 'CABA√ëAS RUSTICA', 'POINT', '\0\0\0\0\0\0\0ÆG·zR¿8¯¬d™»F¿', ''),
+(191, 2, 1, 191, '1', '0xEEBA42', 1, 'CABA√ëAS SAN GABRIEL', 'POINT', '\0\0\0\0\0\0\0ñCãlÁ#R¿]m≈˛≤;H¿', ''),
+(192, 2, 1, 192, '1', '0xEEBA42', 1, 'CABA√ëAS SOL Y LUNA', 'POINT', '\0\0\0\0\0\0\0e™`TR#R¿dÃ]K»üG¿', ''),
+(193, 2, 1, 193, '1', '0xEEBA42', 1, 'CABA√ëAS SUR AUSTRAL', 'POINT', '\0\0\0\0\0\0\0–Dÿ$R¿*:íÀ†G¿', ''),
+(194, 2, 1, 194, '1', '0xEEBA42', 1, 'CABA√ëAS SUR AUSTRAL', 'POINT', '\0\0\0\0\0\0\0Ω„…R¿Íï≤q¸E¿', ''),
+(195, 2, 1, 195, '1', '0xEEBA42', 1, 'CABA√ëAS TIERRA NUEVA', 'POINT', '\0\0\0\0\0\0\0\rq¨ã€R¿oÖ…T…F¿', ''),
+(196, 2, 1, 196, '1', '0xEEBA42', 1, 'CABA√ëAS TIO NINO', 'POINT', '\0\0\0\0\0\0\0™Ò“MbR¿6Õ;N—…F¿', ''),
+(197, 2, 1, 197, '1', '0xEEBA42', 1, 'CABA√ëAS ULKANTUN-KO', 'POINT', '\0\0\0\0\0\0\0‰ÉûÕ™+R¿=,‘öÊ]F¿', ''),
+(198, 2, 1, 198, '1', '0xEEBA42', 1, 'Caba√±as Valle Exploradores', 'POINT', '\0\0\0\0\0\0\0OjM+R¿’Áj+ˆOG¿', ''),
+(199, 2, 1, 199, '1', '0xEEBA42', 1, 'CABA√ëAS VENTISQUEROS', 'POINT', '\0\0\0\0\0\0\0’xÈ&1R¿$(~å…F¿', ''),
+(200, 2, 1, 200, '1', '0xEEBA42', 1, 'CABA√ëAS VIENTOS DEL SUR', 'POINT', '\0\0\0\0\0\0\0ˆ(\\è¬R¿NbX9¸E¿', ''),
+(201, 2, 1, 201, '1', '0xEEBA42', 1, 'CABA√ëAS Y QUINCHO CERRO GILBERTO', 'POINT', '\0\0\0\0\0\0\0˘È∑Ø+R¿>yX®5]F¿', ''),
+(202, 2, 1, 202, '1', '0xEEBA42', 1, 'CABA√ëS ROGERI', 'POINT', '\0\0\0\0\0\0\0[B>ËŸ$R¿OØîe†G¿', ''),
+(203, 2, 1, 203, '1', '0xEEBA42', 1, 'DEPARTAMENTOS OLICER', 'POINT', '\0\0\0\0\0\0\0 √B≠iÓQ¿ìVEG¿', ''),
+(204, 2, 1, 204, '1', '0xEEBA42', 1, 'DON ROBERTO', 'POINT', '\0\0\0\0\0\0\0O@a√+R¿ÕÃÃÃÃ\\F¿', ''),
+(205, 2, 1, 205, '1', '0xEEBA42', 1, 'EL SALMON', 'POINT', '\0\0\0\0\0\0\02ÊÆ%‰+R¿F∂Û˝‘`F¿', ''),
+(206, 2, 1, 206, '1', '0xEEBA42', 1, 'ENTRE PATAGONES', 'POINT', '\0\0\0\0\0\0\0Ä∑@Ç‚#R¿Ï/ª'';H¿', ''),
+(207, 2, 1, 207, '1', '0xEEBA42', 1, 'HOSPEDAJE GUIBEL', 'POINT', '\0\0\0\0\0\0\0ø}8gR¿R∏ÖÎ…F¿', ''),
+(208, 2, 1, 208, '1', '0xEEBA42', 1, 'HOSTAL ESPA√ëOL', 'POINT', '\0\0\0\0\0\0\0≤.n£R¿˝ˆu‡ú…F¿', ''),
+(209, 2, 1, 209, '1', '0xEEBA42', 1, 'HOSTERIA PUERTO BERTRAND', 'POINT', '\0\0\0\0\0\0\0ß∆K75R¿äcÓZÇG¿', ''),
+(210, 2, 1, 210, '1', '0xEEBA42', 1, 'JUANITA', 'POINT', '\0\0\0\0\0\0\0ÚAœf’#R¿Sñ!éu)F¿', ''),
+(211, 2, 1, 211, '1', '0xEEBA42', 1, 'KON - AIKEN TURISMO', 'POINT', '\0\0\0\0\0\0\0ï‘	hÓQ¿[B>ËŸDG¿', ''),
+(212, 2, 1, 212, '1', '0xEEBA42', 1, 'LA CASONA', 'POINT', '\0\0\0\0\0\0\0shëÌ|R¿e‚XG¿', ''),
+(213, 2, 1, 213, '1', '0xEEBA42', 1, 'LA SIRENA', 'POINT', '\0\0\0\0\0\0\0Œà“ﬁ‡#R¿µ¶y«)F¿', ''),
+(214, 2, 1, 214, '1', '0xEEBA42', 1, 'LAGO NEGRO LODGE', 'POINT', '\0\0\0\0\0\0\0≈è1w-R¿ÜZ”º„¸E¿', ''),
+(215, 2, 1, 215, '1', '0xEEBA42', 1, 'LAS HORQUETAS', 'POINT', '\0\0\0\0\0\0\0û^)ÀR¿±PköwƒF¿', ''),
+(216, 2, 1, 216, '1', '0xEEBA42', 1, 'MY TECHO', 'POINT', '\0\0\0\0\0\0\0¿[ AÒR¿&S£ F¿', ''),
+(217, 2, 1, 217, '1', '0xEEBA42', 1, 'PATAGONIA GREEN', 'POINT', '\0\0\0\0\0\0\0$óˇê~+R¿áŸŒ˜≥F¿', ''),
+(218, 2, 1, 218, '1', '0xEEBA42', 1, 'PATAGONIAVENTURA', 'POINT', '\0\0\0\0\0\0\0Å≈è1R¿®5Õ;N…F¿', ''),
+(219, 2, 1, 219, '1', '0xEEBA42', 1, 'REFUGIO DEL POLLUX', 'POINT', '\0\0\0\0\0\0\0ÄHø}R¿\Z¿[ A…F¿', ''),
+(220, 2, 1, 220, '1', '0xEEBA42', 1, 'TERRA LUNA LODGE', 'POINT', '\0\0\0\0\0\0\0NbX9,R¿˙~jºtkG¿', ''),
+(221, 2, 1, 221, '1', '0xEEBA42', 1, 'AREA DE CAMPING PUDU', 'POINT', '\0\0\0\0\0\0\0&S£*R¿‚Èï≤QG¿', ''),
+(222, 2, 1, 222, '1', '0xEEBA42', 1, 'BAQUEANOS DE LA PATAGONIA', 'POINT', '\0\0\0\0\0\0\0æ0ô*R¿À°E∂Û\rG¿', ''),
+(223, 2, 1, 223, '1', '0xEEBA42', 1, 'CABA√ëAS BON', 'POINT', '\0\0\0\0\0\0\0Íï≤qR¿+áŸ∆F¿', ''),
+(224, 2, 1, 224, '1', '0xEEBA42', 1, 'CAMPING ALBORADA', 'POINT', '\0\0\0\0\0\0\0cÓZB>R¿ÉQIùÄ∆F¿', ''),
+(225, 2, 1, 225, '1', '0xEEBA42', 1, 'CAMPING AYEL√âN', 'POINT', '\0\0\0\0\0\0\0?5^∫IR¿«):íÀ«F¿', ''),
+(226, 2, 1, 226, '1', '0xEEBA42', 1, 'CAMPING BELLAVISTA', 'POINT', '\0\0\0\0\0\0\0ﬁ	ä+R¿∆‹µÑ|PG¿', ''),
+(227, 2, 1, 227, '1', '0xEEBA42', 1, 'CAMPING CECILIA', 'POINT', '\0\0\0\0\0\0\0K»=õ%R¿oÖ…T°G¿', ''),
+(228, 2, 1, 228, '1', '0xEEBA42', 1, 'CAMPING COCHRANE', 'POINT', '\0\0\0\0\0\0\07âA`Â$R¿ÒÙJYÜ†G¿', ''),
+(229, 2, 1, 229, '1', '0xEEBA42', 1, 'CAMPING DE LA PATAGONIA', 'POINT', '\0\0\0\0\0\0\0V-≤ÌQ¿⁄¨˙\\mEG¿', ''),
+(230, 2, 1, 230, '1', '0xEEBA42', 1, 'CAMPING DON FRNACISCO', 'POINT', '\0\0\0\0\0\0\0±øÏû<¸Q¿v‡ú•%G¿', ''),
+(231, 2, 1, 231, '1', '0xEEBA42', 1, 'CAMPING DON OMAR ', 'POINT', '\0\0\0\0\0\0\0Ä∑@Ç‚˚Q¿Ω„…%G¿', ''),
+(232, 2, 1, 232, '1', '0xEEBA42', 1, 'CAMPING EL MOSCO', 'POINT', '\0\0\0\0\0\0\0ñCãlÁ#R¿]‹Fx;H¿', ''),
+(233, 2, 1, 233, '1', '0xEEBA42', 1, 'CAMPING EMANUEL', 'POINT', '\0\0\0\0\0\0\0aTR''†˝Q¿éH»F¿', ''),
+(234, 2, 1, 234, '1', '0xEEBA42', 1, 'CAMPING GETZEMANI', 'POINT', '\0\0\0\0\0\0\0Î‚6\Z$R¿∂Ñ|–≥)F¿', ''),
+(235, 2, 1, 235, '1', '0xEEBA42', 1, 'CAMPING LA ARAUCARIA', 'POINT', '\0\0\0\0\0\0\0µ¶y«	R¿U0*©G¿', ''),
+(236, 2, 1, 236, '1', '0xEEBA42', 1, 'CAMPING LA CABA√ëITA', 'POINT', '\0\0\0\0\0\0\0±Pköw¸Q¿x$(~$G¿', ''),
+(237, 2, 1, 237, '1', '0xEEBA42', 1, 'CAMPING LA PANCHA', 'POINT', '\0\0\0\0\0\0\0b°÷4Ô,R¿ŒQ⁄¨F¿', ''),
+(238, 2, 1, 238, '1', '0xEEBA42', 1, 'CAMPING LA SIRENA', 'POINT', '\0\0\0\0\0\0\0Œà“ﬁ‡#R¿µ¶y«)F¿', ''),
+(239, 2, 1, 239, '1', '0xEEBA42', 1, 'CAMPING LO DE ROCCO', 'POINT', '\0\0\0\0\0\0\0Î‚6\ZR¿≈è1w-…F¿', ''),
+(240, 2, 1, 240, '1', '0xEEBA42', 1, 'CAMPING LO DEL ALE', 'POINT', '\0\0\0\0\0\0\0µ¶y«ÌQ¿⁄¨˙\\mEG¿', ''),
+(241, 2, 1, 241, '1', '0xEEBA42', 1, 'CAMPING LOS √ëIRES (LAGO O&#x27;HIGGINS)', 'POINT', '\0\0\0\0\0\0\0˘†g≥Í#R¿]‹Fx;H¿', ''),
+(242, 2, 1, 242, '1', '0xEEBA42', 1, 'CAMPING NO ME OLVIDES', 'POINT', '\0\0\0\0\0\0\0∂Ñ|–≥ÌQ¿h"lxzEG¿', ''),
+(243, 2, 1, 243, '1', '0xEEBA42', 1, 'CAMPING PUERTO CRISTAL', 'POINT', '\0\0\0\0\0\0\0''†â∞·}S¿&S£ F¿', ''),
+(244, 2, 1, 244, '1', '0xEEBA42', 1, 'CAMPING SRA NATHY', 'POINT', '\0\0\0\0\0\0\0Õ;N—ëR¿ƒB≠iﬁ…F¿', ''),
+(245, 2, 1, 245, '1', '0xEEBA42', 1, 'CAMPING VIENTOS DEL SUR', 'POINT', '\0\0\0\0\0\0\0ˆ(\\è¬R¿NbX9¸E¿', ''),
+(246, 2, 1, 246, '1', '0xEEBA42', 1, 'CENTRO ECO FAMILIAR LAGUNA ESMERALDA', 'POINT', '\0\0\0\0\0\0\0ç(Ì\ræ$R¿DioÖ©G¿', ''),
+(247, 2, 1, 247, '1', '0xEEBA42', 1, 'ECO CAMPING PLAYA ARRAYANES', 'POINT', '\0\0\0\0\0\0\0uìV"R¿±·Èï≤$F¿', ''),
+(248, 2, 1, 248, '1', '0xEEBA42', 1, 'ECO CAMPING UN DESTINO NO TUR√çSTICO', 'POINT', '\0\0\0\0\0\0\0æü\Z/›,R¿9EGr˘oG¿', ''),
+(249, 2, 1, 205, '1', '0xEEBA42', 1, 'EL SALMON', 'POINT', '\0\0\0\0\0\0\02ÊÆ%‰+R¿F∂Û˝‘`F¿', ''),
+(250, 2, 1, 249, '1', '0xEEBA42', 1, 'LAS TONINAS', 'POINT', '\0\0\0\0\0\0\0ºtì&R¿)Ì\ræ09F¿', ''),
+(251, 2, 1, 250, '1', '0xEEBA42', 1, 'COYHAIQUE RIVER LODGE', 'POINT', '\0\0\0\0\0\0\0◊4Ô8E˚Q¿x$(∆F¿', ''),
+(252, 2, 1, 251, '1', '0xEEBA42', 1, 'EL  MIRADOR DE GUADAL', 'POINT', '\0\0\0\0\0\0\0Fîˆ_,R¿£í:MlG¿', ''),
+(253, 2, 1, 252, '1', '0xEEBA42', 1, 'EL PANGUE LODGE', 'POINT', '\0\0\0\0\0\0\0ñ≤q¨R¿çónÉF¿', ''),
+(254, 2, 1, 253, '1', '0xEEBA42', 1, 'GREEN BAKER LODGE', 'POINT', '\0\0\0\0\0\0\0Fîˆ_4R¿L7âA`ÖG¿', ''),
+(255, 2, 1, 254, '1', '0xEEBA42', 1, 'LA PASARELA LODGE ', 'POINT', '\0\0\0\0\0\0\0x$(~R¿fàc]‹∆F¿', ''),
+(256, 2, 1, 255, '1', '0xEEBA42', 1, 'LODGE EL ENSUE√ëO', 'POINT', '\0\0\0\0\0\0\0∏ÖÎQR¿=\n◊£p˝E¿', ''),
+(257, 2, 1, 256, '1', '0xEEBA42', 1, 'LODGE PATAGONIA ACRES ', 'POINT', '\0\0\0\0\0\0\0„6\Z¿[R¿æ0ô*XG¿', ''),
+(258, 2, 1, 257, '1', '0xEEBA42', 1, 'PATAGONIA BAY', 'POINT', '\0\0\0\0\0\0\0˜u‡ú-R¿áŸŒ˜;G¿', ''),
+(259, 2, 1, 258, '1', '0xEEBA42', 1, 'PATAGONIAN BADECAMP LODGE', 'POINT', '\0\0\0\0\0\0\0¡®§N@R¿ß∆K7ÈE¿', ''),
+(260, 2, 1, 259, '1', '0xEEBA42', 1, 'POSADA ESTUARIO QUEULAT', 'POINT', '\0\0\0\0\0\0\0Hø}8#R¿â“ﬁ‡CF¿', ''),
+(261, 2, 1, 260, '1', '0xEEBA42', 1, 'PUYUHUAPI LODGE SPA', 'POINT', '\0\0\0\0\0\0\0É/L¶\n&R¿d]‹F8F¿', ''),
+(262, 2, 1, 261, '1', '0xEEBA42', 1, 'ROBINSON CRUSOE DEEP PATAGONIA', 'POINT', '\0\0\0\0\0\0\0]˛C˙Ì#R¿$óˇê~;H¿', ''),
+(263, 2, 1, 262, '1', '0x00C7F6', 1, 'EL PASCUA', 'POINT', '\0\0\0\0\0\0\0U0*©$R¿öôôôô)F¿', ''),
+(264, 2, 1, 263, '1', '0x00C7F6', 1, 'POSADA QUEULAT', 'POINT', '\0\0\0\0\0\0\0Hø}8#R¿â“ﬁ‡CF¿', ''),
+(265, 2, 1, 264, '1', '0x00C7F6', 1, 'SERVICIO GASTRONOMICO PATAGONIA', 'POINT', '\0\0\0\0\0\0\0ø}8g,R¿–Dÿ¥F¿', ''),
+(266, 2, 1, 265, '1', '0x00C7F6', 1, 'EL CHE&#x27;F', 'POINT', '\0\0\0\0\0\0\0 2ƒ±.ÓQ¿wæü\Z/EG¿', ''),
+(267, 2, 1, 266, '1', '0x00C7F6', 1, 'PATAGONI-K MATE &amp; EXPEDICIONES', 'POINT', '\0\0\0\0\0\0\0ÕÃÃÃÃ,R¿k+ˆó›≥F¿', ''),
+(268, 2, 1, 267, '1', '0xEEBA42', 1, 'CABA√ëAS AUSTRAL', 'POINT', '\0\0\0\0\0\0\0Q⁄|aÓQ¿MåJÍDG¿', ''),
+(269, 2, 1, 170, '1', '0xEEBA42', 1, 'CABA√ëAS MIRADOR', 'POINT', '\0\0\0\0\0\0\0Gr˘ÈR¿”º„…F¿', ''),
+(270, 2, 1, 268, '1', '0xEEBA42', 1, 'CABA√ëAS Y HOSTAL SAN SEBASTIAN', 'POINT', '\0\0\0\0\0\0\0\\ AÒcR¿oÅ≈è…F¿', ''),
+(271, 2, 1, 269, '1', '0xEEBA42', 1, 'CABA√ëAS YAGAN', 'POINT', '\0\0\0\0\0\0\0“\0ﬁ	\ZR¿ÆG·z¸E¿', ''),
+(272, 2, 1, 270, '1', '0xEEBA42', 1, 'DEPARTAMENTO BELLAVISTA', 'POINT', '\0\0\0\0\0\0\0ú3¢¥+R¿ÕÃÃÃÃ\\F¿', ''),
+(273, 2, 1, 271, '1', '0xEEBA42', 1, 'DEPARTAMENTO RYC', 'POINT', '\0\0\0\0\0\0\0+ˆó›ì+R¿ÆG·z^F¿', ''),
+(274, 2, 1, 272, '1', '0xEEBA42', 1, 'DEPARTAMENTO ULKANTUN-KO', 'POINT', '\0\0\0\0\0\0\0‰ÉûÕ™+R¿=,‘öÊ]F¿', ''),
+(275, 2, 1, 273, '1', '0xEEBA42', 1, 'DEPARTAMENTOS LA CASCADA', 'POINT', '\0\0\0\0\0\0\0+ï‘	,R¿$óˇê~≥F¿', ''),
+(276, 2, 1, 274, '1', '0xEEBA42', 1, 'DEPARTAMENTOS MARIA CLARA', 'POINT', '\0\0\0\0\0\0\0Ÿ=yXR¿oÖ…T…F¿', ''),
+(277, 2, 1, 275, '1', '0xEEBA42', 1, 'DEPARTAMENTOS NORMITA', 'POINT', '\0\0\0\0\0\0\0¡®§N@R¿a√”+e…F¿', ''),
+(278, 2, 1, 276, '1', '0xEEBA42', 1, 'DEPARTAMENTOS SANTA TERESITA', 'POINT', '\0\0\0\0\0\0\0¡ °E∂+R¿"˝ˆu‡\\F¿', ''),
+(279, 2, 1, 277, '1', '0xEEBA42', 1, 'EL GUAIRAO', 'POINT', '\0\0\0\0\0\0\0ñ≤q¨+R¿Ø%‰Éû]F¿', ''),
+(280, 2, 1, 278, '1', '0xEEBA42', 1, 'DEPARTAMENTO LOS PINOS', 'POINT', '\0\0\0\0\0\0\0ÛéSt$+R¿‰…ÂOG¿', ''),
+(281, 2, 1, 279, '1', '0xEEBA42', 1, 'DEPARTAMENTOS AUSTRAL', 'POINT', '\0\0\0\0\0\0\0ü´≠ÿ_ÓQ¿∞rhëÌDG¿', ''),
+(282, 2, 1, 280, '1', '0xEEBA42', 1, 'HACIENDA TRES LAGOS', 'POINT', '\0\0\0\0\0\0\0	äc2R¿\nh"lxrG¿', ''),
+(283, 2, 1, 281, '1', '0xEEBA42', 1, 'ISABEL', 'POINT', '\0\0\0\0\0\0\0Ú“Mb$R¿öôôôô)F¿', ''),
+(284, 2, 1, 282, '1', '0xEEBA42', 1, 'MIRADOR DEL RIO', 'POINT', '\0\0\0\0\0\0\0Á˚©Ò“R¿[B>ËŸ¸E¿', ''),
+(285, 2, 1, 283, '1', '0xEEBA42', 1, 'CANTO DEL CHUCAO', 'POINT', '\0\0\0\0\0\0\0TR''†â,R¿£º¥F¿', ''),
+(286, 2, 1, 284, '1', '0xEEBA42', 1, 'CASA LUDWIG', 'POINT', '\0\0\0\0\0\0\0OØîeà#R¿®W 2ƒ)F¿', ''),
+(287, 2, 1, 285, '1', '0xEEBA42', 1, 'DARKA RESIDENCIAL', 'POINT', '\0\0\0\0\0\0\0lxz•,+R¿U0*©PG¿', ''),
+(288, 2, 1, 286, '1', '0xEEBA42', 1, 'DAVIMAR', 'POINT', '\0\0\0\0\0\0\0œf’Áj+R¿£í:]F¿', ''),
+(289, 2, 1, 287, '1', '0xEEBA42', 1, 'DON JUANITO', 'POINT', '\0\0\0\0\0\0\0l	˘†g+R¿vq\r‡]F¿', ''),
+(290, 2, 1, 288, '1', '0xEEBA42', 1, 'BRISAS DEL SUR', 'POINT', '\0\0\0\0\0\0\0;pŒà“bR¿…væü\ZÁG¿', ''),
+(291, 2, 1, 289, '1', '0xEEBA42', 1, 'EL ENCANTO', 'POINT', '\0\0\0\0\0\0\0ˆó›ìá\rR¿dÃ]K»_F¿', ''),
+(292, 2, 1, 290, '1', '0xEEBA42', 1, 'EL INDIO', 'POINT', '\0\0\0\0\0\0\0xú¢#π@R¿¢E∂Û˝¿v@', ''),
+(293, 2, 1, 291, '1', '0xEEBA42', 1, 'EL MIRADOR', 'POINT', '\0\0\0\0\0\0\0''1¨ˆQ¿;pŒà“F¿', ''),
+(294, 2, 1, 292, '1', '0xEEBA42', 1, 'HOSPEDAJE BELLAVISTA', 'POINT', '\0\0\0\0\0\0\0ÛéSt$+R¿ˇ!˝ˆuPG¿', ''),
+(295, 2, 1, 293, '1', '0xEEBA42', 1, 'HOSPEDAJE CORDILLERA', 'POINT', '\0\0\0\0\0\0\0‰…Â#R¿Î‚6\Z¿;H¿', ''),
+(296, 2, 1, 294, '1', '0xEEBA42', 1, 'HOSPEDAJE DON KICHO', 'POINT', '\0\0\0\0\0\0\0≥{Ú∞P+R¿räé‰ÚOG¿', ''),
+(297, 2, 1, 295, '1', '0xEEBA42', 1, 'HOSPEDAJE DO√ëA ESTER', 'POINT', '\0\0\0\0\0\0\0b°÷4Ô4R¿¸s◊ÇG¿', ''),
+(298, 2, 1, 296, '1', '0xEEBA42', 1, 'HOSPEDAJE DO√ëA NURY', 'POINT', '\0\0\0\0\0\0\0]m≈˛≤#R¿”ﬁ‡ì)F¿', ''),
+(299, 2, 1, 297, '1', '0xEEBA42', 1, 'HOSPEDAJE EL BOMBERO', 'POINT', '\0\0\0\0\0\0\0TR''†â$R¿∏ØÁå†G¿', ''),
+(300, 2, 1, 298, '1', '0xEEBA42', 1, 'HOSPEDAJE EL CHILCO', 'POINT', '\0\0\0\0\0\0\0†â∞·ÈR¿1ô*ï¸E¿', ''),
+(301, 2, 1, 299, '1', '0xEEBA42', 1, 'HOSPEDAJE EL LAGUITO', 'POINT', '\0\0\0\0\0\0\0ñ!éuq+R¿ÃHø}]F¿', ''),
+(302, 2, 1, 300, '1', '0xEEBA42', 1, 'HOSPEDAJE EL NEVADO', 'POINT', '\0\0\0\0\0\0\0?∆‹µÑR¿DioÖ…F¿', ''),
+(303, 2, 1, 301, '1', '0xEEBA42', 1, 'HOSPEDAJE ESTEFANI', 'POINT', '\0\0\0\0\0\0\0áßW 2R¿$(~å…F¿', ''),
+(304, 2, 1, 302, '1', '0xEEBA42', 1, 'HOSPEDAJE JAVIERA', 'POINT', '\0\0\0\0\0\0\0–≥YıπÓQ¿∞Áå(EG¿', ''),
+(305, 2, 1, 303, '1', '0xEEBA42', 1, 'HOSPEDAJE LA CASCADA', 'POINT', '\0\0\0\0\0\0\0z•,C+R¿_)À«:G¿', ''),
+(306, 2, 1, 304, '1', '0xEEBA42', 1, 'HOSPEDAJE LA UNI√ìN', 'POINT', '\0\0\0\0\0\0\0jºtì¸Q¿ΩRñ!é%G¿', ''),
+(307, 2, 1, 305, '1', '0xEEBA42', 1, 'HOSPEDAJE MAR CLARA', 'POINT', '\0\0\0\0\0\0\0ïeàc],R¿§p=\n◊≥F¿', ''),
+(308, 2, 1, 306, '1', '0xEEBA42', 1, 'HOSPEDAJE MARLUZ', 'POINT', '\0\0\0\0\0\0\0x$(~R¿}Æ∂b…F¿', ''),
+(309, 2, 1, 307, '1', '0xEEBA42', 1, 'HOSPEDAJE MIRIAM', 'POINT', '\0\0\0\0\0\0\0WÏ/ª''+R¿Î‚6\ZPG¿', ''),
+(310, 2, 1, 308, '1', '0xEEBA42', 1, 'HOSPEDAJE TIA LETY', 'POINT', '\0\0\0\0\0\0\0µ˚ÀÓR¿øú3¢¸E¿', ''),
+(311, 2, 1, 309, '1', '0xEEBA42', 1, 'HOSPEDAJE VALENTINA', 'POINT', '\0\0\0\0\0\0\0≤ùÔß∆#R¿öôôôô)F¿', ''),
+(312, 2, 1, 310, '1', '0xEEBA42', 1, 'HOSPEDAJE Y RESIDENCIAL SAN SEBASTIAN', 'POINT', '\0\0\0\0\0\0\09¥»væ+R¿xú¢#π\\F¿', ''),
+(313, 2, 1, 311, '1', '0xEEBA42', 1, 'HOSPEDAJE ZINNIA', 'POINT', '\0\0\0\0\0\0\0˛C˙ÌÎR¿µ¶y«) F¿', ''),
+(314, 2, 1, 312, '1', '0xEEBA42', 1, 'HOSTAL  DON OMAR', 'POINT', '\0\0\0\0\0\0\0Ä∑@Ç‚˚Q¿Ω„…%G¿', ''),
+(315, 2, 1, 313, '1', '0xEEBA42', 1, 'HOSTAL  EL GAUCHO', 'POINT', '\0\0\0\0\0\0\0çónÉR¿Ô…√B≠…F¿', ''),
+(316, 2, 1, 314, '1', '0xEEBA42', 1, 'HOSTAL ALEMANA', 'POINT', '\0\0\0\0\0\0\0‰…Â#R¿aTR''†)F¿', ''),
+(317, 2, 1, 315, '1', '0xEEBA42', 1, 'HOSTAL BON', 'POINT', '\0\0\0\0\0\0\0_òLR¿)Ì\ræ0…F¿', ''),
+(318, 2, 1, 316, '1', '0xEEBA42', 1, 'HOSTAL CERRO EL ESCUDO', 'POINT', '\0\0\0\0\0\0\0V-≤ùR¿©§N@…F¿', ''),
+(319, 2, 1, 317, '1', '0xEEBA42', 1, 'HOSTAL COSTANERA', 'POINT', '\0\0\0\0\0\0\0àc]‹F+R¿ú3¢¥OG¿', ''),
+(320, 2, 1, 318, '1', '0xEEBA42', 1, 'HOSTAL DON LUIS', 'POINT', '\0\0\0\0\0\0\02U0*©#R¿·ì©Ç)F¿', ''),
+(321, 2, 1, 319, '1', '0xEEBA42', 1, 'HOSTAL DON SANTIAGO', 'POINT', '\0\0\0\0\0\0\0]˛C˙ÌR¿ã˝e˜‰…F¿', ''),
+(322, 2, 1, 320, '1', '0xEEBA42', 1, 'HOSTAL EL PUESTO', 'POINT', '\0\0\0\0\0\0\0z6´>W+R¿\0\0\0\0\0PG¿', ''),
+(323, 2, 1, 321, '1', '0xEEBA42', 1, 'HOSTAL ESMERALDA', 'POINT', '\0\0\0\0\0\0\0ìV%R¿9÷≈m4†G¿', ''),
+(324, 2, 1, 322, '1', '0xEEBA42', 1, 'HOSTAL FITZ ROY', 'POINT', '\0\0\0\0\0\0\0ñCãlÁ#R¿\\è¬ı(<H¿', ''),
+(325, 2, 1, 323, '1', '0xEEBA42', 1, 'HOSTAL GLADYS', 'POINT', '\0\0\0\0\0\0\0#J{É/R¿û^)À»F¿', ''),
+(326, 2, 1, 324, '1', '0xEEBA42', 1, 'HOSTAL LA VICTORIA', 'POINT', '\0\0\0\0\0\0\0f˜‰a°ÓQ¿∞rhëÌDG¿', ''),
+(327, 2, 1, 325, '1', '0xEEBA42', 1, 'HOSTAL LAS QUINTAS', 'POINT', '\0\0\0\0\0\0\0]m≈˛≤R¿R''†â∞…F¿', ''),
+(328, 2, 1, 326, '1', '0xEEBA42', 1, 'HOSTAL LATITUD 47 SUR', 'POINT', '\0\0\0\0\0\0\0#€˘~j$R¿q¨ã€h†G¿', ''),
+(329, 2, 1, 327, '1', '0xEEBA42', 1, 'HOSTAL LICARAYEN', 'POINT', '\0\0\0\0\0\0\0áßW 2R¿bX9¥»F¿', ''),
+(330, 2, 1, 328, '1', '0xEEBA42', 1, 'HOSTAL OLICER', 'POINT', '\0\0\0\0\0\0\0 √B≠iÓQ¿ìVEG¿', ''),
+(331, 2, 1, 329, '1', '0xEEBA42', 1, 'HOSTAL PATAGONIA LIVE', 'POINT', '\0\0\0\0\0\0\0*:íÀR¿`vO F¿', ''),
+(332, 2, 1, 330, '1', '0xEEBA42', 1, 'HOSTAL PORVENIR', 'POINT', '\0\0\0\0\0\0\0Â–"€˘bR¿Ù˝‘xÈÊG¿', ''),
+(333, 2, 1, 331, '1', '0xEEBA42', 1, 'HOSTAL QUIYANGO', 'POINT', '\0\0\0\0\0\0\0Ä∑@Ç‚#R¿lxz•,;H¿', ''),
+(334, 2, 1, 332, '1', '0xEEBA42', 1, 'HOSTAL VIENTO SUR', 'POINT', '\0\0\0\0\0\0\0ioÖ…R¿öwú¢#…F¿', ''),
+(335, 2, 1, 333, '1', '0xEEBA42', 1, 'HOSTAL Y RESIDENCIAL DON LUIS', 'POINT', '\0\0\0\0\0\0\0IùÄ&¬ÓQ¿MåJÍDG¿', ''),
+(336, 2, 1, 334, '1', '0xEEBA42', 1, 'HOSTAL Y RESIDENCIAL KUYEN', 'POINT', '\0\0\0\0\0\0\0ioÖ…R¿Ô…√B≠…F¿', ''),
+(337, 2, 1, 335, '1', '0xEEBA42', 1, 'HOSTERIA EL GAUCHO', 'POINT', '\0\0\0\0\0\0\0èSt$ó+R¿!∞rhë]F¿', ''),
+(338, 2, 1, 336, '1', '0xEEBA42', 1, 'HOSTERIA JEINIMENI', 'POINT', '\0\0\0\0\0\0\0‡-ê†¯ÌQ¿h"lxzEG¿', ''),
+(339, 2, 1, 337, '1', '0xEEBA42', 1, 'HOSTERIA VILLARRICA', 'POINT', '\0\0\0\0\0\0\0n£º\nR¿V-≤ùG¿', ''),
+(340, 2, 1, 338, '1', '0xEEBA42', 1, 'JANITO', 'POINT', '\0\0\0\0\0\0\06<ΩR\nR¿ÂÚ“oG¿', ''),
+(341, 2, 1, 339, '1', '0xEEBA42', 1, 'LA PAZ', 'POINT', '\0\0\0\0\0\0\0B`Â–"+R¿räé‰ÚOG¿', ''),
+(342, 2, 1, 340, '1', '0xEEBA42', 1, 'LA POSADA DEL CAMIONERO¬†', 'POINT', '\0\0\0\0\0\0\02U0*©+R¿33333≥F¿', ''),
+(343, 2, 1, 341, '1', '0xEEBA42', 1, 'LOS LIRIOS, RAUL MARIN BALMACEDA', 'POINT', '\0\0\0\0\0\0\0∑—\0ﬁ=R¿¨Zd„E¿', ''),
+(344, 2, 1, 342, '1', '0xEEBA42', 1, 'PIONEROS DEL CARRERA', 'POINT', '\0\0\0\0\0\0\0â“ﬁ‡+R¿Gr˘ÈOG¿', ''),
+(345, 2, 1, 343, '1', '0xEEBA42', 1, 'RESIDENCIAL AUSTRAL', 'POINT', '\0\0\0\0\0\0\0ßy«):\nR¿èSt$óG¿', ''),
+(346, 2, 1, 344, '1', '0xEEBA42', 1, 'RESIDENCIAL CARRERA', 'POINT', '\0\0\0\0\0\0\0±·Èï≤R¿∂Û˝‘x…F¿', ''),
+(347, 2, 1, 345, '1', '0xEEBA42', 1, 'RESIDENCIAL CERO A CERO', 'POINT', '\0\0\0\0\0\0\0Ü8÷≈m$R¿TR''†â†G¿', ''),
+(348, 2, 1, 346, '1', '0xEEBA42', 1, 'RESIDENCIAL CORDILLERA', 'POINT', '\0\0\0\0\0\0\0˝áÙ€◊R¿[±øÏû¸E¿', ''),
+(349, 2, 1, 347, '1', '0xEEBA42', 1, 'RESIDENCIAL COSTANERA', 'POINT', '\0\0\0\0\0\0\0fffffbR¿ÙlV}ÆÊG¿', ''),
+(350, 2, 1, 348, '1', '0xEEBA42', 1, 'RESIDENCIAL DO√ëA JUANITA', 'POINT', '\0\0\0\0\0\0\0è‰Ú“#R¿6´>W[)F¿', ''),
+(351, 2, 1, 349, '1', '0xEEBA42', 1, 'RESIDENCIAL EL ARRIERO', 'POINT', '\0\0\0\0\0\0\0ìV%R¿\0ë~˚:†G¿', ''),
+(352, 2, 1, 350, '1', '0xEEBA42', 1, 'RESIDENCIAL EL FOGON', 'POINT', '\0\0\0\0\0\0\0>ËŸ¨˙$R¿cÓZB>†G¿', ''),
+(353, 2, 1, 351, '1', '0xEEBA42', 1, 'RESIDENCIAL EL VIAJERO', 'POINT', '\0\0\0\0\0\0\0˜u‡ú=R¿HP¸„E¿', ''),
+(354, 2, 1, 352, '1', '0xEEBA42', 1, 'RESIDENCIAL ENRIQUE¬¥S', 'POINT', '\0\0\0\0\0\0\0$(~åπ+R¿˜‰a°÷\\F¿', ''),
+(355, 2, 1, 353, '1', '0xEEBA42', 1, 'RESIDENCIAL HIELO SUR', 'POINT', '\0\0\0\0\0\0\0 2ƒ±.bR¿ “o_ÊG¿', ''),
+(356, 2, 1, 354, '1', '0xEEBA42', 1, 'RESIDENCIAL HORSTMEYER', 'POINT', '\0\0\0\0\0\0\0+áŸŒó%@‰…Âè7@', ''),
+(357, 2, 1, 355, '1', '0xEEBA42', 1, 'RESIDENCIAL KATITA', 'POINT', '\0\0\0\0\0\0\0˛C˙ÌÎ$R¿|a2U†G¿', ''),
+(358, 2, 1, 356, '1', '0xEEBA42', 1, 'RESIDENCIAL LA CENTRAL', 'POINT', '\0\0\0\0\0\0\0a√”+-R¿\\è¬ı(lG¿', ''),
+(359, 2, 1, 357, '1', '0xEEBA42', 1, 'RESIDENCIAL LA HOGARE√ëA', 'POINT', '\0\0\0\0\0\0\0ÓZB>ËÌQ¿i\0oÅEG¿', ''),
+(360, 2, 1, 358, '1', '0xEEBA42', 1, 'RESIDENCIAL LA SURE√ëA', 'POINT', '\0\0\0\0\0\0\0◊ÚAœbR¿,‘öÊÁG¿', ''),
+(361, 2, 1, 359, '1', '0xEEBA42', 1, 'RESIDENCIAL LO DE ROCCO', 'POINT', '\0\0\0\0\0\0\0Î‚6\ZR¿≈è1w-…F¿', ''),
+(362, 2, 1, 360, '1', '0xEEBA42', 1, 'RESIDENCIAL MA√ëIHUALES', 'POINT', '\0\0\0\0\0\0\0”MbX	R¿?∆‹ïF¿', ''),
+(363, 2, 1, 361, '1', '0xEEBA42', 1, 'RESIDENCIAL MARIANELA', 'POINT', '\0\0\0\0\0\0\0W[±øÏ*R¿B>ËŸ¨:G¿', ''),
+(364, 2, 1, 362, '1', '0xEEBA42', 1, 'RESIDENCIAL MARISEL', 'POINT', '\0\0\0\0\0\0\0‚X∑R¿jºtì¸E¿', ''),
+(365, 2, 1, 363, '1', '0xEEBA42', 1, 'RESIDENCIAL MONICA', 'POINT', '\0\0\0\0\0\0\0∆‹µÑ|R¿6Õ;N—…F¿', ''),
+(366, 2, 1, 364, '1', '0xEEBA42', 1, 'RESIDENCIAL NORMITA', 'POINT', '\0\0\0\0\0\0\0¡®§N@R¿a√”+e…F¿', ''),
+(367, 2, 1, 365, '1', '0xEEBA42', 1, 'RESIDENCIAL PANCHITA', 'POINT', '\0\0\0\0\0\0\0‰ÉûÕ™+R¿ıπ⁄ä˝]F¿', ''),
+(368, 2, 1, 366, '1', '0xEEBA42', 1, 'RESIDENCIAL PASARELA', 'POINT', '\0\0\0\0\0\0\0µ¶y+R¿h"lxz]F¿', ''),
+(369, 2, 1, 367, '1', '0xEEBA42', 1, 'RESIDENCIAL PATAGONIA', 'POINT', '\0\0\0\0\0\0\0Zıπ⁄ä-R¿q¨ã€h8G¿', ''),
+(370, 2, 1, 368, '1', '0xEEBA42', 1, 'RESIDENCIAL PUERTO VARAS', 'POINT', '\0\0\0\0\0\0\0ÄHø}R¿·zÆG…F¿', ''),
+(371, 2, 1, 369, '1', '0xEEBA42', 1, 'RESIDENCIAL RAFITA', 'POINT', '\0\0\0\0\0\0\046<ΩÓQ¿£í:EG¿', ''),
+(372, 2, 1, 370, '1', '0xEEBA42', 1, 'RESIDENCIAL SANTA TERESITA', 'POINT', '\0\0\0\0\0\0\0¡ °E∂+R¿"˝ˆu‡\\F¿', ''),
+(373, 2, 1, 371, '1', '0xEEBA42', 1, 'RESIDENCIAL SUR AUSTRAL', 'POINT', '\0\0\0\0\0\0\0–Dÿ$R¿*:íÀ†G¿', ''),
+(374, 2, 1, 372, '1', '0xEEBA42', 1, 'RESIDENCIAL VALDERAS', 'POINT', '\0\0\0\0\0\0\0µ˚ÀÓR¿Õ;N—ë¸E¿', ''),
+(375, 2, 1, 373, '1', '0xEEBA42', 1, 'RESTORAN Y RESIDENCIAL CAMPANARIO', 'POINT', '\0\0\0\0\0\0\0ŒQ⁄#R¿O@a√;H¿', ''),
+(376, 2, 1, 374, '1', '0xEEBA42', 1, 'SANTA EDUVINA VASQUEZ BALDEVENITO', 'POINT', '\0\0\0\0\0\0\0-!ÙlˆQ¿tµ˚ÀF¿', ''),
+(377, 2, 1, 375, '1', '0xEEBA42', 1, 'CASA ORELLANA', 'POINT', '\0\0\0\0\0\0\0[B>ËŸ$R¿æ0ô*†G¿', ''),
+(378, 2, 1, 376, '1', '0xEEBA42', 1, 'HOSPEDAJE ANA', 'POINT', '\0\0\0\0\0\0\0ë~˚:pˆQ¿-≤ùÔßF¿', ''),
+(379, 2, 1, 377, '1', '0xEEBA42', 1, 'HOSPEDAJE EL MICHAY', 'POINT', '\0\0\0\0\0\0\0\ZQ⁄|\rR¿dÃ]K»_F¿', ''),
+(380, 2, 1, 378, '1', '0xEEBA42', 1, 'HOSPEDAJE EL PASO', 'POINT', '\0\0\0\0\0\0\0/›$Å\rR¿«):íÀ_F¿', ''),
+(381, 2, 1, 379, '1', '0xEEBA42', 1, 'HOSPEDAJE PUERTO AGUIRRE', 'POINT', '\0\0\0\0\0\0\0ΩRñ!éaR¿æ0ô*ïF¿', ''),
+(382, 2, 1, 380, '1', '0xEEBA42', 1, 'HOSTAL ALACALUF', 'POINT', '\0\0\0\0\0\0\0™`TR''DR¿)\\è¬ı@G¿', ''),
+(383, 2, 1, 381, '1', '0xEEBA42', 1, 'HOSTAL DON ADAN', 'POINT', '\0\0\0\0\0\0\0Y∑—\0bR¿Áå(Ì\rÊG¿', ''),
+(384, 2, 1, 382, '1', '0xEEBA42', 1, 'HOSTAL MAR√çA ESTER 2', 'POINT', '\0\0\0\0\0\0\00*©–R¿∂Û˝‘x…F¿', ''),
+(385, 2, 1, 383, '1', '0xEEBA42', 1, 'SAN SEBASTIAN', 'POINT', '\0\0\0\0\0\0\0¨Zd;ÎQ¿ò›ìáÖRF¿', ''),
+(386, 2, 1, 384, '1', '0xEEBA42', 1, 'TEHUELCHE PATAGONIA LODGE ', 'POINT', '\0\0\0\0\0\0\0p_ŒR¿ﬂOçón F¿', ''),
+(387, 2, 1, 385, '1', '0xEEBA42', 1, 'CABA√ëAS QUEITAO PATAGONIA', 'POINT', '\0\0\0\0\0\0\0´>W[±+R¿ﬁ	ä≥F¿', ''),
+(388, 2, 1, 277, '1', '0xEEBA42', 1, 'EL GUAIRAO', 'POINT', '\0\0\0\0\0\0\0ñ≤q¨+R¿Ø%‰Éû]F¿', ''),
+(389, 2, 1, 386, '1', '0xEEBA42', 1, 'HOSPEDAJE PATAGONIA', 'POINT', '\0\0\0\0\0\0\0Î‚6\Z¿#R¿åJÍ<H¿', ''),
+(390, 2, 1, 387, '1', '0xEEBA42', 1, 'HOSTAL MICHAY', 'POINT', '\0\0\0\0\0\0\0$(~åπ+R¿[B>ËŸ\\F¿', ''),
+(391, 2, 1, 388, '1', '0xEEBA42', 1, 'HOSTERIA CARRETERA AUSTRAL', 'POINT', '\0\0\0\0\0\0\0÷VÏ/ª#R¿öôôôô)F¿', ''),
+(392, 2, 1, 389, '1', '0xEEBA42', 1, 'HOSTERIA CARRETERA AUSTRAL', 'POINT', '\0\0\0\0\0\0\0û^)À+R¿Ä∑@Ç‚OG¿', ''),
+(393, 2, 1, 390, '1', '0xEEBA42', 1, 'HOSTERIA COPIHUE PATAGON', 'POINT', '\0\0\0\0\0\0\0s◊ÚR¿?∆‹µ¸E¿', ''),
+(394, 2, 1, 391, '1', '0xEEBA42', 1, 'HOSTER√çA DE LA PATAGONIA', 'POINT', '\0\0\0\0\0\0\0V-≤ÌQ¿⁄¨˙\\mEG¿', ''),
+(395, 2, 1, 392, '1', '0xEEBA42', 1, 'HOSTERIA EL MOSCO', 'POINT', '\0\0\0\0\0\0\0ñCãlÁ#R¿]‹Fx;H¿', ''),
+(396, 2, 1, 393, '1', '0xEEBA42', 1, 'HOSTERIA LA CASONA', 'POINT', '\0\0\0\0\0\0\0èSt$ó#R¿''1¨*F¿', ''),
+(397, 2, 1, 394, '1', '0xEEBA42', 1, 'HOSTERIA LA CASONA', 'POINT', '\0\0\0\0\0\0\0shëÌ|R¿e‚XG¿', ''),
+(398, 2, 1, 395, '1', '0xEEBA42', 1, 'HOSTERIA LOS PINOS', 'POINT', '\0\0\0\0\0\0\0z•,C+R¿Zd;ﬂOG¿', ''),
+(399, 2, 1, 396, '1', '0xEEBA42', 1, 'HOSTER√çA POSADA DEL R√çO', 'POINT', '\0\0\0\0\0\0\0È∑ØÎQ¿ùÄ&¬ÜGG¿', ''),
+(400, 2, 1, 397, '1', '0xEEBA42', 1, 'HOSTERIA RAYEN', 'POINT', '\0\0\0\0\0\0\0gDioR¿˜‰a°÷¸E¿', ''),
+(401, 2, 1, 398, '1', '0xEEBA42', 1, 'HOSTERIA VALLE DEL PALENA, RAUL MARIN BALMACEDA', 'POINT', '\0\0\0\0\0\0\0Tt$óˇ<R¿≥{Ú∞P„E¿', ''),
+(402, 2, 1, 399, '1', '0xEEBA42', 1, 'MONCHITO', 'POINT', '\0\0\0\0\0\0\0∫⁄ä˝e+R¿ŸŒ˜S„]F¿', ''),
+(403, 2, 1, 400, '1', '0xEEBA42', 1, 'CABA√ëAS TERRAZAS DEL PALENA', 'POINT', '\0\0\0\0\0\0\0ÚAœfR¿äé‰Ú˙E¿', ''),
+(404, 2, 1, 401, '1', '0xEEBA42', 1, 'CINCO RIOS LODGE', 'POINT', '\0\0\0\0\0\0\0◊ÚAœR¿Ê?§ﬂæŒF¿', ''),
+(405, 2, 1, 402, '1', '0xEEBA42', 1, 'ESPACIO Y TIEMPO - HOTEL DE MONTA√ëA', 'POINT', '\0\0\0\0\0\0\0=õUü´R¿ïeàc]¸E¿', ''),
+(406, 2, 1, 403, '1', '0xEEBA42', 1, 'HOSTAL BELISARIO JARA', 'POINT', '\0\0\0\0\0\0\09÷≈m4R¿(~åπk…F¿', ''),
+(407, 2, 1, 404, '1', '0xEEBA42', 1, 'HOSTERIA COYHAIQUE', 'POINT', '\0\0\0\0\0\0\0˜‰a°÷R¿©§N@…F¿', ''),
+(408, 2, 1, 405, '1', '0xEEBA42', 1, 'HOTEL AUSTRAL', 'POINT', '\0\0\0\0\0\0\0éuq\rR¿≈ ∞rh…F¿', ''),
+(409, 2, 1, 406, '1', '0xEEBA42', 1, 'HOTEL AUSTRAL', 'POINT', '\0\0\0\0\0\0\0uìVÓQ¿˜u‡úEG¿', ''),
+(410, 2, 1, 407, '1', '0xEEBA42', 1, 'HOTEL AYSEN PATAGONIA', 'POINT', '\0\0\0\0\0\0\0∏@Ç‚«,R¿åJÍ¥F¿', ''),
+(411, 2, 1, 408, '1', '0xEEBA42', 1, 'HOTEL CAICAHUE', 'POINT', '\0\0\0\0\0\0\0æ0ô*,R¿˙~jºt≥F¿', ''),
+(412, 2, 1, 409, '1', '0xEEBA42', 1, 'HOTEL DIEGO DE ALMAGRO', 'POINT', '\0\0\0\0\0\0\0ç(Ì\ræR¿¥Yıπ⁄ F¿', ''),
+(413, 2, 1, 410, '1', '0xEEBA42', 1, 'HOTEL DREAMS PATAGONIA', 'POINT', '\0\0\0\0\0\0\0€˘~jºR¿+á…F¿', ''),
+(414, 2, 1, 411, '1', '0xEEBA42', 1, 'HOTEL EL RELOJ', 'POINT', '\0\0\0\0\0\0\0´œ’VÏR¿p_Œ…F¿', ''),
+(415, 2, 1, 412, '1', '0xEEBA42', 1, 'HOTEL LOBERIAS DEL SUR', 'POINT', '\0\0\0\0\0\0\0¯¬d™`4R¿=õUüªF¿', ''),
+(416, 2, 1, 413, '1', '0xEEBA42', 1, 'HOTEL LOS √ëIRES', 'POINT', '\0\0\0\0\0\0\0¿Ïû<,R¿ÒÙJYÜ»F¿', ''),
+(417, 2, 1, 414, '1', '0xEEBA42', 1, 'HOTEL LOYOLA', 'POINT', '\0\0\0\0\0\0\0îˆ_òR¿Ô8EGr…F¿', ''),
+(418, 2, 1, 415, '1', '0xEEBA42', 1, 'HOTEL PLAZA', 'POINT', '\0\0\0\0\0\0\0È&1¨,R¿k+ˆó›≥F¿', ''),
+(419, 2, 1, 416, '1', '0xEEBA42', 1, 'HOTEL PLAZA', 'POINT', '\0\0\0\0\0\0\0ònÉ¿ÓQ¿[B>ËŸDG¿', ''),
+(420, 2, 1, 417, '1', '0xEEBA42', 1, 'HOTEL TERRAZAS DEL PALENA', 'POINT', '\0\0\0\0\0\0\0ÚAœfR¿äé‰Ú˙E¿', ''),
+(421, 2, 1, 418, '1', '0xEEBA42', 1, 'HOTEL ULTIMO PARAISO', 'POINT', '\0\0\0\0\0\0\08gDio$R¿∏ØÁå†G¿', ''),
+(422, 2, 1, 419, '1', '0xEEBA42', 1, 'HOTEL VENTURA', 'POINT', '\0\0\0\0\0\0\0;ﬂOçóÓQ¿[”º„EG¿', ''),
+(423, 2, 1, 420, '1', '0xEEBA42', 1, 'HOTEL WELLMANN', 'POINT', '\0\0\0\0\0\0\0∆m4Ä∑$R¿„6\Z¿[†G¿', ''),
+(424, 2, 1, 421, '1', '0xEEBA42', 1, 'HOTELERA SAN RAFAEL', 'POINT', '\0\0\0\0\0\0\0±øÏû<R¿∏@Ç‚«»F¿', ''),
+(425, 2, 1, 422, '1', '0xEEBA42', 1, 'N√ìMADES HOTEL BOUTIQUE', 'POINT', '\0\0\0\0\0\0\0’xÈ&1R¿Fîˆ_»F¿', ''),
+(426, 2, 1, 217, '1', '0xEEBA42', 1, 'PATAGONIA GREEN', 'POINT', '\0\0\0\0\0\0\0$óˇê~+R¿áŸŒ˜≥F¿', ''),
+(427, 2, 1, 423, '1', '0xEEBA42', 1, 'HOTEL QUEITAO PATAGONIA', 'POINT', '\0\0\0\0\0\0\0´>W[±+R¿ﬁ	ä≥F¿', ''),
+(428, 2, 1, 424, '1', '0xDE007B', 1, 'OIT SERNATUR', 'POINT', '\0\0\0\0\0\0\0a2U0*=R¿¡®§N@„E¿', ''),
+(429, 2, 1, 425, '1', '0xDE007B', 1, 'OIT SERNATUR', 'POINT', '\0\0\0\0\0\0\0	äcˆQ¿Ê?§ﬂæF¿', ''),
+(430, 2, 1, 426, '1', '0xDE007B', 1, 'OIT SERNATUR', 'POINT', '\0\0\0\0\0\0\0s◊ÚR¿Œ™œ’V¸E¿', ''),
+(431, 2, 1, 427, '1', '0xDE007B', 1, 'OIT SERNATUR', 'POINT', '\0\0\0\0\0\0\0+áŸŒ#R¿öôôôô)F¿', ''),
+(432, 2, 1, 428, '1', '0xDE007B', 1, 'OIT SERNATUR', 'POINT', '\0\0\0\0\0\0\0§ﬂæú+R¿ìV]F¿', ''),
+(433, 2, 1, 429, '1', '0xDE007B', 1, 'OIT SERNATUR', 'POINT', '\0\0\0\0\0\0\0”MbX	R¿gDioïF¿', ''),
+(434, 2, 1, 430, '1', '0xDE007B', 1, 'OIT SERNATUR', 'POINT', '\0\0\0\0\0\0\0Õ;N—ë,R¿N—ë\\˛≥F¿', ''),
+(435, 2, 1, 431, '1', '0xDE007B', 1, 'OIT SERNATUR', 'POINT', '\0\0\0\0\0\0\0 cÓZB\nR¿ÅïCãlG¿', ''),
+(436, 2, 1, 432, '1', '0xDE007B', 1, 'OIT SERNATUR', 'POINT', '\0\0\0\0\0\0\0•Ω¡&+R¿ù•Ω¡OG¿', ''),
+(437, 2, 1, 433, '1', '0xDE007B', 1, 'OIT SERNATUR', 'POINT', '\0\0\0\0\0\0\0ÙlV}ÆÓQ¿È∑ØÁDG¿', ''),
+(438, 2, 1, 434, '1', '0xDE007B', 1, 'OIT SERNATUR', 'POINT', '\0\0\0\0\0\0\0‘öÊß$R¿∏ØÁå†G¿', ''),
+(439, 2, 1, 435, '1', '0xDE007B', 1, 'OIT SERNATUR', 'POINT', '\0\0\0\0\0\0\0¡ °E∂#R¿TR''†â@H¿', ''),
+(440, 2, 1, 436, '1', '0xDE007B', 1, 'OIT SERNATUR', 'POINT', '\0\0\0\0\0\0\0jMÛéSR¿)\\è¬ı»F¿', ''),
+(441, 2, 1, 437, '1', '0x00C7F6', 1, 'CASITA DE CAMPO', 'POINT', '\0\0\0\0\0\0\07âA`Â4R¿''¬ÜßWÇG¿', ''),
+(442, 2, 1, 438, '1', '0xEEBA42', 1, 'RESIDENCIAL IBA√ëEZ', 'POINT', '\0\0\0\0\0\0\0ŒQ⁄˚Q¿Ω„…%G¿', ''),
+(443, 2, 1, 439, '1', '0xEEBA42', 1, 'RESIDENCIAL MARIA', 'POINT', '\0\0\0\0\0\0\0-≤ùÔ˚Q¿Ø%‰Éû%G¿', ''),
+(444, 2, 1, 440, '1', '0x00C7F6', 1, 'EL RINC√ìN DE MIRNA', 'POINT', '\0\0\0\0\0\0\0€˘~jºÏQ¿HPÙF¿', ''),
+(445, 2, 1, 441, '1', '0x00C7F6', 1, 'PARRILLAS DON JOAQU√çN', 'POINT', '\0\0\0\0\0\0\0Zıπ⁄äR¿àÙ€◊ÅÀF¿', ''),
+(446, 2, 1, 217, '1', '0x00C7F6', 1, 'PATAGONIA GREEN', 'POINT', '\0\0\0\0\0\0\0$óˇê~+R¿áŸŒ˜≥F¿', ''),
+(447, 2, 1, 442, '1', '0x00C7F6', 1, 'QUINCHO DE DON NO√â', 'POINT', '\0\0\0\0\0\0\0J+áR¿L7âA`•F¿', ''),
+(448, 2, 1, 443, '1', '0x00C7F6', 1, 'QUINCHO LAS ALPACAS', 'POINT', '\0\0\0\0\0\0\0\Z¿[ A%R¿ô*ï‘±F¿', ''),
+(449, 2, 1, 444, '1', '0x00C7F6', 1, 'RESTAURANT ENTRE AMIGOS', 'POINT', '\0\0\0\0\0\0\0!∞rhëR¿R∏ÖÎ—F¿', ''),
+(450, 2, 1, 445, '1', '0x00C7F6', 1, 'RESTAURANT Y CABA√ëAS ENTRE PATAGONES', 'POINT', '\0\0\0\0\0\0\0Ä∑@Ç‚#R¿Ï/ª'';H¿', ''),
+(451, 2, 1, 446, '1', '0x00C7F6', 1, 'SAN GABRIEL', 'POINT', '\0\0\0\0\0\0\0π¸áÙ€#R¿Î‚6\Z¿;H¿', ''),
+(452, 2, 1, 447, '1', '0x00C7F6', 1, 'SIN RESERVA', 'POINT', '\0\0\0\0\0\0\0Gx$R¿}?5^∫…F¿', ''),
+(453, 2, 1, 448, '1', '0x00C7F6', 1, 'ADA`S CAFE RESTAURANT', 'POINT', '\0\0\0\0\0\0\0[B>ËŸ$R¿OØîe†G¿', ''),
+(454, 2, 1, 449, '1', '0x00C7F6', 1, 'CAFE REFER', 'POINT', '\0\0\0\0\0\0\0_òLåÓQ¿∞rhëÌDG¿', ''),
+(455, 2, 1, 450, '1', '0x00C7F6', 1, 'CAFE RESTAURANT ANTU MAPU', 'POINT', '\0\0\0\0\0\0\0ÿÅsFîÓQ¿w-!ÙDG¿', ''),
+(456, 2, 1, 451, '1', '0x00C7F6', 1, 'EL MUELLE CAFE - RESTAURANT', 'POINT', '\0\0\0\0\0\0\0ÚAœf’#R¿(µ¶)F¿', ''),
+(457, 2, 1, 402, '1', '0x00C7F6', 1, 'ESPACIO Y TIEMPO - HOTEL DE MONTA√ëA', 'POINT', '\0\0\0\0\0\0\0=õUü´R¿ïeàc]¸E¿', ''),
+(458, 2, 1, 452, '1', '0x00C7F6', 1, 'LA MERCE', 'POINT', '\0\0\0\0\0\0\0vq\r‡ÌQ¿46<EG¿', ''),
+(459, 2, 1, 453, '1', '0x00C7F6', 1, 'LOS MA√ëIOS DEL QUEULAT', 'POINT', '\0\0\0\0\0\0\0àÙ€◊Å#R¿oÖ…T)F¿', ''),
+(460, 2, 1, 454, '1', '0x00C7F6', 1, 'MI CASITA DE TE', 'POINT', '\0\0\0\0\0\0\0ˆ(\\è¬R¿È&1¨¸E¿', ''),
+(461, 2, 1, 455, '1', '0x00C7F6', 1, 'RESTAURANT EL FOGON', 'POINT', '\0\0\0\0\0\0\0ﬂOçónÓQ¿i\0oÅEG¿', ''),
+(462, 2, 1, 456, '1', '0x00C7F6', 1, 'RESTAURANT TUR√çSTICO ', 'POINT', '\0\0\0\0\0\0\0–Dÿ$R¿p_Œ°G¿', ''),
+(463, 2, 1, 457, '1', '0x00C7F6', 1, 'RESTAURANT YAMILY Y BEATRIZ', 'POINT', '\0\0\0\0\0\0\0QköwúÓQ¿0*©–DG¿', '');
+INSERT INTO `destino` (`idDestino`, `idEstadoDestino`, `idCliente`, `idBiblioteca`, `icono`, `color`, `tienePanel`, `nombre`, `tipoGeometria`, `geom`, `geometria`) VALUES
+(464, 2, 1, 458, '1', '0x00C7F6', 1, 'RESTAURANTE KAIKE', 'POINT', '\0\0\0\0\0\0\0|Ú∞PkÓQ¿0ª''EG¿', ''),
+(465, 2, 1, 459, '1', '0x00C7F6', 1, 'RESTAURANTE SABORES LOCALES', 'POINT', '\0\0\0\0\0\0\0É¿ °EbR¿ÿÙJYÊG¿', ''),
+(466, 2, 1, 460, '1', '0x00C7F6', 1, 'RESTORANT LA COSTANERA DE PUERTO GUADAL', 'POINT', '\0\0\0\0\0\0\0i\0oÅ-R¿¡ °E∂kG¿', ''),
+(467, 2, 1, 461, '1', '0x00C7F6', 1, 'RUCA MANQUE', 'POINT', '\0\0\0\0\0\0\0Âa°÷4+R¿ú3¢¥OG¿', ''),
+(468, 2, 1, 462, '1', '0x00C7F6', 1, 'TAMANGO RESTAURANT', 'POINT', '\0\0\0\0\0\0\0Î‚6\ZI¿˜_òLEU¿', ''),
+(469, 2, 1, 463, '1', '0x00C7F6', 1, 'CAF√â DE MAYO', 'POINT', '\0\0\0\0\0\0\0±øÏû<R¿©§N@…F¿', ''),
+(470, 2, 1, 464, '1', '0x00C7F6', 1, 'CAFE MONTANA', 'POINT', '\0\0\0\0\0\0\0HPR¿b°÷4Ô»F¿', ''),
+(471, 2, 1, 465, '1', '0x00C7F6', 1, 'CAFE REAGGAL', 'POINT', '\0\0\0\0\0\0\0˚ÀÓ…√ÓQ¿>ËŸ¨˙DG¿', ''),
+(472, 2, 1, 466, '1', '0x00C7F6', 1, 'CAFETERIA Y CHOCOLATERIA LA OVEJITA', 'POINT', '\0\0\0\0\0\0\0\n◊£p=I¿a√”+EU¿', ''),
+(473, 2, 1, 467, '1', '0x00C7F6', 1, 'CAMELLO PATAGON', 'POINT', '\0\0\0\0\0\0\0NbX9R¿åπk	˘»F¿', ''),
+(474, 2, 1, 468, '1', '0x00C7F6', 1, 'FITZ ROY CAFE', 'POINT', '\0\0\0\0\0\0\0#€˘~jR¿)Ì\ræ0…F¿', ''),
+(475, 2, 1, 469, '1', '0x00C7F6', 1, 'FORASTERO CAFE', 'POINT', '\0\0\0\0\0\0\0xú¢#π,R¿$π¸áÙ≥F¿', ''),
+(476, 2, 1, 470, '1', '0x00C7F6', 1, 'CAFE ROSSBACH', 'POINT', '\0\0\0\0\0\0\09÷≈m4$R¿}?5^∫)F¿', ''),
+(477, 2, 1, 471, '1', '0xEEBA42', 1, 'HOTEL Y CABA√ëAS MORALEDA', 'POINT', '\0\0\0\0\0\0\0Gr˘È+R¿°¯1ÊÆµF¿', ''),
+(478, 2, 1, 472, '1', '0xEEBA42', 1, 'VILLARRICA', 'POINT', '\0\0\0\0\0\0\0n£º\nR¿V-≤ùG¿', ''),
+(479, 2, 1, 473, '1', '0x00C3BA', 1, 'BUEN VIAJE', 'POINT', '\0\0\0\0\0\0\0NbX9R¿õÊßË»F¿', ''),
+(480, 2, 1, 474, '1', '0x00C3BA', 1, 'CABALGATA AVENTURA', 'POINT', '\0\0\0\0\0\0\0’xÈ&1R¿H·zÆG¿', ''),
+(481, 2, 1, 475, '1', '0x00C3BA', 1, 'C√ÅMARA DE TURISMO DE COYHAIQUE', 'POINT', '\0\0\0\0\0\0\0’	h"lR¿+á…F¿', ''),
+(482, 2, 1, 476, '1', '0x00C3BA', 1, 'CASA DEL TURISMO RURAL', 'POINT', '\0\0\0\0\0\0\0’	h"lR¿+á…F¿', ''),
+(483, 2, 1, 477, '1', '0x00C3BA', 1, 'COYHAIQUE RIVER TOUR OPERADOR', 'POINT', '\0\0\0\0\0\0\0$(~å}S¿Vü´≠ÿ«F¿', ''),
+(484, 2, 1, 478, '1', '0x00C3BA', 1, 'CRISTHOPHER PI√ëEIRA CONCHA', 'POINT', '\0\0\0\0\0\0\0ûÔß∆KR¿äé‰Ú F¿', ''),
+(485, 2, 1, 479, '1', '0x00C3BA', 1, 'DESTINO PATAGONIA', 'POINT', '\0\0\0\0\0\0\08gDi+R¿-≤ùÔOG¿', ''),
+(486, 2, 1, 480, '1', '0x00C3BA', 1, 'EMA MORALES', 'POINT', '\0\0\0\0\0\0\0∑—\0ﬁR¿5Ô8EG F¿', ''),
+(487, 2, 1, 481, '1', '0x00C3BA', 1, 'ENPATAGONIA TURISMO', 'POINT', '\0\0\0\0\0\0\0øú3¢R¿≈˛≤{Ú»F¿', ''),
+(488, 2, 1, 206, '1', '0x00C3BA', 1, 'ENTRE PATAGONES', 'POINT', '\0\0\0\0\0\0\0Ä∑@Ç‚#R¿Ï/ª'';H¿', ''),
+(489, 2, 1, 482, '1', '0x00C3BA', 1, 'EXPERIENCIA AUSTRAL', 'POINT', '\0\0\0\0\0\0\0ù•Ω¡#R¿öôôôô)F¿', ''),
+(490, 2, 1, 483, '1', '0x00C3BA', 1, 'FRANCISCO CROXATTO', 'POINT', '\0\0\0\0\0\0\0z6´>W+R¿\0\0\0\0\0PG¿', ''),
+(491, 2, 1, 484, '1', '0x00C3BA', 1, 'GEOTURISMO PATAGONIA', 'POINT', '\0\0\0\0\0\0\0¯¬d™`R¿oÉ¿ …F¿', ''),
+(492, 2, 1, 485, '1', '0x00C3BA', 1, 'GONZALO AGUILERA', 'POINT', '\0\0\0\0\0\0\0ÒÙJYÜ,R¿àÙ€◊Å≥F¿', ''),
+(493, 2, 1, 486, '1', '0x00C3BA', 1, 'GRAN PATAGONIA', 'POINT', '\0\0\0\0\0\0\0\\ AÒcR¿Sñ!éu…F¿', ''),
+(494, 2, 1, 487, '1', '0x00C3BA', 1, 'GUILLERMO CIFUENTES QUINTANILLA', 'POINT', '\0\0\0\0\0\0\0ë~˚:pR¿4¢¥7¯ F¿', ''),
+(495, 2, 1, 488, '1', '0x00C3BA', 1, 'HECTOR SUBIABRE SEPULVEDA', 'POINT', '\0\0\0\0\0\0\0ø}8gR¿B>ËŸ¨ F¿', ''),
+(496, 2, 1, 489, '1', '0x00C3BA', 1, 'HUENTEC√ì', 'POINT', '\0\0\0\0\0\0\0öû*R¿”º„QG¿', ''),
+(497, 2, 1, 490, '1', '0x00C3BA', 1, 'JULIO MEIER TRUJILLO', 'POINT', '\0\0\0\0\0\0\0¯¬d™`R¿EGr˘…F¿', ''),
+(498, 2, 1, 491, '1', '0x00C3BA', 1, 'K√ÅPENKE E.I.R.L.', 'POINT', '\0\0\0\0\0\0\0]m≈˛≤R¿&S£í F¿', ''),
+(499, 2, 1, 492, '1', '0x00C3BA', 1, 'KARLA MORALES SANDOVAL', 'POINT', '\0\0\0\0\0\0\0‹FxR¿‡ú•Ω…F¿', ''),
+(500, 2, 1, 493, '1', '0x00C3BA', 1, 'PARQUE AIKEN', 'POINT', '\0\0\0\0\0\0\0˘È∑Ø/R¿|Ú∞Pk∫F¿', ''),
+(501, 2, 1, 494, '1', '0x00C3BA', 1, 'PATAGONA RAFTING', 'POINT', '\0\0\0\0\0\0\0Ö|–≥YR¿â“ﬁ‡ÀF¿', ''),
+(502, 2, 1, 495, '1', '0x00C3BA', 1, 'PATAGONIA GREEN', 'POINT', '\0\0\0\0\0\0\0ÖÎQ∏*R¿=õUü≥F¿', ''),
+(503, 2, 1, 496, '1', '0x00C3BA', 1, 'PATAGONIAXPRESS', 'POINT', '\0\0\0\0\0\0\0 √B≠iÓQ¿0ª''EG¿', ''),
+(504, 2, 1, 497, '1', '0x00C3BA', 1, 'PURAPATAGONIA', 'POINT', '\0\0\0\0\0\0\0HPR¿7âA`Â»F¿', ''),
+(505, 2, 1, 498, '1', '0x00C3BA', 1, 'RODRIGO MANSILLA HERNANDEZ', 'POINT', '\0\0\0\0\0\0\0™ÇQIùR¿PçónÀF¿', ''),
+(506, 2, 1, 499, '1', '0x00C3BA', 1, 'SOUTH ANGLERS', 'POINT', '\0\0\0\0\0\0\0n4Ä∑@R¿&S£í F¿', ''),
+(507, 2, 1, 500, '1', '0x00C3BA', 1, 'SOY PATAGON', 'POINT', '\0\0\0\0\0\0\0˜‰a°÷R¿p_Œ…F¿', ''),
+(508, 2, 1, 501, '1', '0x00C3BA', 1, 'STEFFEN - AVENTURA', 'POINT', '\0\0\0\0\0\0\0µ¶y«)bR¿í\\˛C˙ÂG¿', ''),
+(509, 2, 1, 502, '1', '0x00C3BA', 1, 'TEHUELCHE PATAGONIA TOUR', 'POINT', '\0\0\0\0\0\0\0¯S„•õR¿S£í:…F¿', ''),
+(510, 2, 1, 503, '1', '0x00C3BA', 1, 'THE BRITISH GUIDE', 'POINT', '\0\0\0\0\0\0\0AÒcÃ]R¿”º„…F¿', ''),
+(511, 2, 1, 504, '1', '0x00C3BA', 1, 'THE PATAGONIAN EXPERIENCE', 'POINT', '\0\0\0\0\0\0\0?∆‹µÑR¿+á…F¿', ''),
+(512, 2, 1, 505, '1', '0x00C3BA', 1, 'TRAVEL CITY AROUND', 'POINT', '\0\0\0\0\0\0\0æü\Z/›R¿O@a√ÀF¿', ''),
+(513, 2, 1, 506, '1', '0x00C3BA', 1, 'TURISMO ANULEN', 'POINT', '\0\0\0\0\0\0\0›$ÅïR¿&S£ F¿', ''),
+(514, 2, 1, 507, '1', '0x00C3BA', 1, 'TURISMO DESCUBREPATAGONIA', 'POINT', '\0\0\0\0\0\0\0Íï≤qR¿b°÷4Ô»F¿', ''),
+(515, 2, 1, 508, '1', '0x00C3BA', 1, 'TURISMO PATAGONIA MARMOL TOUR', 'POINT', '\0\0\0\0\0\0\0…Â?§R¿m≈˛≤{ F¿', ''),
+(516, 2, 1, 509, '1', '0x00C3BA', 1, 'TURISMO Y CONSTRUCCION BLACKTROUT EIRL', 'POINT', '\0\0\0\0\0\0\0.ˇ!˝ˆR¿¥Yıπ⁄ F¿', ''),
+(517, 2, 1, 510, '1', '0x00C3BA', 1, 'VALLE LEONES', 'POINT', '\0\0\0\0\0\0\0Ç‚«òª*R¿7âA`ÂPG¿', ''),
+(518, 2, 1, 511, '1', '0x00C3BA', 1, 'VILLA O&#x27;HIGGINS EXPEDICIONES', 'POINT', '\0\0\0\0\0\0\0´œ’VÏ#R¿˚ÀÓ…;H¿', ''),
+(519, 2, 1, 512, '1', '0x00C3BA', 1, 'VULTURPATAGONIA', 'POINT', '\0\0\0\0\0\0\0Å&¬Üß#R¿@a√”;H¿', ''),
+(520, 2, 1, 513, '1', '0x00C3BA', 1, 'AVENTURAYSEN.CL', 'POINT', '\0\0\0\0\0\0\0~8gD	R¿Ï/ª''ÀF¿', ''),
+(521, 2, 1, 514, '1', '0x00C3BA', 1, 'GU√çA DE PESCA ANDREAS MANSTEIN', 'POINT', '\0\0\0\0\0\0\0#€˘~jR¿ß∆K7…F¿', ''),
+(522, 2, 1, 515, '1', '0x00C3BA', 1, 'MARK ROY', 'POINT', '\0\0\0\0\0\0\0Íï≤qR¿Ω„…’F¿', ''),
+(523, 2, 1, 516, '1', '0x00C3BA', 1, 'MARTA GU√çA DE TURISMO', 'POINT', '\0\0\0\0\0\0\0V-≤ùR¿óˇê~˚ F¿', ''),
+(524, 2, 1, 517, '1', '0x00C3BA', 1, 'PATAGONE TRAVELLING', 'POINT', '\0\0\0\0\0\0\0ÙlV}Æ˛Q¿àÖZ”ºÀF¿', ''),
+(525, 2, 1, 518, '1', '0x00C3BA', 1, 'SOUTHERN LATITUDES FLY FISHING &amp; TOURS', 'POINT', '\0\0\0\0\0\0\0Ê?§ﬂæ˙Q¿[”º„≈F¿', ''),
+(526, 2, 1, 519, '1', '0x00C3BA', 1, 'SOUTH TRAIL', 'POINT', '\0\0\0\0\0\0\02w-!R¿∂Û˝‘x…F¿', ''),
+(527, 2, 1, 520, '1', '0x00C3BA', 1, 'FRANCO JAVIER CAYUPI CUEVAS', 'POINT', '\0\0\0\0\0\0\0≠˙\\m≈ÊQ¿vOjΩF¿', ''),
+(528, 2, 1, 521, '1', '0x00C3BA', 1, 'GU√çA REGIONAL SANDRA CARCAMO', 'POINT', '\0\0\0\0\0\0\0Ö…T¡,R¿@a√”≥F¿', ''),
+(529, 2, 1, 522, '1', '0x00C3BA', 1, 'JORGE LEPIO OYARZUN', 'POINT', '\0\0\0\0\0\0\0´œ’VÏ+R¿%ÅïC≥F¿', ''),
+(530, 2, 1, 523, '1', '0x00C3BA', 1, 'JIMMY LAZARO VALD√âS BAIGORRIA', 'POINT', '\0\0\0\0\0\0\0Íï≤q$R¿õUü´≠†G¿', ''),
+(531, 2, 1, 524, '1', '0x00C3BA', 1, 'ELISABETH DE R√çO √ëADIS', 'POINT', '\0\0\0\0\0\0\0«K7âA<R¿;ﬂOçóæG¿', ''),
+(532, 2, 1, 525, '1', '0x00C3BA', 1, 'TROLLING PESCA CON MOSCA', 'POINT', '\0\0\0\0\0\0\0◊ÚAœÓQ¿È&1¨DG¿', ''),
+(533, 2, 1, 526, '1', '0x00C3BA', 1, 'FELIPE RAILEN', 'POINT', '\0\0\0\0\0\0\0z6´>+R¿\0ë~˚:PG¿', ''),
+(534, 2, 1, 527, '1', '0x00C3BA', 1, 'AGUAHIELO EXPEDICIONES', 'POINT', '\0\0\0\0\0\0\0€ä˝e˜4R¿F%uÇG¿', ''),
+(535, 2, 1, 528, '1', '0x00C3BA', 1, 'ALMA PATAGONICA EXPEDICIONES', 'POINT', '\0\0\0\0\0\0\0ÒcÃ]KR¿`Â–"€…F¿', ''),
+(536, 2, 1, 529, '1', '0x00C3BA', 1, 'ANDES PATAGONICOS', 'POINT', '\0\0\0\0\0\0\0|Ú∞Pk\nR¿÷≈m4Ä◊F¿', ''),
+(537, 2, 1, 530, '1', '0x00C3BA', 1, 'ARTEMIO BENEDICTO RUIZ FUENTES', 'POINT', '\0\0\0\0\0\0\05Ô8EGbR¿X9¥»vÊG¿', ''),
+(538, 2, 1, 531, '1', '0x00C3BA', 1, 'AVENTURA TEHUELCHE', 'POINT', '\0\0\0\0\0\0\0q¨ã€hR¿_ŒQ F¿', ''),
+(539, 2, 1, 513, '1', '0x00C3BA', 1, 'AVENTURAYSEN.CL', 'POINT', '\0\0\0\0\0\0\0~8gD	R¿Ï/ª''ÀF¿', ''),
+(540, 2, 1, 532, '1', '0x00C3BA', 1, 'AYSEN RIVERS OUTFITTER', 'POINT', '\0\0\0\0\0\0\0MÛéStR¿˛‘xÈ&…F¿', ''),
+(541, 2, 1, 533, '1', '0x00C3BA', 1, 'BAKER PATAGONIA AVENTURA', 'POINT', '\0\0\0\0\0\0\07\Z¿[ 5R¿`vOÇG¿', ''),
+(542, 2, 1, 534, '1', '0x00C3BA', 1, 'BORDE R√çO TORTEL', 'POINT', '\0\0\0\0\0\0\0C≠iﬁqbR¿+áŸÊG¿', ''),
+(543, 2, 1, 535, '1', '0x00C3BA', 1, 'CINCO RIOS CHILE', 'POINT', '\0\0\0\0\0\0\0Íï≤qR¿EGr˘…F¿', ''),
+(544, 2, 1, 536, '1', '0x00C3BA', 1, 'CLUB DE MONTA√ëA ANDINO PATAGONICO', 'POINT', '\0\0\0\0\0\0\0«K7âAR¿''1¨ F¿', ''),
+(545, 2, 1, 537, '1', '0x00C3BA', 1, 'COYHAIQUE RIVER GUIDES', 'POINT', '\0\0\0\0\0\0\0±PköwR¿@a√”ÀF¿', ''),
+(546, 2, 1, 538, '1', '0x00C3BA', 1, 'DIVISADERO TURISMO', 'POINT', '\0\0\0\0\0\0\0∞Áå(R¿›µÑ|–ÀF¿', ''),
+(547, 2, 1, 539, '1', '0x00C3BA', 1, 'DON SEBA', 'POINT', '\0\0\0\0\0\0\0''¬ÜßWR¿RIùÄ& F¿', ''),
+(548, 2, 1, 540, '1', '0x00C3BA', 1, 'ECO EXPLORADORES PATAGONIA', 'POINT', '\0\0\0\0\0\0\0OjMR¿äé‰Ú F¿', ''),
+(549, 2, 1, 541, '1', '0x00C3BA', 1, 'EL PANGUE LODGE', 'POINT', '\0\0\0\0\0\0\0¨≠ÿ_vR¿bX9¥F¿', ''),
+(550, 2, 1, 542, '1', '0x00C3BA', 1, 'EL RASTRO EXCURSIONES', 'POINT', '\0\0\0\0\0\0\0"éuq%R¿„•õƒ †G¿', ''),
+(551, 2, 1, 543, '1', '0x00C3BA', 1, 'ENTRE AGUAS EXCURSIONES', 'POINT', '\0\0\0\0\0\0\0oÉ¿ R¿[B>ËŸ¸E¿', ''),
+(552, 2, 1, 544, '1', '0x00C3BA', 1, 'ESCUELA DE KAYAK EXPLORA EXPEDICION PATAGONIA CHILE', 'POINT', '\0\0\0\0\0\0\0ïeàc]R¿lxz•,ÀF¿', ''),
+(553, 2, 1, 545, '1', '0x00C3BA', 1, 'EXCURSIONES JAVIER VILLEGAS', 'POINT', '\0\0\0\0\0\0\0}?5^∫R¿xz•,C¸E¿', ''),
+(554, 2, 1, 546, '1', '0x00C3BA', 1, 'EXPEDCIONES PATAGONIA LANDEROS C', 'POINT', '\0\0\0\0\0\0\04¢¥7¯bR¿z6´>ÁG¿', ''),
+(555, 2, 1, 547, '1', '0x00C3BA', 1, 'EXPEDICIONES COYHAIQUE FLY FISHING - PESCA CON MOSCA', 'POINT', '\0\0\0\0\0\0\0¯¬d™`R¿EGr˘…F¿', ''),
+(556, 2, 1, 548, '1', '0x00C3BA', 1, 'EXPEDICIONES OC√âANO ANDINO', 'POINT', '\0\0\0\0\0\0\0x$(~R¿@a√””F¿', ''),
+(557, 2, 1, 549, '1', '0x00C3BA', 1, 'EXPLORASUR EXCURSIONES', 'POINT', '\0\0\0\0\0\0\00*©–(R¿ØîeàcUG¿', ''),
+(558, 2, 1, 550, '1', '0x00C3BA', 1, 'GEOSUR EXPEDICIONES', 'POINT', '\0\0\0\0\0\0\0¯¬d™`R¿oÉ¿ …F¿', ''),
+(559, 2, 1, 253, '1', '0x00C3BA', 1, 'GREEN BAKER LODGE', 'POINT', '\0\0\0\0\0\0\0Fîˆ_4R¿L7âA`ÖG¿', ''),
+(560, 2, 1, 551, '1', '0x00C3BA', 1, 'HACIENDA TRES LAGOS', 'POINT', '\0\0\0\0\0\0\0C≠iﬁq2R¿Ì\ræ0ôrG¿', ''),
+(561, 2, 1, 552, '1', '0x00C3BA', 1, 'INVERSIONES RUMBO PATAG√ìN LIMITADA', 'POINT', '\0\0\0\0\0\0\0◊4Ô8E˚Q¿x$(∆F¿', ''),
+(562, 2, 1, 553, '1', '0x00C3BA', 1, 'JULIO MEIER JR.', 'POINT', '\0\0\0\0\0\0\0¯¬d™`R¿EGr˘…F¿', ''),
+(563, 2, 1, 554, '1', '0x00C3BA', 1, 'LAPO EXPEDICIONES', 'POINT', '\0\0\0\0\0\0\0Hø}8+R¿ÒcÃ]KPG¿', ''),
+(564, 2, 1, 555, '1', '0x00C3BA', 1, 'LATITUD 47 LTDA.', 'POINT', '\0\0\0\0\0\0\0ÅïCãl+R¿’Áj+ˆOG¿', ''),
+(565, 2, 1, 556, '1', '0x00C3BA', 1, 'LOS JUACOS', 'POINT', '\0\0\0\0\0\0\0•Ω¡R¿_)À«⁄F¿', ''),
+(566, 2, 1, 557, '1', '0x00C3BA', 1, 'MARCO BECERRA', 'POINT', '\0\0\0\0\0\0\0áßW 2R¿ƒB≠iﬁ…F¿', ''),
+(567, 2, 1, 558, '1', '0x00C3BA', 1, 'MEJOR EN BICI', 'POINT', '\0\0\0\0\0\0\0\r‡-ê†$R¿*:íÀ†G¿', ''),
+(568, 2, 1, 559, '1', '0x00C3BA', 1, 'NOEL VIDAL LANDEROS', 'POINT', '\0\0\0\0\0\0\0äcÓZbR¿«∫∏çÊG¿', ''),
+(569, 2, 1, 560, '1', '0x00C3BA', 1, 'ONIXPATAGONIA', 'POINT', '\0\0\0\0\0\0\0F%uö$R¿æ0ô*†G¿', ''),
+(570, 2, 1, 561, '1', '0x00C3BA', 1, 'PASEOS NAUTICOS EL PIONERO', 'POINT', '\0\0\0\0\0\0\0Õ;N—ë,R¿OØîeà≥F¿', ''),
+(571, 2, 1, 562, '1', '0x00C3BA', 1, 'PATAGONIA ACTIVA', 'POINT', '\0\0\0\0\0\0\0ßËH.ˇÌQ¿˜u‡úEG¿', ''),
+(572, 2, 1, 563, '1', '0x00C3BA', 1, 'PATAGONIA RIDERS', 'POINT', '\0\0\0\0\0\0\0oÉ¿ R¿ñ≤q¨cG¿', ''),
+(573, 2, 1, 564, '1', '0x00C3BA', 1, 'PATAGONIA SILVESTRE', 'POINT', '\0\0\0\0\0\0\0;MÑ\rR¿vq\r‡≈F¿', ''),
+(574, 2, 1, 565, '1', '0x00C3BA', 1, 'PATAGONIAN BASECAMP', 'POINT', '\0\0\0\0\0\0\0^K»=R¿åJÍ4ÈE¿', ''),
+(575, 2, 1, 566, '1', '0x00C3BA', 1, 'PATAGONI-K EXPEDICIONES', 'POINT', '\0\0\0\0\0\0\0ÚAœf’+R¿?∆\\F¿', ''),
+(576, 2, 1, 567, '1', '0x00C3BA', 1, 'PATO KAYAK EXPEDICIONES', 'POINT', '\0\0\0\0\0\0\08gDiR¿˛C˙ÌÎ»F¿', ''),
+(577, 2, 1, 568, '1', '0x00C3BA', 1, 'PESCA EL CALAFATE', 'POINT', '\0\0\0\0\0\0\0U0*©R¿ÇsFîˆ∆F¿', ''),
+(578, 2, 1, 79, '1', '0x00C3BA', 1, 'PUERTO CRISTAL', 'POINT', '\0\0\0\0\0\0\0''†â∞·˝Q¿&S£ F¿', ''),
+(579, 2, 1, 569, '1', '0x00C3BA', 1, 'SENDEROS PATAGONIA', 'POINT', '\0\0\0\0\0\0\0C≠iﬁq\nR¿´>W[±G¿', ''),
+(580, 2, 1, 570, '1', '0x00C3BA', 1, 'TOLIN FISHING TRIPS', 'POINT', '\0\0\0\0\0\0\0úƒ ∞rR¿å€h\0o…F¿', ''),
+(581, 2, 1, 571, '1', '0x00C3BA', 1, 'TRANSPORTE ARRATIA', 'POINT', '\0\0\0\0\0\0\0W[±øÏÜP¿d]‹FËT¿', ''),
+(582, 2, 1, 572, '1', '0x00C3BA', 1, 'TRIBU PATAGONIA E.I.R.L.', 'POINT', '\0\0\0\0\0\0\0–’VÏ/+R¿úƒ ∞rPG¿', ''),
+(583, 2, 1, 573, '1', '0x00C3BA', 1, 'TSONEK EXPEDICIONES', 'POINT', '\0\0\0\0\0\0\0‰…Â#R¿¥»væü:H¿', ''),
+(584, 2, 1, 574, '1', '0x00C3BA', 1, 'TURISMO COCHRANE PATAGONIA', 'POINT', '\0\0\0\0\0\0\09÷≈m4$R¿9¥»væüG¿', ''),
+(585, 2, 1, 575, '1', '0x00C3BA', 1, 'TURISMO KALEM', 'POINT', '\0\0\0\0\0\0\0°÷4Ô8-R¿\\è¬ı(lG¿', ''),
+(586, 2, 1, 576, '1', '0x00C3BA', 1, 'TURISMO RIO EXPLORADORES -  EMTREX', 'POINT', '\0\0\0\0\0\0\0ºñêzR¿^∫IÀF¿', ''),
+(587, 2, 1, 577, '1', '0x00C3BA', 1, 'TURISMO RURAL LOS VALLES', 'POINT', '\0\0\0\0\0\0\0F∂Û˝‘R¿‘öÊß¯E¿', ''),
+(588, 2, 1, 578, '1', '0x00C3BA', 1, 'VALESKA FORMANTEL', 'POINT', '\0\0\0\0\0\0\0áßW 2R¿ã˝e˜‰…F¿', ''),
+(589, 2, 1, 579, '1', '0x00C3BA', 1, 'VIENTOS DEL SUR', 'POINT', '\0\0\0\0\0\0\0/n£ºR¿xz•,C¸E¿', ''),
+(590, 2, 1, 580, '1', '0x00C3BA', 1, 'YAGAN EXPEDITIONS &quot;CANOTAJE&quot;', 'POINT', '\0\0\0\0\0\0\0“\0ﬁ	\ZR¿ÆG·z¸E¿', ''),
+(591, 2, 1, 581, '1', '0x00C3BA', 1, 'EL PUESTO EXPEDICIONES', 'POINT', '\0\0\0\0\0\0\033333+R¿ù•Ω¡OG¿', ''),
+(592, 2, 1, 582, '1', '0x00C3BA', 1, 'EXCURSIONES EL CONDOR', 'POINT', '\0\0\0\0\0\0\0ÿ∂(≥AÜ@ûÔß∆Ká0@', ''),
+(593, 2, 1, 583, '1', '0x00C3BA', 1, 'EXCURSIONES MARAN-ATHA', 'POINT', '\0\0\0\0\0\0\0ﬁ	ä+R¿\0oÅ≈OG¿', ''),
+(594, 2, 1, 584, '1', '0x00C3BA', 1, 'EXCURSIONES RUTA M.A.S.', 'POINT', '\0\0\0\0\0\0\0Ó|?5^\nR¿»òªñêG¿', ''),
+(595, 2, 1, 585, '1', '0x00C3BA', 1, 'KAWELYEK EXPEDICIONES', 'POINT', '\0\0\0\0\0\0\0≈è1w-=R¿¥Yıπ⁄‚E¿', ''),
+(596, 2, 1, 586, '1', '0xE54265', 1, 'ANIVERSARIO DE LA CIUDAD DE COYHAIQUE', 'POINT', '\0\0\0\0\0\0\0|a2UR¿”º„…F¿', ''),
+(597, 2, 1, 587, '1', '0xE54265', 1, 'ANIVERSARIO DE LA CIUDAD DE PUERTO AYS√âN', 'POINT', '\0\0\0\0\0\0\0bX9¥,R¿@§ﬂæ¥F¿', ''),
+(598, 2, 1, 588, '1', '0xE54265', 1, 'ANIVERSARIO DE LA COMUNA DE MA√ëIHUALES', 'POINT', '\0\0\0\0\0\0\0≈ ∞rh	R¿uöñF¿', ''),
+(599, 2, 1, 589, '1', '0xE54265', 1, 'ANIVERSARIO SEMANA DE PUERTO AGUIRRE', 'POINT', '\0\0\0\0\0\0\0Ëj+ˆóaR¿MåJÍîF¿', ''),
+(600, 2, 1, 590, '1', '0x007C9D', 1, '√ÅREA DE PROTECCI√ìN CERRO HUEMULES', 'POINT', '\0\0\0\0\0\0\0v‡ú•\rR¿ª''µŒF¿', ''),
+(601, 2, 1, 591, '1', '0x007C9D', 1, 'ARTESAN√çA EN CER√ÅMICA DE PUERTO INGENIERO IB√Å√ëEZ', 'POINT', '\0\0\0\0\0\0\0Ú“Mb¸Q¿æ¡&S%G¿', ''),
+(602, 2, 1, 592, '1', '0x007C9D', 1, 'BAH√çA EXPLORADORES', 'POINT', '\0\0\0\0\0\0\0WÏ/ª''_R¿-!Ùl&G¿', ''),
+(603, 2, 1, 593, '1', '0x007C9D', 1, 'BAH√çA JARA', 'POINT', '\0\0\0\0\0\0\0¸s◊ˆQ¿ T¡®§>G¿', ''),
+(604, 2, 1, 594, '1', '0x007C9D', 1, 'BAH√çA MURTA', 'POINT', '\0\0\0\0\0\0\0;MÑ\r+R¿Q⁄|a:G¿', ''),
+(605, 2, 1, 595, '1', '0x007C9D', 1, 'BALMACEDA', 'POINT', '\0\0\0\0\0\0\0∏@Ç‚«ÏQ¿îˆ_òÙF¿', ''),
+(606, 2, 1, 596, '1', '0x007C9D', 1, 'BOSQUE PETRIFICADO CERRO BAYO', 'POINT', '\0\0\0\0\0\0\0¯¬d™`R¿öôôôô±F¿', ''),
+(607, 2, 1, 597, '1', '0x007C9D', 1, 'CALETA BUZETA', 'POINT', '\0\0\0\0\0\0\0ÇsFîˆfR¿K»=õH¿', ''),
+(608, 2, 1, 598, '1', '0x007C9D', 1, 'CALETA TORTEL (ZT)', 'POINT', '\0\0\0\0\0\0\0ﬂOçónbR¿üÕ™œ’ÊG¿', ''),
+(609, 2, 1, 599, '1', '0x007C9D', 1, 'CAMINO COYHAIQUE - PUERTO AYS√âN', 'POINT', '\0\0\0\0\0\0\0∫I+R¿Vü´≠ÿøF¿', ''),
+(610, 2, 1, 600, '1', '0x007C9D', 1, 'CAMINO LA JUNTA - LAGO VERDE', 'POINT', '\0\0\0\0\0\0\0“o_Œ\rR¿Ô8EGrF¿', ''),
+(611, 2, 1, 601, '1', '0x007C9D', 1, 'CAMINO LA JUNTA - PUERTO RA√öL MAR√çN BALMACEDA', 'POINT', '\0\0\0\0\0\0\0˛C˙ÌÎ$R¿£í:MF¿', ''),
+(612, 2, 1, 602, '1', '0x007C9D', 1, 'CAMINO PUERTO TRANQUILO - BAH√çA EXPLORADORES', 'POINT', '\0\0\0\0\0\0\0pŒà“ﬁ@R¿¸©Ò“MBG¿', ''),
+(613, 2, 1, 603, '1', '0x007C9D', 1, 'CAMPAMENTO MINERO PUERTO CRISTAL (MH)', 'POINT', '\0\0\0\0\0\0\0åJÍ4R¿+ï‘	HG¿', ''),
+(614, 2, 1, 604, '1', '0x007C9D', 1, 'CAMPO DE HIELO NORTE', 'POINT', '\0\0\0\0\0\0\0÷VÏ/ª_R¿\r‡-ê†xG¿', ''),
+(615, 2, 1, 605, '1', '0x007C9D', 1, 'CAMPO DE HIELO SUR', 'POINT', '\0\0\0\0\0\0\0ÓÎ¿9#bR¿ÃHø}mH¿', ''),
+(616, 2, 1, 606, '1', '0x007C9D', 1, 'CANAL BAKER', 'POINT', '\0\0\0\0\0\0\0å€h\0oqR¿mV}Æ∂˙G¿', ''),
+(617, 2, 1, 607, '1', '0x007C9D', 1, 'CANAL COSTA', 'POINT', '\0\0\0\0\0\0\0öû^eR¿oÉ¿ ·F¿', ''),
+(618, 2, 1, 608, '1', '0x007C9D', 1, 'CANAL DEL CHACAO', 'POINT', '\0\0\0\0\0\0\0<N—ë\\jR¿a2U0*F¿', ''),
+(619, 2, 1, 609, '1', '0x007C9D', 1, 'CANAL ELEFANTES', 'POINT', '\0\0\0\0\0\0\0~åπk	qR¿ºñêz6G¿', ''),
+(620, 2, 1, 610, '1', '0x007C9D', 1, 'CANAL ERRAZURIZ', 'POINT', '\0\0\0\0\0\0\0jºtìtR¿∞rhëÌÃF¿', ''),
+(621, 2, 1, 611, '1', '0x007C9D', 1, 'CANAL MESSIER', 'POINT', '\0\0\0\0\0\0\0-≤ùÔßÆR¿ŸŒ˜S„ÌG¿', ''),
+(622, 2, 1, 612, '1', '0x007C9D', 1, 'CANAL MORALEDA', 'POINT', '\0\0\0\0\0\0\0±øÏû<`R¿?∆‹µÑlF¿', ''),
+(623, 2, 1, 613, '1', '0x007C9D', 1, 'CANAL PUYUHUAPI', 'POINT', '\0\0\0\0\0\0\0R∏ÖÎ5R¿$óˇê~cF¿', ''),
+(624, 2, 1, 614, '1', '0x007C9D', 1, 'CANAL REFUGIO', 'POINT', '\0\0\0\0\0\0\0éHHR¿ıπ⁄ä˝˝E¿', ''),
+(625, 2, 1, 615, '1', '0x007C9D', 1, 'CANAL STEFFENS', 'POINT', '\0\0\0\0\0\0\0∆‹µÑ|lR¿Û“o_ﬂG¿', ''),
+(626, 2, 1, 616, '1', '0x007C9D', 1, 'CAPILLA DE M√ÅRMOL (SN)', 'POINT', '\0\0\0\0\0\0\0+ˆó›ì''R¿àc]‹FSG¿', ''),
+(627, 2, 1, 617, '1', '0xE54265', 1, 'CARRERA DE AVENTURA- DESAF√çO AYS√âN INVERNAL', 'POINT', '\0\0\0\0\0\0\0q¨ã€hR¿EGr˘…F¿', ''),
+(628, 2, 1, 618, '1', '0xE54265', 1, 'CARRERA DE AVENTURA- DESAF√çO AYS√âN VERANO', 'POINT', '\0\0\0\0\0\0\0ïeàc]R¿‚Èï≤…F¿', ''),
+(629, 2, 1, 619, '1', '0x007C9D', 1, 'CASCADA DE LA VIRGEN', 'POINT', '\0\0\0\0\0\0\0ŒQ⁄R¿&S£∫F¿', ''),
+(630, 2, 1, 620, '1', '0x007C9D', 1, 'CASCADA VELO DE LA NOVIA', 'POINT', '\0\0\0\0\0\0\0ˇ≤{Ú∞R¿∫I+øF¿', ''),
+(631, 2, 1, 621, '1', '0x007C9D', 1, 'CENTRAL HIDROEL√âCTRICA R√çO LOS PALOS', 'POINT', '\0\0\0\0\0\0\0å€h\0o-R¿Ú“Mb∞F¿', ''),
+(632, 2, 1, 622, '1', '0x007C9D', 1, 'CENTRO DE VISITANTES RESERVA NACIONAL R√çO SIMPSON', 'POINT', '\0\0\0\0\0\0\0…Â?R¿¥»væü∫F¿', ''),
+(633, 2, 1, 623, '1', '0x007C9D', 1, 'CERRO CACHET', 'POINT', '\0\0\0\0\0\0\0Îsµ˚cR¿]˛C˙ÌãG¿', ''),
+(634, 2, 1, 624, '1', '0x007C9D', 1, 'CERRO CASTILLO', 'POINT', '\0\0\0\0\0\0\0vq\r‡	R¿‰ÉûÕ™G¿', ''),
+(635, 2, 1, 625, '1', '0x007C9D', 1, 'CERRO MANO NEGRA', 'POINT', '\0\0\0\0\0\0\0òLåJ˙Q¿óêz6ªF¿', ''),
+(636, 2, 1, 626, '1', '0x007C9D', 1, 'CERRO PARED NORTE', 'POINT', '\0\0\0\0\0\0\0"˝ˆu‡`R¿À«∫∏•G¿', ''),
+(637, 2, 1, 627, '1', '0x007C9D', 1, 'CERRO PARED SUR', 'POINT', '\0\0\0\0\0\0\0:íÀH_R¿uö∂G¿', ''),
+(638, 2, 1, 628, '1', '0x007C9D', 1, 'CHILE CHICO', 'POINT', '\0\0\0\0\0\0\0n4Ä∑@ÓQ¿ÈH.ˇ!EG¿', ''),
+(639, 2, 1, 629, '1', '0x007C9D', 1, 'COCHRANE', 'POINT', '\0\0\0\0\0\0\0MÑ\rOØ$R¿çónÉ†G¿', ''),
+(640, 2, 1, 630, '1', '0x007C9D', 1, 'CONFLUENCIA R√çOS BAKER Y NEF', 'POINT', '\0\0\0\0\0\0\0Ëj+ˆó1R¿‰ÉûÕ™èG¿', ''),
+(641, 2, 1, 631, '1', '0x007C9D', 1, 'COYHAIQUE', 'POINT', '\0\0\0\0\0\0\0™Ò“MbR¿”º„…F¿', ''),
+(642, 2, 1, 632, '1', '0x007C9D', 1, 'CUEVA R√çO PEDREGOSO (MA)', 'POINT', '\0\0\0\0\0\0\0a2U0*ÒQ¿ºñêz^G¿', ''),
+(643, 2, 1, 633, '1', '0xE54265', 1, 'ENCUENTRO COSTUMBRISTA &quot;LA TRILLA COMO LO HAC√çA MI ABUELO&quot;', 'POINT', '\0\0\0\0\0\0\0≤.n£¸Q¿0L¶\nF%G¿', ''),
+(644, 2, 1, 634, '1', '0xE54265', 1, 'ENCUENTRO COSTUMBRISTA &quot;TROPEANDO PARA NO OLVIDAR&quot;', 'POINT', '\0\0\0\0\0\0\0è‰Ú“#R¿≤.n£<H¿', ''),
+(645, 2, 1, 635, '1', '0xE54265', 1, 'ENCUENTRO COSTUMBRISTA RESCATANDO TRADICIONES DE VILLA CERRO CASTILLO', 'POINT', '\0\0\0\0\0\0\0É¿ °E\nR¿»òªñêG¿', ''),
+(646, 2, 1, 636, '1', '0x007C9D', 1, 'ESCUELA ANTIGUA DE CERRO CASTILLO (MH)', 'POINT', '\0\0\0\0\0\0\0—ë\\˛C\nR¿r˘È∑G¿', ''),
+(647, 2, 1, 637, '1', '0x007C9D', 1, 'ESTANCIA BA√ëO NUEVO', 'POINT', '\0\0\0\0\0\0\0R∏ÖÎ·Q¿äcÓZ¢F¿', ''),
+(648, 2, 1, 638, '1', '0x007C9D', 1, 'ESTANCIA R√çO CISNES', 'POINT', '\0\0\0\0\0\0\0Gr˘È”Q¿9¥»væ?F¿', ''),
+(649, 2, 1, 639, '1', '0x007C9D', 1, 'ESTERO BERNARDO', 'POINT', '\0\0\0\0\0\0\0Gx$ÑR¿;MÑ\r?H¿', ''),
+(650, 2, 1, 640, '1', '0x007C9D', 1, 'ESTERO DE QUITRALCO (SN)', 'POINT', '\0\0\0\0\0\0\0oÉ¿ YR¿†â∞·ÈÂF¿', ''),
+(651, 2, 1, 641, '1', '0x007C9D', 1, 'ESTERO STEELE', 'POINT', '\0\0\0\0\0\0\0’Áj+ˆ_R¿vq\r‡\rH¿', ''),
+(652, 2, 1, 642, '1', '0xE54265', 1, 'EXPOCERVEZA', 'POINT', '\0\0\0\0\0\0\0Õ;N—ëR¿p_Œ…F¿', ''),
+(653, 2, 1, 643, '1', '0xE54265', 1, 'EXPOPATAGONIA', 'POINT', '\0\0\0\0\0\0\0oÖ…TR¿ﬁqäé‰ F¿', ''),
+(654, 2, 1, 644, '1', '0x007C9D', 1, 'FACHINAL', 'POINT', '\0\0\0\0\0\0\0t$óˇêR¿ÙlV}FG¿', ''),
+(655, 2, 1, 645, '1', '0xE54265', 1, 'FERIA DEL TERRITORIO CHELENKO', 'POINT', '\0\0\0\0\0\0\09EGr˘˚Q¿Ö|–≥Y%G¿', ''),
+(656, 2, 1, 646, '1', '0xE54265', 1, 'FESTIVAL CAMPERO EN EL LAGO POLLUX', 'POINT', '\0\0\0\0\0\0\0±Pköw¯Q¿–’VÏ/€F¿', ''),
+(657, 2, 1, 647, '1', '0xE54265', 1, 'FESTIVAL DE CINE DE LA PATAGONIA', 'POINT', '\0\0\0\0\0\0\01¨ZR¿˛‘xÈ&…F¿', ''),
+(658, 2, 1, 648, '1', '0xE54265', 1, 'FESTIVAL DE JINETEADAS Y FOLKLORE', 'POINT', '\0\0\0\0\0\0\0«∫∏ç¸Q¿vOj%G¿', ''),
+(659, 2, 1, 649, '1', '0xE54265', 1, 'FESTIVAL DE LA VOZ DE CHILE CHICO', 'POINT', '\0\0\0\0\0\0\0\n◊£p=ÓQ¿[”º„EG¿', ''),
+(660, 2, 1, 650, '1', '0xE54265', 1, 'FESTIVAL GASTRON√ìMICO LOS FIORDOS DE DARWIN', 'POINT', '\0\0\0\0\0\0\0⁄¨˙\\maR¿"˝ˆu‡îF¿', ''),
+(661, 2, 1, 651, '1', '0xE54265', 1, 'FESTIVAL GLACIARES DEL SUR - ANIVERSARIO DE VILLA O&#x27;HIGGINS', 'POINT', '\0\0\0\0\0\0\0≤ùÔß∆#R¿˘†g≥Í;H¿', ''),
+(662, 2, 1, 652, '1', '0xE54265', 1, 'FESTIVAL INTERNACIONAL DE JINETEADAS Y FESTIVAL COSTUMBRISTA', 'POINT', '\0\0\0\0\0\0\0Q⁄|aˆQ¿X9¥»F¿', ''),
+(663, 2, 1, 653, '1', '0xE54265', 1, 'FESTIVAL INTERNACIONAL DE JINETEADAS Y FIESTA DE LA CARRETERA AUSTRAL', 'POINT', '\0\0\0\0\0\0\0}Æ∂b\rR¿´>W[±_F¿', ''),
+(664, 2, 1, 654, '1', '0xE54265', 1, 'FESTIVAL INTERNACIONAL DEL CABALLO VILLA LA TAPERA', 'POINT', '\0\0\0\0\0\0\0–DÿÙÍQ¿Ì\ræ0ôRF¿', ''),
+(665, 2, 1, 655, '1', '0xE54265', 1, 'FIESTA CAMPESINA VILLA MA√ëIHUALES', 'POINT', '\0\0\0\0\0\0\0˛e˜‰a	R¿ıπ⁄ä˝ïF¿', ''),
+(666, 2, 1, 656, '1', '0xE54265', 1, 'FIESTA COSTUMBRISTA &quot;ENTRE CURANTO Y KUCHEN&quot;', 'POINT', '\0\0\0\0\0\0\0«):íÀ#R¿å€h\0o)F¿', ''),
+(667, 2, 1, 657, '1', '0xE54265', 1, 'FIESTA COSTUMBRISTA COCHRANE', 'POINT', '\0\0\0\0\0\0\0xú¢#π$R¿∏ØÁå†G¿', ''),
+(668, 2, 1, 658, '1', '0xE54265', 1, 'FIESTA DE LOS R√çOS', 'POINT', '\0\0\0\0\0\0\0R∏ÖÎR¿Íï≤q¸E¿', ''),
+(669, 2, 1, 659, '1', '0xE54265', 1, 'FIESTA DEL ARREO', 'POINT', '\0\0\0\0\0\0\0tFîˆ+R¿—ë\\˛C:G¿', ''),
+(670, 2, 1, 660, '1', '0xE54265', 1, 'FIESTA DEL MAR DE PUERTO RA√öL MAR√çN BALMACEDA', 'POINT', '\0\0\0\0\0\0\0i\0oÅ=R¿•N@a„E¿', ''),
+(671, 2, 1, 661, '1', '0x007C9D', 1, 'FIORDO AYS√âN', 'POINT', '\0\0\0\0\0\0\0ëz6´:R¿’	h"l∏F¿', ''),
+(672, 2, 1, 662, '1', '0x007C9D', 1, 'FIORDO OFHIDRO', 'POINT', '\0\0\0\0\0\0\0YÜ8÷≈}R¿[±øÏû4H¿', ''),
+(673, 2, 1, 663, '1', '0x007C9D', 1, 'GLACIAR MOSCO', 'POINT', '\0\0\0\0\0\0\0´>W[±R¿“o_Œ9H¿', ''),
+(674, 2, 1, 664, '1', '0xE54265', 1, 'ICE FEST PATAG√ìNICO', 'POINT', '\0\0\0\0\0\0\0ôªñê\nR¿6´>W[	G¿', ''),
+(675, 2, 1, 665, '1', '0x007C9D', 1, 'ISLA BYRON', 'POINT', '\0\0\0\0\0\0\0*:íÀ»R¿ˆó›ìáÂG¿', ''),
+(676, 2, 1, 666, '1', '0x007C9D', 1, 'ISLA DE LOS MUERTOS (MH)', 'POINT', '\0\0\0\0\0\0\0ÒÙJYÜdR¿?5^∫I‰G¿', ''),
+(677, 2, 1, 667, '1', '0x007C9D', 1, 'ISLA HUEMULES', 'POINT', '\0\0\0\0\0\0\0¸s◊nR¿;MÑ\rˇF¿', ''),
+(678, 2, 1, 668, '1', '0x007C9D', 1, 'ISLA JAMES', 'POINT', '\0\0\0\0\0\0\0ÁßËHÜR¿4Ä∑@ÇzF¿', ''),
+(679, 2, 1, 669, '1', '0x007C9D', 1, 'ISLA JECHICA', 'POINT', '\0\0\0\0\0\0\0—"€˘~vR¿bX9¥8F¿', ''),
+(680, 2, 1, 670, '1', '0x007C9D', 1, 'ISLA KENT', 'POINT', '\0\0\0\0\0\0\0n£ºñR¿⁄|a2çF¿', ''),
+(681, 2, 1, 671, '1', '0x007C9D', 1, 'ISLA NALCAYEC', 'POINT', '\0\0\0\0\0\0\0àÙ€◊ÅoR¿ÆG·zG¿', ''),
+(682, 2, 1, 672, '1', '0x007C9D', 1, 'ISLA ROJAS', 'POINT', '\0\0\0\0\0\0\0Ú“MbpR¿ŒQ⁄€F¿', ''),
+(683, 2, 1, 673, '1', '0x007C9D', 1, 'ISLA SIMPSON', 'POINT', '\0\0\0\0\0\0\0∏@Ç‚«tR¿}Æ∂bÒF¿', ''),
+(684, 2, 1, 674, '1', '0xE54265', 1, 'JINETEADA INTERNACIONAL', 'POINT', '\0\0\0\0\0\0\0"lxz•,R¿yÈ&1¥F¿', ''),
+(685, 2, 1, 675, '1', '0xE54265', 1, 'LA FIESTA DEL &quot;PESCAO&#x27; FRITO&quot; EN PUERTO CISNES', 'POINT', '\0\0\0\0\0\0\0èSt$ó+R¿[”º„]F¿', ''),
+(686, 2, 1, 676, '1', '0x007C9D', 1, 'LA JUNTA', 'POINT', '\0\0\0\0\0\0\0gDioR¿Ü8÷≈m¸E¿', ''),
+(687, 2, 1, 677, '1', '0x007C9D', 1, 'LAGO ALEGRE', 'POINT', '\0\0\0\0\0\0\0”º„!R¿©§N@H¿', ''),
+(688, 2, 1, 678, '1', '0x007C9D', 1, 'LAGO ALTO', 'POINT', '\0\0\0\0\0\0\0çónÉR¿˚:pŒG¿', ''),
+(689, 2, 1, 679, '1', '0x007C9D', 1, 'LAGO ATRAVESADO', 'POINT', '\0\0\0\0\0\0\0≠˙\\m≈R¿˛C˙ÌÎÿF¿', ''),
+(690, 2, 1, 680, '1', '0x007C9D', 1, 'LAGO BAYO', 'POINT', '\0\0\0\0\0\0\046<ΩFR¿ÆG·z>G¿', ''),
+(691, 2, 1, 681, '1', '0x007C9D', 1, 'LAGO BERTRAND', 'POINT', '\0\0\0\0\0\0\0&S£6R¿–’VÏ/{G¿', ''),
+(692, 2, 1, 682, '1', '0x007C9D', 1, 'LAGO BRICE√ëO', 'POINT', '\0\0\0\0\0\0\0‘+e‚$R¿Zıπ⁄ä%H¿', ''),
+(693, 2, 1, 683, '1', '0x007C9D', 1, 'LAGO BROWN', 'POINT', '\0\0\0\0\0\0\0æü\Z/›R¿óˇê~˚≤G¿', ''),
+(694, 2, 1, 684, '1', '0x007C9D', 1, 'LAGO CARO', 'POINT', '\0\0\0\0\0\0\046<!R¿Ω„…ÂF¿', ''),
+(695, 2, 1, 685, '1', '0x007C9D', 1, 'LAGO CASTOR', 'POINT', '\0\0\0\0\0\0\0Ù˝‘xÈÚQ¿ˆó›ìáÕF¿', ''),
+(696, 2, 1, 686, '1', '0x007C9D', 1, 'LAGO CENTRAL', 'POINT', '\0\0\0\0\0\0\0xú¢#πR¿ÄHø}G¿', ''),
+(697, 2, 1, 687, '1', '0x007C9D', 1, 'LAGO CHACABUCO', 'POINT', '\0\0\0\0\0\0\0Ö|–≥Y1R¿46<µG¿', ''),
+(698, 2, 1, 688, '1', '0x007C9D', 1, 'LAGO CHRISTIE', 'POINT', '\0\0\0\0\0\0\0ÄHø}R¿…Â?H¿', ''),
+(699, 2, 1, 689, '1', '0x007C9D', 1, 'LAGO CIERVO', 'POINT', '\0\0\0\0\0\0\0L7âA`)R¿1¨Z<H¿', ''),
+(700, 2, 1, 690, '1', '0x007C9D', 1, 'LAGO CISNES', 'POINT', '\0\0\0\0\0\0\0÷≈m4Ä''R¿U¡®§N8H¿', ''),
+(701, 2, 1, 691, '1', '0x007C9D', 1, 'LAGO COCHRANE', 'POINT', '\0\0\0\0\0\0\0æ0ô*R¿@§ﬂæúG¿', ''),
+(702, 2, 1, 692, '1', '0x007C9D', 1, 'LAGO C√ìNDOR', 'POINT', '\0\0\0\0\0\0\0}Æ∂b=R¿å€h\0o…F¿', ''),
+(703, 2, 1, 693, '1', '0x007C9D', 1, 'LAGO DESIERTO', 'POINT', '\0\0\0\0\0\0\0\n◊£p=R¿À«∫∏ıF¿', ''),
+(704, 2, 1, 694, '1', '0x007C9D', 1, 'LAGO ELIZALDE', 'POINT', '\0\0\0\0\0\0\01¨ZR¿˘1ÊÆ%‰F¿', ''),
+(705, 2, 1, 695, '1', '0x007C9D', 1, 'LAGO ESMERALDA', 'POINT', '\0\0\0\0\0\0\0í\\˛C˙%R¿Fîˆ_®G¿', ''),
+(706, 2, 1, 696, '1', '0x007C9D', 1, 'LAGO FR√çO', 'POINT', '\0\0\0\0\0\0\0b°÷4Ô¸Q¿Ÿ=yX®’F¿', ''),
+(707, 2, 1, 697, '1', '0x007C9D', 1, 'LAGO GENERAL CARRERA (ZOIT)', 'POINT', '\0\0\0\0\0\0\0HP,R¿\\è¬ı(dG¿', ''),
+(708, 2, 1, 698, '1', '0x007C9D', 1, 'LAGO JUNCAL', 'POINT', '\0\0\0\0\0\0\0F%uö,R¿lxz•,´G¿', ''),
+(709, 2, 1, 699, '1', '0x007C9D', 1, 'LAGO LA PALOMA', 'POINT', '\0\0\0\0\0\0\0öû^R¿''¬ÜßWÚF¿', ''),
+(710, 2, 1, 700, '1', '0x007C9D', 1, 'LAGO LAPPARENT', 'POINT', '\0\0\0\0\0\0\0\0\0\0\0\0R¿=\n◊£pG¿', ''),
+(711, 2, 1, 701, '1', '0x007C9D', 1, 'LAGO LAS ARDILLAS', 'POINT', '\0\0\0\0\0\0\0øú3¢R¿MÑ\rOØG¿', ''),
+(712, 2, 1, 702, '1', '0x007C9D', 1, 'LAGO LEONES', 'POINT', '\0\0\0\0\0\0\0‰…ÂGR¿Ÿ=yX®]G¿', ''),
+(713, 2, 1, 703, '1', '0x007C9D', 1, 'LAGO LOS PALOS', 'POINT', '\0\0\0\0\0\0\0ì©ÇQI-R¿„6\Z¿[®F¿', ''),
+(714, 2, 1, 704, '1', '0x007C9D', 1, 'LAGO MISTERIOSO', 'POINT', '\0\0\0\0\0\0\0·ì©ÇÌQ¿Ø%‰ÉûçF¿', ''),
+(715, 2, 1, 705, '1', '0x007C9D', 1, 'LAGO MONREAL O AZUL', 'POINT', '\0\0\0\0\0\0\0˘È∑ØR¿ê1w-!˜F¿', ''),
+(716, 2, 1, 706, '1', '0x007C9D', 1, 'LAGO NEGRO', 'POINT', '\0\0\0\0\0\0\0m≈˛≤{2R¿l	˘†gsG¿', ''),
+(717, 2, 1, 707, '1', '0x007C9D', 1, 'LAGO NORTE', 'POINT', '\0\0\0\0\0\0\03ƒ±.nÛQ¿ÚAœf’áF¿', ''),
+(718, 2, 1, 708, '1', '0x007C9D', 1, 'LAGO O&#x27;HIGGINS', 'POINT', '\0\0\0\0\0\0\0áŸŒ˜#R¿jMÛFH¿', ''),
+(719, 2, 1, 709, '1', '0x007C9D', 1, 'LAGO PLOMO', 'POINT', '\0\0\0\0\0\0\0[”º„9R¿‰ÉûÕ™G¿', ''),
+(720, 2, 1, 710, '1', '0x007C9D', 1, 'LAGO POLLUX', 'POINT', '\0\0\0\0\0\0\0Ä∑@Ç‚˜Q¿è¬ı(\\◊F¿', ''),
+(721, 2, 1, 711, '1', '0x007C9D', 1, 'LAGO PORTALES', 'POINT', '\0\0\0\0\0\0\0X9¥»v&R¿àÖZ”º√F¿', ''),
+(722, 2, 1, 712, '1', '0x007C9D', 1, 'LAGO QUETRU', 'POINT', '\0\0\0\0\0\0\0^∫IGR¿úƒ ∞rH¿', ''),
+(723, 2, 1, 713, '1', '0x007C9D', 1, 'LAGO RIESCO', 'POINT', '\0\0\0\0\0\0\0ÈH.ˇ!-R¿>ËŸ¨˙ºF¿', ''),
+(724, 2, 1, 714, '1', '0x007C9D', 1, 'LAGO RISOPATRON', 'POINT', '\0\0\0\0\0\0\0R''†â∞!R¿≥q¨ã#F¿', ''),
+(725, 2, 1, 715, '1', '0x007C9D', 1, 'LAGO ROSSELOT', 'POINT', '\0\0\0\0\0\0\0@a√”R¿Ì\ræ0ôF¿', ''),
+(726, 2, 1, 716, '1', '0x007C9D', 1, 'LAGO TRANQUILO', 'POINT', '\0\0\0\0\0\0\0L7âA`1R¿¨Zd;OG¿', ''),
+(727, 2, 1, 717, '1', '0x007C9D', 1, 'LAGO VERDE', 'POINT', '\0\0\0\0\0\0\0åπk	˘¯Q¿úƒ ∞r F¿', ''),
+(728, 2, 1, 718, '1', '0x007C9D', 1, 'LAGO YULTON', 'POINT', '\0\0\0\0\0\0\0£#π¸á<R¿™ÇQIùêF¿', ''),
+(729, 2, 1, 719, '1', '0x007C9D', 1, 'LAGUNA COFR√â', 'POINT', '\0\0\0\0\0\0\0e™`TR/R¿e™`TRG¿', ''),
+(730, 2, 1, 720, '1', '0x007C9D', 1, 'LAGUNA SAN RAFAEL', 'POINT', '\0\0\0\0\0\0\0tµ˚ÀzR¿h"lxzUG¿', ''),
+(731, 2, 1, 721, '1', '0x007C9D', 1, 'LAGUNA VERDE CHILE CHICO', 'POINT', '\0\0\0\0\0\0\0ÛéSt$R¿±øÏû<lG¿', ''),
+(732, 2, 1, 722, '1', '0x007C9D', 1, 'LAGUNA VERDE R√çO IB√Å√ëEZ', 'POINT', '\0\0\0\0\0\0\0ÜZ”º„R¿=\n◊£pG¿', ''),
+(733, 2, 1, 723, '1', '0x007C9D', 1, 'LAS MANOS DE CERRO CASTILLO', 'POINT', '\0\0\0\0\0\0\0ﬂ‡ì©R¿«∫∏çG¿', ''),
+(734, 2, 1, 724, '1', '0x007C9D', 1, 'MALLIN GRANDE', 'POINT', '\0\0\0\0\0\0\0}?5^∫R¿°÷4Ô8]G¿', ''),
+(735, 2, 1, 725, '1', '0x007C9D', 1, 'MELINKA', 'POINT', '\0\0\0\0\0\0\0O@a√oR¿¥Yıπ⁄ÚE¿', ''),
+(736, 2, 1, 726, '1', '0x007C9D', 1, 'MONTE CAY', 'POINT', '\0\0\0\0\0\0\0ê†¯1Ê>R¿èSt$óáF¿', ''),
+(737, 2, 1, 727, '1', '0x007C9D', 1, 'MONTE FITZ ROY', 'POINT', '\0\0\0\0\0\0\0¨≠ÿ_vCR¿Tt$óˇòH¿', ''),
+(738, 2, 1, 728, '1', '0x007C9D', 1, 'MONTE MENTOLAT', 'POINT', '\0\0\0\0\0\0\0˛C˙ÌÎDR¿HP¸XF¿', ''),
+(739, 2, 1, 729, '1', '0x007C9D', 1, 'MONTE SAN LORENZO', 'POINT', '\0\0\0\0\0\0\0öû^R¿3ƒ±.nÀG¿', ''),
+(740, 2, 1, 730, '1', '0x007C9D', 1, 'MONTE SAN VALENT√çN', 'POINT', '\0\0\0\0\0\0\0·zÆGYR¿Ê?§ﬂæVG¿', ''),
+(741, 2, 1, 731, '1', '0x007C9D', 1, 'MONUMENTO AL OVEJERO', 'POINT', '\0\0\0\0\0\0\0Ú“MbR¿~åπk	…F¿', ''),
+(742, 2, 1, 732, '1', '0x007C9D', 1, 'MONUMENTO NATURAL CINCO HERMANAS', 'POINT', '\0\0\0\0\0\0\0)Ì\ræ0QR¿‡æú3¢F¿', ''),
+(743, 2, 1, 733, '1', '0x007C9D', 1, 'MONUMENTO NATURAL DOS LAGUNAS', 'POINT', '\0\0\0\0\0\0\0≠˙\\m≈ˆQ¿[”º„≈F¿', ''),
+(744, 2, 1, 734, '1', '0x007C9D', 1, 'MUSEO REGIONAL DE LA PATAGONIA CENTRAL', 'POINT', '\0\0\0\0\0\0\0ÄHø}R¿ç(Ì\ræ»F¿', ''),
+(745, 2, 1, 735, '1', '0x007C9D', 1, 'PARQUE AIKEN DEL SUR', 'POINT', '\0\0\0\0\0\0\0–DÿÙ.R¿jMÛéªF¿', ''),
+(746, 2, 1, 736, '1', '0x007C9D', 1, 'PARQUE NACIONAL BERNARDO O&#x27;HIGGINS', 'POINT', '\0\0\0\0\0\0\0À°E∂ÛaR¿ûÔß∆K_H¿', ''),
+(747, 2, 1, 737, '1', '0x007C9D', 1, 'PARQUE NACIONAL ISLA GUAMBLIN', 'POINT', '\0\0\0\0\0\0\0“\0ﬁ	∆R¿«):íÀoF¿', ''),
+(748, 2, 1, 738, '1', '0x007C9D', 1, 'PARQUE NACIONAL ISLA MAGDALENA', 'POINT', '\0\0\0\0\0\0\0“o_ŒIR¿\\è¬ı(\\F¿', ''),
+(749, 2, 1, 739, '1', '0x007C9D', 1, 'PARQUE NACIONAL LAGUNA SAN RAFAEL', 'POINT', '\0\0\0\0\0\0\0ΩRñ!éiR¿cÓZB>`G¿', ''),
+(750, 2, 1, 740, '1', '0x007C9D', 1, 'PARQUE NACIONAL QUEULAT', 'POINT', '\0\0\0\0\0\0\0£#π¸áR¿8gDi?F¿', ''),
+(751, 2, 1, 741, '1', '0x007C9D', 1, 'PASO SAN CARLOS O LUCAS BRIDGE', 'POINT', '\0\0\0\0\0\0\0R∏ÖÎAR¿^K»=√G¿', ''),
+(752, 2, 1, 742, '1', '0x007C9D', 1, 'PEN√çNSULA DE MELIMOYU', 'POINT', '\0\0\0\0\0\0\0Gr˘ÈKR¿‚X∑—F¿', ''),
+(753, 2, 1, 743, '1', '0x007C9D', 1, 'PIEDRA DEL CONDE', 'POINT', '\0\0\0\0\0\0\0ÊÆ%‰É˛Q¿áßW 2G¿', ''),
+(754, 2, 1, 744, '1', '0x007C9D', 1, 'PIEDRA DEL INDIO', 'POINT', '\0\0\0\0\0\0\0‚Èï≤R¿aTR''†…F¿', ''),
+(755, 2, 1, 745, '1', '0x007C9D', 1, 'PIEDRA EL GATO', 'POINT', '\0\0\0\0\0\0\0«):íÀR¿◊4Ô8EWF¿', ''),
+(756, 2, 1, 746, '1', '0x007C9D', 1, 'PUENTE PRESIDENTE IB√Å√ëEZ (MH)', 'POINT', '\0\0\0\0\0\0\0+áŸŒ+R¿˚ÀÓ…≥F¿', ''),
+(757, 2, 1, 747, '1', '0x007C9D', 1, 'PUERTO AGUIRRE', 'POINT', '\0\0\0\0\0\0\0}Æ∂baR¿ìVïF¿', ''),
+(758, 2, 1, 748, '1', '0x007C9D', 1, 'PUERTO AYS√âN', 'POINT', '\0\0\0\0\0\0\0Ü…T¡®,R¿£º¥F¿', ''),
+(759, 2, 1, 749, '1', '0x007C9D', 1, 'PUERTO BERTRAND', 'POINT', '\0\0\0\0\0\0\0æ0ô*5R¿µ¶y«)ÇG¿', ''),
+(760, 2, 1, 750, '1', '0x007C9D', 1, 'PUERTO BONITO', 'POINT', '\0\0\0\0\0\0\0≈è1w-eR¿:íÀH˜F¿', ''),
+(761, 2, 1, 751, '1', '0x007C9D', 1, 'PUERTO CHACABUCO', 'POINT', '\0\0\0\0\0\0\0£º4R¿HP¸ªF¿', ''),
+(762, 2, 1, 752, '1', '0x007C9D', 1, 'PUERTO CISNES', 'POINT', '\0\0\0\0\0\0\0d;ﬂOç+R¿L¶\nF%]F¿', ''),
+(763, 2, 1, 753, '1', '0x007C9D', 1, 'PUERTO GUADAL', 'POINT', '\0\0\0\0\0\0\0©§N@-R¿˘1ÊÆ%lG¿', ''),
+(764, 2, 1, 754, '1', '0x007C9D', 1, 'PUERTO INGENIERO IB√Å√ëEZ', 'POINT', '\0\0\0\0\0\0\0d]‹F¸Q¿!ÙlV%G¿', ''),
+(765, 2, 1, 755, '1', '0x007C9D', 1, 'PUERTO RA√öL MAR√çN BALMACEDA', 'POINT', '\0\0\0\0\0\0\0\rq¨ã€<R¿AÒcÃ]„E¿', ''),
+(766, 2, 1, 756, '1', '0x007C9D', 1, 'PUERTO R√çO TRANQUILO', 'POINT', '\0\0\0\0\0\0\0s◊ÚA+R¿Zd;ﬂOG¿', ''),
+(767, 2, 1, 757, '1', '0x007C9D', 1, 'PUERTO S√ÅNCHEZ', 'POINT', '\0\0\0\0\0\0\0i\0oÅ%R¿$(~åπKG¿', ''),
+(768, 2, 1, 758, '1', '0x007C9D', 1, 'PUERTO YUNGAY', 'POINT', '\0\0\0\0\0\0\0∏@Ç‚«TR¿‰ÉûÕ™˜G¿', ''),
+(769, 2, 1, 759, '1', '0x007C9D', 1, 'PUYUHUAPI', 'POINT', '\0\0\0\0\0\0\0≤ùÔß∆#R¿öôôôô)F¿', ''),
+(770, 2, 1, 760, '1', '0xE54265', 1, 'RAID SOLIDARIO CLUB DE LEONES', 'POINT', '\0\0\0\0\0\0\0#€˘~jR¿+á…F¿', ''),
+(771, 2, 1, 761, '1', '0x007C9D', 1, 'RESERVA NACIONAL CERRO CASTILLO', 'POINT', '\0\0\0\0\0\0\0§p=\n◊R¿s◊ÚAG¿', ''),
+(772, 2, 1, 762, '1', '0x007C9D', 1, 'RESERVA NACIONAL COYHAIQUE', 'POINT', '\0\0\0\0\0\0\0ì©ÇQR¿√”+e¬F¿', ''),
+(773, 2, 1, 763, '1', '0x007C9D', 1, 'RESERVA NACIONAL KATALALIXAR', 'POINT', '\0\0\0\0\0\0\0µ˚ÀÓΩR¿éHH¿', ''),
+(774, 2, 1, 764, '1', '0x007C9D', 1, 'RESERVA NACIONAL LAGO CARLOTA', 'POINT', '\0\0\0\0\0\0\0_)À«‚Q¿£í:EF¿', ''),
+(775, 2, 1, 765, '1', '0x007C9D', 1, 'RESERVA NACIONAL LAGO JEINEMENI', 'POINT', '\0\0\0\0\0\0\0&‰ÉûÕ\nR¿ÖÎQ∏eG¿', ''),
+(776, 2, 1, 766, '1', '0x007C9D', 1, 'RESERVA NACIONAL LAGO LAS TORRES', 'POINT', '\0\0\0\0\0\0\0¿[ AÒR¿Vü´≠ÿgF¿', ''),
+(777, 2, 1, 767, '1', '0x007C9D', 1, 'RESERVA NACIONAL LAGO ROSSELOT', 'POINT', '\0\0\0\0\0\0\0àc]‹FR¿µ¶y«)F¿', ''),
+(778, 2, 1, 768, '1', '0x007C9D', 1, 'RESERVA NACIONAL LAGO TAMANGO', 'POINT', '\0\0\0\0\0\0\0?∆ R¿R∏ÖÎôG¿', ''),
+(779, 2, 1, 769, '1', '0x007C9D', 1, 'RESERVA NACIONAL LAS GUAITECAS', 'POINT', '\0\0\0\0\0\0\0Íï≤q|R¿ “o_ñF¿', ''),
+(780, 2, 1, 770, '1', '0x007C9D', 1, 'RESERVA NACIONAL MA√ëIHUALES', 'POINT', '\0\0\0\0\0\0\033333R¿ï‘	h"úF¿', ''),
+(781, 2, 1, 771, '1', '0x007C9D', 1, 'RESERVA NACIONAL R√çO SIMPSON', 'POINT', '\0\0\0\0\0\0\0!∞rhëR¿Gx$¿F¿', ''),
+(782, 2, 1, 772, '1', '0x007C9D', 1, 'RESERVA NACIONAL TRAPANANDA', 'POINT', '\0\0\0\0\0\0\0èSt$óÛQ¿yÈ&1¨F¿', ''),
+(783, 2, 1, 773, '1', '0x007C9D', 1, 'R√çO AYS√âN', 'POINT', '\0\0\0\0\0\0\0◊£p=\n+R¿ñ!éuq≥F¿', ''),
+(784, 2, 1, 774, '1', '0x007C9D', 1, 'R√çO BAKER', 'POINT', '\0\0\0\0\0\0\0»=õUCR¿Ù˝‘xÈŒG¿', ''),
+(785, 2, 1, 775, '1', '0x007C9D', 1, 'R√çO BLANCO', 'POINT', '\0\0\0\0\0\0\0	û^)+R¿§p=\n◊√F¿', ''),
+(786, 2, 1, 776, '1', '0x007C9D', 1, 'R√çO BRAVO', 'POINT', '\0\0\0\0\0\0\0jMÛéSDR¿∂Û˝‘xH¿', ''),
+(787, 2, 1, 777, '1', '0x007C9D', 1, 'R√çO CISNES', 'POINT', '\0\0\0\0\0\0\0\r‡-ê† R¿9EGr˘WF¿', ''),
+(788, 2, 1, 778, '1', '0x007C9D', 1, 'R√çO COYHAIQUE', 'POINT', '\0\0\0\0\0\0\0ô*ï‘R¿çónÉ»F¿', ''),
+(789, 2, 1, 779, '1', '0x007C9D', 1, 'R√çO DE LA COLONIA', 'POINT', '\0\0\0\0\0\0\0Hø}8;R¿Ä∑@Ç‚ßG¿', ''),
+(790, 2, 1, 780, '1', '0x007C9D', 1, 'R√çO FIGUEROA', 'POINT', '\0\0\0\0\0\0\0¢E∂Û˝R¿È∑ØF¿', ''),
+(791, 2, 1, 781, '1', '0x007C9D', 1, 'R√çO LA PALOMA', 'POINT', '\0\0\0\0\0\0\0óêz6R¿Â–"€˘ÊF¿', ''),
+(792, 2, 1, 782, '1', '0x007C9D', 1, 'R√çO LOS PALOS', 'POINT', '\0\0\0\0\0\0\0‚Èï≤-R¿YÜ8÷≈≠F¿', ''),
+(793, 2, 1, 783, '1', '0x007C9D', 1, 'R√çO MA√ëIHUALES', 'POINT', '\0\0\0\0\0\0\0:#J{ÉR¿^K»=≥F¿', ''),
+(794, 2, 1, 784, '1', '0x007C9D', 1, 'R√çO MAYER', 'POINT', '\0\0\0\0\0\0\0@a√”R¿R''†â∞!H¿', ''),
+(795, 2, 1, 785, '1', '0x007C9D', 1, 'R√çO MOSCO', 'POINT', '\0\0\0\0\0\0\0âA`Â–"R¿!ÙlV=H¿', ''),
+(796, 2, 1, 786, '1', '0x007C9D', 1, 'R√çO √ëIREHUAO', 'POINT', '\0\0\0\0\0\0\0CÎ‚6ÓQ¿Áå(ÌùF¿', ''),
+(797, 2, 1, 787, '1', '0x007C9D', 1, 'R√çO PALENA', 'POINT', '\0\0\0\0\0\0\0	˘†g≥6R¿	û^)ÛE¿', ''),
+(798, 2, 1, 788, '1', '0x007C9D', 1, 'R√çO PASCUA', 'POINT', '\0\0\0\0\0\0\0ÆG·zNR¿i\0oÅH¿', ''),
+(799, 2, 1, 789, '1', '0x007C9D', 1, 'R√çO SIMPSON', 'POINT', '\0\0\0\0\0\0\0îˆ_òR¿a√”+≈F¿', ''),
+(800, 2, 1, 790, '1', '0x007C9D', 1, 'RUTA AUSTRAL COCHRANE', 'POINT', '\0\0\0\0\0\0\0öû&R¿Âa°÷4üG¿', ''),
+(801, 2, 1, 791, '1', '0x007C9D', 1, 'RUTA AUSTRAL COYHAIQUE', 'POINT', '\0\0\0\0\0\0\0q¨ã€hR¿e‚X«F¿', ''),
+(802, 2, 1, 792, '1', '0x007C9D', 1, 'RUTA AUSTRAL LA JUNTA', 'POINT', '\0\0\0\0\0\0\0D˙ÌÎ¿R¿?W[±ø¸E¿', ''),
+(803, 2, 1, 793, '1', '0xE54265', 1, 'RUTA DEL HUEMUL, COCHRANE', 'POINT', '\0\0\0\0\0\0\0‘öÊß$R¿cŸ=y†G¿', ''),
+(804, 2, 1, 794, '1', '0x007C9D', 1, 'SALTO R√çO BAKER', 'POINT', '\0\0\0\0\0\0\0ôªñêBR¿OjM√G¿', ''),
+(805, 2, 1, 795, '1', '0x007C9D', 1, 'SALTO R√çO IB√Å√ëEZ', 'POINT', '\0\0\0\0\0\0\0Î‚6\Z¿ˇQ¿b°÷4Ô G¿', ''),
+(806, 2, 1, 796, '1', '0x007C9D', 1, 'SECTOR SEIS LAGUNAS', 'POINT', '\0\0\0\0\0\0\0∏@Ç‚«R¿í\\˛C˙›F¿', ''),
+(807, 2, 1, 797, '1', '0xE54265', 1, 'SEMANA DE PUERTO CINES', 'POINT', '\0\0\0\0\0\0\0ÏQ∏Ö+R¿ìV]F¿', ''),
+(808, 2, 1, 798, '1', '0xE54265', 1, 'SEMANA DEL PIONERO', 'POINT', '\0\0\0\0\0\0\0Fîˆ_R¿a2U0*…F¿', ''),
+(809, 2, 1, 799, '1', '0xE54265', 1, 'SEMANA LAGOVERDINA', 'POINT', '\0\0\0\0\0\0\06<ΩRˆQ¿Ç‚«òªF¿', ''),
+(810, 2, 1, 800, '1', '0x007C9D', 1, 'SENDEROS RA√öL MAR√çN BALMACEDA SECTOR 1', 'POINT', '\0\0\0\0\0\0\0îáÖZ”<R¿ñCãlÁ„E¿', ''),
+(811, 2, 1, 801, '1', '0x007C9D', 1, 'SENDEROS RA√öL MAR√çN BALMACEDA SECTOR 2', 'POINT', '\0\0\0\0\0\0\0EÿÙJ=R¿MÑ\rOØ‰E¿', ''),
+(812, 2, 1, 802, '1', '0x007C9D', 1, 'SENO GALA', 'POINT', '\0\0\0\0\0\0\0\Z¿[ AIR¿åπk	˘F¿', ''),
+(813, 2, 1, 803, '1', '0x007C9D', 1, 'SENO QUEULAT', 'POINT', '\0\0\0\0\0\0\0äé‰Ú&R¿V-≤ù?F¿', ''),
+(814, 2, 1, 804, '1', '0x007C9D', 1, 'VALLE DEL R√çO MIRTA', 'POINT', '\0\0\0\0\0\0\0n4Ä∑@R¿åJÍ4ÒE¿', ''),
+(815, 2, 1, 805, '1', '0x007C9D', 1, 'VALLE LAGUNAS', 'POINT', '\0\0\0\0\0\0\0_òLåR¿ô*ï‘ŸF¿', ''),
+(816, 2, 1, 806, '1', '0x007C9D', 1, 'VALLE PANGAL', 'POINT', '\0\0\0\0\0\0\09÷≈m4(R¿ÕÃÃÃÃ¨F¿', ''),
+(817, 2, 1, 807, '1', '0x007C9D', 1, 'VALLE R√çO CHACABUCO', 'POINT', '\0\0\0\0\0\0\0„•õƒ R¿J+áÜG¿', ''),
+(818, 2, 1, 808, '1', '0x007C9D', 1, 'VALLE R√çO MULLER', 'POINT', '\0\0\0\0\0\0\0Œà“ﬁ‡R¿AÒcÃ]KG¿', ''),
+(819, 2, 1, 809, '1', '0x007C9D', 1, 'VALLE R√çO SIMPSON', 'POINT', '\0\0\0\0\0\0\0üÕ™œ’R¿fffffŒF¿', ''),
+(820, 2, 1, 810, '1', '0x007C9D', 1, 'VENTISQUERO ARENALES', 'POINT', '\0\0\0\0\0\0\0-≤ùÔSR¿´œ’VÏüG¿', ''),
+(821, 2, 1, 811, '1', '0x007C9D', 1, 'VENTISQUERO CACHET', 'POINT', '\0\0\0\0\0\0\0V-≤UR¿≥q¨ããG¿', ''),
+(822, 2, 1, 812, '1', '0x007C9D', 1, 'VENTISQUERO CHICO', 'POINT', '\0\0\0\0\0\0\0$(~åER¿Ø%‰ÉûÖH¿', ''),
+(823, 2, 1, 813, '1', '0x007C9D', 1, 'VENTISQUERO COLGANTE QUEULAT', 'POINT', '\0\0\0\0\0\0\0Í46 R¿ú3¢¥7F¿', ''),
+(824, 2, 1, 814, '1', '0x007C9D', 1, 'VENTISQUERO EXPLORADORES', 'POINT', '\0\0\0\0\0\0\0â“ﬁ‡KR¿DãlÁ˚AG¿', ''),
+(825, 2, 1, 815, '1', '0x007C9D', 1, 'VENTISQUERO JORGE MONTT', 'POINT', '\0\0\0\0\0\0\0(~åπk]R¿ß∆K7)H¿', ''),
+(826, 2, 1, 816, '1', '0x007C9D', 1, 'VENTISQUERO LA COLONIA', 'POINT', '\0\0\0\0\0\0\0jﬁqäéPR¿?W[±øúG¿', ''),
+(827, 2, 1, 817, '1', '0x007C9D', 1, 'VENTISQUERO LEONES', 'POINT', '\0\0\0\0\0\0\0J{É/LNR¿∑—\0ﬁbG¿', ''),
+(828, 2, 1, 818, '1', '0x007C9D', 1, 'VENTISQUERO NEF', 'POINT', '\0\0\0\0\0\0\0—"€˘~NR¿ßËH.ˇâG¿', ''),
+(829, 2, 1, 819, '1', '0x007C9D', 1, 'VENTISQUERO O&#x27;HIGGINS', 'POINT', '\0\0\0\0\0\0\0"˝ˆu‡HR¿ì:MÑuH¿', ''),
+(830, 2, 1, 820, '1', '0x007C9D', 1, 'VENTISQUERO PARED NORTE', 'POINT', '\0\0\0\0\0\0\0«):íÀOR¿K»=õµG¿', ''),
+(831, 2, 1, 821, '1', '0x007C9D', 1, 'VENTISQUERO PARED SUR', 'POINT', '\0\0\0\0\0\0\0¡®§N@WR¿Î‚6\Z∏G¿', ''),
+(832, 2, 1, 822, '1', '0x007C9D', 1, 'VENTISQUERO SAN QUINT√çN', 'POINT', '\0\0\0\0\0\0\0~8gD}R¿a2U0*qG¿', ''),
+(833, 2, 1, 823, '1', '0x007C9D', 1, 'VENTISQUERO SAN RAFAEL', 'POINT', '\0\0\0\0\0\0\0Ëj+ˆóuR¿jºtìXG¿', ''),
+(834, 2, 1, 824, '1', '0x007C9D', 1, 'VENTISQUERO SOLER', 'POINT', '\0\0\0\0\0\0\07âA`ÂLR¿˙ÌÎ¿9sG¿', ''),
+(835, 2, 1, 825, '1', '0x007C9D', 1, 'VENTISQUERO STEFFENS', 'POINT', '\0\0\0\0\0\0\0$(~åmR¿ä∞·Èï¬G¿', ''),
+(836, 2, 1, 826, '1', '0x007C9D', 1, 'VILLA AMENGUAL', 'POINT', '\0\0\0\0\0\0\0/›$Å\rR¿÷VÏ/ª_F¿', ''),
+(837, 2, 1, 827, '1', '0x007C9D', 1, 'VILLA CERRO CASTILLO', 'POINT', '\0\0\0\0\0\0\0''†â∞·	R¿´>W[±G¿', ''),
+(838, 2, 1, 828, '1', '0x007C9D', 1, 'VILLA LA TAPERA', 'POINT', '\0\0\0\0\0\0\0I.ˇ!˝ÍQ¿\nh"lxRF¿', ''),
+(839, 2, 1, 829, '1', '0x007C9D', 1, 'VILLA MA√ëIHUALES', 'POINT', '\0\0\0\0\0\0\0Øîeàc	R¿ “o_ñF¿', ''),
+(840, 2, 1, 830, '1', '0x007C9D', 1, 'VILLA O&#x27;HIGGINS', 'POINT', '\0\0\0\0\0\0\02ÊÆ%‰#R¿≤ùÔß∆;H¿', ''),
+(841, 2, 1, 831, '1', '0x007C9D', 1, 'VOLC√ÅN HUDSON', 'POINT', '\0\0\0\0\0\0\00L¶\nFAR¿áßW 2ÙF¿', ''),
+(842, 2, 1, 832, '1', '0x007C9D', 1, 'VOLC√ÅN MACA', 'POINT', '\0\0\0\0\0\0\0Ìû<,‘JR¿!∞rhëçF¿', ''),
+(843, 2, 1, 833, '1', '0x007C9D', 1, 'VOLC√ÅN MELIMOYU', 'POINT', '\0\0\0\0\0\0\0÷VÏ/ª7R¿HP¸F¿', ''),
+(844, 2, 1, 834, '1', '0x008A66', 1, 'R√çO PALENA', 'POINT', '\0\0\0\0\0\0\0,e‚X7R¿F∂Û˝‘E¿', ''),
+(845, 2, 1, 835, '1', '0x008A66', 1, 'PARQUE NACIONAL QUEULAT', 'POINT', '\0\0\0\0\0\0\0]‹FxR¿!ÙlV5F¿', ''),
+(846, 2, 1, 836, '1', '0x008A66', 1, 'CERRO CASTILLO', 'POINT', '\0\0\0\0\0\0\02U0*©R¿ü´≠ÿ_G¿', ''),
+(847, 2, 1, 837, '1', '0x008A66', 1, 'LAGUNA SAN RAFAEL', 'POINT', '\0\0\0\0\0\0\0ëz6´zR¿Ö|–≥YUG¿', ''),
+(848, 2, 1, 838, '1', '0x008A66', 1, 'LAGO GENERAL CARRERA', 'POINT', '\0\0\0\0\0\0\0Tt$óˇ¯Q¿ß∆K79G¿', ''),
+(849, 2, 1, 839, '1', '0x008A66', 1, 'R√çO BAKER', 'POINT', '\0\0\0\0\0\0\0#J{É/XR¿V-‚G¿', ''),
+(850, 2, 1, 840, '1', '0x008A66', 1, 'CALETA TORTEL', 'POINT', '\0\0\0\0\0\0\0’xÈ&1`R¿ŸŒ˜S„ÂG¿', ''),
+(851, 2, 1, 841, '1', '0x008A66', 1, 'CAMPO DE HIELO SAN VALENT√çN', 'POINT', '\0\0\0\0\0\0\0≥ÍsµcR¿⁄¨˙\\m]G¿', ''),
+(852, 2, 1, 842, '1', '0x008A66', 1, 'CAMPO DE HIELO NORTE', 'POINT', '\0\0\0\0\0\0\0¢¥7¯¬hR¿PçónõG¿', ''),
+(853, 2, 1, 843, '1', '0x008A66', 1, 'CAMPO DE HIELO SUR', 'POINT', '\0\0\0\0\0\0\0≠˙\\m≈^R¿äcÓZRH¿', ''),
+(854, 2, 1, 844, '1', '0x008A66', 1, 'VILLA OHIGGINS', 'POINT', '\0\0\0\0\0\0\02ÊÆ%‰#R¿≤ùÔß∆;H¿', ''),
+(855, 2, 1, 845, '1', '0x005679', 0, 'INFORMACIONES MELINKA', 'POINT', '\0\0\0\0\0\0\0jﬁqäépR¿[±øÏûÏE¿', ''),
+(856, 2, 1, 846, '1', '0x005679', 0, 'INFORMACIONES PUERTO AYSEN', 'POINT', '\0\0\0\0\0\0\0@a√”+R¿ï‘	h"¥F¿', ''),
+(857, 2, 1, 847, '1', '0x005679', 0, 'INFORMACIONES PUERTO CHACABUCO', 'POINT', '\0\0\0\0\0\0\0éH4R¿Ï¿9#JªF¿', ''),
+(858, 2, 1, 848, '1', '0x005679', 0, 'INFORMACIONES CHILE CHICO', 'POINT', '\0\0\0\0\0\0\0x$(ÓQ¿Zd;ﬂOEG¿', ''),
+(859, 2, 1, 849, '1', '0x005679', 0, 'INFORMACIONES PUERTO RA√öL MAR√çN', 'POINT', '\0\0\0\0\0\0\07âA`Â<R¿œf’Áj„E¿', ''),
+(860, 2, 1, 850, '1', '0x005679', 0, 'INFORMACIONES LA JUNTA', 'POINT', '\0\0\0\0\0\0\0F%u\ZR¿?∆¸E¿', ''),
+(861, 2, 1, 851, '1', '0x005679', 0, 'INFORMACIONES LAGO VERDE', 'POINT', '\0\0\0\0\0\0\0ë~˚:pˆQ¿tµ˚ÀF¿', ''),
+(862, 2, 1, 852, '1', '0x005679', 0, 'INFORMACIONES PUYUHUAPI', 'POINT', '\0\0\0\0\0\0\0«):íÀ#R¿”ﬁ‡ì)F¿', ''),
+(863, 2, 1, 853, '1', '0x005679', 0, 'INFORMACIONES PUERTO CISNES', 'POINT', '\0\0\0\0\0\0\0HP¸s+R¿æ¡&S]F¿', ''),
+(864, 2, 1, 854, '1', '0x005679', 0, 'INFORMACIONES MA√ëIHUALES', 'POINT', '\0\0\0\0\0\0\0·zÆG	R¿ü<,‘öñF¿', ''),
+(865, 2, 1, 855, '1', '0x005679', 0, 'INFORMACIONES COYHAIQUE', 'POINT', '\0\0\0\0\0\0\0Gx$R¿DãlÁ˚…F¿', ''),
+(866, 2, 1, 856, '1', '0x005679', 0, 'INFORMACIONES CERRO CASTILLO', 'POINT', '\0\0\0\0\0\0\0}–≥Yı	R¿\0oÅ≈G¿', ''),
+(867, 2, 1, 857, '1', '0x005679', 0, 'INFORMACIONES PUERTO IBA√ëEZ', 'POINT', '\0\0\0\0\0\0\0åJÍ¸Q¿Á˚©Ò“%G¿', ''),
+(868, 2, 1, 858, '1', '0x005679', 0, 'INFORMACIONES BAH√çA MURTA', 'POINT', '\0\0\0\0\0\0\0%uö+R¿—"€˘~:G¿', ''),
+(869, 2, 1, 859, '1', '0x005679', 0, 'INFORMACIONES PUERTO SANCHEZ', 'POINT', '\0\0\0\0\0\0\0€ä˝e˜$R¿2ÊÆ%‰KG¿', ''),
+(870, 2, 1, 860, '1', '0x005679', 0, 'INFORMACIONES PUERTO TRANQUILO', 'POINT', '\0\0\0\0\0\0\0˙ÌÎ¿9+R¿«∫∏çPG¿', ''),
+(871, 2, 1, 861, '1', '0x005679', 0, 'INFORMACIONES COCHRANE', 'POINT', '\0\0\0\0\0\0\0ÜZ”º„$R¿ç(Ì\ræ†G¿', ''),
+(872, 2, 1, 862, '1', '0x005679', 0, 'INFORMACIONES TORTEL', 'POINT', '\0\0\0\0\0\0\0‡-ê†¯aR¿ºtìÊG¿', ''),
+(873, 2, 1, 863, '1', '0x005679', 0, 'INFORMACIONES VILLA O&#x27;HIGGINS', 'POINT', '\0\0\0\0\0\0\0O@a√#R¿ŒQ⁄;H¿', ''),
+(874, 2, 1, 864, '1', '0x005679', 0, 'BENCINERA PUERTO CHACABUCO', 'POINT', '\0\0\0\0\0\0\0MÛéSt4R¿l	˘†gªF¿', ''),
+(875, 2, 1, 865, '1', '0x005679', 0, 'BENCINERA BALMACEDA', 'POINT', '\0\0\0\0\0\0\0õUü´≠ÏQ¿x$(~ÙF¿', ''),
+(876, 2, 1, 866, '1', '0x005679', 0, 'BENCINERA LA JUNTA', 'POINT', '\0\0\0\0\0\0\0F%u\ZR¿?∆¸E¿', ''),
+(877, 2, 1, 867, '1', '0x005679', 0, 'BENCINERA PUYUHUAPI', 'POINT', '\0\0\0\0\0\0\0«):íÀ#R¿”ﬁ‡ì)F¿', ''),
+(878, 2, 1, 868, '1', '0x005679', 0, 'BENCINERA PUERTO CISNES', 'POINT', '\0\0\0\0\0\0\0HP¸s+R¿æ¡&S]F¿', ''),
+(879, 2, 1, 869, '1', '0x005679', 0, 'BENCINERA MA√ëIHUALES', 'POINT', '\0\0\0\0\0\0\0·zÆG	R¿ü<,‘öñF¿', ''),
+(880, 2, 1, 870, '1', '0x005679', 0, 'BENCINERA COYHAIQUE', 'POINT', '\0\0\0\0\0\0\0Gx$R¿DãlÁ˚…F¿', ''),
+(881, 2, 1, 871, '1', '0x005679', 0, 'BENCINERA PUERTO AYSEN', 'POINT', '\0\0\0\0\0\0\0@a√”+R¿ï‘	h"¥F¿', ''),
+(882, 2, 1, 872, '1', '0x005679', 0, 'BENCINERA CHILE CHICO', 'POINT', '\0\0\0\0\0\0\0x$(ÓQ¿Zd;ﬂOEG¿', ''),
+(883, 2, 1, 873, '1', '0x005679', 0, 'BENCINERA PUERTO TRANQUILO', 'POINT', '\0\0\0\0\0\0\0˙ÌÎ¿9+R¿«∫∏çPG¿', ''),
+(884, 2, 1, 874, '1', '0x005679', 0, 'BENCINERA PUERTO GUADAL', 'POINT', '\0\0\0\0\0\0\0p_Œ-R¿áßW 2lG¿', ''),
+(885, 2, 1, 875, '1', '0x005679', 0, 'BENCINERA COCHRANE', 'POINT', '\0\0\0\0\0\0\0ÜZ”º„$R¿ç(Ì\ræ†G¿', ''),
+(886, 2, 1, 876, '1', '0x005679', 0, 'BENCINERA VILLA O&#x27;HIGGINS', 'POINT', '\0\0\0\0\0\0\0O@a√#R¿ŒQ⁄;H¿', ''),
+(887, 2, 1, 877, '1', '0x005679', 0, 'BANCO PUERTO CISNES', 'POINT', '\0\0\0\0\0\0\0HP¸s+R¿æ¡&S]F¿', ''),
+(888, 2, 1, 878, '1', '0x005679', 0, 'BANCO MA√ëIHUALES', 'POINT', '\0\0\0\0\0\0\0·zÆG	R¿ü<,‘öñF¿', ''),
+(889, 2, 1, 879, '1', '0x005679', 0, 'BANCO COYHAIQUE', 'POINT', '\0\0\0\0\0\0\0Gx$R¿DãlÁ˚…F¿', ''),
+(890, 2, 1, 880, '1', '0x005679', 0, 'BANCO PUERTO AYSEN', 'POINT', '\0\0\0\0\0\0\0@a√”+R¿ï‘	h"¥F¿', ''),
+(891, 2, 1, 881, '1', '0x005679', 0, 'BANCO CHILE CHICO', 'POINT', '\0\0\0\0\0\0\0x$(ÓQ¿Zd;ﬂOEG¿', ''),
+(892, 2, 1, 882, '1', '0x005679', 0, 'BANCO COCHRANE', 'POINT', '\0\0\0\0\0\0\0ÜZ”º„$R¿ç(Ì\ræ†G¿', ''),
+(893, 2, 1, 883, '1', '0x005679', 0, 'INTERNET LA JUNTA', 'POINT', '\0\0\0\0\0\0\0F%u\ZR¿?∆¸E¿', ''),
+(894, 2, 1, 884, '1', '0x005679', 0, 'INTERNET LAGO VERDE', 'POINT', '\0\0\0\0\0\0\0ë~˚:pˆQ¿tµ˚ÀF¿', ''),
+(895, 2, 1, 885, '1', '0x005679', 0, 'INTERNET PUYUHUAPI', 'POINT', '\0\0\0\0\0\0\0«):íÀ#R¿”ﬁ‡ì)F¿', ''),
+(896, 2, 1, 886, '1', '0x005679', 0, 'INTERNET PUERTO CISNES', 'POINT', '\0\0\0\0\0\0\0HP¸s+R¿æ¡&S]F¿', ''),
+(897, 2, 1, 887, '1', '0x005679', 0, 'INTERNET VILLA AMENGUAL', 'POINT', '\0\0\0\0\0\0\0öôôôô\rR¿9¥»væ_F¿', ''),
+(898, 2, 1, 888, '1', '0x005679', 0, 'INTERNET COYHAIQUE', 'POINT', '\0\0\0\0\0\0\0Gx$R¿DãlÁ˚…F¿', ''),
+(899, 2, 1, 889, '1', '0x005679', 0, 'INTERNET PUERTO AYSEN', 'POINT', '\0\0\0\0\0\0\0@a√”+R¿ï‘	h"¥F¿', ''),
+(900, 2, 1, 890, '1', '0x005679', 0, 'INTERNET CERRO CASTILLO', 'POINT', '\0\0\0\0\0\0\0}–≥Yı	R¿\0oÅ≈G¿', ''),
+(901, 2, 1, 891, '1', '0x005679', 0, 'INTERNET PUERTO IBA√ëEZ', 'POINT', '\0\0\0\0\0\0\0åJÍ¸Q¿Á˚©Ò“%G¿', ''),
+(902, 2, 1, 892, '1', '0x005679', 0, 'INTERNET BAH√çA MURTA', 'POINT', '\0\0\0\0\0\0\0%uö+R¿—"€˘~:G¿', ''),
+(903, 2, 1, 893, '1', '0x005679', 0, 'INTERNET CHILE CHICO', 'POINT', '\0\0\0\0\0\0\0x$(ÓQ¿Zd;ﬂOEG¿', ''),
+(904, 2, 1, 894, '1', '0x005679', 0, 'INTERNET PUERTO SANCHEZ', 'POINT', '\0\0\0\0\0\0\0€ä˝e˜$R¿2ÊÆ%‰KG¿', ''),
+(905, 2, 1, 895, '1', '0x005679', 0, 'INTERNET PUERTO TRANQUILO', 'POINT', '\0\0\0\0\0\0\0˙ÌÎ¿9+R¿«∫∏çPG¿', ''),
+(906, 2, 1, 896, '1', '0x005679', 0, 'INTERNET PUERTO GUADAL', 'POINT', '\0\0\0\0\0\0\0p_Œ-R¿áßW 2lG¿', ''),
+(907, 2, 1, 897, '1', '0x005679', 0, 'INTERNET COCHRANE', 'POINT', '\0\0\0\0\0\0\0ÜZ”º„$R¿ç(Ì\ræ†G¿', ''),
+(908, 2, 1, 898, '1', '0x005679', 0, 'INTERNET TORTEL', 'POINT', '\0\0\0\0\0\0\0‡-ê†¯aR¿ºtìÊG¿', ''),
+(909, 2, 1, 899, '1', '0x005679', 0, 'INTERNET VILLA O&#x27;HIGGINS', 'POINT', '\0\0\0\0\0\0\0O@a√#R¿ŒQ⁄;H¿', ''),
+(910, 2, 1, 900, '1', '0x005679', 0, 'TEL√âFONO PUERTO RA√öL MAR√çN', 'POINT', '\0\0\0\0\0\0\07âA`Â<R¿œf’Áj„E¿', ''),
+(911, 2, 1, 901, '1', '0x005679', 0, 'TEL√âFONO LA JUNTA', 'POINT', '\0\0\0\0\0\0\0F%u\ZR¿?∆¸E¿', ''),
+(912, 2, 1, 902, '1', '0x005679', 0, 'TEL√âFONO LAGO VERDE', 'POINT', '\0\0\0\0\0\0\0ë~˚:pˆQ¿tµ˚ÀF¿', ''),
+(913, 2, 1, 903, '1', '0x005679', 0, 'TEL√âFONO PUYUHUAPI', 'POINT', '\0\0\0\0\0\0\0«):íÀ#R¿”ﬁ‡ì)F¿', ''),
+(914, 2, 1, 904, '1', '0x005679', 0, 'TEL√âFONO PUERTO CISNES', 'POINT', '\0\0\0\0\0\0\0HP¸s+R¿æ¡&S]F¿', '');
+INSERT INTO `destino` (`idDestino`, `idEstadoDestino`, `idCliente`, `idBiblioteca`, `icono`, `color`, `tienePanel`, `nombre`, `tipoGeometria`, `geom`, `geometria`) VALUES
+(915, 2, 1, 905, '1', '0x005679', 0, 'TEL√âFONO VILLA AMENGUAL', 'POINT', '\0\0\0\0\0\0\0öôôôô\rR¿9¥»væ_F¿', ''),
+(916, 2, 1, 906, '1', '0x005679', 0, 'TEL√âFONO MA√ëIHUALES', 'POINT', '\0\0\0\0\0\0\0·zÆG	R¿ü<,‘öñF¿', ''),
+(917, 2, 1, 907, '1', '0x005679', 0, 'TEL√âFONO COYHAIQUE', 'POINT', '\0\0\0\0\0\0\0Gx$R¿DãlÁ˚…F¿', ''),
+(918, 2, 1, 908, '1', '0x005679', 0, 'TEL√âFONO PUERTO AYSEN', 'POINT', '\0\0\0\0\0\0\0@a√”+R¿ï‘	h"¥F¿', ''),
+(919, 2, 1, 909, '1', '0x005679', 0, 'TEL√âFONO CERRO CASTILLO', 'POINT', '\0\0\0\0\0\0\0}–≥Yı	R¿\0oÅ≈G¿', ''),
+(920, 2, 1, 910, '1', '0x005679', 0, 'TEL√âFONO PUERTO IBA√ëEZ', 'POINT', '\0\0\0\0\0\0\0åJÍ¸Q¿Á˚©Ò“%G¿', ''),
+(921, 2, 1, 911, '1', '0x005679', 0, 'TEL√âFONO BAH√çA MURTA', 'POINT', '\0\0\0\0\0\0\0%uö+R¿—"€˘~:G¿', ''),
+(922, 2, 1, 912, '1', '0x005679', 0, 'TEL√âFONO CHILE CHICO', 'POINT', '\0\0\0\0\0\0\0x$(ÓQ¿Zd;ﬂOEG¿', ''),
+(923, 2, 1, 913, '1', '0x005679', 0, 'TEL√âFONO PUERTO SANCHEZ', 'POINT', '\0\0\0\0\0\0\0€ä˝e˜$R¿2ÊÆ%‰KG¿', ''),
+(924, 2, 1, 914, '1', '0x005679', 0, 'TEL√âFONO PUERTO TRANQUILO', 'POINT', '\0\0\0\0\0\0\0˙ÌÎ¿9+R¿«∫∏çPG¿', ''),
+(925, 2, 1, 915, '1', '0x005679', 0, 'TEL√âFONO PUERTO BERTRAND', 'POINT', '\0\0\0\0\0\0\0∑—\0ﬁ5R¿äé‰ÚÇG¿', ''),
+(926, 2, 1, 916, '1', '0x005679', 0, 'TEL√âFONO PUERTO GUADAL', 'POINT', '\0\0\0\0\0\0\0p_Œ-R¿áßW 2lG¿', ''),
+(927, 2, 1, 917, '1', '0x005679', 0, 'TEL√âFONO COCHRANE', 'POINT', '\0\0\0\0\0\0\0ÜZ”º„$R¿ç(Ì\ræ†G¿', ''),
+(928, 2, 1, 918, '1', '0x005679', 0, 'TEL√âFONO TORTEL', 'POINT', '\0\0\0\0\0\0\0‡-ê†¯aR¿ºtìÊG¿', ''),
+(929, 2, 1, 919, '1', '0x005679', 0, 'TEL√âFONO VILLA O&#x27;HIGGINS', 'POINT', '\0\0\0\0\0\0\0O@a√#R¿ŒQ⁄;H¿', ''),
+(930, 2, 1, 920, '1', '0x005679', 0, 'CELULAR PUERTO RA√öL MAR√çN', 'POINT', '\0\0\0\0\0\0\07âA`Â<R¿œf’Áj„E¿', ''),
+(931, 2, 1, 921, '1', '0x005679', 0, 'CELULAR LA JUNTA', 'POINT', '\0\0\0\0\0\0\0F%u\ZR¿?∆¸E¿', ''),
+(932, 2, 1, 922, '1', '0x005679', 0, 'CELULAR LAGO VERDE', 'POINT', '\0\0\0\0\0\0\0ë~˚:pˆQ¿tµ˚ÀF¿', ''),
+(933, 2, 1, 923, '1', '0x005679', 0, 'CELULAR PUYUHUAPI', 'POINT', '\0\0\0\0\0\0\0«):íÀ#R¿”ﬁ‡ì)F¿', ''),
+(934, 2, 1, 924, '1', '0x005679', 0, 'CELULAR PUERTO CISNES', 'POINT', '\0\0\0\0\0\0\0HP¸s+R¿æ¡&S]F¿', ''),
+(935, 2, 1, 925, '1', '0x005679', 0, 'CELULAR VILLA AMENGUAL', 'POINT', '\0\0\0\0\0\0\0öôôôô\rR¿9¥»væ_F¿', ''),
+(936, 2, 1, 926, '1', '0x005679', 0, 'CELULAR MA√ëIHUALES', 'POINT', '\0\0\0\0\0\0\0·zÆG	R¿ü<,‘öñF¿', ''),
+(937, 2, 1, 927, '1', '0x005679', 0, 'CELULAR COYHAIQUE', 'POINT', '\0\0\0\0\0\0\0Gx$R¿DãlÁ˚…F¿', ''),
+(938, 2, 1, 928, '1', '0x005679', 0, 'CELULAR PUERTO AYSEN', 'POINT', '\0\0\0\0\0\0\0@a√”+R¿ï‘	h"¥F¿', ''),
+(939, 2, 1, 929, '1', '0x005679', 0, 'CELULAR CERRO CASTILLO', 'POINT', '\0\0\0\0\0\0\0}–≥Yı	R¿\0oÅ≈G¿', ''),
+(940, 2, 1, 930, '1', '0x005679', 0, 'CELULAR PUERTO IBA√ëEZ', 'POINT', '\0\0\0\0\0\0\0åJÍ¸Q¿Á˚©Ò“%G¿', ''),
+(941, 2, 1, 931, '1', '0x005679', 0, 'CELULAR BAH√çA MURTA', 'POINT', '\0\0\0\0\0\0\0%uö+R¿—"€˘~:G¿', ''),
+(942, 2, 1, 932, '1', '0x005679', 0, 'CELULAR CHILE CHICO', 'POINT', '\0\0\0\0\0\0\0x$(ÓQ¿Zd;ﬂOEG¿', ''),
+(943, 2, 1, 933, '1', '0x005679', 0, 'CELULAR PUERTO SANCHEZ', 'POINT', '\0\0\0\0\0\0\0€ä˝e˜$R¿2ÊÆ%‰KG¿', ''),
+(944, 2, 1, 934, '1', '0x005679', 0, 'CELULAR PUERTO TRANQUILO', 'POINT', '\0\0\0\0\0\0\0˙ÌÎ¿9+R¿«∫∏çPG¿', ''),
+(945, 2, 1, 935, '1', '0x005679', 0, 'CELULAR PUERTO BERTRAND', 'POINT', '\0\0\0\0\0\0\0∑—\0ﬁ5R¿äé‰ÚÇG¿', ''),
+(946, 2, 1, 936, '1', '0x005679', 0, 'CELULAR PUERTO GUADAL', 'POINT', '\0\0\0\0\0\0\0p_Œ-R¿áßW 2lG¿', ''),
+(947, 2, 1, 937, '1', '0x005679', 0, 'CELULAR COCHRANE', 'POINT', '\0\0\0\0\0\0\0ÜZ”º„$R¿ç(Ì\ræ†G¿', ''),
+(948, 2, 1, 938, '1', '0x005679', 0, 'CELULAR TORTEL', 'POINT', '\0\0\0\0\0\0\0‡-ê†¯aR¿ºtìÊG¿', ''),
+(949, 2, 1, 939, '1', '0x005679', 0, 'CELULAR VILLA O&#x27;HIGGINS', 'POINT', '\0\0\0\0\0\0\0O@a√#R¿ŒQ⁄;H¿', ''),
+(950, 2, 1, 940, '1', '0x005679', 0, 'SUPERMERCADO PUERTO RA√öL MAR√çN', 'POINT', '\0\0\0\0\0\0\07âA`Â<R¿œf’Áj„E¿', ''),
+(951, 2, 1, 941, '1', '0x005679', 0, 'SUPERMERCADO LA JUNTA', 'POINT', '\0\0\0\0\0\0\0F%u\ZR¿?∆¸E¿', ''),
+(952, 2, 1, 942, '1', '0x005679', 0, 'SUPERMERCADO LAGO VERDE', 'POINT', '\0\0\0\0\0\0\0ë~˚:pˆQ¿tµ˚ÀF¿', ''),
+(953, 2, 1, 943, '1', '0x005679', 0, 'SUPERMERCADO PUYUHUAPI', 'POINT', '\0\0\0\0\0\0\0«):íÀ#R¿”ﬁ‡ì)F¿', ''),
+(954, 2, 1, 944, '1', '0x005679', 0, 'SUPERMERCADO PUERTO CISNES', 'POINT', '\0\0\0\0\0\0\0HP¸s+R¿æ¡&S]F¿', ''),
+(955, 2, 1, 945, '1', '0x005679', 0, 'SUPERMERCADO VILLA AMENGUAL', 'POINT', '\0\0\0\0\0\0\0öôôôô\rR¿9¥»væ_F¿', ''),
+(956, 2, 1, 946, '1', '0x005679', 0, 'SUPERMERCADO MA√ëIHUALES', 'POINT', '\0\0\0\0\0\0\0·zÆG	R¿ü<,‘öñF¿', ''),
+(957, 2, 1, 947, '1', '0x005679', 0, 'SUPERMERCADO COYHAIQUE', 'POINT', '\0\0\0\0\0\0\0Gx$R¿DãlÁ˚…F¿', ''),
+(958, 2, 1, 948, '1', '0x005679', 0, 'SUPERMERCADO PUERTO AYSEN', 'POINT', '\0\0\0\0\0\0\0@a√”+R¿ï‘	h"¥F¿', ''),
+(959, 2, 1, 949, '1', '0x005679', 0, 'SUPERMERCADO CERRO CASTILLO', 'POINT', '\0\0\0\0\0\0\0}–≥Yı	R¿\0oÅ≈G¿', ''),
+(960, 2, 1, 950, '1', '0x005679', 0, 'SUPERMERCADO PUERTO IBA√ëEZ', 'POINT', '\0\0\0\0\0\0\0åJÍ¸Q¿Á˚©Ò“%G¿', ''),
+(961, 2, 1, 951, '1', '0x005679', 0, 'SUPERMERCADO BAH√çA MURTA', 'POINT', '\0\0\0\0\0\0\0%uö+R¿—"€˘~:G¿', ''),
+(962, 2, 1, 952, '1', '0x005679', 0, 'SUPERMERCADO CHILE CHICO', 'POINT', '\0\0\0\0\0\0\0x$(ÓQ¿Zd;ﬂOEG¿', ''),
+(963, 2, 1, 953, '1', '0x005679', 0, 'SUPERMERCADO PUERTO TRANQUILO', 'POINT', '\0\0\0\0\0\0\0˙ÌÎ¿9+R¿«∫∏çPG¿', ''),
+(964, 2, 1, 954, '1', '0x005679', 0, 'SUPERMERCADO PUERTO BERTRAND', 'POINT', '\0\0\0\0\0\0\0∑—\0ﬁ5R¿äé‰ÚÇG¿', ''),
+(965, 2, 1, 955, '1', '0x005679', 0, 'SUPERMERCADO PUERTO GUADAL', 'POINT', '\0\0\0\0\0\0\0p_Œ-R¿áßW 2lG¿', ''),
+(966, 2, 1, 956, '1', '0x005679', 0, 'SUPERMERCADO COCHRANE', 'POINT', '\0\0\0\0\0\0\0ÜZ”º„$R¿ç(Ì\ræ†G¿', ''),
+(967, 2, 1, 957, '1', '0x005679', 0, 'SUPERMERCADO TORTEL', 'POINT', '\0\0\0\0\0\0\0‡-ê†¯aR¿ºtìÊG¿', ''),
+(968, 2, 1, 958, '1', '0x005679', 0, 'SUPERMERCADO VILLA O&#x27;HIGGINS', 'POINT', '\0\0\0\0\0\0\0O@a√#R¿ŒQ⁄;H¿', ''),
+(969, 2, 1, 959, '1', '0x005679', 0, 'TALLER LA JUNTA', 'POINT', '\0\0\0\0\0\0\0F%u\ZR¿?∆¸E¿', ''),
+(970, 2, 1, 960, '1', '0x005679', 0, 'TALLER LAGO VERDE', 'POINT', '\0\0\0\0\0\0\0ë~˚:pˆQ¿tµ˚ÀF¿', ''),
+(971, 2, 1, 961, '1', '0x005679', 0, 'TALLER PUYUHUAPI', 'POINT', '\0\0\0\0\0\0\0«):íÀ#R¿”ﬁ‡ì)F¿', ''),
+(972, 2, 1, 962, '1', '0x005679', 0, 'TALLER PUERTO CISNES', 'POINT', '\0\0\0\0\0\0\0HP¸s+R¿æ¡&S]F¿', ''),
+(973, 2, 1, 963, '1', '0x005679', 0, 'TALLER VILLA AMENGUAL', 'POINT', '\0\0\0\0\0\0\0öôôôô\rR¿9¥»væ_F¿', ''),
+(974, 2, 1, 964, '1', '0x005679', 0, 'TALLER MA√ëIHUALES', 'POINT', '\0\0\0\0\0\0\0·zÆG	R¿ü<,‘öñF¿', ''),
+(975, 2, 1, 965, '1', '0x005679', 0, 'TALLER COYHAIQUE', 'POINT', '\0\0\0\0\0\0\0Gx$R¿DãlÁ˚…F¿', ''),
+(976, 2, 1, 966, '1', '0x005679', 0, 'TALLER PUERTO AYSEN', 'POINT', '\0\0\0\0\0\0\0@a√”+R¿ï‘	h"¥F¿', ''),
+(977, 2, 1, 967, '1', '0x005679', 0, 'TALLER CERRO CASTILLO', 'POINT', '\0\0\0\0\0\0\0}–≥Yı	R¿\0oÅ≈G¿', ''),
+(978, 2, 1, 968, '1', '0x005679', 0, 'TALLER PUERTO IBA√ëEZ', 'POINT', '\0\0\0\0\0\0\0åJÍ¸Q¿Á˚©Ò“%G¿', ''),
+(979, 2, 1, 969, '1', '0x005679', 0, 'TALLER BAH√çA MURTA', 'POINT', '\0\0\0\0\0\0\0%uö+R¿—"€˘~:G¿', ''),
+(980, 2, 1, 970, '1', '0x005679', 0, 'TALLER CHILE CHICO', 'POINT', '\0\0\0\0\0\0\0x$(ÓQ¿Zd;ﬂOEG¿', ''),
+(981, 2, 1, 971, '1', '0x005679', 0, 'TALLER PUERTO TRANQUILO', 'POINT', '\0\0\0\0\0\0\0˙ÌÎ¿9+R¿«∫∏çPG¿', ''),
+(982, 2, 1, 972, '1', '0x005679', 0, 'TALLER PUERTO GUADAL', 'POINT', '\0\0\0\0\0\0\0p_Œ-R¿áßW 2lG¿', ''),
+(983, 2, 1, 973, '1', '0x005679', 0, 'TALLER COCHRANE', 'POINT', '\0\0\0\0\0\0\0ÜZ”º„$R¿ç(Ì\ræ†G¿', ''),
+(984, 2, 1, 974, '1', '0x005679', 0, 'TALLE VILLA O&#x27;HIGGINS', 'POINT', '\0\0\0\0\0\0\0O@a√#R¿ŒQ⁄;H¿', ''),
+(985, 2, 1, 975, '1', '0x005679', 0, 'CARABINEROS PUERTO RA√öL MAR√çN', 'POINT', '\0\0\0\0\0\0\07âA`Â<R¿œf’Áj„E¿', ''),
+(986, 2, 1, 976, '1', '0x005679', 0, 'CARABINEROS LA JUNTA', 'POINT', '\0\0\0\0\0\0\0F%u\ZR¿?∆¸E¿', ''),
+(987, 2, 1, 977, '1', '0x005679', 0, 'CARABINEROS LAGO VERDE', 'POINT', '\0\0\0\0\0\0\0ë~˚:pˆQ¿tµ˚ÀF¿', ''),
+(988, 2, 1, 978, '1', '0x005679', 0, 'CARABINEROS PUYUHUAPI', 'POINT', '\0\0\0\0\0\0\0«):íÀ#R¿”ﬁ‡ì)F¿', ''),
+(989, 2, 1, 979, '1', '0x005679', 0, 'CARABINEROS PUERTO CISNES', 'POINT', '\0\0\0\0\0\0\0HP¸s+R¿æ¡&S]F¿', ''),
+(990, 2, 1, 980, '1', '0x005679', 0, 'CARABINEROS MA√ëIHUALES', 'POINT', '\0\0\0\0\0\0\0·zÆG	R¿ü<,‘öñF¿', ''),
+(991, 2, 1, 981, '1', '0x005679', 0, 'CARABINEROS COYHAIQUE', 'POINT', '\0\0\0\0\0\0\0Gx$R¿DãlÁ˚…F¿', ''),
+(992, 2, 1, 982, '1', '0x005679', 0, 'CARABINEROS PUERTO AYSEN', 'POINT', '\0\0\0\0\0\0\0@a√”+R¿ï‘	h"¥F¿', ''),
+(993, 2, 1, 983, '1', '0x005679', 0, 'CARABINEROS CERRO CASTILLO', 'POINT', '\0\0\0\0\0\0\0}–≥Yı	R¿\0oÅ≈G¿', ''),
+(994, 2, 1, 984, '1', '0x005679', 0, 'CARABINEROS PUERTO IBA√ëEZ', 'POINT', '\0\0\0\0\0\0\0åJÍ¸Q¿Á˚©Ò“%G¿', ''),
+(995, 2, 1, 985, '1', '0x005679', 0, 'CARABINEROS BAH√çA MURTA', 'POINT', '\0\0\0\0\0\0\0%uö+R¿—"€˘~:G¿', ''),
+(996, 2, 1, 986, '1', '0x005679', 0, 'CARABINEROS CHILE CHICO', 'POINT', '\0\0\0\0\0\0\0x$(ÓQ¿Zd;ﬂOEG¿', ''),
+(997, 2, 1, 987, '1', '0x005679', 0, 'CARABINEROS PUERTO TRANQUILO', 'POINT', '\0\0\0\0\0\0\0˙ÌÎ¿9+R¿«∫∏çPG¿', ''),
+(998, 2, 1, 988, '1', '0x005679', 0, 'CARABINEROS PUERTO GUADAL', 'POINT', '\0\0\0\0\0\0\0p_Œ-R¿áßW 2lG¿', ''),
+(999, 2, 1, 989, '1', '0x005679', 0, 'CARABINEROS COCHRANE', 'POINT', '\0\0\0\0\0\0\0ÜZ”º„$R¿ç(Ì\ræ†G¿', ''),
+(1000, 2, 1, 990, '1', '0x005679', 0, 'CARABINEROS TORTEL', 'POINT', '\0\0\0\0\0\0\0‡-ê†¯aR¿ºtìÊG¿', ''),
+(1001, 2, 1, 991, '1', '0x005679', 0, 'CARABINEROS VILLA O&#x27;HIGGINS', 'POINT', '\0\0\0\0\0\0\0O@a√#R¿ŒQ⁄;H¿', ''),
+(1002, 2, 1, 992, '1', '0x005679', 1, 'A VINTAGE RENT A CAR', 'POINT', '\0\0\0\0\0\0\0\0\0\0\0∂·RA\0\0\0\0h>&A', ''),
+(1003, 2, 1, 993, '1', '0x005679', 1, 'RENT A CAR JRPFEIFFER EIRL', 'POINT', '\0\0\0\0\0\0\0\0\0\0ÄA‡RA\0\0\0\0?&A', ''),
+(1004, 2, 1, 994, '1', '0x005679', 1, 'RENT A CAR SAN MARTIN', 'POINT', '\0\0\0\0\0\0\0\0\0\0Ä‹‡RA\0\0\0\0ﬁ<&A', ''),
+(1005, 2, 1, 995, '1', '0x005679', 1, 'TRAEGER RENT A CAR', 'POINT', '\0\0\0\0\0\0\0\0\0\0\0¢·RA\0\0\0\0ÿ?&A', ''),
+(1006, 2, 1, 996, '1', '0x005679', 1, 'PATAGONIAXPRESS', 'POINT', '\0\0\0\0\0\0\0\0\0\0ÄÍxRA\0\0\0\0ú√A', ''),
+(1159, 2, 1, 997, '1', '0x005679', 0, 'SERVICIOS M√âDICOS PUERTO RA√öL MAR√çN', 'POINT', '\0\0\0\0\0\0\07âA`Â<R¿œf’Áj„E¿', ''),
+(1160, 2, 1, 998, '1', '0x005679', 0, 'SERVICIOS M√âDICOS LA JUNTA', 'POINT', '\0\0\0\0\0\0\0F%u\ZR¿?∆¸E¿', ''),
+(1161, 2, 1, 999, '1', '0x005679', 0, 'SERVICIOS M√âDICOS LAGO VERDE', 'POINT', '\0\0\0\0\0\0\0ë~˚:pˆQ¿tµ˚ÀF¿', ''),
+(1162, 2, 1, 1000, '1', '0x005679', 0, 'SERVICIOS M√âDICOS PUYUHUAPI', 'POINT', '\0\0\0\0\0\0\0«):íÀ#R¿”ﬁ‡ì)F¿', ''),
+(1163, 2, 1, 1001, '1', '0x005679', 0, 'SERVICIOS M√âDICOS PUERTO CISNES', 'POINT', '\0\0\0\0\0\0\0HP¸s+R¿æ¡&S]F¿', ''),
+(1164, 2, 1, 1002, '1', '0x005679', 0, 'SERVICIOS M√âDICOS VILLA AMENGUAL', 'POINT', '\0\0\0\0\0\0\0öôôôô\rR¿9¥»væ_F¿', ''),
+(1165, 2, 1, 1003, '1', '0x005679', 0, 'SERVICIOS M√âDICOS MA√ëIHUALES', 'POINT', '\0\0\0\0\0\0\0·zÆG	R¿ü<,‘öñF¿', ''),
+(1166, 2, 1, 1004, '1', '0x005679', 0, 'SERVICIOS M√âDICOS COYHAIQUE', 'POINT', '\0\0\0\0\0\0\0Gx$R¿DãlÁ˚…F¿', ''),
+(1167, 2, 1, 1005, '1', '0x005679', 0, 'SERVICIOS M√âDICOS PUERTO AYSEN', 'POINT', '\0\0\0\0\0\0\0@a√”+R¿ï‘	h"¥F¿', ''),
+(1168, 2, 1, 1006, '1', '0x005679', 0, 'SERVICIOS M√âDICOS CERRO CASTILLO', 'POINT', '\0\0\0\0\0\0\0}–≥Yı	R¿\0oÅ≈G¿', ''),
+(1169, 2, 1, 1007, '1', '0x005679', 0, 'SERVICIOS M√âDICOS PUERTO IBA√ëEZ', 'POINT', '\0\0\0\0\0\0\0åJÍ¸Q¿Á˚©Ò“%G¿', ''),
+(1170, 2, 1, 1008, '1', '0x005679', 0, 'SERVICIOS M√âDICOS BAH√çA MURTA', 'POINT', '\0\0\0\0\0\0\0%uö+R¿—"€˘~:G¿', ''),
+(1171, 2, 1, 1009, '1', '0x005679', 0, 'SERVICIOS M√âDICOS CHILE CHICO', 'POINT', '\0\0\0\0\0\0\0x$(ÓQ¿Zd;ﬂOEG¿', ''),
+(1172, 2, 1, 1010, '1', '0x005679', 0, 'SERVICIOS M√âDICOS PUERTO TRANQUILO', 'POINT', '\0\0\0\0\0\0\0˙ÌÎ¿9+R¿«∫∏çPG¿', ''),
+(1173, 2, 1, 1011, '1', '0x005679', 0, 'SERVICIOS M√âDICOS PUERTO BERTRAND', 'POINT', '\0\0\0\0\0\0\0∑—\0ﬁ5R¿äé‰ÚÇG¿', ''),
+(1174, 2, 1, 1012, '1', '0x005679', 0, 'SERVICIOS M√âDICOS PUERTO GUADAL', 'POINT', '\0\0\0\0\0\0\0p_Œ-R¿áßW 2lG¿', ''),
+(1175, 2, 1, 1013, '1', '0x005679', 0, 'SERVICIOS M√âDICOS COCHRANE', 'POINT', '\0\0\0\0\0\0\0ÜZ”º„$R¿ç(Ì\ræ†G¿', ''),
+(1176, 2, 1, 1014, '1', '0x005679', 0, 'SERVICIOS M√âDICOS TORTEL', 'POINT', '\0\0\0\0\0\0\0‡-ê†¯aR¿ºtìÊG¿', ''),
+(1177, 2, 1, 1015, '1', '0x005679', 0, 'SERVICIOS M√âDICOS VILLA O&#x27;HIGGINS', 'POINT', '\0\0\0\0\0\0\0O@a√#R¿ŒQ⁄;H¿', ''),
+(1188, 1, 2, 1, '1', '0x000000', 0, 'prueba', 'LINESTRING', '\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0?\0\0\0\0\0\0?\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@', 'LineString(1 1,2 2)');
 
 --
 -- Disparadores `destino`
@@ -2292,11 +2292,7 @@ DROP TRIGGER IF EXISTS `Destino_BUPD`;
 DELIMITER //
 CREATE TRIGGER `Destino_BUPD` BEFORE UPDATE ON `destino`
  FOR EACH ROW begin
-	DECLARE geom varchar(50);
-	
-	SET geom = new.tipoGeometria;
-	SET new.geometria = GeomFromText(geom);
-	SET new.tipoGeometria = 'POINT';
+	SET new.geom = GeomFromText(new.geometria);
 End
 //
 DELIMITER ;
@@ -2304,11 +2300,7 @@ DROP TRIGGER IF EXISTS `destino_BINS`;
 DELIMITER //
 CREATE TRIGGER `destino_BINS` BEFORE INSERT ON `destino`
  FOR EACH ROW begin
-	DECLARE geom varchar(50);
-	
-	SET geom = new.tipoGeometria;
-	SET new.geometria = GeomFromText(geom);
-	SET new.tipoGeometria = 'POINT';
+	SET new.geom = GeomFromText(new.geometria);
 End
 //
 DELIMITER ;
