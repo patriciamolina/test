@@ -53,6 +53,10 @@
     "dataSource": "INFOGEO",
     "public": true
   },
+  "DestinoMasivo":{
+      "dataSource": "db",
+      "public": false
+  },
   "Destino": {
     "dataSource": "INFOGEO",
     "public": true
