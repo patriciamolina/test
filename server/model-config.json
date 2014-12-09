@@ -13,9 +13,9 @@
     "dataSource": "INFOSESION",
     "public": true
   },
-  "Application": {
+  "Aplicacion": {
     "dataSource": "INFOSESION",
-    "public": false
+    "public": true
   },
   "AccessToken": {
     "dataSource": "db",
