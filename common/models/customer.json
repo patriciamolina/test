@@ -23,7 +23,44 @@
               "dataScale": 0,
               "nullable": "NO"
           }
-      }
+      },
+        "nombres": {
+            "type": "String",
+            "required": true,
+            "length": 150,
+            "precision": null,
+            "scale": null,
+            "mysql": {
+                "columnName": "nombres",
+                "dataType": "varchar",
+                "dataLength": 150,
+                "dataPrecision": null,
+                "dataScale": null,
+                "nullable": "NO"
+            }
+        },
+        "apellidos": {
+            "type": "String",
+            "required": true,
+            "length": 150,
+            "precision": null,
+            "scale": null,
+            "mysql": {
+                "columnName": "apellidos",
+                "dataType": "varchar",
+                "dataLength": 150,
+                "dataPrecision": null,
+                "dataScale": null,
+                "nullable": "NO"
+            }
+        }
+    },
+    "relations": {
+        "roles": {
+            "type": "hasMany",
+            "model": "RoleMapping",
+            "foreignKey": "principalId"
+        }
     },
     "acls": [
         {
@@ -43,6 +80,90 @@
           "principalType": "ROLE",
           "principalId": "SUPERADMIN",
           "permission": "ALLOW"
-      }
+      },
+        {
+            "principalType": "ROLE",
+            "principalId": "ADMIN",
+            "permission": "ALLOW",
+            "property": "__count__roles"
+        },
+        {
+            "principalType": "ROLE",
+            "principalId": "ADMIN",
+            "permission": "ALLOW",
+            "property": "__create__roles"
+        },
+        {
+            "principalType": "ROLE",
+            "principalId": "ADMIN",
+            "permission": "ALLOW",
+            "property": "__delete__roles"
+        },
+        {
+            "principalType": "ROLE",
+            "principalId": "ADMIN",
+            "permission": "ALLOW",
+            "property": "__destroyById__roles"
+        },
+        {
+            "principalType": "ROLE",
+            "principalId": "ADMIN",
+            "permission": "ALLOW",
+            "property": "__findById__roles"
+        },
+        {
+            "principalType": "ROLE",
+            "principalId": "ADMIN",
+            "permission": "ALLOW",
+            "property": "__get__roles"
+        },
+        {
+            "principalType": "ROLE",
+            "principalId": "ADMIN",
+            "permission": "ALLOW",
+            "property": "__updateById__roles"
+        },
+        {
+            "principalType": "ROLE",
+            "principalId": "SUPERADMIN",
+            "permission": "ALLOW",
+            "property": "__count__roles"
+        },
+        {
+            "principalType": "ROLE",
+            "principalId": "SUPERADMIN",
+            "permission": "ALLOW",
+            "property": "__create__roles"
+        },
+        {
+            "principalType": "ROLE",
+            "principalId": "SUPERADMIN",
+            "permission": "ALLOW",
+            "property": "__delete__roles"
+        },
+        {
+            "principalType": "ROLE",
+            "principalId": "SUPERADMIN",
+            "permission": "ALLOW",
+            "property": "__destroyById__roles"
+        },
+        {
+            "principalType": "ROLE",
+            "principalId": "SUPERADMIN",
+            "permission": "ALLOW",
+            "property": "__findById__roles"
+        },
+        {
+            "principalType": "ROLE",
+            "principalId": "SUPERADMIN",
+            "permission": "ALLOW",
+            "property": "__get__roles"
+        },
+        {
+            "principalType": "ROLE",
+            "principalId": "SUPERADMIN",
+            "permission": "ALLOW",
+            "property": "__updateById__roles"
+        }
     ]
 }

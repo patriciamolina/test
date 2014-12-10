@@ -2,6 +2,8 @@ module.exports = function(app) {
 
     var     Cliente = app.models.Cliente
         ,   Customer = app.models.Customer
+        ,   RoleMapping = app.models.RoleMapping
+        ,   Rol = app.models.Role
         ,   findClientes = Customer.find
         ,   Utils = require('../index');
 
@@ -80,18 +82,32 @@ module.exports = function(app) {
                                 }
                             }
                         }
-                    }else{
+                    }else if (cliente.idcliente != 0){
                         query['where'] = {idcliente: cliente.idcliente };
                     }
-                    Customer.find(query, function(err, customer){
-                        ctx.result = customer;
+                    Customer.find(query, function(err, customers){
+                        ctx.result = customers;
                         Customer.find = findNada;
+                        for(var i=0; customers.length > i; i++) {
+                            RoleMapping.find({where: {principalId: customers[i].id}},function(err,roles){
+                                roles = [ roles ];
+                                for(var j=0; roles.length > j; j++) {
+                                    Rol.find({where: {id: roles[j].roleId}}, function (err, role) {
+                                        console.log(role);
+                                    });
+                                }
+                            });
+                        };
                         next();
                     });
                 });
             });
 
         });
+    });
+
+    Customer.afterRemote('create', function (ctx, affectedModelInstance, next) {
+        console.log(affectedModelInstance.roles);
     });
 
 };

@@ -31,7 +31,7 @@
   },
   "Role": {
     "dataSource": "INFOSESION",
-    "public": false
+    "public": true
   },
   "Audio": {
     "dataSource": "INFOGEO",
