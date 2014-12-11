@@ -58,7 +58,7 @@
     "relations": {
         "roles": {
             "type": "hasMany",
-            "model": "RoleMapping",
+            "model": "MapeoRol",
             "foreignKey": "principalId"
         }
     },

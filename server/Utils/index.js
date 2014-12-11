@@ -24,6 +24,41 @@ utils.getSizeJson = function (jsonElement){
     return count;
 };
 
+utils.isEmpty = function isEmpty(obj) {
+
+    // null and undefined are "empty"
+    if (obj == null) return true;
+
+    // Assume if it has a length property with a non-zero value
+    // that that property is correct.
+    if (obj.length > 0)    return false;
+    if (obj.length === 0)  return true;
+
+    // Otherwise, does it have any properties of its own?
+    // Note that this doesn't handle
+    // toString and valueOf enumeration bugs in IE < 9
+    for (var key in obj) {
+        if (hasOwnProperty.call(obj, key)) return false;
+    }
+
+    return true;
+}
+
+utils.isValidJson = function isValidJson(jsonObject){
+    var json = JSON.stringify(jsonObject);
+    if (/^[\],:{}\s]*$/.test(json.replace(/\\["\\\/bfnrtu]/g, '@').
+        replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']').
+        replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
+
+        return true;
+
+    }else{
+
+        return false;
+
+    }
+}
+
 utils.alterModels = require('./alterModels.js');
 utils.routes = require('./routes.js');
 utils.migrateData = require('./migrate-data-mysql.js');

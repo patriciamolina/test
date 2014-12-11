@@ -2,7 +2,7 @@ module.exports = function(app) {
 
     var     Cliente = app.models.Cliente
         ,   Customer = app.models.Customer
-        ,   RoleMapping = app.models.RoleMapping
+        ,   RoleMapping = app.models.MapeoRol
         ,   Rol = app.models.Role
         ,   findClientes = Customer.find
         ,   Utils = require('../index')
@@ -124,7 +124,51 @@ module.exports = function(app) {
     });
 
     Customer.afterRemote('create', function (ctx, affectedModelInstance, next) {
-        console.log(affectedModelInstance.roles);
+        console.log(affectedModelInstance);
+        if(affectedModelInstance.rol !== undefined) {
+            async.each(affectedModelInstance.rol, function(rol,callback){
+                RoleMapping.create({
+                    "principalType": "USER",
+                    "principalId": affectedModelInstance.id,
+                    "roleId": rol
+                }, function (err) {
+                    if (err) console.error(err);
+                });
+                callback();
+            }, function(err){
+                if(err)console.error(err);
+                next();
+            });
+        }else{
+            next();
+        }
+    });
+
+    Customer.afterRemote('findById', function (ctx, customer, next) {
+        if(!Utils.isEmpty(customer)) {
+            customer["rol"]=[];
+            RoleMapping.find({where: {principalId: customer.id}}, function (err, roles) {
+                var count = 0;
+                async.each(roles, function (rol, callbackRol) {
+                    Rol.find({where: {id: rol.roleId}}, function (err, role) {
+                        var roltemp = {};
+                        roltemp["id"] = role[0].id;
+                        roltemp["name"] = role[0].name;
+                        customer.rol[count] = roltemp;
+                        count++;
+                        callbackRol();
+                    });
+                }, function (err) {
+                    if (err) {
+                        console.error(err);
+                    }
+                    ctx.result = customer;
+                    next();
+                });
+            });
+        }else{
+            next();
+        }
     });
 
 };
