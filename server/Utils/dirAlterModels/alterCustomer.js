@@ -5,7 +5,8 @@ module.exports = function(app) {
         ,   RoleMapping = app.models.RoleMapping
         ,   Rol = app.models.Role
         ,   findClientes = Customer.find
-        ,   Utils = require('../index');
+        ,   Utils = require('../index')
+        ,   async = require('async');
 
     function findNada(filter, cb) {
         Customer.find = findClientes;
@@ -85,20 +86,36 @@ module.exports = function(app) {
                     }else if (cliente.idcliente != 0){
                         query['where'] = {idcliente: cliente.idcliente };
                     }
+
                     Customer.find(query, function(err, customers){
-                        ctx.result = customers;
                         Customer.find = findNada;
-                        for(var i=0; customers.length > i; i++) {
-                            RoleMapping.find({where: {principalId: customers[i].id}},function(err,roles){
-                                roles = [ roles ];
-                                for(var j=0; roles.length > j; j++) {
-                                    Rol.find({where: {id: roles[j].roleId}}, function (err, role) {
-                                        console.log(role);
+                        async.each(customers,function(customer, callback){
+                            customer["rol"]=[];
+                            RoleMapping.find({where: {principalId: customer.id}},function(err,roles){
+                                var count = 0;
+                                async.each(roles,function(rol,callbackRol){
+                                    Rol.find({where: {id: rol.roleId}}, function (err, role) {
+                                        var roltemp = {};
+                                        roltemp["id"] = role[0].id;
+                                        roltemp["name"] = role[0].name;
+                                        customer.rol[count] = roltemp;
+                                        count++;
+                                        callbackRol();
                                     });
-                                }
+                                }, function(err){
+                                    if(err){
+                                        console.error(err);
+                                    }
+                                    callback();
+                                });
                             });
-                        };
-                        next();
+                        }, function(err){
+                            if(err){
+                                console.error(err);
+                            }
+                            ctx.result = customers;
+                            next();
+                        });
                     });
                 });
             });
