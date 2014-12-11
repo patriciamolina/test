@@ -124,7 +124,6 @@ module.exports = function(app) {
     });
 
     Customer.afterRemote('create', function (ctx, affectedModelInstance, next) {
-        console.log(affectedModelInstance);
         if(affectedModelInstance.rol !== undefined) {
             async.each(affectedModelInstance.rol, function(rol,callback){
                 RoleMapping.create({
@@ -169,6 +168,14 @@ module.exports = function(app) {
         }else{
             next();
         }
+    });
+
+    Customer.afterRemote('login',function( ctx, customer, next) {
+        Customer.findById(customer.userId,function(err, user){
+            if (err) console.error(err);
+            customer["customer"]=user;
+            next();
+        });
     });
 
 };
