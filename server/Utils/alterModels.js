@@ -5,7 +5,7 @@ module.exports = function(app) {
 
     var fs = require("fs");
 
-    fs.readdir('./Utils/dirAlterModels', function(err, files) {
+    fs.readdir('server/Utils/dirAlterModels', function(err, files) {
         if (err) {
             throw err;
         }
