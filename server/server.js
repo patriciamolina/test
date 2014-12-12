@@ -24,6 +24,8 @@ app.use(loopback.compress());
 // -- Add your pre-processing middleware here --
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.set('json spaces', 2); //pretty print json responses
 
 //routes
 Utils.routes(app);
@@ -40,7 +42,6 @@ boot(app, __dirname);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'html');
 app.engine('html', require('ejs').renderFile);
-app.set('json spaces', 2); //pretty print json responses
 
 // Requests that get this far won't be handled
 // by any middleware. Convert them into a 404 error

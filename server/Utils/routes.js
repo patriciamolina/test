@@ -1,5 +1,11 @@
 module.exports = function(app) {
   var router = app.loopback.Router();
+  var contentTypesByExtension = {
+    'html': "text/html",
+    'css':  "text/css",
+    'js':   "text/javascript",
+    'json': "application/json" //Edited due to answer - Still no success :(
+  };
 
   router.get('*',function(req, res, next) {
       var httpsPort = app.get('port-https') || 443;
@@ -60,6 +66,29 @@ module.exports = function(app) {
     });
     token.destroy();
     res.redirect('/');
+  });
+
+  router.get('/VerifyToken', function(req, res) {
+        var AccessToken = app.models.AccessToken;
+        AccessToken.findById(req.query.access_token,function(err,token){
+            if(err)console.error(err);
+
+            var respjson;
+
+            if(token == null){
+                respjson = {logged: "false"};
+            }else{
+                respjson = {logged: "true", token: token};
+            }
+
+            var headers = {};
+            var contentType = contentTypesByExtension["json"];
+            if (contentType) headers["Content-Type"] = contentType;
+            res.writeHead(200, headers);
+            res.write(JSON.stringify(respjson));
+            res.write
+            res.end();
+        });
   });
 
   app.use(router);
