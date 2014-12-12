@@ -17,7 +17,13 @@ module.exports = function(app) {
         next();
     });
 
-  router.get('/', function(req, res) {
+    router.get('/', function(req, res) {
+        res.render('index', {
+            loginFailed: false
+        });
+    });
+
+  router.get('/login', function(req, res) {
     res.render('index', {
       loginFailed: false
     });
@@ -65,12 +71,12 @@ module.exports = function(app) {
           console.log(err || 'Logged out');
     });
     token.destroy();
-    res.redirect('/');
+    res.redirect('/login');
   });
 
-  router.get('/VerifyToken', function(req, res) {
+  router.get('/VerifyToken/:id', function(req, res) {
         var AccessToken = app.models.AccessToken;
-        AccessToken.findById(req.query.access_token,function(err,token){
+        AccessToken.findById(req.params.id,function(err,token){
             if(err)console.error(err);
 
             var respjson;

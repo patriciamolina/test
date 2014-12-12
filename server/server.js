@@ -4,6 +4,7 @@ var boot = require('loopback-boot');
 var http = require('http')
     , https = require('https')
     , path = require('path')
+
     , sslCert = require('./private/ssl_cert')
     , Utils = require('./Utils');
 
@@ -21,6 +22,10 @@ app.use(loopback.favicon(__dirname + '/resources/favicon.jpg'));
 app.use(loopback.compress());
 
 // -- Add your pre-processing middleware here --
+
+app.use(loopback.session({ saveUninitialized: true,
+    resave: true, secret: 'esto es una key' }));
+
 // -- Add your pre-processing middleware here --
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -33,6 +38,16 @@ Utils.routes(app);
 // boot scripts mount components like REST API
 boot(app, __dirname);
 
+
+var oauth2 = require('loopback-component-oauth2').oAuth2Provider(
+    app, // The app instance
+    {
+        dataSource: app.dataSources.INFOSESION, // Data source for oAuth2 metadata persistence
+        loginPage: '/login', // The login page url
+        loginPath: '/login' // The login form processing url
+    } // The options
+);
+
 // -- Mount static files here--
 // All static middleware should be registered at the end, as all requests
 // passing the static middleware are hitting the file system
@@ -42,6 +57,8 @@ boot(app, __dirname);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'html');
 app.engine('html', require('ejs').renderFile);
+
+oauth2.authenticate(['/api', '/me'], {session: true, scope: 'demo'});
 
 // Requests that get this far won't be handled
 // by any middleware. Convert them into a 404 error
