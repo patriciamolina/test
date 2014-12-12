@@ -1,7 +1,7 @@
 module.exports = function(app) {
 
     var     Cliente = app.models.Cliente
-        ,   Customer = app.models.Customer
+        ,   Customer = app.models.User
         ,   RoleMapping = app.models.MapeoRol
         ,   Rol = app.models.Role
         ,   findClientes = Customer.find
@@ -124,23 +124,30 @@ module.exports = function(app) {
     });
 
     Customer.afterRemote('create', function (ctx, affectedModelInstance, next) {
-        if(affectedModelInstance.rol !== undefined) {
-            async.each(affectedModelInstance.rol, function(rol,callback){
-                RoleMapping.create({
-                    "principalType": "USER",
-                    "principalId": affectedModelInstance.id,
-                    "roleId": rol
-                }, function (err) {
-                    if (err) console.error(err);
-                });
-                callback();
-            }, function(err){
-                if(err)console.error(err);
+        var AccessToken = app.models.AccessToken;
+        AccessToken.findById(ctx.req.accessToken,function(err,token) {
+            if(err){
+                console.error(err);
                 next();
-            });
-        }else{
-            next();
-        }
+            }
+            if (affectedModelInstance.rol !== undefined) {
+                async.each(affectedModelInstance.rol, function (rol, callback) {
+                    RoleMapping.create({
+                        "principalType": "USER",
+                        "principalId": affectedModelInstance.id,
+                        "roleId": rol
+                    }, function (err) {
+                        if (err) console.error(err);
+                    });
+                    callback();
+                }, function (err) {
+                    if (err)console.error(err);
+                    next();
+                });
+            } else {
+                next();
+            }
+        });
     });
 
     Customer.afterRemote('findById', function (ctx, customer, next) {
@@ -171,6 +178,7 @@ module.exports = function(app) {
     });
 
     Customer.afterRemote('login',function( ctx, customer, next) {
+        console.log("aquiiiiiiiiiii");
         Customer.findById(customer.userId,function(err, user){
             if (err) console.error(err);
             customer["customer"]=user;
