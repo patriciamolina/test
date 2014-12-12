@@ -74,9 +74,9 @@ module.exports = function(app) {
     res.redirect('/login');
   });
 
-  router.get('/VerifyToken/:id', function(req, res) {
+    router.get('/VerifyToken', function(req, res) {
         var AccessToken = app.models.AccessToken;
-        AccessToken.findById(req.params.id,function(err,token){
+        AccessToken.findById(req.query.access_token,function(err,token){
             if(err)console.error(err);
 
             var respjson;
