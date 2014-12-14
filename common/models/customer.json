@@ -104,18 +104,6 @@
             "principalType": "ROLE",
             "principalId": "$everyone",
             "permission": "ALLOW",
-            "property": "create"
-        },
-        {
-            "principalType": "ROLE",
-            "principalId": "$owner",
-            "permission": "ALLOW",
-            "property": "deleteById"
-        },
-        {
-            "principalType": "ROLE",
-            "principalId": "$everyone",
-            "permission": "ALLOW",
             "property": "login"
         },
         {
@@ -123,18 +111,6 @@
             "principalId": "$everyone",
             "permission": "ALLOW",
             "property": "logout"
-        },
-        {
-            "principalType": "ROLE",
-            "principalId": "$owner",
-            "permission": "ALLOW",
-            "property": "findById"
-        },
-        {
-            "principalType": "ROLE",
-            "principalId": "$owner",
-            "permission": "ALLOW",
-            "property": "updateAttributes"
         },
         {
             "principalType": "ROLE",

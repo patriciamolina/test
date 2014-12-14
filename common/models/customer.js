@@ -127,6 +127,7 @@ module.exports = function(User) {
 
     User.login = function(credentials, include, fn) {
         var self = this;
+
         if (typeof include === 'function') {
             fn = include;
             include = undefined;
@@ -195,6 +196,7 @@ module.exports = function(User) {
                                 // See also loopback#161 and loopback#162
                                 token.__data.user = user;
                             }
+                            token["customer"]=user;
                             fn(err, token);
                         });
                     } else {

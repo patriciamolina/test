@@ -1,7 +1,7 @@
 module.exports = function(app) {
 
     var     Cliente = app.models.Cliente
-        ,   Customer = app.models.User
+        ,   Customer = app.models.Customer
         ,   RoleMapping = app.models.MapeoRol
         ,   Rol = app.models.Role
         ,   findClientes = Customer.find
@@ -175,15 +175,6 @@ module.exports = function(app) {
         }else{
             next();
         }
-    });
-
-    Customer.afterRemote('login',function( ctx, customer, next) {
-        console.log("aquiiiiiiiiiii");
-        Customer.findById(customer.userId,function(err, user){
-            if (err) console.error(err);
-            customer["customer"]=user;
-            next();
-        });
     });
 
 };
