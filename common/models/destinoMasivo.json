@@ -1,6 +1,7 @@
 {
   "name": "DestinoMasivo",
   "base": "PersistedModel",
+  "idInjection": false,
   "properties": {
       "CATEGORIA": {
           "required": true,
