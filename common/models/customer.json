@@ -81,7 +81,7 @@
         "created": "date",
         "lastUpdated": "date"
     },
-    "hidden": ["password","rol"],
+    "hidden": ["password"],
     "relations": {
         "roles": {
             "type": "hasMany",

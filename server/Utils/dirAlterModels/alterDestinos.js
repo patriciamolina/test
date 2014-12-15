@@ -1,4 +1,6 @@
 module.exports = function(app) {
+
+    console.log("holi");
     var Destino = app.models.Destino
         , filtroCampos = app.models.DestinoMasivo
         , Utils = require('../index');

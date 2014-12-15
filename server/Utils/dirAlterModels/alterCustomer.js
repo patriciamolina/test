@@ -1,19 +1,10 @@
 module.exports = function(app) {
 
-    var     Cliente = app.models.Cliente
-        ,   Customer = app.models.Customer
+    var     Customer = app.models.Customer
         ,   RoleMapping = app.models.MapeoRol
         ,   Rol = app.models.Role
-        ,   findClientes = Customer.find
         ,   Utils = require('../index')
         ,   async = require('async');
-
-    function findNada(filter, cb) {
-        Customer.find = findClientes;
-        cb(null,{});
-    }
-
-    Customer.find = findNada;
 
     Customer.afterRemote('find', function (ctx, affectedModelInstance, next) {
 
@@ -42,82 +33,71 @@ module.exports = function(app) {
                     return next(new Error('could not find a valid user'));
                 }
 
-                Cliente.findById(user.idcliente, function (err, cliente){
-                    if (err) {
-                        ctx.result = {data: ctx.result};
-                        return next(err);
-                    }
-                    if ( ! cliente) {
-                        ctx.result = {data: ctx.result};
-                        return next(new Error('could not find a valid client'));
-                    }
+                if(user.idcliente !=0) {
 
-                    var query = {};
+                    var idcliente = user.idcliente
+                        , customerFinal = [];
 
-                    if(ctx.req.query['filter'] !== undefined) {
-                        if(ctx.req.query.filter['include'] !== undefined)
-                            query['include'] = ctx.req.query.filter.include;
-                        if(ctx.req.query.filter['fields'] !== undefined)
-                            query['fields'] = ctx.req.query.filter.fields;
-                        if(ctx.req.query.filter['limit'] !== undefined)
-                            query['limit'] = ctx.req.query.filter.limit;
-                        if(ctx.req.query.filter['order'] !== undefined)
-                            query['order'] = ctx.req.query.filter.order;
-                        if(ctx.req.query.filter['skip'] !== undefined)
-                            query['skip'] = ctx.req.query.filter.skip;
-                        if(ctx.req.query.filter['where'] !== undefined) {
-                            query['where'] = ctx.req.query.filter.where;
-                            if (cliente.idcliente != 0){
-                                if (query.where['and'] !== undefined) {
-                                    query.where.and['idcliente'] = cliente.idcliente;
-                                } else if (query.where['or'] !== undefined) {
-                                    var ortemp = query.where['or'];
-                                    delete query.where['or'];
-                                    query.where['and'] = {idcliente: cliente.idcliente };
-                                    query.where.and['or'] = ortemp;
-                                } else {
-                                    var temp = query.where;
-                                    delete query['where'];
-                                    query['where'] = {};
-                                    query.where['and'] = [ Utils.jsonextend(temp, {idcliente: cliente.idcliente}) ];
-                                }
-                            }
-                        }
-                    }else if (cliente.idcliente != 0){
-                        query['where'] = {idcliente: cliente.idcliente };
-                    }
-
-                    Customer.find(query, function(err, customers){
-                        Customer.find = findNada;
-                        async.each(customers,function(customer, callback){
-                            customer["rol"]=[];
-                            RoleMapping.find({where: {principalId: customer.id}},function(err,roles){
+                    async.each(affectedModelInstance, function (element, callback) {
+                        if (element.idcliente == idcliente) {
+                            element.rol = [];
+                            RoleMapping.find({where: {principalId: element.id}}, function (err, roles) {
+                                if (err) console.error(err);
                                 var count = 0;
-                                async.each(roles,function(rol,callbackRol){
+                                async.each(roles, function (rol, callbackRol) {
                                     Rol.find({where: {id: rol.roleId}}, function (err, role) {
+                                        if (err) console.error(err);
                                         var roltemp = {};
                                         roltemp["id"] = role[0].id;
                                         roltemp["name"] = role[0].name;
-                                        customer.rol[count] = roltemp;
+                                        element.rol[count] = roltemp;
                                         count++;
                                         callbackRol();
                                     });
-                                }, function(err){
-                                    if(err){
+                                }, function (err) {
+                                    if (err) {
                                         console.error(err);
                                     }
+                                    customerFinal.push(element);
                                     callback();
                                 });
                             });
-                        }, function(err){
-                            if(err){
-                                console.error(err);
-                            }
-                            ctx.result = customers;
-                            next();
-                        });
+                        } else {
+                            callback();
+                        }
+                    }, function (err) {
+                        if (err)console.error(err);
+                        ctx.result = customerFinal;
+                        next();
                     });
-                });
+                }else{
+                    async.each(affectedModelInstance, function (element, callback) {
+                        element.rol = [];
+                        RoleMapping.find({where: {principalId: element.id}}, function (err, roles) {
+                            if (err) console.error(err);
+                            var count = 0;
+                            async.each(roles, function (rol, callbackRol) {
+                                Rol.find({where: {id: rol.roleId}}, function (err, role) {
+                                    if (err) console.error(err);
+                                    var roltemp = {};
+                                    roltemp["id"] = role[0].id;
+                                    roltemp["name"] = role[0].name;
+                                    element.rol[count] = roltemp;
+                                    count++;
+                                    callbackRol();
+                                });
+                            }, function (err) {
+                                if (err) {
+                                    console.error(err);
+                                }
+                                callback();
+                            });
+                        });
+                    }, function (err) {
+                        if (err)console.error(err);
+                        next();
+                    });
+                }
             });
 
         });
