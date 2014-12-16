@@ -33,6 +33,10 @@
     "dataSource": "INFOSESION",
     "public": true
   },
+    "container": {
+        "dataSource": "storage",
+        "public": true
+    },
   "Audio": {
     "dataSource": "INFOGEO",
     "public": true

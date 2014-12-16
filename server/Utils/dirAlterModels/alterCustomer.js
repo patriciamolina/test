@@ -157,4 +157,31 @@ module.exports = function(app) {
         }
     });
 
+    Customer.afterRemote('login', function (ctx, user, next) {
+        if(!Utils.isEmpty(user.customer)) {
+            user.customer["rol"]=[];
+            RoleMapping.find({where: {principalId: user.customer.id}}, function (err, roles) {
+                var count = 0;
+                async.each(roles, function (rol, callbackRol) {
+                    Rol.find({where: {id: rol.roleId}}, function (err, role) {
+                        var roltemp = {};
+                        roltemp["id"] = role[0].id;
+                        roltemp["name"] = role[0].name;
+                        user.customer.rol[count] = roltemp;
+                        count++;
+                        callbackRol();
+                    });
+                }, function (err) {
+                    if (err) {
+                        console.error(err);
+                    }
+                    ctx.result = user;
+                    next();
+                });
+            });
+        }else{
+            next();
+        }
+    });
+
 };
