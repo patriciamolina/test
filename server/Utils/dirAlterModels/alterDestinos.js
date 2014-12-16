@@ -21,11 +21,16 @@ module.exports = function(app) {
             async.each(data,function (elemento, callback){
                 var result = validador(elemento);
                 if(result){
-                    console.log("insertando: " + elemento);
-                    Subcategoria.findOne({ where: {nombre: elemento.NOMBRE} },function(err,subcategoria){
+                    Subcategoria.findOne({ where: {nombre: elemento.SUBCATEGORIA} },function(err,subcategoria){
                         if (err) console.error(err);
-                        console.log(subcategoria);
-                        //callback();
+
+                        if(subcategoria != null) {
+                            console.log(subcategoria);
+                            callback();
+                        }else {
+                            console.error("error, la subcategoria '" + elemento.SUBCATEGORIA + "' no existe");
+                            callback();
+                        }
                     });
                 }else{
                     if(response.result === undefined
