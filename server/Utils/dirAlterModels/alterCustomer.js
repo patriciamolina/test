@@ -157,6 +157,36 @@ module.exports = function(app) {
         }
     });
 
+    Customer.afterRemote('updateById', function (ctx, affectedModelInstance, next) {
+        var AccessToken = app.models.AccessToken;
+        AccessToken.findById(ctx.req.accessToken,function(err,token) {
+            if(err){
+                console.error(err);
+                next();
+            }
+            if (affectedModelInstance.rol !== undefined) {
+                RoleMapping.delete({where: {principalId: affectedModelInstance.id}}, function(err){
+                    if(err) console.error(err);
+                    async.each(affectedModelInstance.rol, function (rol, callback) {
+                        RoleMapping.create({
+                            "principalType": "USER",
+                            "principalId": affectedModelInstance.id,
+                            "roleId": rol
+                        }, function (err) {
+                            if (err) console.error(err);
+                        });
+                        callback();
+                    }, function (err) {
+                        if (err)console.error(err);
+                        next();
+                    });
+                });
+            } else {
+                next();
+            }
+        });
+    });
+
     Customer.afterRemote('login', function (ctx, user, next) {
         if(!Utils.isEmpty(user.customer)) {
             user.customer["rol"]=[];
@@ -183,5 +213,4 @@ module.exports = function(app) {
             next();
         }
     });
-
 };

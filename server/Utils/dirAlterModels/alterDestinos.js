@@ -1,6 +1,8 @@
 module.exports = function(app) {
 
     var Destino = app.models.Destino
+        ,   Customer = app.models.Customer
+        ,   Categoria = app.models.Categoria
         ,   Subcategoria = app.models.Subcategoria
         ,   SubcategoriaTieneDestinos = app.models.SubcategoriaTieneDestinos
         ,   Texto = app.models.Texto
@@ -8,48 +10,79 @@ module.exports = function(app) {
         ,   Estadodestino = app.models.Estadodestino
         ,   Bibliotecamultimedia = app.models.Bibliotecamultimedia
         ,   Tipotexto = app.models.Tipotexto
+        ,   Container = app.models.Container
         ,   filtroCampos = app.models.DestinoMasivo.definition.rawProperties
         ,   Utils = require('../index')
         ,   async = require('async')
         ,   isNumeric = require("isnumeric");
 
     Destino.cargaMasiva = function (req, data, cb){
-        var response = {};
+        var response = {}
+            ,   token = req.accessToken;
         if(Utils.isEmpty(data))
             cb(null, "Json empty");
         else if(Utils.isValidJson(data)){
-            async.each(data,function (elemento, callback){
-                var result = validador(elemento);
-                if(result){
-                    Subcategoria.findOne({ where: {nombre: elemento.SUBCATEGORIA} },function(err,subcategoria){
-                        if (err) console.error(err);
+            Customer.relations.accessTokens.modelTo.findById(token.id, function(err, accessToken) {
+                if (err) {
+                    ctx.result = {data: ctx.result};
+                    return next(err);
+                }
+                if (!accessToken) {
+                    ctx.result = {data: ctx.result};
+                    return next(new Error('could not find accessToken'));
+                }
 
-                        if(subcategoria != null) {
-                            console.log(subcategoria);
-                            callback();
-                        }else {
-                            console.error("error, la subcategoria '" + elemento.SUBCATEGORIA + "' no existe");
+                // Look up the user associated with the accessToken
+                Customer.findById(accessToken.userId, function (err, user) {
+                    if (err) {
+                        ctx.result = {data: ctx.result};
+                        return next(err);
+                    }
+                    if ( ! user) {
+                        ctx.result = {data: ctx.result};
+                        console.log(user);
+                        return next(new Error('could not find a valid user'));
+                    }
+                    async.each(data, function (elemento, callback) {
+                        var result = validador(elemento);
+                        if (result) {
+                            Categoria.findOne({ where: {nombre: elemento.CATEGORIA} }, function (err, categoria) {
+                                if (err) console.error(err);
+                                Subcategoria.findOne({ where: {nombre: elemento.SUBCATEGORIA} }, function (err, subcategoria) {
+                                    if (err) console.error(err);
+
+                                    if (subcategoria != null) {
+                                        if(crearNombreCarpetaBiblioteca(user.idcliente, categoria.idcategoria, subcategoria.idsubcategoria, elemento.NOMBRE)){
+                                            console.log("se crea la carpeta");
+                                        }else{
+                                            console.log("No se crea la carpeta");
+                                        }
+                                    } else {
+                                        console.error("error, la subcategoria '" + elemento.SUBCATEGORIA + "' no existe");
+                                        callback();
+                                    }
+                                });
+                            });
+                        } else {
+                            if (response.result === undefined
+                                && response.elements === undefined) {
+
+                                response["result"] = "Problems";
+                                response["elements"] = [];
+                            }
+                            response.elements.push(elemento);
                             callback();
                         }
+                    }, function (err) {
+                        if (err) {
+                            console.error(err);
+                        }
+                        if (response.elements === undefined) {
+                            response["result"] = "OK";
+                        }
+                        cb(null, response);
                     });
-                }else{
-                    if(response.result === undefined
-                        && response.elements === undefined){
-
-                        response["result"] = "Problems";
-                        response["elements"] = [];
-                    }
-                    response.elements.push(elemento);
-                    callback();
-                }
-            },function(err){
-                if (err) {
-                    console.error(err);
-                }
-                if(response.elements === undefined){
-                    response["result"] = "OK";
-                }
-                cb(null, response);
+                });
             });
         }else{
             cb(null, "Data is invalid Json");
@@ -103,4 +136,16 @@ module.exports = function(app) {
         return isValid;
     }
 
+    function crearNombreCarpetaBiblioteca(idCliente, idCategoria, idSubcategoria, idDestino){
+        var nombre = ""+idCliente + "" + idCategoria + "" + idSubcategoria + "" + idDestino
+            ,   contenedor = {name:nombre};
+
+        Container.createContainer(contenedor,function(err){
+            if(err) {
+                return false;
+            }else{
+                return true;
+            }
+        });
+    }
 };

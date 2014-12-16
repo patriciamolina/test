@@ -27,13 +27,13 @@
   },
   "MapeoRol": {
     "dataSource": "INFOSESION",
-    "public": false
+    "public": true
   },
   "Role": {
     "dataSource": "INFOSESION",
     "public": true
   },
-    "container": {
+    "Container": {
         "dataSource": "storage",
         "public": true
     },
