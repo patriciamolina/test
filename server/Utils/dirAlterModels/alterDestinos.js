@@ -14,7 +14,8 @@ module.exports = function(app) {
         ,   filtroCampos = app.models.DestinoMasivo.definition.rawProperties
         ,   Utils = require('../index')
         ,   async = require('async')
-        ,   isNumeric = require("isnumeric");
+        ,   isNumeric = require("isnumeric")
+        ,   md5 = require('MD5');;
 
     Destino.cargaMasiva = function (req, data, cb){
         var response = {}
@@ -24,44 +25,118 @@ module.exports = function(app) {
         else if(Utils.isValidJson(data)){
             Customer.relations.accessTokens.modelTo.findById(token.id, function(err, accessToken) {
                 if (err) {
-                    ctx.result = {data: ctx.result};
-                    return next(err);
+                    cb(err,null);
                 }
                 if (!accessToken) {
-                    ctx.result = {data: ctx.result};
-                    return next(new Error('could not find accessToken'));
+                    cb(new Error('could not find accessToken'),null);
                 }
 
                 // Look up the user associated with the accessToken
                 Customer.findById(accessToken.userId, function (err, user) {
                     if (err) {
-                        ctx.result = {data: ctx.result};
-                        return next(err);
+                        cb(err,null);
                     }
                     if ( ! user) {
-                        ctx.result = {data: ctx.result};
-                        console.log(user);
-                        return next(new Error('could not find a valid user'));
+                        cb(new Error('could not find a valid user'),null);
                     }
                     async.each(data, function (elemento, callback) {
                         var result = validador(elemento);
                         if (result) {
                             Categoria.findOne({ where: {nombre: elemento.CATEGORIA} }, function (err, categoria) {
-                                if (err) console.error(err);
-                                Subcategoria.findOne({ where: {nombre: elemento.SUBCATEGORIA} }, function (err, subcategoria) {
-                                    if (err) console.error(err);
+                                if (err){
+                                    if (response.result === undefined
+                                        && response.elements === undefined) {
 
-                                    if (subcategoria != null) {
-                                        if(crearNombreCarpetaBiblioteca(user.idcliente, categoria.idcategoria, subcategoria.idsubcategoria, elemento.NOMBRE)){
-                                            console.log("se crea la carpeta");
-                                        }else{
-                                            console.log("No se crea la carpeta");
-                                        }
-                                    } else {
-                                        console.error("error, la subcategoria '" + elemento.SUBCATEGORIA + "' no existe");
-                                        callback();
+                                        response["result"] = "Problems";
+                                        response["elements"] = [];
                                     }
-                                });
+                                    elemento["PROBLEMA"] = "error";
+                                    response.elements.push(elemento);
+                                    callback();
+                                }
+                                if(categoria == null){
+                                    if (response.result === undefined
+                                        && response.elements === undefined) {
+
+                                        response["result"] = "Problems";
+                                        response["elements"] = [];
+                                    }
+                                    elemento["PROBLEMA"] = "Categoria No existe";
+                                    response.elements.push(elemento);
+                                    callback();
+                                }else {
+                                    Subcategoria.findOne({ where: {nombre: elemento.SUBCATEGORIA} }, function (err, subcategoria) {
+                                        if (err) {
+                                            if (response.result === undefined
+                                                && response.elements === undefined) {
+
+                                                response["result"] = "Problems";
+                                                response["elements"] = [];
+                                            }
+                                            elemento["PROBLEMA"] = "error";
+                                            response.elements.push(elemento);
+                                            callback();
+                                        }
+
+                                        if (subcategoria != null) {
+                                            var nombre = "" + user.idcliente + "" + categoria.idcategoria + "" + subcategoria.idsubcategoria + "" + elemento.NOMBRE
+                                                , nombreMD5 = md5(nombre)
+                                                , contenedor = {name: nombreMD5};
+                                            Container.createContainer(contenedor, function (err) {
+                                                if (err) {
+                                                    if (response.result === undefined
+                                                        && response.elements === undefined) {
+
+                                                        response["result"] = "Problems";
+                                                        response["elements"] = [];
+                                                    }
+                                                    elemento["PROBLEMA"] = "Elemento Ya existe";
+                                                    response.elements.push(elemento);
+                                                    callback();
+                                                } else {
+                                                    Bibliotecamultimedia.create({ruta: nombreMD5},function(err,biblioteca){
+                                                        if (err) {
+                                                            if (response.result === undefined
+                                                                && response.elements === undefined) {
+
+                                                                response["result"] = "Problems";
+                                                                response["elements"] = [];
+                                                            }
+                                                            elemento["PROBLEMA"] = "error";
+                                                            response.elements.push(elemento);
+                                                            callback();
+                                                        }
+
+                                                        if(biblioteca == null){
+                                                            if (response.result === undefined
+                                                                && response.elements === undefined) {
+
+                                                                response["result"] = "Problems";
+                                                                response["elements"] = [];
+                                                            }
+                                                            elemento["PROBLEMA"] = "Elemento Ya existe";
+                                                            response.elements.push(elemento);
+                                                            callback();
+                                                        }else{
+                                                            console.log("se creo la biblioteca (id): " + biblioteca.idbiblioteca);
+                                                            callback();
+                                                        }
+                                                    });
+                                                }
+                                            });
+                                        } else {
+                                            if (response.result === undefined
+                                                && response.elements === undefined) {
+
+                                                response["result"] = "Problems";
+                                                response["elements"] = [];
+                                            }
+                                            elemento["PROBLEMA"] = "Subcategoria No existe";
+                                            response.elements.push(elemento);
+                                            callback();
+                                        }
+                                    });
+                                }
                             });
                         } else {
                             if (response.result === undefined
@@ -70,12 +145,13 @@ module.exports = function(app) {
                                 response["result"] = "Problems";
                                 response["elements"] = [];
                             }
+                            elemento["PROBLEMA"] = "Elemento Invalido";
                             response.elements.push(elemento);
                             callback();
                         }
                     }, function (err) {
                         if (err) {
-                            console.error(err);
+                            cb(err,null);
                         }
                         if (response.elements === undefined) {
                             response["result"] = "OK";
@@ -134,18 +210,5 @@ module.exports = function(app) {
             }
         }
         return isValid;
-    }
-
-    function crearNombreCarpetaBiblioteca(idCliente, idCategoria, idSubcategoria, idDestino){
-        var nombre = ""+idCliente + "" + idCategoria + "" + idSubcategoria + "" + idDestino
-            ,   contenedor = {name:nombre};
-
-        Container.createContainer(contenedor,function(err){
-            if(err) {
-                return false;
-            }else{
-                return true;
-            }
-        });
     }
 };

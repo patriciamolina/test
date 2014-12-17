@@ -7,11 +7,14 @@
     "schema": "infogeo",
     "table": "bibliotecamultimedia"
   },
+  "mixins": {
+    "ObjectId": true
+  },
   "properties": {
     "idbiblioteca": {
       "type": "Number",
       "id": true,
-      "required": true,
+      "required": false,
       "length": null,
       "precision": 10,
       "scale": 0,
@@ -61,11 +64,6 @@
       "type": "hasMany",
       "model": "Audio",
       "foreignKey": "idbiblioteca"
-    },
-    "destino": {
-      "type": "belongsTo",
-      "model": "Destino",
-      "foreignKey": "iddestino"
     }
   },
   "acls": [
@@ -604,24 +602,6 @@
         "principalId": "ESCRITOR",
         "permission": "ALLOW",
         "property": "__updateById__audios"
-    },
-    {
-        "principalType": "ROLE",
-        "principalId": "ADMIN",
-        "permission": "ALLOW",
-        "property": "__get__destino"
-    },
-    {
-        "principalType": "ROLE",
-        "principalId": "SUPERADMIN",
-        "permission": "ALLOW",
-        "property": "__get__destino"
-    },
-    {
-        "principalType": "ROLE",
-        "principalId": "LECTOR",
-        "permission": "ALLOW",
-        "property": "__get__destino"
     }
   ],
   "methods": []
