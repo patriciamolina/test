@@ -8,6 +8,7 @@ module.exports = function(app) {
   };
 
   router.get('*',function(req, res, next) {
+      setHeaders(res);
       var httpsPort = app.get('port-https') || 443;
         if (!req.secure) {
             var parts = req.get('host').split(':');
@@ -18,22 +19,26 @@ module.exports = function(app) {
     });
 
     router.get('/', function(req, res) {
+        setHeaders(res);
         res.render('index', {
             loginFailed: false
         });
     });
 
   router.get('/login', function(req, res) {
+      setHeaders(res);
     res.render('index', {
       loginFailed: false
     });
   });
 
   router.get('/resources', function(req, res) {
+      setHeaders(res);
     res.render('resources');
   });
 
   router.post('/resources', function(req, res) {
+      setHeaders(res);
     var username = req.body.username;
     var password = req.body.password;
     app.models.Customer.login({
@@ -65,6 +70,7 @@ module.exports = function(app) {
   });
 
   router.get('/logout', function(req, res) {
+      setHeaders(res);
     var AccessToken = app.models.AccessToken;
     var token = new AccessToken({id: req.query.access_token});
     app.models.Customer.logout(token.accessToken, function (err) {
@@ -75,6 +81,7 @@ module.exports = function(app) {
   });
 
   router.get('/VerifyToken/:id', function(req, res) {
+      setHeaders(res);
         var AccessToken = app.models.AccessToken;
         AccessToken.findById(req.params.id,function(err,token){
             if(err)console.error(err);
@@ -98,4 +105,9 @@ module.exports = function(app) {
   });
 
   app.use(router);
+
+ function setHeaders(res){
+     res.header("Access-Control-Allow-Origin", "*");
+     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+ }
 };
