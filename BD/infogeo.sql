@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost:3333
--- Tiempo de generaci√≥n: 09-12-2014 a las 02:23:52
+-- Tiempo de generaci√≥n: 17-12-2014 a las 22:08:25
 -- Versi√≥n del servidor: 5.5.24-log
--- Versi√≥n de PHP: 5.4.3
+-- Versi√≥n de PHP: 5.3.13
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -80,7 +80,7 @@ CREATE TABLE IF NOT EXISTS `bibliotecamultimedia` (
   `idBiblioteca` int(11) NOT NULL AUTO_INCREMENT,
   `ruta` varchar(500) NOT NULL,
   PRIMARY KEY (`idBiblioteca`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1016 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1017 ;
 
 --
 -- Volcado de datos para la tabla `bibliotecamultimedia`
@@ -1117,7 +1117,7 @@ CREATE TABLE IF NOT EXISTS `categoria` (
   `icono` varchar(45) NOT NULL,
   `color` varchar(45) NOT NULL,
   PRIMARY KEY (`idCategoria`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
 
 --
 -- Volcado de datos para la tabla `categoria`
@@ -1134,7 +1134,8 @@ INSERT INTO `categoria` (`idCategoria`, `nombre`, `icono`, `color`) VALUES
 (8, '¬øC√ìMO LLEGAR?', '1', '0xA56FB6'),
 (9, '¬øQUE VISITAR?', '3', '0xFF6256'),
 (10, '¬øAGENCIAS Y TOUR OPERADORES?', '4', '0x00C3BA'),
-(11, 'PUNTOS FIJOS', '17', '0xDE007B');
+(11, 'PUNTOS FIJOS', '17', '0xDE007B'),
+(12, 'ACTIVIDADES', '18', '0xDE007B');
 
 -- --------------------------------------------------------
 
@@ -1168,7 +1169,8 @@ INSERT INTO `categoria_tiene_texto` (`idCategoria`, `idTexto`, `idTipoTexto`) VA
 (8, 8, 1),
 (9, 9, 1),
 (10, 10, 1),
-(11, 11, 1);
+(11, 11, 1),
+(12, 4554, 1);
 
 -- --------------------------------------------------------
 
@@ -1184,7 +1186,7 @@ CREATE TABLE IF NOT EXISTS `cliente` (
   `fechaInicioSuscripcion` date NOT NULL,
   `fechaFinSuscripcion` date NOT NULL,
   PRIMARY KEY (`idCliente`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- Volcado de datos para la tabla `cliente`
@@ -1257,7 +1259,7 @@ CREATE TABLE IF NOT EXISTS `destino` (
 --
 
 INSERT INTO `destino` (`idDestino`, `idEstadoDestino`, `idCliente`, `idBiblioteca`, `icono`, `color`, `tienePanel`, `nombre`, `tipoGeometria`, `geom`, `geometria`) VALUES
-(1, 2, 1, 1, '1', '0x00C3BA', 1, 'EMTREX', 'POINT', '\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0?\0\0\0\0\0\0?\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0@\0\0\0\0\0\0@', 'LINESTRING(1 1,2 2,3 3)'),
+(1, 2, 1, 1, '1', '0x00C3BA', 1, 'EMTREX', 'LINESTRING', '\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0?\0\0\0\0\0\0?\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0@\0\0\0\0\0\0@', 'LINESTRING(1 1,2 2,3 3)'),
 (2, 2, 1, 2, '1', '0x00C3BA', 1, 'TURISMO VENTISQUERO', 'POINT', '\0\0\0\0\0\0\0áßW 2R¿$(~å…F¿', 'POINT(-72.0656 -45.5746)'),
 (3, 2, 1, 3, '1', '0x00C3BA', 1, 'BUSES JOSEFINA', 'POINT', '\0\0\0\0\0\0\0,e‚XR¿oÉ¿ …F¿', 'POINT(-72.0523 -45.5765)'),
 (4, 2, 1, 4, '1', '0x00C3BA', 1, 'DON LUIS', 'POINT', '\0\0\0\0\0\0\0∫I+R¿4¢¥7¯ F¿', 'POINT(-72.0495 -45.5857)'),
@@ -7018,7 +7020,7 @@ CREATE TABLE IF NOT EXISTS `subcategoria` (
   `icono` varchar(45) NOT NULL,
   PRIMARY KEY (`idSubCategoria`),
   KEY `fk_SubCategoria_Categoria1_idx` (`idCategoria`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=77 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=78 ;
 
 --
 -- Volcado de datos para la tabla `subcategoria`
@@ -7100,7 +7102,8 @@ INSERT INTO `subcategoria` (`idSubCategoria`, `idCategoria`, `nombre`, `icono`) 
 (73, 11, 'OIT', '17'),
 (74, 2, 'CAMPO DE HIELO SAN VALENT√çN', '31'),
 (75, 2, 'CAMPO DE HIELO NORTE', '31'),
-(76, 2, 'CAMPO DE HIELO SUR', '31');
+(76, 2, 'CAMPO DE HIELO SUR', '31'),
+(77, 12, 'SENDEROS TREKKING', '123');
 
 -- --------------------------------------------------------
 
@@ -8245,7 +8248,8 @@ INSERT INTO `subcategoria_tiene_texto` (`idSubCategoria`, `idTexto`, `idTipoText
 (73, 84, 1),
 (75, 3114, 1),
 (76, 3119, 1),
-(74, 4178, 1);
+(74, 4178, 1),
+(77, 4555, 1);
 
 -- --------------------------------------------------------
 
@@ -8260,7 +8264,7 @@ CREATE TABLE IF NOT EXISTS `texto` (
   `texto` text NOT NULL,
   PRIMARY KEY (`idTexto`),
   KEY `fk_Texto_Lenguaje1_idx` (`idLenguaje`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4554 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4556 ;
 
 --
 -- Volcado de datos para la tabla `texto`
@@ -12652,7 +12656,9 @@ INSERT INTO `texto` (`idTexto`, `idLenguaje`, `texto`) VALUES
 (4550, 1, 'SERVICIOS M√âDICOS PUERTO GUADAL'),
 (4551, 1, 'SERVICIOS M√âDICOS COCHRANE'),
 (4552, 1, 'SERVICIOS M√âDICOS TORTEL'),
-(4553, 1, 'SERVICIOS M√âDICOS VILLA O&#x27;HIGGINS');
+(4553, 1, 'SERVICIOS M√âDICOS VILLA O&#x27;HIGGINS'),
+(4554, 1, 'ACTIVIDADES'),
+(4555, 1, 'SENDEROS TREKKING');
 
 -- --------------------------------------------------------
 
@@ -12665,7 +12671,7 @@ CREATE TABLE IF NOT EXISTS `tipotexto` (
   `idTipoTexto` int(11) NOT NULL AUTO_INCREMENT,
   `nombreTipoTexto` varchar(45) NOT NULL,
   PRIMARY KEY (`idTipoTexto`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
 
 --
 -- Volcado de datos para la tabla `tipotexto`
@@ -12677,7 +12683,12 @@ INSERT INTO `tipotexto` (`idTipoTexto`, `nombreTipoTexto`) VALUES
 (3, 'DESCRIPCION'),
 (4, 'DIRECCION'),
 (5, 'LOCALIDAD'),
-(6, 'CORREO');
+(6, 'CORREO'),
+(7, 'REGION'),
+(8, 'PROVINCIA'),
+(9, 'COMUNA'),
+(10, 'LOCALIDADES CERCANAS'),
+(11, 'NUMERO');
 
 -- --------------------------------------------------------
 

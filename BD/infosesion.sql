@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost:3333
--- Tiempo de generación: 09-12-2014 a las 02:23:05
+-- Tiempo de generación: 17-12-2014 a las 22:11:21
 -- Versión del servidor: 5.5.24-log
--- Versión de PHP: 5.4.3
+-- Versión de PHP: 5.3.13
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -101,17 +101,24 @@ CREATE TABLE IF NOT EXISTS `customer` (
   `created` datetime DEFAULT NULL,
   `lastUpdated` datetime DEFAULT NULL,
   `idcliente` int(11) NOT NULL,
+  `nombres` varchar(150) CHARACTER SET utf8 NOT NULL,
+  `apellidos` varchar(150) CHARACTER SET utf8 NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
 
 --
 -- Volcado de datos para la tabla `customer`
 --
 
-INSERT INTO `customer` (`id`, `realm`, `username`, `password`, `credentials`, `challenges`, `email`, `emailVerified`, `verificationToken`, `status`, `created`, `lastUpdated`, `idcliente`) VALUES
-(1, NULL, 'bob', '$2a$10$4oLm9TIaVGcQR5EkXixph.9bot9dmRHUPvo3tLEpt9Dc3CY9vX8UO', NULL, NULL, 'foo@bar.com', NULL, NULL, NULL, NULL, NULL, 1),
-(2, NULL, 'felipe', '$2a$10$c6.4O4966Id3qvyi81Wrr.UHzKnUhRDnN140lsiTTPPejWzhkMgfS', NULL, NULL, 'foo@bar.com', NULL, NULL, NULL, NULL, NULL, 2),
-(3, NULL, 'datactil', '$2a$10$ShyXoSSqZwkHB7dPjwXuo.hcwMoC3/oeiMuBh5KilazplWd7M8HaC', NULL, NULL, 'datactil@datactil.com', NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `customer` (`id`, `realm`, `username`, `password`, `credentials`, `challenges`, `email`, `emailVerified`, `verificationToken`, `status`, `created`, `lastUpdated`, `idcliente`, `nombres`, `apellidos`) VALUES
+(1, NULL, 'bob', '$2a$10$4oLm9TIaVGcQR5EkXixph.9bot9dmRHUPvo3tLEpt9Dc3CY9vX8UO', NULL, NULL, 'foo@bar.com', NULL, NULL, NULL, NULL, NULL, 1, 'bob', 'bobs'),
+(2, NULL, 'felipe', '$2a$10$c6.4O4966Id3qvyi81Wrr.UHzKnUhRDnN140lsiTTPPejWzhkMgfS', NULL, NULL, 'foo@bar.com', NULL, NULL, NULL, NULL, NULL, 2, 'felipe', 'aguayo'),
+(3, NULL, 'datactil', '$2a$10$ShyXoSSqZwkHB7dPjwXuo.hcwMoC3/oeiMuBh5KilazplWd7M8HaC', NULL, NULL, 'datactil@datactil.com', NULL, NULL, NULL, NULL, NULL, 0, 'datactil', 'datactil'),
+(7, NULL, 'adc', '$2a$10$SKevZixEh.LEBKl/PYtl2OHkxm8CO5C2VpfnhwW3O1qvdJV6wv3Cm', NULL, NULL, 'adc@adc.cl', NULL, NULL, '1', NULL, NULL, 1, '11', 'adc'),
+(8, NULL, 'user', '$2a$10$V1/QJnj/a/nUgPFEiNCIx.ih3K5kycCDBHj/.8admSL6bFfdWT9IO', NULL, NULL, 'user@user.cl', NULL, NULL, '1', NULL, NULL, 1, 'user', 'user'),
+(9, NULL, 'mmm', '$2a$10$lFx5w2BlbUviN0ygCUIGR.Ysixkc0PuK1s.R72FJemkzRo72V2S7O', NULL, NULL, 'mmm@mmm.cl', NULL, NULL, '1', NULL, NULL, 1, 'mmm', 'mmm'),
+(10, NULL, 'rrr', '$2a$10$F1pBNK9hty82owmHbYnTfOW4hw9zA3ZrrBhGpelSMeNHiOQ9P3FGy', NULL, NULL, 'rrr@rrr.cl', NULL, NULL, '0', NULL, NULL, 1, 'rrr', 'rrr'),
+(11, NULL, 'nuevo', '$2a$10$0pPG2aUHLzR/DLWjs1em9eynmR1h8oN/xt2BU0n1QPCYqun.TQpie', NULL, NULL, 'nuevo@nuevo.cl', NULL, NULL, '1', NULL, NULL, 1, 'nuevo', 'nuevo');
 
 -- --------------------------------------------------------
 
@@ -127,7 +134,7 @@ CREATE TABLE IF NOT EXISTS `role` (
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Volcado de datos para la tabla `role`
@@ -152,7 +159,7 @@ CREATE TABLE IF NOT EXISTS `rolemapping` (
   `principalId` varchar(512) DEFAULT NULL,
   `roleId` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
 
 --
 -- Volcado de datos para la tabla `rolemapping`
@@ -161,7 +168,16 @@ CREATE TABLE IF NOT EXISTS `rolemapping` (
 INSERT INTO `rolemapping` (`id`, `principalType`, `principalId`, `roleId`) VALUES
 (1, 'USER', '2', 3),
 (2, 'USER', '1', 1),
-(3, 'USER', '3', 4);
+(3, 'USER', '3', 4),
+(4, 'USER', '2', 2),
+(5, 'USER', '4', 1),
+(6, 'USER', '5', 1),
+(7, 'USER', '6', 1),
+(8, 'USER', '7', 1),
+(9, 'USER', '8', 1),
+(10, 'USER', '9', 2),
+(11, 'USER', '10', 1),
+(12, 'USER', '11', 1);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
