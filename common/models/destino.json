@@ -193,9 +193,26 @@
           "dataPrecision": null,
           "dataScale": null,
           "nullable": "NO"
-      }
+      },
+        "geom": {
+            "type": "String",
+            "id": false,
+            "required": false,
+            "length": null,
+            "precision": null,
+            "scale": null,
+            "mysql": {
+                "columnName": "geom",
+                "dataType": "geometry",
+                "dataLength": null,
+                "dataPrecision": null,
+                "dataScale": null,
+                "nullable": "YES"
+            }
+        }
     }
   },
+  "hidden": ["geom"],
   "validations": [],
   "relations": {
     "textos": {

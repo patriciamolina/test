@@ -4,7 +4,7 @@ module.exports = function(app) {
         ,   Customer = app.models.Customer
         ,   Categoria = app.models.Categoria
         ,   Subcategoria = app.models.Subcategoria
-        ,   SubcategoriaTieneDestinos = app.models.SubcategoriaTieneDestinos
+        ,   SubcategoriaTieneDestinos = app.models.SubcategoriaTieneDestino
         ,   Texto = app.models.Texto
         ,   DestinoTieneTexto = app.models.DestinoTieneTexto
         ,   Bibliotecamultimedia = app.models.Bibliotecamultimedia
@@ -101,6 +101,7 @@ module.exports = function(app) {
                                                         response["result"] = "Problems";
                                                         response["elements"] = [];
                                                     }
+                                                    console.log("AQUI 1");
                                                     elemento["PROBLEMA"] = "Elemento Ya existe";
                                                     response.elements.push(elemento);
                                                     callback();
@@ -127,6 +128,7 @@ module.exports = function(app) {
                                                                 response["result"] = "Problems";
                                                                 response["elements"] = [];
                                                             }
+                                                            console.log("AQUI 2");
                                                             elemento["PROBLEMA"] = "Elemento Ya existe";
                                                             response.elements.push(elemento);
                                                             callback();
@@ -162,6 +164,7 @@ module.exports = function(app) {
                                                                             response["result"] = "Problems";
                                                                             response["elements"] = [];
                                                                         }
+                                                                        console.log("AQUI 3");
                                                                         elemento["PROBLEMA"] = "Elemento Ya existe";
                                                                         response.elements.push(elemento);
                                                                         callback();
@@ -172,48 +175,83 @@ module.exports = function(app) {
                                                                         },function(err,std){
                                                                             if(err) cb(err,null);
                                                                             if(std != null){
-                                                                                async.each(elemento.TEXTOS, function (text, callbacktexto) {
-                                                                                    Tipotexto.find({
-                                                                                        where: {
-                                                                                            nombreTipoTexto: text.tipotexto
-                                                                                        }
-                                                                                    }, function(err,tipotext){
-                                                                                        if(err) cb(err,null);
-                                                                                        if(tipotext != null){
-                                                                                            var idioma = 1;
-                                                                                            Texto.create({
-                                                                                                idlenguaje: idioma,
-                                                                                                texto: text.texto
-                                                                                            },function(err,text){
-                                                                                                if(err) cb(err,null);
-                                                                                                if(text != null){
-                                                                                                    DestinoTieneTexto.create({
-                                                                                                        iddestino: destino.iddestino,
-                                                                                                        idtexto: text.idtexto
-                                                                                                    },function(err,dtt){
-                                                                                                        if(err) cb(err,null);
-                                                                                                        if(text != null){
-                                                                                                            callbacktexto();
-                                                                                                        }else{
-                                                                                                            cb(new Error('No fue posible insertar la relacion ' +
-                                                                                                                'Destino (' + destino.iddestino + ') con' +
-                                                                                                                'Texto (' + text.idtexto + ')'),null);
-                                                                                                        }
-                                                                                                    });
-                                                                                                }else{
-                                                                                                    cb(new Error('No se pudo insertar el texto : ' + text.texto),null);
-                                                                                                }
-                                                                                            });
-                                                                                        }else{
-                                                                                            cb(new Error('No se encontro ningun tipo de texto del tipo :' + text.tipotexto),null);
-                                                                                        }
-                                                                                    });
-                                                                                }, function(err){
-                                                                                    if (err) {
-                                                                                        cb(err,null);
+                                                                                Tipotexto.findOne({
+                                                                                    where: {
+                                                                                        nombretipotexto: 'TITULO'
                                                                                     }
-                                                                                    console.log("probando textos");
-                                                                                    callback();
+                                                                                }, function(err,tipotext1){
+                                                                                    if(err) cb(err,null);
+                                                                                    if(tipotext1 != null){
+                                                                                        var idioma = 1;
+                                                                                        Texto.create({
+                                                                                            idlenguaje: idioma,
+                                                                                            texto: elemento.NOMBRE
+                                                                                        },function(err,text1){
+                                                                                            if(err) cb(err,null);
+                                                                                            if(text1 != null){
+                                                                                                DestinoTieneTexto.create({
+                                                                                                    iddestino: destino.iddestino,
+                                                                                                    idtexto: text1.idtexto,
+                                                                                                    idtipotexto: tipotext1.idtipotexto
+                                                                                                },function(err,dtt){
+                                                                                                    if(err) cb(err,null);
+                                                                                                    if(dtt != null){
+                                                                                                        async.each(elemento.TEXTOS, function (elementotext, callbacktexto) {
+                                                                                                            Tipotexto.findOne({
+                                                                                                                where: {
+                                                                                                                    nombretipotexto: elementotext.tipotexto
+                                                                                                                }
+                                                                                                            }, function(err,tipotext2){
+                                                                                                                if(err) cb(err,null);
+                                                                                                                if(tipotext2 != null){
+                                                                                                                    var idioma = 1;
+                                                                                                                    Texto.create({
+                                                                                                                        idlenguaje: idioma,
+                                                                                                                        texto: elementotext.texto
+                                                                                                                    },function(err,text2){
+                                                                                                                        if(err) cb(err,null);
+                                                                                                                        if(text2 != null){
+                                                                                                                            DestinoTieneTexto.create({
+                                                                                                                                iddestino: destino.iddestino,
+                                                                                                                                idtexto: text2.idtexto,
+                                                                                                                                idtipotexto: tipotext2.idtipotexto
+                                                                                                                            },function(err,dtt2){
+                                                                                                                                if(err) cb(err,null);
+                                                                                                                                if(dtt2 != null){
+                                                                                                                                    callbacktexto();
+                                                                                                                                }else{
+                                                                                                                                    cb(new Error('No fue posible insertar la relacion ' +
+                                                                                                                                        'Destino (' + destino.iddestino + ') con' +
+                                                                                                                                        'Texto (' + text2.idtexto + ')'),null);
+                                                                                                                                }
+                                                                                                                            });
+                                                                                                                        }else{
+                                                                                                                            cb(new Error('No se pudo insertar el texto : ' + text2.texto),null);
+                                                                                                                        }
+                                                                                                                    });
+                                                                                                                }else{
+                                                                                                                    cb(new Error('No se encontro ningun tipo de texto del tipo :' + elementotext.tipotexto),null);
+                                                                                                                }
+                                                                                                            });
+                                                                                                        }, function(err){
+                                                                                                            if (err) {
+                                                                                                                cb(err,null);
+                                                                                                            }
+                                                                                                            callback();
+                                                                                                        });
+                                                                                                    }else{
+                                                                                                        cb(new Error('No fue posible insertar la relacion ' +
+                                                                                                            'Destino (' + destino.iddestino + ') con' +
+                                                                                                            'Texto (' + t.idtexto + ')'),null);
+                                                                                                    }
+                                                                                                });
+                                                                                            }else{
+                                                                                                cb(new Error('No se pudo insertar el texto : ' + elemento.NOMBRE),null);
+                                                                                            }
+                                                                                        });
+                                                                                    }else{
+                                                                                        cb(new Error('No se encontro ningun tipo de texto del tipo TITULO'),null);
+                                                                                    }
                                                                                 });
                                                                             }else{
                                                                                 cb(new Error('No fue posible insertar la relacion ' +
