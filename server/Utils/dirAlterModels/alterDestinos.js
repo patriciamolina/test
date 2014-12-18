@@ -15,7 +15,8 @@ module.exports = function(app) {
         ,   Utils = require('../index')
         ,   async = require('async')
         ,   isNumeric = require("isnumeric")
-        ,   md5 = require('MD5');;
+        ,   md5 = require('MD5')
+        ,   moderado = 2;
 
     Destino.cargaMasiva = function (req, data, cb){
         var response = {}
@@ -118,8 +119,57 @@ module.exports = function(app) {
                                                             response.elements.push(elemento);
                                                             callback();
                                                         }else{
-                                                            console.log("se creo la biblioteca (id): " + biblioteca.idbiblioteca);
-                                                            callback();
+                                                            console.log({
+                                                                idestadodestino: moderado,
+                                                                idcliente: user.idcliente,
+                                                                idbiblioteca: biblioteca.idbiblioteca,
+                                                                iconox: subcategoria.iconox,
+                                                                iconoy: subcategoria.iconoy,
+                                                                color: subcategoria.color,
+                                                                tienepanel: 0,
+                                                                nombre: elemento.NOMBRE,
+                                                                tipogeometria: "POINT",
+                                                                geometria: "POINT(" + elemento.LONGITUD + ", " + elemento.LATITUD + ")"
+                                                            });
+                                                            Destino.create({
+                                                                idestadodestino: moderado,
+                                                                idcliente: user.idcliente,
+                                                                idbiblioteca: biblioteca.idbiblioteca,
+                                                                iconox: subcategoria.iconox,
+                                                                iconoy: subcategoria.iconoy,
+                                                                color: subcategoria.color,
+                                                                tienepanel: 0,
+                                                                nombre: elemento.NOMBRE,
+                                                                tipogeometria: "POINT",
+                                                                geometria: "POINT(" + elemento.LONGITUD + ", " + elemento.LATITUD + ")"
+                                                            },function(err,destino){
+                                                                if (err) {
+                                                                    if (response.result === undefined
+                                                                        && response.elements === undefined) {
+
+                                                                        response["result"] = "Problems";
+                                                                        response["elements"] = [];
+                                                                    }
+                                                                    elemento["PROBLEMA"] = "error";
+                                                                    response.elements.push(elemento);
+                                                                    callback();
+                                                                }else{
+                                                                    if(destino == null){
+                                                                        if (response.result === undefined
+                                                                            && response.elements === undefined) {
+
+                                                                            response["result"] = "Problems";
+                                                                            response["elements"] = [];
+                                                                        }
+                                                                        elemento["PROBLEMA"] = "Elemento Ya existe";
+                                                                        response.elements.push(elemento);
+                                                                        callback();
+                                                                    }else{
+                                                                        console.log("se creo el Destino (id): " + destino.iddestino);
+                                                                        callback();
+                                                                    }
+                                                                }
+                                                            });
                                                         }
                                                     });
                                                 }

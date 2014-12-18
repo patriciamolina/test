@@ -55,21 +55,38 @@
         "nullable": "NO"
       }
     },
-    "icono": {
-      "type": "String",
-      "required": true,
-      "length": 135,
-      "precision": null,
-      "scale": null,
-      "mysql": {
-        "columnName": "icono",
-        "dataType": "varchar",
-        "dataLength": 135,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "NO"
+      "iconox": {
+          "type": "Number",
+          "id": true,
+          "required": true,
+          "length": null,
+          "precision": 10,
+          "scale": 0,
+          "mysql": {
+              "columnName": "iconox",
+              "dataType": "int",
+              "dataLength": null,
+              "dataPrecision": 10,
+              "dataScale": 0,
+              "nullable": "NO"
+          }
+      },
+      "iconoy": {
+          "type": "Number",
+          "id": true,
+          "required": true,
+          "length": null,
+          "precision": 10,
+          "scale": 0,
+          "mysql": {
+              "columnName": "iconoy",
+              "dataType": "int",
+              "dataLength": null,
+              "dataPrecision": 10,
+              "dataScale": 0,
+              "nullable": "NO"
+          }
       }
-    }
   },
   "validations": [],
   "relations": {
