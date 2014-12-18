@@ -71,7 +71,21 @@
         "dataScale": 0,
         "nullable": "NO"
       }
-    },
+    },"nombreicono": {
+          "type": "String",
+          "required": true,
+          "length": 450,
+          "precision": null,
+          "scale": null,
+          "mysql": {
+              "columnName": "nombreicono",
+              "dataType": "varchar",
+              "dataLength": 450,
+              "dataPrecision": null,
+              "dataScale": null,
+              "nullable": "NO"
+          }
+      },
       "iconox": {
           "type": "Number",
           "id": true,

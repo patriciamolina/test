@@ -7,7 +7,6 @@ module.exports = function(app) {
         ,   SubcategoriaTieneDestinos = app.models.SubcategoriaTieneDestinos
         ,   Texto = app.models.Texto
         ,   DestinoTieneTexto = app.models.DestinoTieneTexto
-        ,   Estadodestino = app.models.Estadodestino
         ,   Bibliotecamultimedia = app.models.Bibliotecamultimedia
         ,   Tipotexto = app.models.Tipotexto
         ,   Container = app.models.Container
@@ -43,7 +42,11 @@ module.exports = function(app) {
                     async.each(data, function (elemento, callback) {
                         var result = validador(elemento);
                         if (result) {
-                            Categoria.findOne({ where: {nombre: elemento.CATEGORIA} }, function (err, categoria) {
+                            Categoria.findOne({
+                                where: {
+                                    nombre: elemento.CATEGORIA
+                                }
+                            }, function (err, categoria) {
                                 if (err){
                                     if (response.result === undefined
                                         && response.elements === undefined) {
@@ -66,7 +69,11 @@ module.exports = function(app) {
                                     response.elements.push(elemento);
                                     callback();
                                 }else {
-                                    Subcategoria.findOne({ where: {nombre: elemento.SUBCATEGORIA} }, function (err, subcategoria) {
+                                    Subcategoria.findOne({
+                                        where: {
+                                            nombre: elemento.SUBCATEGORIA
+                                        }
+                                    }, function (err, subcategoria) {
                                         if (err) {
                                             if (response.result === undefined
                                                 && response.elements === undefined) {
@@ -80,7 +87,10 @@ module.exports = function(app) {
                                         }
 
                                         if (subcategoria != null) {
-                                            var nombre = "" + user.idcliente + "" + categoria.idcategoria + "" + subcategoria.idsubcategoria + "" + elemento.NOMBRE
+                                            var nombre = "" + user.idcliente + ""
+                                                    + categoria.idcategoria + ""
+                                                    + subcategoria.idsubcategoria + ""
+                                                    + elemento.NOMBRE
                                                 , nombreMD5 = md5(nombre)
                                                 , contenedor = {name: nombreMD5};
                                             Container.createContainer(contenedor, function (err) {
@@ -95,7 +105,9 @@ module.exports = function(app) {
                                                     response.elements.push(elemento);
                                                     callback();
                                                 } else {
-                                                    Bibliotecamultimedia.create({ruta: nombreMD5},function(err,biblioteca){
+                                                    Bibliotecamultimedia.create({
+                                                        ruta: nombreMD5
+                                                    },function(err,biblioteca){
                                                         if (err) {
                                                             if (response.result === undefined
                                                                 && response.elements === undefined) {
@@ -119,25 +131,14 @@ module.exports = function(app) {
                                                             response.elements.push(elemento);
                                                             callback();
                                                         }else{
-                                                            console.log({
-                                                                idestadodestino: moderado,
-                                                                idcliente: user.idcliente,
-                                                                idbiblioteca: biblioteca.idbiblioteca,
-                                                                iconox: subcategoria.iconox,
-                                                                iconoy: subcategoria.iconoy,
-                                                                color: subcategoria.color,
-                                                                tienepanel: 0,
-                                                                nombre: elemento.NOMBRE,
-                                                                tipogeometria: "POINT",
-                                                                geometria: "POINT(" + elemento.LONGITUD + ", " + elemento.LATITUD + ")"
-                                                            });
                                                             Destino.create({
                                                                 idestadodestino: moderado,
                                                                 idcliente: user.idcliente,
                                                                 idbiblioteca: biblioteca.idbiblioteca,
+                                                                nombreicono: subcategoria.nombreicono,
                                                                 iconox: subcategoria.iconox,
                                                                 iconoy: subcategoria.iconoy,
-                                                                color: subcategoria.color,
+                                                                color: categoria.color,
                                                                 tienepanel: 0,
                                                                 nombre: elemento.NOMBRE,
                                                                 tipogeometria: "POINT",
@@ -165,8 +166,61 @@ module.exports = function(app) {
                                                                         response.elements.push(elemento);
                                                                         callback();
                                                                     }else{
-                                                                        console.log("se creo el Destino (id): " + destino.iddestino);
-                                                                        callback();
+                                                                        SubcategoriaTieneDestinos.create({
+                                                                                iddestino: destino.iddestino,
+                                                                                idsubcategoria: subcategoria.idsubcategoria
+                                                                        },function(err,std){
+                                                                            if(err) cb(err,null);
+                                                                            if(std != null){
+                                                                                async.each(elemento.TEXTOS, function (text, callbacktexto) {
+                                                                                    Tipotexto.find({
+                                                                                        where: {
+                                                                                            nombreTipoTexto: text.tipotexto
+                                                                                        }
+                                                                                    }, function(err,tipotext){
+                                                                                        if(err) cb(err,null);
+                                                                                        if(tipotext != null){
+                                                                                            var idioma = 1;
+                                                                                            Texto.create({
+                                                                                                idlenguaje: idioma,
+                                                                                                texto: text.texto
+                                                                                            },function(err,text){
+                                                                                                if(err) cb(err,null);
+                                                                                                if(text != null){
+                                                                                                    DestinoTieneTexto.create({
+                                                                                                        iddestino: destino.iddestino,
+                                                                                                        idtexto: text.idtexto
+                                                                                                    },function(err,dtt){
+                                                                                                        if(err) cb(err,null);
+                                                                                                        if(text != null){
+                                                                                                            callbacktexto();
+                                                                                                        }else{
+                                                                                                            cb(new Error('No fue posible insertar la relacion ' +
+                                                                                                                'Destino (' + destino.iddestino + ') con' +
+                                                                                                                'Texto (' + text.idtexto + ')'),null);
+                                                                                                        }
+                                                                                                    });
+                                                                                                }else{
+                                                                                                    cb(new Error('No se pudo insertar el texto : ' + text.texto),null);
+                                                                                                }
+                                                                                            });
+                                                                                        }else{
+                                                                                            cb(new Error('No se encontro ningun tipo de texto del tipo :' + text.tipotexto),null);
+                                                                                        }
+                                                                                    });
+                                                                                }, function(err){
+                                                                                    if (err) {
+                                                                                        cb(err,null);
+                                                                                    }
+                                                                                    console.log("probando textos");
+                                                                                    callback();
+                                                                                });
+                                                                            }else{
+                                                                                cb(new Error('No fue posible insertar la relacion ' +
+                                                                                    'subcategoria (' + subcategoria.idsubcategoria + ') con' +
+                                                                                    'destino (' + destino.iddestino + ')'),null);
+                                                                            }
+                                                                        });
                                                                     }
                                                                 }
                                                             });
@@ -226,7 +280,7 @@ module.exports = function(app) {
             return false;
     };
     var filtroType = function (filtro, value) {
-        if (!!value && filtro != "string" && !isNumeric(value.replace(",", ".")))
+        if (!!value && filtro != "string" && filtro != "object" && !isNumeric(value.replace(",", ".")) )
             return true;
         else
             return false;

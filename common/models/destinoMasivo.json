@@ -18,50 +18,10 @@
           "type": "string",
           "length": 150
       },
-      "REGION": {
-          "required": false,
-          "type": "string",
-          "length": 100
-      },
-      "PROVINCIA": {
-          "required": false,
-          "type": "string",
-          "length": 100
-      },
-      "COMUNA": {
-          "required": false,
-          "type": "string",
-          "length": 100
-      },
-      "LOCALIDAD": {
-          "required": false,
-          "type": "string",
-          "length": 100
-      },
-      "DIRECCION": {
-          "required": false,
-          "type": "string",
-          "length": 100
-      },
-      "NUMERO": {
-          "required": false,
-          "type": "string",
-          "length": 100
-      },
-      "TELEFONO": {
-          "required": false,
-          "type": "string",
-          "length": 100
-      },
-      "CORREO": {
-          "required": false,
-          "type": "string",
-          "length": 100
-      },
-      "DESCRIPCION": {
-          "required": false,
-          "type": "string",
-          "length": 700
+      "TEXTOS": {
+          "type": "object",
+          "required": true,
+          "deprecated": true
       },
       "LATITUD": {
           "required": true,
