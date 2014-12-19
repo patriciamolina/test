@@ -39,7 +39,8 @@ module.exports = function(app) {
                         cb(new Error('could not find a valid user'),null);
                     }
                     var contObj = 0;
-                    console.log(req.headers);
+                    console.error(req.headers);
+                    console.log(data);
                     async.each(data, function (elemento, callback) {
                         contObj++;
                         var result = validador(elemento);
