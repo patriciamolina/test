@@ -22,6 +22,7 @@ module.exports = function(app) {
         if(Utils.isEmpty(data))
             cb(null, {result:"Json empty"});
         else if(Utils.isValidJson(data)){
+            console.log(data);
             Customer.relations.accessTokens.modelTo.findById(token.id, function(err, accessToken) {
                 if (err) {
                     cb(err,null);
