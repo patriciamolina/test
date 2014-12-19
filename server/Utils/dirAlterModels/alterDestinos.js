@@ -39,7 +39,7 @@ module.exports = function(app) {
                         cb(new Error('could not find a valid user'),null);
                     }
                     var contObj = 0;
-                    console.log(data);
+                    console.log(req.headers);
                     async.each(data, function (elemento, callback) {
                         contObj++;
                         var result = validador(elemento);
@@ -281,7 +281,7 @@ module.exports = function(app) {
                             }
                             cb(null, response);
                         }else{
-                            cb(null, {result:"asd Json invalid"});
+                            cb(null, {result:"Json invalid"});
                         }
                     });
                 });
