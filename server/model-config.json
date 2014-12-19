@@ -41,10 +41,6 @@
     "dataSource": "INFOGEO",
     "public": true
   },
-  "Bibliotecamultimedia": {
-    "dataSource": "INFOGEO",
-    "public": true
-  },
   "Categoria": {
     "dataSource": "INFOGEO",
     "public": true

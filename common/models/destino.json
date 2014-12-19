@@ -56,21 +56,6 @@
         "dataScale": 0,
         "nullable": "NO"
       }
-    },
-    "idbiblioteca": {
-      "type": "Number",
-      "required": true,
-      "length": null,
-      "precision": 10,
-      "scale": 0,
-      "mysql": {
-        "columnName": "idBiblioteca",
-        "dataType": "int",
-        "dataLength": null,
-        "dataPrecision": 10,
-        "dataScale": 0,
-        "nullable": "NO"
-      }
     },"nombreicono": {
           "type": "String",
           "required": true,
@@ -193,24 +178,40 @@
           "dataPrecision": null,
           "dataScale": null,
           "nullable": "NO"
-      },
-        "geom": {
-            "type": "String",
-            "id": false,
-            "required": false,
-            "length": null,
-            "precision": null,
-            "scale": null,
-            "mysql": {
-                "columnName": "geom",
-                "dataType": "geometry",
-                "dataLength": null,
-                "dataPrecision": null,
-                "dataScale": null,
-                "nullable": "YES"
-            }
-        }
+      }
     }
+      ,
+      "geom": {
+          "type": "String",
+          "id": false,
+          "required": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "mysql": {
+              "columnName": "geom",
+              "dataType": "geometry",
+              "dataLength": null,
+              "dataPrecision": null,
+              "dataScale": null,
+              "nullable": "YES"
+          }
+      },
+      "rutabiblioteca": {
+          "type": "String",
+          "required": true,
+          "length": 1500,
+          "precision": null,
+          "scale": null,
+          "mysql": {
+              "columnName": "rutabiblioteca",
+              "dataType": "varchar",
+              "dataLength": 1500,
+              "dataPrecision": null,
+              "dataScale": null,
+              "nullable": "NO"
+          }
+      }
   },
   "hidden": ["geom"],
   "validations": [],
@@ -219,11 +220,6 @@
       "type": "hasMany",
       "model": "DestinoTieneTexto",
       "foreignKey": "iddestino"
-    },
-    "bibliotecamultimedia": {
-      "type": "hasOne",
-      "model": "Bibliotecamultimedia",
-      "foreignKey": "idbiblioteca"
     },
     "estado": {
       "type": "belongsTo",
@@ -244,7 +240,27 @@
       "type": "hasMany",
       "model": "DestinoTienePuntohijo",
       "foreignKey": "iddestino"
-    }
+    },
+      "codigosqr": {
+          "type": "hasMany",
+          "model": "Codigoqr",
+          "foreignKey": "iddestino"
+      },
+      "imagenes": {
+          "type": "hasMany",
+          "model": "Imagen",
+          "foreignKey": "iddestino"
+      },
+      "videos": {
+          "type": "hasMany",
+          "model": "Video",
+          "foreignKey": "iddestino"
+      },
+      "audios": {
+          "type": "hasMany",
+          "model": "Audio",
+          "foreignKey": "iddestino"
+      }
   },
   "acls": [
       {
@@ -535,24 +551,6 @@
           "principalType": "ROLE",
           "principalId": "ADMIN",
           "permission": "ALLOW",
-          "property": "__get__bibliotecamultimedia"
-      },
-      {
-          "principalType": "ROLE",
-          "principalId": "SUPERADMIN",
-          "permission": "ALLOW",
-          "property": "__get__bibliotecamultimedia"
-      },
-      {
-          "principalType": "ROLE",
-          "principalId": "LECTOR",
-          "permission": "ALLOW",
-          "property": "__get__bibliotecamultimedia"
-      },
-      {
-          "principalType": "ROLE",
-          "principalId": "ADMIN",
-          "permission": "ALLOW",
           "property": "__get__estado"
       },
       {
@@ -602,6 +600,510 @@
           "principalId": "LECTOR",
           "permission": "ALLOW",
           "property": "__get__subcategoria"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ADMIN",
+          "permission": "ALLOW",
+          "property": "__count__codigosqr"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ADMIN",
+          "permission": "ALLOW",
+          "property": "__create__codigosqr"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ADMIN",
+          "permission": "ALLOW",
+          "property": "__delete__codigosqr"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ADMIN",
+          "permission": "ALLOW",
+          "property": "__destroyById__codigosqr"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ADMIN",
+          "permission": "ALLOW",
+          "property": "__findById__codigosqr"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ADMIN",
+          "permission": "ALLOW",
+          "property": "__get__codigosqr"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ADMIN",
+          "permission": "ALLOW",
+          "property": "__updateById__codigosqr"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "SUPERADMIN",
+          "permission": "ALLOW",
+          "property": "__count__codigosqr"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "SUPERADMIN",
+          "permission": "ALLOW",
+          "property": "__create__codigosqr"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "SUPERADMIN",
+          "permission": "ALLOW",
+          "property": "__delete__codigosqr"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "SUPERADMIN",
+          "permission": "ALLOW",
+          "property": "__destroyById__codigosqr"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "SUPERADMIN",
+          "permission": "ALLOW",
+          "property": "__findById__codigosqr"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "SUPERADMIN",
+          "permission": "ALLOW",
+          "property": "__get__codigosqr"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "SUPERADMIN",
+          "permission": "ALLOW",
+          "property": "__updateById__codigosqr"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "LECTOR",
+          "permission": "ALLOW",
+          "property": "__count__codigosqr"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "LECTOR",
+          "permission": "ALLOW",
+          "property": "__findById__codigosqr"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "LECTOR",
+          "permission": "ALLOW",
+          "property": "__get__codigosqr"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ESCRITOR",
+          "permission": "ALLOW",
+          "property": "__create__codigosqr"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ESCRITOR",
+          "permission": "ALLOW",
+          "property": "__delete__codigosqr"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ESCRITOR",
+          "permission": "ALLOW",
+          "property": "__destroyById__codigosqr"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ESCRITOR",
+          "permission": "ALLOW",
+          "property": "__updateById__codigosqr"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ADMIN",
+          "permission": "ALLOW",
+          "property": "__count__imagenes"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ADMIN",
+          "permission": "ALLOW",
+          "property": "__create__imagenes"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ADMIN",
+          "permission": "ALLOW",
+          "property": "__delete__imagenes"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ADMIN",
+          "permission": "ALLOW",
+          "property": "__destroyById__imagenes"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ADMIN",
+          "permission": "ALLOW",
+          "property": "__findById__imagenes"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ADMIN",
+          "permission": "ALLOW",
+          "property": "__get__imagenes"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ADMIN",
+          "permission": "ALLOW",
+          "property": "__updateById__imagenes"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "SUPERADMIN",
+          "permission": "ALLOW",
+          "property": "__count__imagenes"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "SUPERADMIN",
+          "permission": "ALLOW",
+          "property": "__create__imagenes"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "SUPERADMIN",
+          "permission": "ALLOW",
+          "property": "__delete__imagenes"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "SUPERADMIN",
+          "permission": "ALLOW",
+          "property": "__destroyById__imagenes"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "SUPERADMIN",
+          "permission": "ALLOW",
+          "property": "__findById__imagenes"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "SUPERADMIN",
+          "permission": "ALLOW",
+          "property": "__get__imagenes"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "SUPERADMIN",
+          "permission": "ALLOW",
+          "property": "__updateById__imagenes"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "LECTOR",
+          "permission": "ALLOW",
+          "property": "__count__imagenes"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "LECTOR",
+          "permission": "ALLOW",
+          "property": "__findById__imagenes"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "LECTOR",
+          "permission": "ALLOW",
+          "property": "__get__imagenes"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ESCRITOR",
+          "permission": "ALLOW",
+          "property": "__create__imagenes"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ESCRITOR",
+          "permission": "ALLOW",
+          "property": "__delete__imagenes"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ESCRITOR",
+          "permission": "ALLOW",
+          "property": "__destroyById__imagenes"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ESCRITOR",
+          "permission": "ALLOW",
+          "property": "__updateById__imagenes"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ADMIN",
+          "permission": "ALLOW",
+          "property": "__count__videos"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ADMIN",
+          "permission": "ALLOW",
+          "property": "__create__videos"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ADMIN",
+          "permission": "ALLOW",
+          "property": "__delete__videos"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ADMIN",
+          "permission": "ALLOW",
+          "property": "__destroyById__videos"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ADMIN",
+          "permission": "ALLOW",
+          "property": "__findById__videos"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ADMIN",
+          "permission": "ALLOW",
+          "property": "__get__videos"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ADMIN",
+          "permission": "ALLOW",
+          "property": "__updateById__videos"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "SUPERADMIN",
+          "permission": "ALLOW",
+          "property": "__count__videos"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "SUPERADMIN",
+          "permission": "ALLOW",
+          "property": "__create__videos"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "SUPERADMIN",
+          "permission": "ALLOW",
+          "property": "__delete__videos"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "SUPERADMIN",
+          "permission": "ALLOW",
+          "property": "__destroyById__videos"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "SUPERADMIN",
+          "permission": "ALLOW",
+          "property": "__findById__videos"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "SUPERADMIN",
+          "permission": "ALLOW",
+          "property": "__get__videos"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "SUPERADMIN",
+          "permission": "ALLOW",
+          "property": "__updateById__videos"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "LECTOR",
+          "permission": "ALLOW",
+          "property": "__count__videos"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "LECTOR",
+          "permission": "ALLOW",
+          "property": "__findById__videos"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "LECTOR",
+          "permission": "ALLOW",
+          "property": "__get__videos"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ESCRITOR",
+          "permission": "ALLOW",
+          "property": "__create__videos"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ESCRITOR",
+          "permission": "ALLOW",
+          "property": "__delete__videos"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ESCRITOR",
+          "permission": "ALLOW",
+          "property": "__destroyById__videos"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ESCRITOR",
+          "permission": "ALLOW",
+          "property": "__updateById__videos"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ADMIN",
+          "permission": "ALLOW",
+          "property": "__count__audios"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ADMIN",
+          "permission": "ALLOW",
+          "property": "__create__audios"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ADMIN",
+          "permission": "ALLOW",
+          "property": "__delete__audios"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ADMIN",
+          "permission": "ALLOW",
+          "property": "__destroyById__audios"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ADMIN",
+          "permission": "ALLOW",
+          "property": "__findById__audios"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ADMIN",
+          "permission": "ALLOW",
+          "property": "__get__audios"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ADMIN",
+          "permission": "ALLOW",
+          "property": "__updateById__audios"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "SUPERADMIN",
+          "permission": "ALLOW",
+          "property": "__count__audios"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "SUPERADMIN",
+          "permission": "ALLOW",
+          "property": "__create__audios"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "SUPERADMIN",
+          "permission": "ALLOW",
+          "property": "__delete__audios"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "SUPERADMIN",
+          "permission": "ALLOW",
+          "property": "__destroyById__audios"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "SUPERADMIN",
+          "permission": "ALLOW",
+          "property": "__findById__audios"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "SUPERADMIN",
+          "permission": "ALLOW",
+          "property": "__get__audios"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "SUPERADMIN",
+          "permission": "ALLOW",
+          "property": "__updateById__audios"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "LECTOR",
+          "permission": "ALLOW",
+          "property": "__count__audios"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "LECTOR",
+          "permission": "ALLOW",
+          "property": "__findById__audios"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "LECTOR",
+          "permission": "ALLOW",
+          "property": "__get__audios"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ESCRITOR",
+          "permission": "ALLOW",
+          "property": "__create__audios"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ESCRITOR",
+          "permission": "ALLOW",
+          "property": "__delete__audios"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ESCRITOR",
+          "permission": "ALLOW",
+          "property": "__destroyById__audios"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ESCRITOR",
+          "permission": "ALLOW",
+          "property": "__updateById__audios"
       }
 
   ],

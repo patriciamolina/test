@@ -63,6 +63,7 @@ utils.alterModels = require('./alterModels.js');
 utils.routes = require('./routes.js');
 utils.migrateData = require('./migrate-data-mysql.js');
 utils.createRole = require('./create-role.js');
+utils.prueba = require('./prueba.js');
 
 module.exports = utils;
 
