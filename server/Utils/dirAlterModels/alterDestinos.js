@@ -20,7 +20,7 @@ module.exports = function(app) {
         var response = {}
             ,   token = req.accessToken;
         if(Utils.isEmpty(data))
-            cb(null, "Json empty");
+            cb(null, {result:"Json empty"});
         else if(Utils.isValidJson(data)){
             Customer.relations.accessTokens.modelTo.findById(token.id, function(err, accessToken) {
                 if (err) {
@@ -166,49 +166,58 @@ module.exports = function(app) {
                                                                                         },function(err,dtt){
                                                                                             if(err) cb(err,null);
                                                                                             if(dtt != null){
-                                                                                                async.each(elemento.TEXTOS, function (elementotext, callbacktexto) {
-                                                                                                    Tipotexto.findOne({
-                                                                                                        where: {
-                                                                                                            nombretipotexto: elementotext.tipotexto
+                                                                                                if(!Utils.isEmpty(elemento.TEXTOS)) {
+                                                                                                    async.each(elemento.TEXTOS, function (elementotext, callbacktexto) {
+                                                                                                        Tipotexto.findOne({
+                                                                                                            where: {
+                                                                                                                nombretipotexto: elementotext.tipotexto
+                                                                                                            }
+                                                                                                        }, function (err, tipotext2) {
+                                                                                                            if (err) cb(err, null);
+                                                                                                            if (tipotext2 != null) {
+                                                                                                                var idioma = 1;
+                                                                                                                Texto.create({
+                                                                                                                    idlenguaje: idioma,
+                                                                                                                    texto: elementotext.texto
+                                                                                                                }, function (err, text2) {
+                                                                                                                    if (err) cb(err, null);
+                                                                                                                    if (text2 != null) {
+                                                                                                                        DestinoTieneTexto.create({
+                                                                                                                            iddestino: destino.iddestino,
+                                                                                                                            idtexto: text2.idtexto,
+                                                                                                                            idtipotexto: tipotext2.idtipotexto
+                                                                                                                        }, function (err, dtt2) {
+                                                                                                                            if (err) cb(err, null);
+                                                                                                                            if (dtt2 != null) {
+                                                                                                                                callbacktexto();
+                                                                                                                            } else {
+                                                                                                                                cb(new Error('No fue posible insertar la relacion ' +
+                                                                                                                                    'Destino (' + destino.iddestino + ') con' +
+                                                                                                                                    'Texto (' + text2.idtexto + ')'), null);
+                                                                                                                            }
+                                                                                                                        });
+                                                                                                                    } else {
+                                                                                                                        cb(new Error('No se pudo insertar el texto : ' + text2.texto), null);
+                                                                                                                    }
+                                                                                                                });
+                                                                                                            } else {
+                                                                                                                cb(new Error('No se encontro ningun tipo de texto del tipo :' + elementotext.tipotexto), null);
+                                                                                                            }
+                                                                                                        });
+                                                                                                    }, function (err) {
+                                                                                                        if (err) {
+                                                                                                            cb(err, null);
                                                                                                         }
-                                                                                                    }, function(err,tipotext2){
-                                                                                                        if(err) cb(err,null);
-                                                                                                        if(tipotext2 != null){
-                                                                                                            var idioma = 1;
-                                                                                                            Texto.create({
-                                                                                                                idlenguaje: idioma,
-                                                                                                                texto: elementotext.texto
-                                                                                                            },function(err,text2){
-                                                                                                                if(err) cb(err,null);
-                                                                                                                if(text2 != null){
-                                                                                                                    DestinoTieneTexto.create({
-                                                                                                                        iddestino: destino.iddestino,
-                                                                                                                        idtexto: text2.idtexto,
-                                                                                                                        idtipotexto: tipotext2.idtipotexto
-                                                                                                                    },function(err,dtt2){
-                                                                                                                        if(err) cb(err,null);
-                                                                                                                        if(dtt2 != null){
-                                                                                                                            callbacktexto();
-                                                                                                                        }else{
-                                                                                                                            cb(new Error('No fue posible insertar la relacion ' +
-                                                                                                                                'Destino (' + destino.iddestino + ') con' +
-                                                                                                                                'Texto (' + text2.idtexto + ')'),null);
-                                                                                                                        }
-                                                                                                                    });
-                                                                                                                }else{
-                                                                                                                    cb(new Error('No se pudo insertar el texto : ' + text2.texto),null);
-                                                                                                                }
-                                                                                                            });
-                                                                                                        }else{
-                                                                                                            cb(new Error('No se encontro ningun tipo de texto del tipo :' + elementotext.tipotexto),null);
-                                                                                                        }
+                                                                                                        callback();
                                                                                                     });
-                                                                                                }, function(err){
-                                                                                                    if (err) {
-                                                                                                        cb(err,null);
-                                                                                                    }
-                                                                                                    callback();
-                                                                                                });
+                                                                                                }else{
+                                                                                                    destino.updateAttributes("tienepanel", 0,function(err,d){
+                                                                                                        if (err) {
+                                                                                                            cb(err, null);
+                                                                                                        }
+                                                                                                        callback();
+                                                                                                    });
+                                                                                                }
                                                                                             }else{
                                                                                                 cb(new Error('No fue posible insertar la relacion ' +
                                                                                                     'Destino (' + destino.iddestino + ') con' +
@@ -271,7 +280,7 @@ module.exports = function(app) {
                 });
             });
         }else{
-            cb(null, "Data is invalid Json");
+            cb(null, {result:"Json invalid"});
         }
 
     };
