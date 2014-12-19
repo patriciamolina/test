@@ -51,7 +51,7 @@ app.use(loopback.urlNotFound());
 
 // The ultimate error handler.
 app.use(loopback.errorHandler());
-
+Utils.alterModels(app);
 // Add headers
 app.use(function (req, res, next) {
 
@@ -61,7 +61,6 @@ app.use(function (req, res, next) {
 });
 
 app.start = function() {
-    Utils.alterModels(app);
     var port = app.get('port');
     var portHttps = app.get('port-https');
     http.createServer(app).listen(port, function() {
