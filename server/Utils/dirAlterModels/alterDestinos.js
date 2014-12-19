@@ -39,7 +39,9 @@ module.exports = function(app) {
                     if ( ! user) {
                         cb(new Error('could not find a valid user'),null);
                     }
+                    var contObj = 0;
                     async.each(data, function (elemento, callback) {
+                        contObj++;
                         var result = validador(elemento);
                         if (result) {
                             Categoria.findOne({
@@ -273,10 +275,12 @@ module.exports = function(app) {
                         if (err) {
                             cb(err,null);
                         }
-                        if (response.elements === undefined) {
+                        if (contObj >0 && response.elements === undefined) {
                             response["result"] = "OK";
+                            cb(null, response);
+                        }else{
+                            cb(null, {result:"Json invalid"});
                         }
-                        cb(null, response);
                     });
                 });
             });
