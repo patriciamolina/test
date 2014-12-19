@@ -300,7 +300,7 @@ module.exports = function(app) {
             return false;
     };
     var filtroType = function (filtro, value) {
-        if (!!value && filtro != "string" && filtro != "object" && !isNumeric(value.replace(",", ".")) )
+        if (!!value && filtro != "string" && filtro != "object" && !isNumeric(value) )
             return true;
         else
             return false;
