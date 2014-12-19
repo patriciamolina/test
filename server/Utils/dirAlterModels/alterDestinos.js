@@ -22,7 +22,6 @@ module.exports = function(app) {
         if(Utils.isEmpty(data))
             cb(null, {result:"Json empty"});
         else if(Utils.isValidJson(data)){
-            console.log(data);
             Customer.relations.accessTokens.modelTo.findById(token.id, function(err, accessToken) {
                 if (err) {
                     cb(err,null);
@@ -40,6 +39,7 @@ module.exports = function(app) {
                         cb(new Error('could not find a valid user'),null);
                     }
                     var contObj = 0;
+                    console.log(data);
                     async.each(data, function (elemento, callback) {
                         contObj++;
                         var result = validador(elemento);
@@ -275,11 +275,13 @@ module.exports = function(app) {
                         if (err) {
                             cb(err,null);
                         }
-                        if (contObj >0 && response.elements === undefined) {
-                            response["result"] = "OK";
+                        if (contObj >0 ){
+                            if(response.elements === undefined) {
+                                response["result"] = "OK";
+                            }
                             cb(null, response);
                         }else{
-                            cb(null, {result:"Json invalid"});
+                            cb(null, {result:"asd Json invalid"});
                         }
                     });
                 });
