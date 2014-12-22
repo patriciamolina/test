@@ -377,7 +377,7 @@ module.exports = function(app) {
                                                     }
                                                     elemento["PROBLEMA"] = "Elemento Ya existe";
                                                     response.elements.push(elemento);
-                                                    callback();
+                                                    cb(null, response);
                                                 } else {
                                                     Destino.create({
                                                         idestadodestino: moderado,
@@ -401,7 +401,7 @@ module.exports = function(app) {
                                                             }
                                                             elemento["PROBLEMA"] = "error";
                                                             response.elements.push(elemento);
-                                                            callback();
+                                                            cb(null, response);
                                                         }else{
                                                             if(destino == null){
                                                                 if (response.result === undefined
@@ -412,7 +412,7 @@ module.exports = function(app) {
                                                                 }
                                                                 elemento["PROBLEMA"] = "Elemento Ya existe";
                                                                 response.elements.push(elemento);
-                                                                callback();
+                                                                cb(null, response);
                                                             }else{
                                                                 SubcategoriaTieneDestinos.create({
                                                                     iddestino: destino.iddestino,
@@ -498,7 +498,11 @@ module.exports = function(app) {
                                                                                                         if (err) {
                                                                                                             cb(err, null);
                                                                                                         }
-                                                                                                        callback();
+                                                                                                        if(response.elements === undefined) {
+                                                                                                            response["result"] = "OK";
+                                                                                                            response["destino"] = destino;
+                                                                                                        }
+                                                                                                        cb(null, response);
                                                                                                     });
                                                                                                 }
                                                                                             }else{
