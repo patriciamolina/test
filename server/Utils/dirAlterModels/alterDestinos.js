@@ -322,11 +322,8 @@ module.exports = function(app) {
                     }
                     var result = validador(elemento);
                     if (result) {
-                        Categoria.findOne({
-                            where: {
-                                nombre: elemento.CATEGORIA
-                            }
-                        }, function (err, categoria) {
+                        Categoria.findById(elemento.CATEGORIA
+                        , function (err, categoria) {
                             if (err){
                                 if (response.result === undefined
                                     && response.elements === undefined) {
@@ -349,11 +346,8 @@ module.exports = function(app) {
                                 response.elements.push(elemento);
                                 cb(null, response);
                             }else {
-                                Subcategoria.findOne({
-                                    where: {
-                                        nombre: elemento.SUBCATEGORIA
-                                    }
-                                }, function (err, subcategoria) {
+                                Subcategoria.findById(elemento.SUBCATEGORIA
+                                , function (err, subcategoria) {
                                     if (err) {
                                         if (response.result === undefined
                                             && response.elements === undefined) {
