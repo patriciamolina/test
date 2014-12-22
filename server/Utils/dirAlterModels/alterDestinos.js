@@ -118,7 +118,7 @@ module.exports = function(app) {
                                                         tienepanel: 0,
                                                         nombre: elemento.NOMBRE,
                                                         tipogeometria: "POINT",
-                                                        geometria: "POINT(" + elemento.LONGITUD + ", " + elemento.LATITUD + ")"
+                                                        geometria: "POINT(" + elemento.LONGITUD + " " + elemento.LATITUD + ")"
                                                     },function(err,destino){
                                                         if (err) {
                                                             if (response.result === undefined
@@ -390,7 +390,7 @@ module.exports = function(app) {
                                                         tienepanel: 0,
                                                         nombre: elemento.NOMBRE,
                                                         tipogeometria: "POINT",
-                                                        geometria: "POINT(" + elemento.LONGITUD + ", " + elemento.LATITUD + ")"
+                                                        geometria: "POINT(" + elemento.LONGITUD + " " + elemento.LATITUD + ")"
                                                     },function(err,destino){
                                                         if (err) {
                                                             if (response.result === undefined
