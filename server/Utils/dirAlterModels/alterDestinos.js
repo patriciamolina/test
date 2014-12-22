@@ -360,32 +360,15 @@ module.exports = function(app) {
                                         cb(null, response);
                                     }
 
-                                    if (subcategoria != null) {
-                                        Destino.create({
-                                            idestadodestino: moderado,
-                                            idcliente: user.idcliente,
-                                            rutabiblioteca: "temp",
-                                            nombreicono: subcategoria.nombreicono,
-                                            iconox: subcategoria.iconox,
-                                            iconoy: subcategoria.iconoy,
-                                            color: categoria.color,
-                                            tienepanel: 0,
-                                            nombre: elemento.NOMBRE,
-                                            tipogeometria: "POINT",
-                                            geometria: "POINT(" + elemento.LONGITUD + ", " + elemento.LATITUD + ")"
-                                        },function(err,destino){
-                                            if (err) {
-                                                if (response.result === undefined
-                                                    && response.elements === undefined) {
-
-                                                    response["result"] = "Problems";
-                                                    response["elements"] = [];
-                                                }
-                                                elemento["PROBLEMA"] = "error";
-                                                response.elements.push(elemento);
-                                                cb(null, response);
-                                            }else{
-                                                if(destino == null){
+                                        if (subcategoria != null) {
+                                            var nombre = "" + user.idcliente + ""
+                                                    + categoria.idcategoria + ""
+                                                    + subcategoria.idsubcategoria + ""
+                                                    + elemento.NOMBRE
+                                                , nombreMD5 = md5(nombre)
+                                                , contenedor = {name: nombreMD5};
+                                            Container.createContainer(contenedor, function (err) {
+                                                if (err) {
                                                     if (response.result === undefined
                                                         && response.elements === undefined) {
 
@@ -394,15 +377,21 @@ module.exports = function(app) {
                                                     }
                                                     elemento["PROBLEMA"] = "Elemento Ya existe";
                                                     response.elements.push(elemento);
-                                                    cb(null, response);
-                                                }else {
-                                                    var nombre = "" + user.idcliente + ""
-                                                            + categoria.idcategoria + ""
-                                                            + subcategoria.idsubcategoria + ""
-                                                            + destino.iddestino
-                                                        , nombreMD5 = md5(nombre)
-                                                        , contenedor = {name: nombreMD5};
-                                                    Container.createContainer(contenedor, function (err) {
+                                                    callback();
+                                                } else {
+                                                    Destino.create({
+                                                        idestadodestino: moderado,
+                                                        idcliente: user.idcliente,
+                                                        rutabiblioteca: nombreMD5,
+                                                        nombreicono: subcategoria.nombreicono,
+                                                        iconox: subcategoria.iconox,
+                                                        iconoy: subcategoria.iconoy,
+                                                        color: categoria.color,
+                                                        tienepanel: 0,
+                                                        nombre: elemento.NOMBRE,
+                                                        tipogeometria: "POINT",
+                                                        geometria: "POINT(" + elemento.LONGITUD + ", " + elemento.LATITUD + ")"
+                                                    },function(err,destino){
                                                         if (err) {
                                                             if (response.result === undefined
                                                                 && response.elements === undefined) {
@@ -410,137 +399,143 @@ module.exports = function(app) {
                                                                 response["result"] = "Problems";
                                                                 response["elements"] = [];
                                                             }
-                                                            elemento["PROBLEMA"] = "Elemento Ya existe";
+                                                            elemento["PROBLEMA"] = "error";
                                                             response.elements.push(elemento);
-                                                            cb(null, response);
-                                                        } else {
-                                                            destino.updateAttribute("rutabiblioteca",nombreMD5);
-                                                            SubcategoriaTieneDestinos.create({
-                                                                iddestino: destino.iddestino,
-                                                                idsubcategoria: subcategoria.idsubcategoria
-                                                            }, function (err, std) {
-                                                                if (err) cb(err, null);
-                                                                if (std != null) {
-                                                                    Tipotexto.findOne({
-                                                                        where: {
-                                                                            nombretipotexto: 'TITULO'
-                                                                        }
-                                                                    }, function (err, tipotext1) {
-                                                                        if (err) cb(err, null);
-                                                                        if (tipotext1 != null) {
-                                                                            var idioma = 1;
-                                                                            Texto.create({
-                                                                                idlenguaje: idioma,
-                                                                                texto: elemento.NOMBRE
-                                                                            }, function (err, text1) {
-                                                                                if (err) cb(err, null);
-                                                                                if (text1 != null) {
-                                                                                    DestinoTieneTexto.create({
-                                                                                        iddestino: destino.iddestino,
-                                                                                        idtexto: text1.idtexto,
-                                                                                        idtipotexto: tipotext1.idtipotexto
-                                                                                    }, function (err, dtt) {
-                                                                                        if (err) cb(err, null);
-                                                                                        if (dtt != null) {
-                                                                                            if (!Utils.isEmpty(elemento.TEXTOS)) {
-                                                                                                async.each(elemento.TEXTOS, function (elementotext, callbacktexto) {
-                                                                                                    if (validacionTexto(elementotext)) {
-                                                                                                        Tipotexto.findOne({
-                                                                                                            where: {
-                                                                                                                nombretipotexto: elementotext.tipotexto
-                                                                                                            }
-                                                                                                        }, function (err, tipotext2) {
-                                                                                                            if (err) cb(err, null);
-                                                                                                            if (tipotext2 != null) {
-                                                                                                                var idioma = 1;
-                                                                                                                Texto.create({
-                                                                                                                    idlenguaje: idioma,
-                                                                                                                    texto: elementotext.texto
-                                                                                                                }, function (err, text2) {
-                                                                                                                    if (err) cb(err, null);
-                                                                                                                    if (text2 != null) {
-                                                                                                                        destino.updateAttribute("tienepanel",1);
-                                                                                                                        DestinoTieneTexto.create({
-                                                                                                                            iddestino: destino.iddestino,
-                                                                                                                            idtexto: text2.idtexto,
-                                                                                                                            idtipotexto: tipotext2.idtipotexto
-                                                                                                                        }, function (err, dtt2) {
-                                                                                                                            if (err) cb(err, null);
-                                                                                                                            if (dtt2 != null) {
-                                                                                                                                callbacktexto();
-                                                                                                                            } else {
-                                                                                                                                cb(new Error('No fue posible insertar la relacion ' +
-                                                                                                                                    'Destino (' + destino.iddestino + ') con' +
-                                                                                                                                    'Texto (' + text2.idtexto + ')'), null);
-                                                                                                                            }
-                                                                                                                        });
-                                                                                                                    } else {
-                                                                                                                        cb(new Error('No se pudo insertar el texto : ' + text2.texto), null);
-                                                                                                                    }
-                                                                                                                });
-                                                                                                            } else {
-                                                                                                                cb(new Error('No se encontro ningun tipo de texto del tipo :' + elementotext.tipotexto), null);
-                                                                                                            }
-                                                                                                        });
-                                                                                                    } else {
+                                                            callback();
+                                                        }else{
+                                                            if(destino == null){
+                                                                if (response.result === undefined
+                                                                    && response.elements === undefined) {
 
-                                                                                                        callbacktexto();
-                                                                                                    }
-                                                                                                }, function (err) {
-                                                                                                    if (err) {
-                                                                                                        cb(err, null);
-                                                                                                    }
-                                                                                                    if(response.elements === undefined) {
-                                                                                                        response["result"] = "OK";
-                                                                                                    }
-                                                                                                    cb(null, response);
-                                                                                                });
-                                                                                            } else {
-                                                                                                destino.updateAttributes("tienepanel", 0, function (err, d) {
-                                                                                                    if (err) {
-                                                                                                        cb(err, null);
-                                                                                                    }
-                                                                                                });
-                                                                                            }
-                                                                                        } else {
-                                                                                            cb(new Error('No fue posible insertar la relacion ' +
-                                                                                                'Destino (' + destino.iddestino + ') con' +
-                                                                                                'Texto (' + t.idtexto + ')'), null);
-                                                                                        }
-                                                                                    });
-                                                                                } else {
-                                                                                    cb(new Error('No se pudo insertar el texto : ' + elemento.NOMBRE), null);
-                                                                                }
-                                                                            });
-                                                                        } else {
-                                                                            cb(new Error('No se encontro ningun tipo de texto del tipo TITULO'), null);
-                                                                        }
-                                                                    });
-                                                                } else {
-                                                                    cb(new Error('No fue posible insertar la relacion ' +
-                                                                        'subcategoria (' + subcategoria.idsubcategoria + ') con' +
-                                                                        'destino (' + destino.iddestino + ')'), null);
+                                                                    response["result"] = "Problems";
+                                                                    response["elements"] = [];
                                                                 }
-                                                            });
+                                                                elemento["PROBLEMA"] = "Elemento Ya existe";
+                                                                response.elements.push(elemento);
+                                                                callback();
+                                                            }else{
+                                                                SubcategoriaTieneDestinos.create({
+                                                                    iddestino: destino.iddestino,
+                                                                    idsubcategoria: subcategoria.idsubcategoria
+                                                                },function(err,std){
+                                                                    if(err) cb(err,null);
+                                                                    if(std != null){
+                                                                        Tipotexto.findOne({
+                                                                            where: {
+                                                                                nombretipotexto: 'TITULO'
+                                                                            }
+                                                                        }, function(err,tipotext1){
+                                                                            if(err) cb(err,null);
+                                                                            if(tipotext1 != null){
+                                                                                var idioma = 1;
+                                                                                Texto.create({
+                                                                                    idlenguaje: idioma,
+                                                                                    texto: elemento.NOMBRE
+                                                                                },function(err,text1){
+                                                                                    if(err) cb(err,null);
+                                                                                    if(text1 != null){
+                                                                                        DestinoTieneTexto.create({
+                                                                                            iddestino: destino.iddestino,
+                                                                                            idtexto: text1.idtexto,
+                                                                                            idtipotexto: tipotext1.idtipotexto
+                                                                                        },function(err,dtt){
+                                                                                            if(err) cb(err,null);
+                                                                                            if(dtt != null){
+                                                                                                if(!Utils.isEmpty(elemento.TEXTOS)) {
+                                                                                                    async.each(elemento.TEXTOS, function (elementotext, callbacktexto) {
+                                                                                                        if(validacionTexto(elementotext)){
+                                                                                                            Tipotexto.findOne({
+                                                                                                                where: {
+                                                                                                                    nombretipotexto: elementotext.tipotexto
+                                                                                                                }
+                                                                                                            }, function (err, tipotext2) {
+                                                                                                                if (err) cb(err, null);
+                                                                                                                if (tipotext2 != null) {
+                                                                                                                    var idioma = 1;
+                                                                                                                    Texto.create({
+                                                                                                                        idlenguaje: idioma,
+                                                                                                                        texto: elementotext.texto
+                                                                                                                    }, function (err, text2) {
+                                                                                                                        if (err) cb(err, null);
+                                                                                                                        if (text2 != null) {
+                                                                                                                            DestinoTieneTexto.create({
+                                                                                                                                iddestino: destino.iddestino,
+                                                                                                                                idtexto: text2.idtexto,
+                                                                                                                                idtipotexto: tipotext2.idtipotexto
+                                                                                                                            }, function (err, dtt2) {
+                                                                                                                                if (err) cb(err, null);
+                                                                                                                                if (dtt2 != null) {
+                                                                                                                                    callbacktexto();
+                                                                                                                                } else {
+                                                                                                                                    cb(new Error('No fue posible insertar la relacion ' +
+                                                                                                                                        'Destino (' + destino.iddestino + ') con' +
+                                                                                                                                        'Texto (' + text2.idtexto + ')'), null);
+                                                                                                                                }
+                                                                                                                            });
+                                                                                                                        } else {
+                                                                                                                            cb(new Error('No se pudo insertar el texto : ' + text2.texto), null);
+                                                                                                                        }
+                                                                                                                    });
+                                                                                                                } else {
+                                                                                                                    cb(new Error('No se encontro ningun tipo de texto del tipo :' + elementotext.tipotexto), null);
+                                                                                                                }
+                                                                                                            });
+                                                                                                        }else{
+                                                                                                            callbacktexto();
+                                                                                                        }
+                                                                                                    }, function (err) {
+                                                                                                        if (err) {
+                                                                                                            cb(err, null);
+                                                                                                        }
+                                                                                                        if(response.elements === undefined) {
+                                                                                                            response["result"] = "OK";
+                                                                                                        }
+                                                                                                        cb(null, response);
+                                                                                                    });
+                                                                                                }else{
+                                                                                                    destino.updateAttributes("tienepanel", 0,function(err,d){
+                                                                                                        if (err) {
+                                                                                                            cb(err, null);
+                                                                                                        }
+                                                                                                        callback();
+                                                                                                    });
+                                                                                                }
+                                                                                            }else{
+                                                                                                cb(new Error('No fue posible insertar la relacion ' +
+                                                                                                    'Destino (' + destino.iddestino + ') con' +
+                                                                                                    'Texto (' + t.idtexto + ')'),null);
+                                                                                            }
+                                                                                        });
+                                                                                    }else{
+                                                                                        cb(new Error('No se pudo insertar el texto : ' + elemento.NOMBRE),null);
+                                                                                    }
+                                                                                });
+                                                                            }else{
+                                                                                cb(new Error('No se encontro ningun tipo de texto del tipo TITULO'),null);
+                                                                            }
+                                                                        });
+                                                                    }else{
+                                                                        cb(new Error('No fue posible insertar la relacion ' +
+                                                                            'subcategoria (' + subcategoria.idsubcategoria + ') con' +
+                                                                            'destino (' + destino.iddestino + ')'),null);
+                                                                    }
+                                                                });
+                                                            }
                                                         }
-
-
-
                                                     });
                                                 }
-                                            }
-                                        });
-                                    } else {
-                                        if (response.result === undefined
-                                            && response.elements === undefined) {
+                                            });
+                                        } else {
+                                            if (response.result === undefined
+                                                && response.elements === undefined) {
 
-                                            response["result"] = "Problems";
-                                            response["elements"] = [];
+                                                response["result"] = "Problems";
+                                                response["elements"] = [];
+                                            }
+                                            elemento["PROBLEMA"] = "Subcategoria No existe";
+                                            response.elements.push(elemento);
+                                            cb(null, response);
                                         }
-                                        elemento["PROBLEMA"] = "Subcategoria No existe";
-                                        response.elements.push(elemento);
-                                        cb(null, response);
-                                    }
                                 });
                             }
                         });
