@@ -489,6 +489,7 @@ module.exports = function(app) {
                                                                                                         }
                                                                                                         if(response.elements === undefined) {
                                                                                                             response["result"] = "OK";
+                                                                                                            response["destino"] = destino;
                                                                                                         }
                                                                                                         cb(null, response);
                                                                                                     });
