@@ -22,7 +22,7 @@
     "public": false
   },
   "ACL": {
-    "dataSource": "INFOSESION",
+    "dataSource": "db",
     "public": false
   },
   "MapeoRol": {

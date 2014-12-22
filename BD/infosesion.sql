@@ -123,11 +123,11 @@ INSERT INTO `customer` (`id`, `realm`, `username`, `password`, `credentials`, `c
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `role`
+-- Estructura de tabla para la tabla `Role`
 --
 
-DROP TABLE IF EXISTS `role`;
-CREATE TABLE IF NOT EXISTS `role` (
+DROP TABLE IF EXISTS `Role`;
+CREATE TABLE IF NOT EXISTS `Role` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(512) DEFAULT NULL,
   `description` varchar(512) DEFAULT NULL,
@@ -137,10 +137,10 @@ CREATE TABLE IF NOT EXISTS `role` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
--- Volcado de datos para la tabla `role`
+-- Volcado de datos para la tabla `Role`
 --
 
-INSERT INTO `role` (`id`, `name`, `description`, `created`, `modified`) VALUES
+INSERT INTO `Role` (`id`, `name`, `description`, `created`, `modified`) VALUES
 (1, 'ADMIN', 'El rol de Administrador permite a un usuario hacer cualquier acción (Crear, Leer, Editar, Borrar) y ademas gestionar Usuarios dentro de la API (excepto los de tipo Admin).', '2014-11-27 20:41:12', '2014-11-27 20:41:12'),
 (2, 'ESCRITOR', 'El rol de ESCRITOR permite a un usuario crear, actualizar y eliminar registros dentro de la API.', '2014-11-27 20:42:58', '2014-11-27 20:42:58'),
 (3, 'LECTOR', 'El rol de LECTOR permite a un usuario leer registros dentro de la API.', '2014-11-27 20:42:58', '2014-11-27 20:42:58'),
