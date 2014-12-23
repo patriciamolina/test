@@ -49,6 +49,7 @@ app.use(loopback.urlNotFound());
 // The ultimate error handler.
 app.use(loopback.errorHandler());
 Utils.alterModels(app);
+// Add headers
 
 app.start = function() {
     var port = app.get('port');

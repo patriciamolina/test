@@ -1,3 +1,5 @@
+var cors = require('cors');
+
 module.exports = function(app) {
   var router = app.loopback.Router();
   var contentTypesByExtension = {
@@ -6,6 +8,8 @@ module.exports = function(app) {
     'js':   "text/javascript",
     'json': "application/json" //Edited due to answer - Still no success :(
   };
+
+    app.use(cors());
 
   router.get('*',function(req, res, next) {
       setHeaders(res);
