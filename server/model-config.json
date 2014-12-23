@@ -57,6 +57,10 @@
       "dataSource": "db",
       "public": false
   },
+    "DestinoUnoCompleto":{
+        "dataSource": "db",
+        "public": false
+    },
   "Destino": {
     "dataSource": "INFOGEO",
     "public": true
