@@ -92,7 +92,7 @@ module.exports = function(app) {
                                             var nombre = "" + user.idcliente + ""
                                                     + categoria.idcategoria + ""
                                                     + subcategoria.idsubcategoria + ""
-                                                    + elemento.NOMBRE
+                                                    + elemento.NOMBRE.toLowerCase()
                                                 , nombreMD5 = md5(nombre)
                                                 , contenedor = {name: nombreMD5};
                                             Container.createContainer(contenedor, function (err) {
@@ -364,7 +364,7 @@ module.exports = function(app) {
                                             var nombre = "" + user.idcliente + ""
                                                     + categoria.idcategoria + ""
                                                     + subcategoria.idsubcategoria + ""
-                                                    + elemento.NOMBRE
+                                                    + elemento.NOMBRE.toLowerCase()
                                                 , nombreMD5 = md5(nombre)
                                                 , contenedor = {name: nombreMD5};
                                             Container.createContainer(contenedor, function (err) {
