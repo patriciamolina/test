@@ -1,7 +1,7 @@
 {
   "restApiRoot": "/api",
-  "host": "0.0.0.0",
-  "port": 3000,
-  "port-https": 5000,
-  "url": "https://localhost:5000"
+  "host": "barman.datactil.local",
+  "port": 80,
+  "port-https": 8080,
+  "url": "https://barman.datactil.local:8080"
 }
