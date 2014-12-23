@@ -139,21 +139,7 @@ CREATE TABLE IF NOT EXISTS `cliente` (
 
 INSERT INTO `cliente` (`idCliente`, `nombreCliente`, `estadoSuscripcion`, `fechaInicioSuscripcion`, `fechaFinSuscripcion`) VALUES
 (0, 'DATACTIL', '1', '2014-12-23', '3000-12-31'),
-(1, 'SERNATUR REGION 1', '1', '2014-12-23', '3000-12-31'),
-(2, 'SERNATUR REGION 2', '1', '2014-12-23', '3000-12-31'),
-(3, 'SERNATUR REGION 3', '1', '2014-12-23', '3000-12-31'),
-(4, 'SERNATUR REGION 4', '1', '2014-12-23', '3000-12-31'),
-(5, 'SERNATUR REGION 5', '1', '2014-12-23', '3000-12-31'),
-(6, 'SERNATUR REGION 6', '1', '2014-12-23', '3000-12-31'),
-(7, 'SERNATUR REGION 7', '1', '2014-12-23', '3000-12-31'),
-(8, 'SERNATUR REGION 8', '1', '2014-12-23', '3000-12-31'),
-(9, 'SERNATUR REGION 9', '1', '2014-12-23', '3000-12-31'),
-(10, 'SERNATUR REGION 10', '1', '2014-12-23', '3000-12-31'),
-(11, 'SERNATUR REGION 11', '1', '2014-12-23', '3000-12-31'),
-(12, 'SERNATUR REGION 12', '1', '2014-12-23', '3000-12-31'),
-(13, 'SERNATUR REGION 13', '1', '2014-12-23', '3000-12-31'),
-(14, 'SERNATUR REGION 14', '1', '2014-12-23', '3000-12-31'),
-(15, 'SERNATUR REGION 15', '1', '2014-12-23', '3000-12-31');
+(1, 'SERNATUR', '1', '2014-12-23', '3000-12-31');
 
 -- --------------------------------------------------------
 
