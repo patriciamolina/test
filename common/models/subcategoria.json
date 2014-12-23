@@ -101,6 +101,22 @@
               "dataScale": 0,
               "nullable": "NO"
           }
+      },
+      "color": {
+          "type": "String",
+          "id": false,
+          "required": true,
+          "length": 135,
+          "precision": null,
+          "scale": null,
+          "mysql": {
+              "columnName": "color",
+              "dataType": "varchar",
+              "dataLength": 135,
+              "dataPrecision": null,
+              "dataScale": null,
+              "nullable": "NO"
+          }
       }
   },
   "validations": [],

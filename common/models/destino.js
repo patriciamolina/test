@@ -20,7 +20,7 @@ module.exports = function(Destino) {
             description: 'Carga Masiva de Información',
             accepts: [
                 {arg: 'req', type: 'object', http: {source: 'req'}},
-                {arg: 'data', type: 'DestinoMasivo', required: true, http: {source: 'body'}}
+                {arg: 'data', type: 'DestinoUnoCompleto', required: true, http: {source: 'body'}}
             ],
             returns: {
                 arg: 'response', type: 'object', root: true

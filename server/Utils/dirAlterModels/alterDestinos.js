@@ -9,7 +9,8 @@ module.exports = function(app) {
         ,   DestinoTieneTexto = app.models.DestinoTieneTexto
         ,   Tipotexto = app.models.Tipotexto
         ,   Container = app.models.Container
-        ,   filtroCampos = app.models.DestinoMasivo.definition.rawProperties
+        ,   filtroCamposMasivo = app.models.DestinoMasivo.definition.rawProperties
+        ,   filtroCamposUno = app.models.DestinoUnoCompleto.definition.rawProperties
         ,   Utils = require('../index')
         ,   async = require('async')
         ,   isNumeric = require("isnumeric")
@@ -42,7 +43,7 @@ module.exports = function(app) {
                     var contObj = 0;
                     async.each(data, function (elemento, callback) {
                         contObj++;
-                        var result = validador(elemento);
+                        var result = validador(elemento,filtroCamposMasivo);
                         if (result) {
                             Categoria.findOne({
                                 where: {
@@ -320,7 +321,7 @@ module.exports = function(app) {
                     if ( ! user) {
                         cb(new Error('could not find a valid user'),null);
                     }
-                    var result = validador(elemento);
+                    var result = validador(elemento, filtroCamposUno);
                     if (result) {
                         Categoria.findById(elemento.CATEGORIA
                         , function (err, categoria) {
@@ -389,8 +390,8 @@ module.exports = function(app) {
                                                         color: categoria.color,
                                                         tienepanel: 0,
                                                         nombre: elemento.NOMBRE,
-                                                        tipogeometria: "POINT",
-                                                        geometria: "POINT(" + elemento.LONGITUD + " " + elemento.LATITUD + ")"
+                                                        tipogeometria: elemento.TIPOGEOMETRIA,
+                                                        geometria: elemento.GEOMETRIA
                                                     },function(err,destino){
                                                         if (err) {
                                                             if (response.result === undefined
@@ -585,7 +586,7 @@ module.exports = function(app) {
             return false;
     };
 
-    function validador(data) {
+    function validador(data, filtroCampos) {
 
 
         var isValid = true;
