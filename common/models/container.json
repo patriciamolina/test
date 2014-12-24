@@ -13,6 +13,13 @@
       },
       {
           "accessType": "EXECUTE",
+          "property": "removeFile",
+          "permission": "ALLOW",
+          "principalType": "ROLE",
+          "principalId": "ADMIN"
+      },
+      {
+          "accessType": "EXECUTE",
           "property": "getFiles",
           "permission": "ALLOW",
           "principalType": "ROLE",
@@ -31,6 +38,13 @@
           "principalType": "ROLE",
           "principalId": "ADMIN",
           "permission": "ALLOW"
+      },
+      {
+          "accessType": "EXECUTE",
+          "property": "removeFile",
+          "permission": "ALLOW",
+          "principalType": "ROLE",
+          "principalId": "SUPERADMIN"
       },
       {
           "accessType": "EXECUTE",
@@ -66,6 +80,13 @@
           "permission": "ALLOW",
           "principalType": "ROLE",
           "principalId": "LECTOR"
+      },
+      {
+          "accessType": "EXECUTE",
+          "property": "removeFile",
+          "permission": "ALLOW",
+          "principalType": "ROLE",
+          "principalId": "ESCRITOR"
       },
       {
           "accessType": "EXECUTE",

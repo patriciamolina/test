@@ -168,11 +168,11 @@ module.exports = function(app) {
             async.each(res, function (element, callback) {
                 var objetoFinalTemp = {
                     deleteType: "DELETE",
-                    deleteUrl: "https://192.168.1.182:5000/api/Containers/" + element.container + "/files/" + element.name + "?access_token=" + token.id,
+                    deleteUrl: app.get('url') + "/api/Containers/" + element.container + "/files/" + element.name + "?access_token=" + token.id,
                     name: element.name,
                     size: element.size,
-                    thumbnailUrl: "https://192.168.1.182:5000/api/Containers/" + element.container + "/download/" + element.name + "?access_token=" + token.id,
-                    url: "https://192.168.1.182:5000/api/Containers/" + element.container + "/download/" + element.name + "?access_token=" + token.id
+                    thumbnailUrl: app.get('url') + "/api/Containers/" + element.container + "/download/" + element.name + "?access_token=" + token.id,
+                    url: app.get('url') + "/api/Containers/" + element.container + "/download/" + element.name + "?access_token=" + token.id
                 };
                 arrFiles.push(objetoFinalTemp);
                 callback();
@@ -190,6 +190,7 @@ module.exports = function(app) {
     });
 
     Container.afterRemote("upload",function(req, res, cb){
+        var arrFiles = [];
         var container = req.req.params.container;
         if(req.req.accessToken != undefined){
             var token = req.req.accessToken;
@@ -224,7 +225,15 @@ module.exports = function(app) {
                                             iddestino: destino.iddestino,
                                             ruta: file.name
                                         },function(err,elem){
-                                            if(err)cb(err);
+                                            var objetoFinalTemp = {
+                                                deleteType: "DELETE",
+                                                deleteUrl: app.get('url') + "/api/Containers/" + file.container + "/files/" + file.name + "?access_token=" + token.id,
+                                                name: file.name,
+                                                size: file.size,
+                                                thumbnailUrl: app.get('url') + "/api/Containers/" + file.container + "/download/" + file.name + "?access_token=" + token.id,
+                                                url: app.get('url') + "/api/Containers/" + file.container + "/download/" + file.name + "?access_token=" + token.id
+                                            };
+                                            arrFiles.push(objetoFinalTemp);
                                             callback();
                                         });
                                     } else {
@@ -234,6 +243,8 @@ module.exports = function(app) {
                                     }
                                 }, function (err) {
                                     if (err)cb(err, null);
+                                    req.result = { files: arrFiles };
+                                    res = arrFiles;
                                     cb(null, res);
                                 });
                             } else {
