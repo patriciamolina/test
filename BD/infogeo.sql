@@ -6002,6 +6002,7 @@ CREATE TABLE IF NOT EXISTS `subcategoria` (
   `nombreicono` varchar(450) NOT NULL,
   `iconox` int(11) NOT NULL,
   `iconoy` int(11) NOT NULL,
+  `color` varchar(8) NOT NULL DEFAULT '0xAAAAAA',
   PRIMARY KEY (`idSubCategoria`),
   KEY `fk_SubCategoria_Categoria1_idx` (`idCategoria`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=78 ;
