@@ -1,4 +1,4 @@
-# Barman API README #
+# Barman API #
 
 ##Requerimientos.
 
