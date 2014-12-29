@@ -240,7 +240,7 @@ module.exports = function(app) {
                                             iddestino: destino.iddestino,
                                             ruta: file.name
                                         },function(err,elem){
-                                            var find = finder(app.__dirserver);
+                                            var find = finder(path.resolve(app.__dirserver, 'storage/' + container));
 
                                             //This listens for files found
                                             find.on('file', function (foundfile) {
