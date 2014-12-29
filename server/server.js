@@ -48,19 +48,15 @@ app.use(loopback.urlNotFound());
 
 // The ultimate error handler.
 app.use(loopback.errorHandler());
+app.__dirserver = __dirname;
 Utils.alterModels(app);
 // Add headers
 
 app.start = function() {
-    var port = app.get('port');
     var portHttps = app.get('port-https');
-    http.createServer(app).listen(port, function() {
-        var url = 'http://' + app.get('host') + ':' + app.get('port') + '/';
-        console.log('Web server listening at: %s', url);
-        https.createServer(httpsOptions, app).listen(portHttps, function() {
-            app.emit('started');
-            console.log('Web server listening at: %s', app.get('url'));
-        });
+    https.createServer(httpsOptions, app).listen(portHttps, function() {
+        app.emit('started');
+        console.log('Web server listening at: %s', app.get('url'));
     });
 };
 

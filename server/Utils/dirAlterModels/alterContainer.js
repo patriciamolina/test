@@ -1,7 +1,8 @@
 /**
  * Created by Felipe on 21-12-2014.
  */
-var async = require("async");
+var async = require("async")
+    ,    Thumbnail = require('thumbnail');
 module.exports = function(app) {
 
     var Container = app.models.Container
@@ -10,7 +11,9 @@ module.exports = function(app) {
         ,   Codigoqr = app.models.Codigoqr
         ,   Imagen = app.models.Imagen
         ,   Video = app.models.Video
-        ,   Audio = app.models.Audio;;
+        ,   Audio = app.models.Audio
+        ,   finder = require('findit')
+        ,   path = require('path');
 
     Container.afterRemote("removeFile",function(ctx, element, cb){
         var container = ctx.args.container;
@@ -40,7 +43,6 @@ module.exports = function(app) {
                         }, function (err, destino) {
                             if (err) cb(err, null);
                             if (destino) {
-                                console.log(destino.iddestino);
                                     Imagen.findOne({where: {
                                         "and": [
                                             {iddestino: destino.iddestino},
@@ -50,9 +52,10 @@ module.exports = function(app) {
                                     },function(err,img){
                                         if(err)cb(err);
                                         if(img) {
-                                            console.log(img.idimagenes);
                                             Imagen.destroyById(img.idimagenes, function (err) {
                                                 if (err)cb(err);
+                                                var file = ctx.args.file;
+                                                Container.removeFile(container,path.basename(file, path.extname(file))+ "-x100" + path.extname(file));
                                                 cb(null,{result: "Imagen Eliminada"});
                                             });
                                         }else{
@@ -67,6 +70,8 @@ module.exports = function(app) {
                                                 if(vid) {
                                                     Video.destroyById(vid.idvideo, function (err) {
                                                         if (err)cb(err);
+                                                        var file = ctx.args.file;
+                                                        Container.removeFile(container,path.basename(file, path.extname(file))+ "-x100" + path.extname(file));
                                                         cb(null,{result: "Video Eliminado"});
                                                     });
                                                 }else{
@@ -81,6 +86,8 @@ module.exports = function(app) {
                                                         if(aud) {
                                                             Audio.destroyById(aud.idaudio, function (err) {
                                                                 if (err)cb(err);
+                                                                var file = ctx.args.file;
+                                                                Container.removeFile(container,path.basename(file, path.extname(file))+ "-x100" + path.extname(file));
                                                                 cb(null,{result: "Audio Eliminado"});
                                                             });
                                                         }else{
@@ -168,10 +175,13 @@ module.exports = function(app) {
             async.each(res, function (element, callback) {
                 var objetoFinalTemp = {
                     deleteType: "DELETE",
-                    deleteUrl: app.get('url') + "/api/Containers/" + element.container + "/files/" + element.name + "?access_token=" + token.id,
+                    deleteUrl: app.get('url') + "/api/Containers/" + element.container
+                        + "/files/" + element.name + "?access_token=" + token.id,
                     name: element.name,
                     size: element.size,
-                    thumbnailUrl: app.get('url') + "/api/Containers/" + element.container + "/download/" + element.name + "?access_token=" + token.id,
+                    thumbnailUrl: app.get('url') + "/api/Containers/" + element.container
+                        + "/download/" + path.basename(element.name, path.extname(element.name))+ "-x100" + path.extname(element.name)
+                        + "?access_token=" + token.id,
                     url: app.get('url') + "/api/Containers/" + element.container + "/download/" + element.name + "?access_token=" + token.id
                 };
                 arrFiles.push(objetoFinalTemp);
@@ -225,16 +235,35 @@ module.exports = function(app) {
                                             iddestino: destino.iddestino,
                                             ruta: file.name
                                         },function(err,elem){
-                                            var objetoFinalTemp = {
-                                                deleteType: "DELETE",
-                                                deleteUrl: app.get('url') + "/api/Containers/" + file.container + "/files/" + file.name + "?access_token=" + token.id,
-                                                name: file.name,
-                                                size: file.size,
-                                                thumbnailUrl: app.get('url') + "/api/Containers/" + file.container + "/download/" + file.name + "?access_token=" + token.id,
-                                                url: app.get('url') + "/api/Containers/" + file.container + "/download/" + file.name + "?access_token=" + token.id
-                                            };
-                                            arrFiles.push(objetoFinalTemp);
-                                            callback();
+                                            var find = finder(app.__dirserver);
+
+                                            //This listens for files found
+                                            find.on('file', function (foundfile) {
+                                                if(path.basename(foundfile) == file.name &&
+                                                    path.dirname(foundfile).indexOf(file.container) > -1) {
+
+                                                    var thumbnail = new Thumbnail(path.dirname(foundfile), path.dirname(foundfile));
+                                                    thumbnail.ensureThumbnail(file.name, null, 100, function (err, filename) {
+                                                        // "filename" is the name of the thumb in '/path/to/thumbnails'
+                                                        console.error(err);
+                                                        console.info(filename);
+                                                        var objetoFinalTemp = {
+                                                            deleteType: "DELETE",
+                                                            deleteUrl: app.get('url') + "/api/Containers/" + file.container
+                                                                + "/files/" + file.name
+                                                                + "?access_token=" + token.id,
+                                                            name: file.name,
+                                                            size: file.size,
+                                                            thumbnailUrl: app.get('url') + "/api/Containers/" + file.container
+                                                                + "/download/" + path.basename(file.name, path.extname(file.name))+ "-x100" + path.extname(file.name)
+                                                                + "?access_token=" + token.id,
+                                                            url: app.get('url') + "/api/Containers/" + file.container + "/download/" + file.name + "?access_token=" + token.id
+                                                        };
+                                                        arrFiles.push(objetoFinalTemp);
+                                                        callback();
+                                                    });
+                                                }
+                                            });
                                         });
                                     } else {
                                         cb(new Error("Tipo de archivo no creado"));
