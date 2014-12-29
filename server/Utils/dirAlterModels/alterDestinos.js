@@ -47,7 +47,7 @@ module.exports = function(app) {
                         if (result) {
                             Categoria.findOne({
                                 where: {
-                                    nombre: elemento.CATEGORIA
+                                    nombre: elemento.CATEGORIA.toLowerCase()
                                 }
                             }, function (err, categoria) {
                                 if (err){
@@ -74,7 +74,7 @@ module.exports = function(app) {
                                 }else {
                                     Subcategoria.findOne({
                                         where: {
-                                            nombre: elemento.SUBCATEGORIA
+                                            nombre: elemento.SUBCATEGORIA.toLowerCase()
                                         }
                                     }, function (err, subcategoria) {
                                         if (err) {
