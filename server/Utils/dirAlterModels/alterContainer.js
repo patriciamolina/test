@@ -2,7 +2,8 @@
  * Created by Felipe on 21-12-2014.
  */
 var async = require("async")
-    ,    Thumbnail = require('thumbnail');
+    ,    Thumbnail = require('thumbnail')
+    ,   fs = require("fs");
 module.exports = function(app) {
 
     var Container = app.models.Container
@@ -55,7 +56,7 @@ module.exports = function(app) {
                                             Imagen.destroyById(img.idimagenes, function (err) {
                                                 if (err)cb(err);
                                                 var file = ctx.args.file;
-                                                Container.removeFile(container,path.basename(file, path.extname(file))+ "-x100" + path.extname(file));
+                                                Container.removeFile(container,"thumb_" + file);
                                                 cb(null,{result: "Imagen Eliminada"});
                                             });
                                         }else{
@@ -71,7 +72,7 @@ module.exports = function(app) {
                                                     Video.destroyById(vid.idvideo, function (err) {
                                                         if (err)cb(err);
                                                         var file = ctx.args.file;
-                                                        Container.removeFile(container,path.basename(file, path.extname(file))+ "-x100" + path.extname(file));
+                                                        Container.removeFile(container,"thumb_" + file);
                                                         cb(null,{result: "Video Eliminado"});
                                                     });
                                                 }else{
@@ -87,7 +88,7 @@ module.exports = function(app) {
                                                             Audio.destroyById(aud.idaudio, function (err) {
                                                                 if (err)cb(err);
                                                                 var file = ctx.args.file;
-                                                                Container.removeFile(container,path.basename(file, path.extname(file))+ "-x100" + path.extname(file));
+                                                                Container.removeFile(container,"thumb_" + file);
                                                                 cb(null,{result: "Audio Eliminado"});
                                                             });
                                                         }else{
@@ -173,19 +174,23 @@ module.exports = function(app) {
         var token = req.req.accessToken;
         if(token) {
             async.each(res, function (element, callback) {
-                var objetoFinalTemp = {
-                    deleteType: "DELETE",
-                    deleteUrl: app.get('url') + "/api/Containers/" + element.container
-                        + "/files/" + element.name + "?access_token=" + token.id,
-                    name: element.name,
-                    size: element.size,
-                    thumbnailUrl: app.get('url') + "/api/Containers/" + element.container
-                        + "/download/" + path.basename(element.name, path.extname(element.name))+ "-x100" + path.extname(element.name)
-                        + "?access_token=" + token.id,
-                    url: app.get('url') + "/api/Containers/" + element.container + "/download/" + element.name + "?access_token=" + token.id
-                };
-                arrFiles.push(objetoFinalTemp);
-                callback();
+                if(!(element.name.indexOf("thumb_") > -1)) {
+                    var objetoFinalTemp = {
+                        deleteType: "DELETE",
+                        deleteUrl: app.get('url') + "/api/Containers/" + element.container
+                            + "/files/" + element.name + "?access_token=" + token.id,
+                        name: element.name,
+                        size: element.size,
+                        thumbnailUrl: app.get('url') + "/api/Containers/" + element.container
+                            + "/download/thumb_" + element.name
+                            + "?access_token=" + token.id,
+                        url: app.get('url') + "/api/Containers/" + element.container + "/download/" + element.name + "?access_token=" + token.id
+                    };
+                    arrFiles.push(objetoFinalTemp);
+                    callback();
+                }else{
+                    callback();
+                }
             }, function (err) {
                 if (err)cb(err);
                 else {
@@ -245,22 +250,25 @@ module.exports = function(app) {
                                                     var thumbnail = new Thumbnail(path.dirname(foundfile), path.dirname(foundfile));
                                                     thumbnail.ensureThumbnail(file.name, null, 100, function (err, filename) {
                                                         // "filename" is the name of the thumb in '/path/to/thumbnails'
-                                                        console.error(err);
-                                                        console.info(filename);
-                                                        var objetoFinalTemp = {
-                                                            deleteType: "DELETE",
-                                                            deleteUrl: app.get('url') + "/api/Containers/" + file.container
-                                                                + "/files/" + file.name
-                                                                + "?access_token=" + token.id,
-                                                            name: file.name,
-                                                            size: file.size,
-                                                            thumbnailUrl: app.get('url') + "/api/Containers/" + file.container
-                                                                + "/download/" + path.basename(file.name, path.extname(file.name))+ "-x100" + path.extname(file.name)
-                                                                + "?access_token=" + token.id,
-                                                            url: app.get('url') + "/api/Containers/" + file.container + "/download/" + file.name + "?access_token=" + token.id
-                                                        };
-                                                        arrFiles.push(objetoFinalTemp);
-                                                        callback();
+                                                        if(err)console.error(err);
+                                                        var base = path.dirname(foundfile);
+                                                        fs.rename(base + "/" + filename, base + "/thumb_" + file.name, function(err){
+                                                            if(err)console.error(err);
+                                                            var objetoFinalTemp = {
+                                                                deleteType: "DELETE",
+                                                                deleteUrl: app.get('url') + "/api/Containers/" + file.container
+                                                                    + "/files/" + file.name
+                                                                    + "?access_token=" + token.id,
+                                                                name: file.name,
+                                                                size: file.size,
+                                                                thumbnailUrl: app.get('url') + "/api/Containers/" + file.container
+                                                                    + "/download/thumb_" + file.name
+                                                                    + "?access_token=" + token.id,
+                                                                url: app.get('url') + "/api/Containers/" + file.container + "/download/" + file.name + "?access_token=" + token.id
+                                                            };
+                                                            arrFiles.push(objetoFinalTemp);
+                                                            callback();
+                                                        });
                                                     });
                                                 }
                                             });
