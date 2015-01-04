@@ -92,7 +92,22 @@
       "type": "hasMany",
       "model": "Destino",
       "foreignKey": "idcliente"
-    }
+    },
+      "categorias": {
+          "type": "hasMany",
+          "model": "Categoria",
+          "foreignKey": "idcliente"
+      },
+      "subcategorias": {
+          "type": "hasMany",
+          "model": "Subcategoria",
+          "foreignKey": "idcliente"
+      },
+      "customers": {
+          "type": "hasMany",
+          "model": "Customer",
+          "foreignKey": "idcliente"
+      }
   },
   "acls": [
     {
@@ -252,7 +267,385 @@
         "principalId": "ESCRITOR",
         "permission": "ALLOW",
         "property": "__updateById__destinos"
-    }
+    },
+      {
+          "principalType": "ROLE",
+          "principalId": "ADMIN",
+          "permission": "ALLOW",
+          "property": "__count__categorias"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ADMIN",
+          "permission": "ALLOW",
+          "property": "__create__categorias"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ADMIN",
+          "permission": "ALLOW",
+          "property": "__delete__categorias"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ADMIN",
+          "permission": "ALLOW",
+          "property": "__destroyById__categorias"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ADMIN",
+          "permission": "ALLOW",
+          "property": "__findById__categorias"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ADMIN",
+          "permission": "ALLOW",
+          "property": "__get__categorias"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ADMIN",
+          "permission": "ALLOW",
+          "property": "__updateById__categorias"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "SUPERADMIN",
+          "permission": "ALLOW",
+          "property": "__count__categorias"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "SUPERADMIN",
+          "permission": "ALLOW",
+          "property": "__create__categorias"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "SUPERADMIN",
+          "permission": "ALLOW",
+          "property": "__delete__categorias"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "SUPERADMIN",
+          "permission": "ALLOW",
+          "property": "__destroyById__categorias"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "SUPERADMIN",
+          "permission": "ALLOW",
+          "property": "__findById__categorias"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "SUPERADMIN",
+          "permission": "ALLOW",
+          "property": "__get__categorias"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "SUPERADMIN",
+          "permission": "ALLOW",
+          "property": "__updateById__categorias"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "LECTOR",
+          "permission": "ALLOW",
+          "property": "__count__categorias"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "LECTOR",
+          "permission": "ALLOW",
+          "property": "__findById__categorias"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "LECTOR",
+          "permission": "ALLOW",
+          "property": "__get__categorias"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ESCRITOR",
+          "permission": "ALLOW",
+          "property": "__create__categorias"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ESCRITOR",
+          "permission": "ALLOW",
+          "property": "__delete__categorias"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ESCRITOR",
+          "permission": "ALLOW",
+          "property": "__destroyById__categorias"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ESCRITOR",
+          "permission": "ALLOW",
+          "property": "__updateById__categorias"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ADMIN",
+          "permission": "ALLOW",
+          "property": "__count__subcategorias"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ADMIN",
+          "permission": "ALLOW",
+          "property": "__create__subcategorias"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ADMIN",
+          "permission": "ALLOW",
+          "property": "__delete__subcategorias"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ADMIN",
+          "permission": "ALLOW",
+          "property": "__destroyById__subcategorias"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ADMIN",
+          "permission": "ALLOW",
+          "property": "__findById__subcategorias"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ADMIN",
+          "permission": "ALLOW",
+          "property": "__get__subcategorias"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ADMIN",
+          "permission": "ALLOW",
+          "property": "__updateById__subcategorias"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "SUPERADMIN",
+          "permission": "ALLOW",
+          "property": "__count__subcategorias"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "SUPERADMIN",
+          "permission": "ALLOW",
+          "property": "__create__subcategorias"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "SUPERADMIN",
+          "permission": "ALLOW",
+          "property": "__delete__subcategorias"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "SUPERADMIN",
+          "permission": "ALLOW",
+          "property": "__destroyById__subcategorias"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "SUPERADMIN",
+          "permission": "ALLOW",
+          "property": "__findById__subcategorias"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "SUPERADMIN",
+          "permission": "ALLOW",
+          "property": "__get__subcategorias"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "SUPERADMIN",
+          "permission": "ALLOW",
+          "property": "__updateById__subcategorias"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "LECTOR",
+          "permission": "ALLOW",
+          "property": "__count__subcategorias"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "LECTOR",
+          "permission": "ALLOW",
+          "property": "__findById__subcategorias"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "LECTOR",
+          "permission": "ALLOW",
+          "property": "__get__subcategorias"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ESCRITOR",
+          "permission": "ALLOW",
+          "property": "__create__subcategorias"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ESCRITOR",
+          "permission": "ALLOW",
+          "property": "__delete__subcategorias"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ESCRITOR",
+          "permission": "ALLOW",
+          "property": "__destroyById__subcategorias"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ESCRITOR",
+          "permission": "ALLOW",
+          "property": "__updateById__subcategorias"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ADMIN",
+          "permission": "ALLOW",
+          "property": "__count__customers"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ADMIN",
+          "permission": "ALLOW",
+          "property": "__create__customers"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ADMIN",
+          "permission": "ALLOW",
+          "property": "__delete__customers"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ADMIN",
+          "permission": "ALLOW",
+          "property": "__destroyById__customers"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ADMIN",
+          "permission": "ALLOW",
+          "property": "__findById__customers"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ADMIN",
+          "permission": "ALLOW",
+          "property": "__get__customers"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ADMIN",
+          "permission": "ALLOW",
+          "property": "__updateById__customers"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "SUPERADMIN",
+          "permission": "ALLOW",
+          "property": "__count__customers"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "SUPERADMIN",
+          "permission": "ALLOW",
+          "property": "__create__customers"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "SUPERADMIN",
+          "permission": "ALLOW",
+          "property": "__delete__customers"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "SUPERADMIN",
+          "permission": "ALLOW",
+          "property": "__destroyById__customers"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "SUPERADMIN",
+          "permission": "ALLOW",
+          "property": "__findById__customers"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "SUPERADMIN",
+          "permission": "ALLOW",
+          "property": "__get__customers"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "SUPERADMIN",
+          "permission": "ALLOW",
+          "property": "__updateById__customers"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "LECTOR",
+          "permission": "ALLOW",
+          "property": "__count__customers"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "LECTOR",
+          "permission": "ALLOW",
+          "property": "__findById__customers"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "LECTOR",
+          "permission": "ALLOW",
+          "property": "__get__customers"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ESCRITOR",
+          "permission": "ALLOW",
+          "property": "__create__customers"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ESCRITOR",
+          "permission": "ALLOW",
+          "property": "__delete__customers"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ESCRITOR",
+          "permission": "ALLOW",
+          "property": "__destroyById__customers"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ESCRITOR",
+          "permission": "ALLOW",
+          "property": "__updateById__customers"
+      }
   ],
   "methods": []
 }
