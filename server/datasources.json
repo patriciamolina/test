@@ -6,7 +6,7 @@
   "INFOGEO": {
     "host": "localhost",
     "port": 3333,
-    "database": "infogeo",
+    "database": "infogeodev",
     "password": "",
     "name": "INFOGEO",
     "user": "root",
@@ -15,7 +15,7 @@
   "INFOSESION": {
     "host": "localhost",
     "port": 3333,
-    "database": "infosesion",
+    "database": "infosesiondev",
     "password": "",
     "name": "INFOSESION",
     "user": "root",

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost:3333
--- Tiempo de generación: 20-12-2014 a las 21:44:13
+-- Tiempo de generación: 05-01-2015 a las 03:51:07
 -- Versión del servidor: 5.5.24-log
 -- Versión de PHP: 5.4.3
 
@@ -19,6 +19,26 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `infogeo`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `atajo_mapa`
+--
+
+DROP TABLE IF EXISTS `atajo_mapa`;
+CREATE TABLE IF NOT EXISTS `atajo_mapa` (
+  `idatajo` int(11) NOT NULL AUTO_INCREMENT,
+  `idCliente` int(11) NOT NULL,
+  `latNorte` float NOT NULL,
+  `lngOeste` float NOT NULL,
+  `latSur` float NOT NULL,
+  `lngEste` float NOT NULL,
+  `nombre` varchar(150) NOT NULL,
+  `zoom` int(11) NOT NULL,
+  PRIMARY KEY (`idatajo`),
+  KEY `fk_atajo_mapa_Cliente1_idx` (`idCliente`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -78,20 +98,22 @@ CREATE TABLE IF NOT EXISTS `audio_tiene_texto` (
 DROP TABLE IF EXISTS `categoria`;
 CREATE TABLE IF NOT EXISTS `categoria` (
   `idCategoria` int(11) NOT NULL AUTO_INCREMENT,
+  `idCliente` int(11) NOT NULL,
   `nombre` varchar(450) NOT NULL,
   `nombreicono` varchar(450) NOT NULL,
   `iconox` int(11) NOT NULL,
   `iconoy` int(11) NOT NULL,
   `color` varchar(45) NOT NULL,
-  PRIMARY KEY (`idCategoria`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
+  PRIMARY KEY (`idCategoria`),
+  KEY `fk_Categoria_Cliente1_idx` (`idCliente`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
 -- Volcado de datos para la tabla `categoria`
 --
 
-INSERT INTO `categoria` (`idCategoria`, `nombre`, `nombreicono`, `iconox`, `iconoy`, `color`) VALUES
-(1, 'atractivos turísticos', 'atractivos', 182, 34, '0x3E7493');
+INSERT INTO `categoria` (`idCategoria`, `idCliente`, `nombre`, `nombreicono`, `iconox`, `iconoy`, `color`) VALUES
+(1, 1, 'atractivos turísticos', 'atractivos', 182, 34, '0x3E7493');
 
 -- --------------------------------------------------------
 
@@ -131,7 +153,7 @@ CREATE TABLE IF NOT EXISTS `cliente` (
   `fechaInicioSuscripcion` date NOT NULL,
   `fechaFinSuscripcion` date NOT NULL,
   PRIMARY KEY (`idCliente`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
 -- Volcado de datos para la tabla `cliente`
@@ -197,7 +219,7 @@ CREATE TABLE IF NOT EXISTS `destino` (
   PRIMARY KEY (`idDestino`),
   KEY `fk_Destino_Cliente1_idx` (`idCliente`),
   KEY `fk_Destino_EstadoDestino1_idx` (`idEstadoDestino`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1205 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Disparadores `destino`
@@ -218,11 +240,6 @@ CREATE TRIGGER `destino_BUPD` BEFORE UPDATE ON `destino`
 End
 //
 DELIMITER ;
-
---
--- Volcado de datos para la tabla `destino`
---
-
 
 -- --------------------------------------------------------
 
@@ -256,11 +273,6 @@ CREATE TABLE IF NOT EXISTS `destino_tiene_texto` (
   KEY `fk_Destino_tiene_Texto_Texto1_idx` (`idTexto`),
   KEY `fk_Destino_tiene_Texto_TipoTexto1_idx` (`idTipoTexto`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `destino_tiene_texto`
---
-
 
 -- --------------------------------------------------------
 
@@ -297,11 +309,8 @@ CREATE TABLE IF NOT EXISTS `imagen` (
   `idDestino` int(11) NOT NULL,
   PRIMARY KEY (`idImagenes`),
   KEY `fk_imagen_destino1_idx` (`idDestino`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=282 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
---
--- Volcado de datos para la tabla `imagen`
---
 
 -- --------------------------------------------------------
 
@@ -351,47 +360,49 @@ DROP TABLE IF EXISTS `subcategoria`;
 CREATE TABLE IF NOT EXISTS `subcategoria` (
   `idSubCategoria` int(11) NOT NULL AUTO_INCREMENT,
   `idCategoria` int(11) NOT NULL,
+  `idCliente` int(11) NOT NULL,
   `nombre` varchar(450) NOT NULL,
   `nombreicono` varchar(450) NOT NULL,
   `iconox` int(11) NOT NULL,
   `iconoy` int(11) NOT NULL,
-  `color` varchar(8) NOT NULL DEFAULT '0xAAAAAA',
+  `color` varchar(8) NOT NULL,
   PRIMARY KEY (`idSubCategoria`),
-  KEY `fk_SubCategoria_Categoria1_idx` (`idCategoria`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=78 ;
+  KEY `fk_SubCategoria_Categoria1_idx` (`idCategoria`),
+  KEY `fk_SubCategoria_Cliente1_idx` (`idCliente`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=28 ;
 
 --
 -- Volcado de datos para la tabla `subcategoria`
 --
 
-INSERT INTO `subcategoria` (`idSubCategoria`, `idCategoria`, `nombre`, `nombreicono`, `iconox`, `iconoy`, `color`) VALUES
-(1, 1, 'área silvestre protegida o reserva de flora y fauna', 'reserva', 0, 0, '0xD22E2E'),
-(2, 1, 'arquitectura popular espontánea', 'arquitectura', 26, 0, '0xBB455F'),
-(3, 1, 'artesanía o arte', 'artesania', 52, 0, '0xC1CF67'),
-(4, 1, 'artístico', 'artistico', 78, 0, '0x448262'),
-(5, 1, 'caída de agua', 'caidadeagua', 104, 0, '0x8FC9F8'),
-(6, 1, 'camino pintoresco', 'caminopintoresco', 130, 0, '0xE36453'),
-(7, 1, 'centro científico', 'centrocientifico', 156, 0, '0x00C4F7'),
-(8, 1, 'costa', 'costa', 182, 0, '0x005374'),
-(9, 1, 'deportivo', 'deporte', 208, 0, '0xE36453'),
-(10, 1, 'evento misceláneo', 'evento', 234, 0, '0x27C1B9'),
-(11, 1, 'feria o mercado', 'feria', 260, 0, '0xE1BA3E'),
-(12, 1, 'grupo étnico', 'grupoetnico', 286, 0, '0xFF8964'),
-(13, 1, 'gruta o caverna', 'gruta', 312, 0, '0xE47272'),
-(14, 1, 'lago, laguna o humedal', 'lago', 338, 0, '0x4389FF'),
-(15, 1, 'lugar de observación de flora y fauna', 'observacion', 364, 0, '0x778F9B'),
-(16, 1, 'lugar histórico', 'historia', 390, 0, '0x445963'),
-(17, 1, 'lugar interés geológico o paleontológico', 'geologia', 416, 0, '0xA0877E'),
-(18, 1, 'manifestación religiosa o creencia popular', 'religion', 442, 0, '0x81B0FF'),
-(19, 1, 'montaña', 'montaña', 468, 0, '0x8C6D62'),
-(20, 1, 'museo', 'museo', 494, 0, '0xBCBCBC'),
-(21, 1, 'música y/o danzas', 'musica', 520, 0, '0xB967C7'),
-(22, 1, 'obra de arte o técnica', 'obradearte', 546, 0, '0x976DB5'),
-(23, 1, 'parque de recreación', 'parque', 0, 34, '0x65BA69'),
-(24, 1, 'planicie', 'planicie', 26, 34, '0x9BCB64'),
-(25, 1, 'río o estero', 'rio', 52, 34, '0x28B5F5'),
-(26, 1, 'ruina o lugar arqueológico', 'ruina', 78, 34, '0xBBA9A3'),
-(27, 1, 'termas', 'terma', 104, 34, '0x7FD7FF');
+INSERT INTO `subcategoria` (`idSubCategoria`, `idCategoria`, `idCliente`, `nombre`, `nombreicono`, `iconox`, `iconoy`, `color`) VALUES
+(1, 1, 1, 'área silvestre protegida o reserva de flora y fauna', 'reserva', 0, 0, '0xD22E2E'),
+(2, 1, 1, 'arquitectura popular espontánea', 'arquitectura', 26, 0, '0xBB455F'),
+(3, 1, 1, 'artesanía o arte', 'artesania', 52, 0, '0xC1CF67'),
+(4, 1, 1, 'artístico', 'artistico', 78, 0, '0x448262'),
+(5, 1, 1, 'caída de agua', 'caidadeagua', 104, 0, '0x8FC9F8'),
+(6, 1, 1, 'camino pintoresco', 'caminopintoresco', 130, 0, '0xE36453'),
+(7, 1, 1, 'centro científico', 'centrocientifico', 156, 0, '0x00C4F7'),
+(8, 1, 1, 'costa', 'costa', 182, 0, '0x005374'),
+(9, 1, 1, 'deportivo', 'deporte', 208, 0, '0xE36453'),
+(10, 1, 1, 'evento misceláneo', 'evento', 234, 0, '0x27C1B9'),
+(11, 1, 1, 'feria o mercado', 'feria', 260, 0, '0xE1BA3E'),
+(12, 1, 1, 'grupo étnico', 'grupoetnico', 286, 0, '0xFF8964'),
+(13, 1, 1, 'gruta o caverna', 'gruta', 312, 0, '0xE47272'),
+(14, 1, 1, 'lago, laguna o humedal', 'lago', 338, 0, '0x4389FF'),
+(15, 1, 1, 'lugar de observación de flora y fauna', 'observacion', 364, 0, '0x778F9B'),
+(16, 1, 1, 'lugar histórico', 'historia', 390, 0, '0x445963'),
+(17, 1, 1, 'lugar interés geológico o paleontológico', 'geologia', 416, 0, '0xA0877E'),
+(18, 1, 1, 'manifestación religiosa o creencia popular', 'religion', 442, 0, '0x81B0FF'),
+(19, 1, 1, 'montaña', 'montaña', 468, 0, '0x8C6D62'),
+(20, 1, 1, 'museo', 'museo', 494, 0, '0xBCBCBC'),
+(21, 1, 1, 'música y/o danzas', 'musica', 520, 0, '0xB967C7'),
+(22, 1, 1, 'obra de arte o técnica', 'obradearte', 546, 0, '0x976DB5'),
+(23, 1, 1, 'parque de recreación', 'parque', 0, 34, '0x65BA69'),
+(24, 1, 1, 'planicie', 'planicie', 26, 34, '0x9BCB64'),
+(25, 1, 1, 'río o estero', 'rio', 52, 34, '0x28B5F5'),
+(26, 1, 1, 'ruina o lugar arqueológico', 'ruina', 78, 34, '0xBBA9A3'),
+(27, 1, 1, 'termas', 'terma', 104, 34, '0x7FD7FF');
 
 -- --------------------------------------------------------
 
@@ -407,10 +418,6 @@ CREATE TABLE IF NOT EXISTS `subcategoria_tiene_destino` (
   KEY `fk_SubCategoria_tiene_Destino_Destino1_idx` (`idDestino`),
   KEY `fk_SubCategoria_tiene_Destino_SubCategoria1_idx` (`idSubCategoria`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `subcategoria_tiene_destino`
---
 
 -- --------------------------------------------------------
 
@@ -475,7 +482,7 @@ CREATE TABLE IF NOT EXISTS `texto` (
   `texto` text NOT NULL,
   PRIMARY KEY (`idTexto`),
   KEY `fk_Texto_Lenguaje1_idx` (`idLenguaje`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4663 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=29 ;
 
 --
 -- Volcado de datos para la tabla `texto`
@@ -578,6 +585,12 @@ CREATE TABLE IF NOT EXISTS `video_tiene_texto` (
 --
 
 --
+-- Filtros para la tabla `atajo_mapa`
+--
+ALTER TABLE `atajo_mapa`
+  ADD CONSTRAINT `fk_atajo_mapa_Cliente1` FOREIGN KEY (`idCliente`) REFERENCES `cliente`  (`idCliente`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
 -- Filtros para la tabla `audio`
 --
 ALTER TABLE `audio`
@@ -598,6 +611,12 @@ ALTER TABLE `audio_tiene_texto`
   ADD CONSTRAINT `fk_Audio_has_Texto_Audio1` FOREIGN KEY (`idAudio`) REFERENCES `audio` (`idAudio`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_Audio_has_Texto_Texto1` FOREIGN KEY (`idTexto`) REFERENCES `texto` (`idTexto`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_Audio_tiene_Texto_TipoTexto1` FOREIGN KEY (`idTipoTexto`) REFERENCES `tipotexto` (`idTipoTexto`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `categoria`
+--
+ALTER TABLE `categoria`
+  ADD CONSTRAINT `fk_Categoria_Cliente1` FOREIGN KEY (`idCliente`) REFERENCES `cliente` (`idCliente`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `categoria_tiene_texto`
@@ -661,6 +680,7 @@ ALTER TABLE `imagen_tiene_texto`
 -- Filtros para la tabla `subcategoria`
 --
 ALTER TABLE `subcategoria`
+  ADD CONSTRAINT `fk_SubCategoria_Cliente1` FOREIGN KEY (`idCliente`) REFERENCES `cliente` (`idCliente`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_SubCategoria_Categoria1` FOREIGN KEY (`idCategoria`) REFERENCES `categoria` (`idCategoria`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
@@ -698,6 +718,5 @@ ALTER TABLE `video_tiene_texto`
   ADD CONSTRAINT `fk_Video_has_Texto_Video1` FOREIGN KEY (`idVideo`) REFERENCES `video` (`idVideo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_Video_tiene_Texto_TipoTexto1` FOREIGN KEY (`idTipoTexto`) REFERENCES `tipotexto` (`idTipoTexto`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
