@@ -1,4 +1,5 @@
-var cors = require('cors');
+var cors = require('cors')
+    ,   dns = require('dns');
 
 module.exports = function(app) {
   var router = app.loopback.Router();
@@ -32,6 +33,11 @@ module.exports = function(app) {
             res.write(JSON.stringify(respjson));
             res.write
             res.end();
+            dns.lookup(req.headers.origin.replace("http://",""), function onLookup(err, addresses, family) {
+                console.log('err:', err);
+                console.log('addresses:', addresses);
+                console.log('family:', family);
+            });
         });
   });
 
