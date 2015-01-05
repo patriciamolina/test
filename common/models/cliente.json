@@ -107,6 +107,11 @@
           "type": "hasMany",
           "model": "Customer",
           "foreignKey": "idcliente"
+      },
+      "atajos": {
+          "type": "hasMany",
+          "model": "Atajomapa",
+          "foreignKey": "idcliente"
       }
   },
   "acls": [
@@ -645,6 +650,132 @@
           "principalId": "ESCRITOR",
           "permission": "ALLOW",
           "property": "__updateById__customers"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ADMIN",
+          "permission": "ALLOW",
+          "property": "__count__atajos"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ADMIN",
+          "permission": "ALLOW",
+          "property": "__create__atajos"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ADMIN",
+          "permission": "ALLOW",
+          "property": "__delete__atajos"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ADMIN",
+          "permission": "ALLOW",
+          "property": "__destroyById__atajos"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ADMIN",
+          "permission": "ALLOW",
+          "property": "__findById__atajos"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ADMIN",
+          "permission": "ALLOW",
+          "property": "__get__atajos"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ADMIN",
+          "permission": "ALLOW",
+          "property": "__updateById__atajos"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "SUPERADMIN",
+          "permission": "ALLOW",
+          "property": "__count__atajos"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "SUPERADMIN",
+          "permission": "ALLOW",
+          "property": "__create__atajos"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "SUPERADMIN",
+          "permission": "ALLOW",
+          "property": "__delete__atajos"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "SUPERADMIN",
+          "permission": "ALLOW",
+          "property": "__destroyById__atajos"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "SUPERADMIN",
+          "permission": "ALLOW",
+          "property": "__findById__atajos"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "SUPERADMIN",
+          "permission": "ALLOW",
+          "property": "__get__atajos"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "SUPERADMIN",
+          "permission": "ALLOW",
+          "property": "__updateById__atajos"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "LECTOR",
+          "permission": "ALLOW",
+          "property": "__count__atajos"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "LECTOR",
+          "permission": "ALLOW",
+          "property": "__findById__atajos"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "LECTOR",
+          "permission": "ALLOW",
+          "property": "__get__atajos"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ESCRITOR",
+          "permission": "ALLOW",
+          "property": "__create__atajos"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ESCRITOR",
+          "permission": "ALLOW",
+          "property": "__delete__atajos"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ESCRITOR",
+          "permission": "ALLOW",
+          "property": "__destroyById__atajos"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ESCRITOR",
+          "permission": "ALLOW",
+          "property": "__updateById__atajos"
       }
   ],
   "methods": []

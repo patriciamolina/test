@@ -37,6 +37,10 @@
         "dataSource": "storage",
         "public": true
     },
+    "Atajomapa": {
+        "dataSource": "INFOGEO",
+        "public": true
+    },
   "Audio": {
     "dataSource": "INFOGEO",
     "public": true
