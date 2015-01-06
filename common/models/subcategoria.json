@@ -13,13 +13,13 @@
       "id": true,
       "required": false,
       "length": null,
-      "precision": 10,
+      "precision": 11,
       "scale": 0,
       "mysql": {
         "columnName": "idSubCategoria",
         "dataType": "int",
         "dataLength": null,
-        "dataPrecision": 10,
+        "dataPrecision": 11,
         "dataScale": 0,
         "nullable": "NO"
       }
@@ -29,13 +29,13 @@
       "id": true,
       "required": true,
       "length": null,
-      "precision": 10,
+      "precision": 11,
       "scale": 0,
       "mysql": {
         "columnName": "idCategoria",
         "dataType": "int",
         "dataLength": null,
-        "dataPrecision": 10,
+        "dataPrecision": 11,
         "dataScale": 0,
         "nullable": "NO"
       }
@@ -44,13 +44,13 @@
           "type": "Number",
           "required": true,
           "length": null,
-          "precision": 10,
+          "precision": 11,
           "scale": 0,
           "mysql": {
               "columnName": "idCliente",
               "dataType": "int",
               "dataLength": null,
-              "dataPrecision": 10,
+              "dataPrecision": 11,
               "dataScale": 0,
               "nullable": "NO"
           }
@@ -90,13 +90,13 @@
           "id": true,
           "required": true,
           "length": null,
-          "precision": 10,
+          "precision": 11,
           "scale": 0,
           "mysql": {
               "columnName": "iconox",
               "dataType": "int",
               "dataLength": null,
-              "dataPrecision": 10,
+              "dataPrecision": 11,
               "dataScale": 0,
               "nullable": "NO"
           }
@@ -106,13 +106,13 @@
           "id": true,
           "required": true,
           "length": null,
-          "precision": 10,
+          "precision": 11,
           "scale": 0,
           "mysql": {
               "columnName": "iconoy",
               "dataType": "int",
               "dataLength": null,
-              "dataPrecision": 10,
+              "dataPrecision": 11,
               "dataScale": 0,
               "nullable": "NO"
           }
@@ -121,13 +121,13 @@
           "type": "String",
           "id": false,
           "required": true,
-          "length": 135,
+          "length": 22,
           "precision": null,
           "scale": null,
           "mysql": {
               "columnName": "color",
               "dataType": "varchar",
-              "dataLength": 135,
+              "dataLength": 22,
               "dataPrecision": null,
               "dataScale": null,
               "nullable": "NO"

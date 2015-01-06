@@ -105,13 +105,13 @@
       "type": "String",
       "id": false,
       "required": true,
-      "length": 135,
+      "length": 22,
       "precision": null,
       "scale": null,
       "mysql": {
         "columnName": "color",
         "dataType": "varchar",
-        "dataLength": 135,
+        "dataLength": 22,
         "dataPrecision": null,
         "dataScale": null,
         "nullable": "NO"

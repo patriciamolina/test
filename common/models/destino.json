@@ -16,13 +16,13 @@
       "id": true,
       "required": false,
       "length": null,
-      "precision": 10,
+      "precision": 11,
       "scale": 0,
       "mysql": {
         "columnName": "idDestino",
         "dataType": "int",
         "dataLength": null,
-        "dataPrecision": 10,
+        "dataPrecision": 11,
         "dataScale": 0,
         "nullable": "NO"
       }
@@ -31,13 +31,13 @@
       "type": "Number",
       "required": true,
       "length": null,
-      "precision": 10,
+      "precision": 11,
       "scale": 0,
       "mysql": {
         "columnName": "idEstadoDestino",
         "dataType": "int",
         "dataLength": null,
-        "dataPrecision": 10,
+        "dataPrecision": 11,
         "dataScale": 0,
         "nullable": "NO"
       }
@@ -46,13 +46,13 @@
       "type": "Number",
       "required": true,
       "length": null,
-      "precision": 10,
+      "precision": 11,
       "scale": 0,
       "mysql": {
         "columnName": "idCliente",
         "dataType": "int",
         "dataLength": null,
-        "dataPrecision": 10,
+        "dataPrecision": 11,
         "dataScale": 0,
         "nullable": "NO"
       }
@@ -76,13 +76,13 @@
           "id": true,
           "required": true,
           "length": null,
-          "precision": 10,
+          "precision": 11,
           "scale": 0,
           "mysql": {
               "columnName": "iconox",
               "dataType": "int",
               "dataLength": null,
-              "dataPrecision": 10,
+              "dataPrecision": 11,
               "dataScale": 0,
               "nullable": "NO"
           }
@@ -92,13 +92,13 @@
           "id": true,
           "required": true,
           "length": null,
-          "precision": 10,
+          "precision": 11,
           "scale": 0,
           "mysql": {
               "columnName": "iconoy",
               "dataType": "int",
               "dataLength": null,
-              "dataPrecision": 10,
+              "dataPrecision": 11,
               "dataScale": 0,
               "nullable": "NO"
           }
@@ -107,13 +107,13 @@
       "type": "String",
       "id": false,
       "required": true,
-      "length": 24,
+      "length": 22,
       "precision": null,
       "scale": null,
       "mysql": {
         "columnName": "color",
         "dataType": "varchar",
-        "dataLength": 24,
+        "dataLength": 22,
         "dataPrecision": null,
         "dataScale": null,
         "nullable": "NO"
@@ -137,13 +137,13 @@
     "nombre": {
       "type": "String",
       "required": true,
-      "length": 450,
+      "length": 150,
       "precision": null,
       "scale": null,
       "mysql": {
         "columnName": "nombre",
         "dataType": "varchar",
-        "dataLength": 450,
+        "dataLength": 150,
         "dataPrecision": null,
         "dataScale": null,
         "nullable": "NO"
@@ -152,13 +152,13 @@
     "tipogeometria": {
       "type": "String",
       "required": true,
-      "length": 1500,
+      "length": 500,
       "precision": null,
       "scale": null,
       "mysql": {
         "columnName": "tipoGeometria",
         "dataType": "varchar",
-        "dataLength": 1500,
+        "dataLength": 500,
         "dataPrecision": null,
         "dataScale": null,
         "nullable": "NO"
@@ -200,13 +200,13 @@
       "rutabiblioteca": {
           "type": "String",
           "required": true,
-          "length": 1500,
+          "length": 500,
           "precision": null,
           "scale": null,
           "mysql": {
               "columnName": "rutabiblioteca",
               "dataType": "varchar",
-              "dataLength": 1500,
+              "dataLength": 500,
               "dataPrecision": null,
               "dataScale": null,
               "nullable": "NO"

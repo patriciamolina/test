@@ -103,7 +103,7 @@ CREATE TABLE IF NOT EXISTS `categoria` (
   `nombreicono` varchar(450) NOT NULL,
   `iconox` int(11) NOT NULL,
   `iconoy` int(11) NOT NULL,
-  `color` varchar(45) NOT NULL,
+  `color` varchar(22) NOT NULL DEFAULT 'rgba(170, 170, 170, 1)',
   PRIMARY KEY (`idCategoria`),
   KEY `fk_Categoria_Cliente1_idx` (`idCliente`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
@@ -113,7 +113,7 @@ CREATE TABLE IF NOT EXISTS `categoria` (
 --
 
 INSERT INTO `categoria` (`idCategoria`, `idCliente`, `nombre`, `nombreicono`, `iconox`, `iconoy`, `color`) VALUES
-(1, 1, 'atractivos turísticos', 'atractivos', 182, 34, '0x3E7493');
+(1, 1, 'atractivos turísticos', 'atractivos', 182, 34, 'rgba(62, 116, 147, 1)');
 
 -- --------------------------------------------------------
 
@@ -210,7 +210,7 @@ CREATE TABLE IF NOT EXISTS `destino` (
   `iconox` int(11) NOT NULL,
   `nombreicono` varchar(450) NOT NULL,
   `iconoy` int(11) NOT NULL,
-  `color` varchar(8) NOT NULL DEFAULT '0xAAAAAA',
+  `color` varchar(22) NOT NULL DEFAULT 'rgba(170, 170, 170, 1)',
   `tienePanel` tinyint(1) NOT NULL DEFAULT '0',
   `nombre` varchar(150) NOT NULL,
   `tipoGeometria` varchar(500) NOT NULL,
@@ -365,7 +365,7 @@ CREATE TABLE IF NOT EXISTS `subcategoria` (
   `nombreicono` varchar(450) NOT NULL,
   `iconox` int(11) NOT NULL,
   `iconoy` int(11) NOT NULL,
-  `color` varchar(8) NOT NULL,
+  `color` varchar(22) NOT NULL DEFAULT 'rgba(170, 170, 170, 1)',
   PRIMARY KEY (`idSubCategoria`),
   KEY `fk_SubCategoria_Categoria1_idx` (`idCategoria`),
   KEY `fk_SubCategoria_Cliente1_idx` (`idCliente`)
@@ -376,33 +376,33 @@ CREATE TABLE IF NOT EXISTS `subcategoria` (
 --
 
 INSERT INTO `subcategoria` (`idSubCategoria`, `idCategoria`, `idCliente`, `nombre`, `nombreicono`, `iconox`, `iconoy`, `color`) VALUES
-(1, 1, 1, 'área silvestre protegida o reserva de flora y fauna', 'reserva', 0, 0, '0xD22E2E'),
-(2, 1, 1, 'arquitectura popular espontánea', 'arquitectura', 26, 0, '0xBB455F'),
-(3, 1, 1, 'artesanía o arte', 'artesania', 52, 0, '0xC1CF67'),
-(4, 1, 1, 'artístico', 'artistico', 78, 0, '0x448262'),
-(5, 1, 1, 'caída de agua', 'caidadeagua', 104, 0, '0x8FC9F8'),
-(6, 1, 1, 'camino pintoresco', 'caminopintoresco', 130, 0, '0xE36453'),
-(7, 1, 1, 'centro científico', 'centrocientifico', 156, 0, '0x00C4F7'),
-(8, 1, 1, 'costa', 'costa', 182, 0, '0x005374'),
-(9, 1, 1, 'deportivo', 'deporte', 208, 0, '0xE36453'),
-(10, 1, 1, 'evento misceláneo', 'evento', 234, 0, '0x27C1B9'),
-(11, 1, 1, 'feria o mercado', 'feria', 260, 0, '0xE1BA3E'),
-(12, 1, 1, 'grupo étnico', 'grupoetnico', 286, 0, '0xFF8964'),
-(13, 1, 1, 'gruta o caverna', 'gruta', 312, 0, '0xE47272'),
-(14, 1, 1, 'lago, laguna o humedal', 'lago', 338, 0, '0x4389FF'),
-(15, 1, 1, 'lugar de observación de flora y fauna', 'observacion', 364, 0, '0x778F9B'),
-(16, 1, 1, 'lugar histórico', 'historia', 390, 0, '0x445963'),
-(17, 1, 1, 'lugar interés geológico o paleontológico', 'geologia', 416, 0, '0xA0877E'),
-(18, 1, 1, 'manifestación religiosa o creencia popular', 'religion', 442, 0, '0x81B0FF'),
-(19, 1, 1, 'montaña', 'montaña', 468, 0, '0x8C6D62'),
-(20, 1, 1, 'museo', 'museo', 494, 0, '0xBCBCBC'),
-(21, 1, 1, 'música y/o danzas', 'musica', 520, 0, '0xB967C7'),
-(22, 1, 1, 'obra de arte o técnica', 'obradearte', 546, 0, '0x976DB5'),
-(23, 1, 1, 'parque de recreación', 'parque', 0, 34, '0x65BA69'),
-(24, 1, 1, 'planicie', 'planicie', 26, 34, '0x9BCB64'),
-(25, 1, 1, 'río o estero', 'rio', 52, 34, '0x28B5F5'),
-(26, 1, 1, 'ruina o lugar arqueológico', 'ruina', 78, 34, '0xBBA9A3'),
-(27, 1, 1, 'termas', 'terma', 104, 34, '0x7FD7FF');
+(1, 1, 1, 'área silvestre protegida o reserva de flora y fauna', 'reserva', 0, 0, 'rgba(210, 46, 46, 1)'),
+(2, 1, 1, 'arquitectura popular espontánea', 'arquitectura', 26, 0, 'rgba(187, 69, 95, 1)'),
+(3, 1, 1, 'artesanía o arte', 'artesania', 52, 0, 'rgba(193, 207, 103, 1)'),
+(4, 1, 1, 'artístico', 'artistico', 78, 0, 'rgba(68, 130, 98, 1)'),
+(5, 1, 1, 'caída de agua', 'caidadeagua', 104, 0, 'rgba(143, 201, 248, 1)'),
+(6, 1, 1, 'camino pintoresco', 'caminopintoresco', 130, 0, 'rgba(227, 100, 83, 1)'),
+(7, 1, 1, 'centro científico', 'centrocientifico', 156, 0, 'rgba(0, 196, 247, 1)'),
+(8, 1, 1, 'costa', 'costa', 182, 0, 'rgba(0, 83, 116, 1)'),
+(9, 1, 1, 'deportivo', 'deporte', 208, 0, 'rgba(227, 100, 83, 1)'),
+(10, 1, 1, 'evento misceláneo', 'evento', 234, 0, 'rgba(39, 193, 185, 1)'),
+(11, 1, 1, 'feria o mercado', 'feria', 260, 0, 'rgba(225, 186, 62, 1)'),
+(12, 1, 1, 'grupo étnico', 'grupoetnico', 286, 0, 'rgba(255, 137, 100, 1)'),
+(13, 1, 1, 'gruta o caverna', 'gruta', 312, 0, 'rgba(228, 114, 114, 1)'),
+(14, 1, 1, 'lago, laguna o humedal', 'lago', 338, 0, 'rgba(67, 137, 255, 1)'),
+(15, 1, 1, 'lugar de observación de flora y fauna', 'observacion', 364, 0, 'rgba(119, 143, 155, 1)'),
+(16, 1, 1, 'lugar histórico', 'historia', 390, 0, 'rgba(68, 89, 99, 1)'),
+(17, 1, 1, 'lugar interés geológico o paleontológico', 'geologia', 416, 0, 'rgba(160, 135, 126, 1)'),
+(18, 1, 1, 'manifestación religiosa o creencia popular', 'religion', 442, 0, 'rgba(129, 176, 255, 1)'),
+(19, 1, 1, 'montaña', 'montaña', 468, 0, 'rgba(140, 109, 98, 1)'),
+(20, 1, 1, 'museo', 'museo', 494, 0, 'rgba(188, 188, 188, 1)'),
+(21, 1, 1, 'música y/o danzas', 'musica', 520, 0, 'rgba(185, 103, 199, 1)'),
+(22, 1, 1, 'obra de arte o técnica', 'obradearte', 546, 0, 'rgba(151, 109, 181, 1)'),
+(23, 1, 1, 'parque de recreación', 'parque', 0, 34, 'rgba(101, 186, 105, 1)'),
+(24, 1, 1, 'planicie', 'planicie', 26, 34, 'rgba(155, 203, 100, 1)'),
+(25, 1, 1, 'río o estero', 'rio', 52, 34, 'rgba(40, 181, 245, 1)'),
+(26, 1, 1, 'ruina o lugar arqueológico', 'ruina', 78, 34, 'rgba(187, 169, 163, 1)'),
+(27, 1, 1, 'termas', 'terma', 104, 34, 'rgba(127, 215, 255, 1)');
 
 -- --------------------------------------------------------
 

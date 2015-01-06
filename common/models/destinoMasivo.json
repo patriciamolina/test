@@ -5,17 +5,17 @@
       "CATEGORIA": {
           "required": true,
           "type": "string",
-          "length": 150
+          "length": 450
       },
       "SUBCATEGORIA": {
           "required": true,
           "type": "string",
-          "length": 150
+          "length": 450
       },
       "NOMBRE": {
           "required": true,
           "type": "string",
-          "length": 150
+          "length": 450
       },
       "TEXTOS": {
           "type": "object",

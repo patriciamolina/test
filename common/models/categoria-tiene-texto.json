@@ -14,13 +14,13 @@
       "id": true,
       "required": true,
       "length": null,
-      "precision": 10,
+      "precision": 11,
       "scale": 0,
       "mysql": {
         "columnName": "idCategoria",
         "dataType": "int",
         "dataLength": null,
-        "dataPrecision": 10,
+        "dataPrecision": 11,
         "dataScale": 0,
         "nullable": "NO"
       }
@@ -30,13 +30,13 @@
       "id": true,
       "required": true,
       "length": null,
-      "precision": 10,
+      "precision": 11,
       "scale": 0,
       "mysql": {
         "columnName": "idTexto",
         "dataType": "int",
         "dataLength": null,
-        "dataPrecision": 10,
+        "dataPrecision": 11,
         "dataScale": 0,
         "nullable": "NO"
       }
@@ -46,13 +46,13 @@
       "id": true,
       "required": true,
       "length": null,
-      "precision": 10,
+      "precision": 11,
       "scale": 0,
       "mysql": {
         "columnName": "idTipoTexto",
         "dataType": "int",
         "dataLength": null,
-        "dataPrecision": 10,
+        "dataPrecision": 11,
         "dataScale": 0,
         "nullable": "NO"
       }

@@ -16,13 +16,13 @@
             "id": true,
             "required": false,
             "length": null,
-            "precision": 10,
+            "precision": 11,
             "scale": 0,
             "mysql": {
                 "columnName": "idatajo",
                 "dataType": "int",
                 "dataLength": null,
-                "dataPrecision": 10,
+                "dataPrecision": 11,
                 "dataScale": 0,
                 "nullable": "NO"
             }
@@ -31,13 +31,13 @@
             "type": "Number",
             "required": true,
             "length": null,
-            "precision": 10,
+            "precision": 11,
             "scale": 0,
             "mysql": {
                 "columnName": "idCliente",
                 "dataType": "int",
                 "dataLength": null,
-                "dataPrecision": 10,
+                "dataPrecision": 11,
                 "dataScale": 0,
                 "nullable": "NO"
             }
@@ -105,13 +105,13 @@
         "nombre": {
             "type": "String",
             "required": true,
-            "length": 450,
+            "length": 150,
             "precision": null,
             "scale": null,
             "mysql": {
                 "columnName": "nombre",
                 "dataType": "varchar",
-                "dataLength": 450,
+                "dataLength": 150,
                 "dataPrecision": null,
                 "dataScale": null,
                 "nullable": "NO"

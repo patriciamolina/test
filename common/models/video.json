@@ -13,13 +13,13 @@
       "id": true,
       "required": false,
       "length": null,
-      "precision": 10,
+      "precision": 11,
       "scale": 0,
       "mysql": {
         "columnName": "idVideo",
         "dataType": "int",
         "dataLength": null,
-        "dataPrecision": 10,
+        "dataPrecision": 11,
         "dataScale": 0,
         "nullable": "NO"
       }
@@ -28,13 +28,13 @@
           "type": "Number",
           "required": true,
           "length": null,
-          "precision": 10,
+          "precision": 11,
           "scale": 0,
           "mysql": {
               "columnName": "idDestino",
               "dataType": "int",
               "dataLength": null,
-              "dataPrecision": 10,
+              "dataPrecision": 11,
               "dataScale": 0,
               "nullable": "NO"
           }
@@ -42,13 +42,13 @@
     "ruta": {
       "type": "String",
       "required": true,
-      "length": 240,
+      "length": 80,
       "precision": null,
       "scale": null,
       "mysql": {
         "columnName": "ruta",
         "dataType": "varchar",
-        "dataLength": 240,
+        "dataLength": 80,
         "dataPrecision": null,
         "dataScale": null,
         "nullable": "NO"

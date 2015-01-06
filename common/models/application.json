@@ -20,5 +20,12 @@
             "principalId": "SUPERADMIN",
             "permission": "ALLOW"
         }
-    ]
+    ],
+    "relations": {
+        "accessTokens": {
+            "type": "hasMany",
+            "model": "AccessToken",
+            "foreignKey": "appId"
+        }
+    }
 }

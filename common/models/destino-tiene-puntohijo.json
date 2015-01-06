@@ -14,13 +14,13 @@
       "id": true,
       "required": true,
       "length": null,
-      "precision": 10,
+      "precision": 11,
       "scale": 0,
       "mysql": {
         "columnName": "idDestinoPadre",
         "dataType": "int",
         "dataLength": null,
-        "dataPrecision": 10,
+        "dataPrecision": 11,
         "dataScale": 0,
         "nullable": "NO"
       }
@@ -30,13 +30,13 @@
       "id": true,
       "required": true,
       "length": null,
-      "precision": 10,
+      "precision": 11,
       "scale": 0,
       "mysql": {
         "columnName": "idDestinoHijo",
         "dataType": "int",
         "dataLength": null,
-        "dataPrecision": 10,
+        "dataPrecision": 11,
         "dataScale": 0,
         "nullable": "NO"
       }
@@ -44,13 +44,13 @@
     "coordenadas": {
       "type": "String",
       "required": true,
-      "length": 1500,
+      "length": 500,
       "precision": null,
       "scale": null,
       "mysql": {
         "columnName": "coordenadas",
         "dataType": "varchar",
-        "dataLength": 1500,
+        "dataLength": 500,
         "dataPrecision": null,
         "dataScale": null,
         "nullable": "NO"
