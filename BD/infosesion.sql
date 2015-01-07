@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost:3333
--- Tiempo de generación: 17-12-2014 a las 22:11:21
+-- Tiempo de generación: 07-01-2015 a las 15:03:58
 -- Versión del servidor: 5.5.24-log
 -- Versión de PHP: 5.3.13
 
@@ -19,24 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `infosesion`
 --
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `acl`
---
-
-DROP TABLE IF EXISTS `acl`;
-CREATE TABLE IF NOT EXISTS `acl` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `model` varchar(512) DEFAULT NULL,
-  `property` varchar(512) DEFAULT NULL,
-  `accessType` varchar(512) DEFAULT NULL,
-  `permission` varchar(512) DEFAULT NULL,
-  `principalType` varchar(512) DEFAULT NULL,
-  `principalId` varchar(512) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -112,8 +94,8 @@ CREATE TABLE IF NOT EXISTS `customer` (
 
 INSERT INTO `customer` (`id`, `realm`, `username`, `password`, `credentials`, `challenges`, `email`, `emailVerified`, `verificationToken`, `status`, `created`, `lastUpdated`, `idcliente`, `nombres`, `apellidos`) VALUES
 (1, NULL, 'bob', '$2a$10$4oLm9TIaVGcQR5EkXixph.9bot9dmRHUPvo3tLEpt9Dc3CY9vX8UO', NULL, NULL, 'foo@bar.com', NULL, NULL, NULL, NULL, NULL, 1, 'bob', 'bobs'),
-(2, NULL, 'felipe', '$2a$10$c6.4O4966Id3qvyi81Wrr.UHzKnUhRDnN140lsiTTPPejWzhkMgfS', NULL, NULL, 'foo@bar.com', NULL, NULL, NULL, NULL, NULL, 2, 'felipe', 'aguayo'),
-(3, NULL, 'datactil', '$2a$10$ShyXoSSqZwkHB7dPjwXuo.hcwMoC3/oeiMuBh5KilazplWd7M8HaC', NULL, NULL, 'datactil@datactil.com', NULL, NULL, NULL, NULL, NULL, 0, 'datactil', 'datactil'),
+(2, NULL, 'felipe', '$2a$10$c6.4O4966Id3qvyi81Wrr.UHzKnUhRDnN140lsiTTPPejWzhkMgfS', NULL, NULL, 'foo@bar.com', NULL, NULL, NULL, NULL, NULL, 1, 'felipe', 'aguayo'),
+(3, NULL, 'datactil', '$2a$10$ShyXoSSqZwkHB7dPjwXuo.hcwMoC3/oeiMuBh5KilazplWd7M8HaC', NULL, NULL, 'datactil@datactil.com', NULL, NULL, NULL, NULL, NULL, 3, 'datactil', 'datactil'),
 (7, NULL, 'adc', '$2a$10$SKevZixEh.LEBKl/PYtl2OHkxm8CO5C2VpfnhwW3O1qvdJV6wv3Cm', NULL, NULL, 'adc@adc.cl', NULL, NULL, '1', NULL, NULL, 1, '11', 'adc'),
 (8, NULL, 'user', '$2a$10$V1/QJnj/a/nUgPFEiNCIx.ih3K5kycCDBHj/.8admSL6bFfdWT9IO', NULL, NULL, 'user@user.cl', NULL, NULL, '1', NULL, NULL, 1, 'user', 'user'),
 (9, NULL, 'mmm', '$2a$10$lFx5w2BlbUviN0ygCUIGR.Ysixkc0PuK1s.R72FJemkzRo72V2S7O', NULL, NULL, 'mmm@mmm.cl', NULL, NULL, '1', NULL, NULL, 1, 'mmm', 'mmm'),
@@ -123,11 +105,11 @@ INSERT INTO `customer` (`id`, `realm`, `username`, `password`, `credentials`, `c
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `Role`
+-- Estructura de tabla para la tabla `role`
 --
 
-DROP TABLE IF EXISTS `Role`;
-CREATE TABLE IF NOT EXISTS `Role` (
+DROP TABLE IF EXISTS `role`;
+CREATE TABLE IF NOT EXISTS `role` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(512) DEFAULT NULL,
   `description` varchar(512) DEFAULT NULL,
@@ -137,10 +119,10 @@ CREATE TABLE IF NOT EXISTS `Role` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
--- Volcado de datos para la tabla `Role`
+-- Volcado de datos para la tabla `role`
 --
 
-INSERT INTO `Role` (`id`, `name`, `description`, `created`, `modified`) VALUES
+INSERT INTO `role` (`id`, `name`, `description`, `created`, `modified`) VALUES
 (1, 'ADMIN', 'El rol de Administrador permite a un usuario hacer cualquier acción (Crear, Leer, Editar, Borrar) y ademas gestionar Usuarios dentro de la API (excepto los de tipo Admin).', '2014-11-27 20:41:12', '2014-11-27 20:41:12'),
 (2, 'ESCRITOR', 'El rol de ESCRITOR permite a un usuario crear, actualizar y eliminar registros dentro de la API.', '2014-11-27 20:42:58', '2014-11-27 20:42:58'),
 (3, 'LECTOR', 'El rol de LECTOR permite a un usuario leer registros dentro de la API.', '2014-11-27 20:42:58', '2014-11-27 20:42:58'),

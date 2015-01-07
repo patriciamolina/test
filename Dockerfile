@@ -21,5 +21,4 @@ ADD . /app
 CMD ["npm", "start"]
 
 # Expose ports.
-EXPOSE 8000
-EXPOSE 8080
+EXPOSE 5000
