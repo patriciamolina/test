@@ -6,10 +6,16 @@
     ]
   },
   "User": {
-    "dataSource": "db"
+    "dataSource": "INFOSESION",
+    "public": false
   },
-  "Application": {
-    "dataSource": "db"
+  "Customer": {
+    "dataSource": "INFOSESION",
+    "public": true
+  },
+  "Aplicacion": {
+    "dataSource": "INFOSESION",
+    "public": true
   },
   "AccessToken": {
     "dataSource": "db",
@@ -19,19 +25,23 @@
     "dataSource": "db",
     "public": false
   },
-  "RoleMapping": {
-    "dataSource": "db",
-    "public": false
-  },
-  "Role": {
-    "dataSource": "db",
-    "public": false
-  },
-  "Audio": {
-    "dataSource": "INFOGEO",
+  "MapeoRol": {
+    "dataSource": "INFOSESION",
     "public": true
   },
-  "Bibliotecamultimedia": {
+  "Role": {
+    "dataSource": "INFOSESION",
+    "public": true
+  },
+    "Container": {
+        "dataSource": "storage",
+        "public": true
+    },
+    "Atajomapa": {
+        "dataSource": "INFOGEO",
+        "public": true
+    },
+  "Audio": {
     "dataSource": "INFOGEO",
     "public": true
   },
@@ -47,6 +57,14 @@
     "dataSource": "INFOGEO",
     "public": true
   },
+  "DestinoMasivo":{
+      "dataSource": "db",
+      "public": false
+  },
+    "DestinoUnoCompleto":{
+        "dataSource": "db",
+        "public": false
+    },
   "Destino": {
     "dataSource": "INFOGEO",
     "public": true

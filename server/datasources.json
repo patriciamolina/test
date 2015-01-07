@@ -4,12 +4,27 @@
     "connector": "memory"
   },
   "INFOGEO": {
-    "host": "localhost",
-    "port": 3333,
+    "host": "mariadb",
+    "port": 3306,
     "database": "infogeo",
-    "password": "",
+    "password": "7nDmDpyKdymm69Os",
     "name": "INFOGEO",
-    "user": "root",
+    "user": "barman",
     "connector": "mysql"
+  },
+  "INFOSESION": {
+    "host": "mariadb",
+    "port": 3306,
+    "database": "infosesion",
+    "password": "7nDmDpyKdymm69Os",
+    "name": "INFOSESION",
+    "user": "barman",
+    "connector": "mysql"
+  },
+  "storage": {
+    "name": "storage",
+    "connector": "loopback-component-storage",
+    "provider": "filesystem",
+    "root": "./server/storage"
   }
 }
