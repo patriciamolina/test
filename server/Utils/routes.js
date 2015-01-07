@@ -31,7 +31,6 @@ module.exports = function(app) {
             if (contentType) headers["Content-Type"] = contentType;
             res.writeHead(200, headers);
             res.write(JSON.stringify(respjson));
-            res.write
             res.end();
             dns.lookup(req.headers.origin.replace("http://",""), function onLookup(err, addresses, family) {
                 console.log('err:', err);
