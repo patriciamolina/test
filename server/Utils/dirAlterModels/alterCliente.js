@@ -1,6 +1,7 @@
 module.exports = function(app) {
 
-    var Destino = app.models.Destino
+    var Cliente = app.models.Cliente
+        ,   Destino = app.models.Destino
         ,   Customer = app.models.Customer
         ,   Categoria = app.models.Categoria
         ,   Subcategoria = app.models.Subcategoria
@@ -17,7 +18,7 @@ module.exports = function(app) {
         ,   md5 = require('MD5')
         ,   moderado = 2;
 
-    Destino.cargaMasiva = function (req, data, cb){
+    Cliente.cargaMasiva = function (req, data, cb){
         data = data.data || data;
         var response = {}
             ,   token = req.accessToken;
@@ -298,7 +299,7 @@ module.exports = function(app) {
 
     };
 
-    Destino.cargaUnoCompleto = function (req, data, cb){
+    Cliente.cargaUnoCompleto = function (req, data, cb){
         var response = {}
             ,   token = req.accessToken
             ,   elemento = data;

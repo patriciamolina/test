@@ -15,7 +15,7 @@
   },
   "Aplicacion": {
     "dataSource": "INFOSESION",
-    "public": true
+    "public": false
   },
   "AccessToken": {
     "dataSource": "db",
@@ -27,7 +27,7 @@
   },
   "MapeoRol": {
     "dataSource": "INFOSESION",
-    "public": true
+    "public": false
   },
   "Role": {
     "dataSource": "INFOSESION",
@@ -39,15 +39,15 @@
     },
     "Atajomapa": {
         "dataSource": "INFOGEO",
-        "public": true
+        "public": false
     },
   "Audio": {
     "dataSource": "INFOGEO",
-    "public": true
+    "public": false
   },
   "Categoria": {
     "dataSource": "INFOGEO",
-    "public": true
+    "public": false
   },
   "Cliente": {
     "dataSource": "INFOGEO",
@@ -55,7 +55,7 @@
   },
   "Codigoqr": {
     "dataSource": "INFOGEO",
-    "public": true
+    "public": false
   },
   "DestinoMasivo":{
       "dataSource": "db",
@@ -67,7 +67,7 @@
     },
   "Destino": {
     "dataSource": "INFOGEO",
-    "public": true
+    "public": false
   },
   "Estadodestino": {
     "dataSource": "INFOGEO",
@@ -75,7 +75,7 @@
   },
   "Imagen": {
     "dataSource": "INFOGEO",
-    "public": true
+    "public": false
   },
   "Lenguaje": {
     "dataSource": "INFOGEO",
@@ -83,11 +83,11 @@
   },
   "Subcategoria": {
     "dataSource": "INFOGEO",
-    "public": true
+    "public": false
   },
   "Texto": {
     "dataSource": "INFOGEO",
-    "public": true
+    "public": false
   },
   "Tipotexto": {
     "dataSource": "INFOGEO",
@@ -95,7 +95,7 @@
   },
   "Video": {
     "dataSource": "INFOGEO",
-    "public": true
+    "public": false
   },
   "AudioTieneTexto": {
     "dataSource": "INFOGEO",
