@@ -32,11 +32,13 @@ module.exports = function(app) {
             res.writeHead(200, headers);
             res.write(JSON.stringify(respjson));
             res.end();
-            dns.lookup(req.headers.origin.replace("http://",""), function onLookup(err, addresses, family) {
-                console.log('err:', err);
-                console.log('addresses:', addresses);
-                console.log('family:', family);
-            });
+            if(req.headers.origin != undefined) {
+                dns.lookup(req.headers.origin.replace("http://", ""), function onLookup(err, addresses, family) {
+                    console.log('err:', err);
+                    console.log('addresses:', addresses);
+                    console.log('family:', family);
+                });
+            }
         });
   });
 
