@@ -53,15 +53,16 @@ Utils.alterModels(app);
 // Add headers
 
 app.start = function() {
-    console.log("Starting...")
+    console.log("Starting...");
     
-    var portHttps = process.env.OPENSHIFT_NODEJS_PORT || app.get('port-https');
-    var hostHttps = process.env.OPENSHIFT_NODEJS_IP || app.get('host');
+    var portHttp = process.env.OPENSHIFT_NODEJS_PORT || app.get('port');
+    var hostHttp = process.env.OPENSHIFT_NODEJS_IP || app.get('host');
     var backlog   = 511;
 
-    https.createServer(httpsOptions, app).listen(portHttps, hostHttps, backlog, function() {
+    http.createServer(app).listen(portHttp, hostHttp, backlog, function() {
         app.emit('started');
-        console.log('Web server listening at: %s', app.get('url'));
+        console.log('Web server listening at: %s:%s', hostHttp, portHttp);
+        // MySQL test
     });
 };
 
