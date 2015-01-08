@@ -4,21 +4,21 @@
     "connector": "memory"
   },
   "INFOGEO": {
-    "host": "mariadb",
+    "host": "127.8.155.2",
     "port": 3306,
-    "database": "infogeo",
-    "password": "7nDmDpyKdymm69Os",
+    "database": "barman",
+    "password": "K9HRDHdnn_j-",
     "name": "INFOGEO",
-    "user": "barman",
+    "user": "admin6Lvk21V",
     "connector": "mysql"
   },
   "INFOSESION": {
-    "host": "mariadb",
+    "host": "127.8.155.2",
     "port": 3306,
-    "database": "infosesion",
-    "password": "7nDmDpyKdymm69Os",
+    "database": "barman",
+    "password": "K9HRDHdnn_j-",
     "name": "INFOSESION",
-    "user": "barman",
+    "user": "admin6Lvk21V",
     "connector": "mysql"
   },
   "storage": {
