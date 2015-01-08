@@ -1,0 +1,34 @@
+{
+  "name": "DestinoUnoCompleto",
+  "base": "PersistedModel",
+  "properties": {
+      "CATEGORIA": {
+          "required": true,
+          "type": "string",
+          "length": 450
+      },
+      "SUBCATEGORIA": {
+          "required": true,
+          "type": "string",
+          "length": 450
+      },
+      "NOMBRE": {
+          "required": true,
+          "type": "string",
+          "length": 450
+      },
+      "TEXTOS": {
+          "type": "object",
+          "required": true,
+          "deprecated": true
+      },
+      "GEOMETRIA": {
+          "required": true,
+          "type": "string"
+      },
+      "TIPOGEOMETRIA": {
+          "required": true,
+          "type": "string"
+      }
+  }
+}

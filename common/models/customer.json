@@ -1,0 +1,225 @@
+{
+    "name": "Customer",
+    "plural": "Customers",
+    "base": "PersistedModel",
+    "idInjection": false,
+    "mysql": {
+        "schema": "infosesion",
+        "table": "customer"
+    },
+    "properties": {
+      "idcliente": {
+          "type": "Number",
+          "id": false,
+          "required": true,
+          "length": null,
+          "precision": 11,
+          "scale": 0,
+          "mysql": {
+              "columnName": "idcliente",
+              "dataType": "int",
+              "dataLength": null,
+              "dataPrecision": 11,
+              "dataScale": 0,
+              "nullable": "NO"
+          }
+      },
+        "nombres": {
+            "type": "String",
+            "required": true,
+            "length": 150,
+            "precision": null,
+            "scale": null,
+            "mysql": {
+                "columnName": "nombres",
+                "dataType": "varchar",
+                "dataLength": 150,
+                "dataPrecision": null,
+                "dataScale": null,
+                "nullable": "NO"
+            }
+        },
+        "apellidos": {
+            "type": "String",
+            "required": true,
+            "length": 150,
+            "precision": null,
+            "scale": null,
+            "mysql": {
+                "columnName": "apellidos",
+                "dataType": "varchar",
+                "dataLength": 150,
+                "dataPrecision": null,
+                "dataScale": null,
+                "nullable": "NO"
+            }
+        },    "realm": {
+            "type": "string"
+        },
+        "username": {
+            "type": "string"
+        },
+        "password": {
+            "type": "string",
+            "required": true
+        },
+        "credentials": {
+            "type": "object",
+            "deprecated": true
+        },
+        "challenges": {
+            "type": "object",
+            "deprecated": true
+        },
+        "email": {
+            "type": "string",
+            "required": true
+        },
+        "emailVerified": "boolean",
+        "verificationToken": "string",
+        "status": "string",
+        "created": "date",
+        "lastUpdated": "date"
+    },
+    "hidden": ["password"],
+    "relations": {
+        "roles": {
+            "type": "hasMany",
+            "model": "MapeoRol",
+            "foreignKey": "principalId"
+        },
+        "accessTokens": {
+            "type": "hasMany",
+            "model": "AccessToken",
+            "foreignKey": "userId"
+        }
+    },
+    "acls": [
+        {
+            "principalType": "ROLE",
+            "principalId": "$everyone",
+            "permission": "DENY"
+        },
+        {
+            "principalType": "ROLE",
+            "principalId": "$everyone",
+            "permission": "ALLOW",
+            "property": "login"
+        },
+        {
+            "principalType": "ROLE",
+            "principalId": "$everyone",
+            "permission": "ALLOW",
+            "property": "logout"
+        },
+        {
+            "principalType": "ROLE",
+            "principalId": "$everyone",
+            "permission": "ALLOW",
+            "property": "confirm"
+        },
+        {
+            "principalType": "ROLE",
+            "principalId": "$everyone",
+            "permission": "ALLOW",
+            "property": "resetPassword",
+            "accessType": "EXECUTE"
+        },
+      {
+          "accessType": "*",
+          "principalType": "ROLE",
+          "principalId": "ADMIN",
+          "permission": "ALLOW"
+      },
+      {
+          "accessType": "*",
+          "principalType": "ROLE",
+          "principalId": "SUPERADMIN",
+          "permission": "ALLOW"
+      },
+        {
+            "principalType": "ROLE",
+            "principalId": "ADMIN",
+            "permission": "ALLOW",
+            "property": "__count__roles"
+        },
+        {
+            "principalType": "ROLE",
+            "principalId": "ADMIN",
+            "permission": "ALLOW",
+            "property": "__create__roles"
+        },
+        {
+            "principalType": "ROLE",
+            "principalId": "ADMIN",
+            "permission": "ALLOW",
+            "property": "__delete__roles"
+        },
+        {
+            "principalType": "ROLE",
+            "principalId": "ADMIN",
+            "permission": "ALLOW",
+            "property": "__destroyById__roles"
+        },
+        {
+            "principalType": "ROLE",
+            "principalId": "ADMIN",
+            "permission": "ALLOW",
+            "property": "__findById__roles"
+        },
+        {
+            "principalType": "ROLE",
+            "principalId": "ADMIN",
+            "permission": "ALLOW",
+            "property": "__get__roles"
+        },
+        {
+            "principalType": "ROLE",
+            "principalId": "ADMIN",
+            "permission": "ALLOW",
+            "property": "__updateById__roles"
+        },
+        {
+            "principalType": "ROLE",
+            "principalId": "SUPERADMIN",
+            "permission": "ALLOW",
+            "property": "__count__roles"
+        },
+        {
+            "principalType": "ROLE",
+            "principalId": "SUPERADMIN",
+            "permission": "ALLOW",
+            "property": "__create__roles"
+        },
+        {
+            "principalType": "ROLE",
+            "principalId": "SUPERADMIN",
+            "permission": "ALLOW",
+            "property": "__delete__roles"
+        },
+        {
+            "principalType": "ROLE",
+            "principalId": "SUPERADMIN",
+            "permission": "ALLOW",
+            "property": "__destroyById__roles"
+        },
+        {
+            "principalType": "ROLE",
+            "principalId": "SUPERADMIN",
+            "permission": "ALLOW",
+            "property": "__findById__roles"
+        },
+        {
+            "principalType": "ROLE",
+            "principalId": "SUPERADMIN",
+            "permission": "ALLOW",
+            "property": "__get__roles"
+        },
+        {
+            "principalType": "ROLE",
+            "principalId": "SUPERADMIN",
+            "permission": "ALLOW",
+            "property": "__updateById__roles"
+        }
+    ]
+}

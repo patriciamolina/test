@@ -1,0 +1,34 @@
+{
+  "name": "DestinoMasivo",
+  "base": "PersistedModel",
+  "properties": {
+      "CATEGORIA": {
+          "required": true,
+          "type": "string",
+          "length": 450
+      },
+      "SUBCATEGORIA": {
+          "required": true,
+          "type": "string",
+          "length": 450
+      },
+      "NOMBRE": {
+          "required": true,
+          "type": "string",
+          "length": 450
+      },
+      "TEXTOS": {
+          "type": "object",
+          "required": true,
+          "deprecated": true
+      },
+      "LATITUD": {
+          "required": true,
+          "type": "number"
+      },
+      "LONGITUD": {
+          "required": true,
+          "type": "number"
+      }
+  }
+}
