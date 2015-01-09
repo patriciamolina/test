@@ -27,8 +27,8 @@ module.exports = function(app) {
         var headers = {};
         var contentType = contentTypesByExtension["json"];
         if (contentType) headers["Content-Type"] = contentType;
-        res.writeHead(200, JSON.stringify(headers));
-        res.write(req);
+        res.writeHead(200,headers );
+        res.write(JSON.stringify(req));
         res.end();
     });
 
