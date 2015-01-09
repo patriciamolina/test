@@ -16,7 +16,7 @@ module.exports = function(app) {
         var host = app.get('host');
         if(host == '127.8.155.1') {
             //if (!req.secure) {
-                return res.redirect('https://barman-nimbutravel.rhcloud.com:443' + req.url);
+                return res.redirect('https://barman-nimbutravel.rhcloud.com' + req.url);
             //}
         }
         next();
