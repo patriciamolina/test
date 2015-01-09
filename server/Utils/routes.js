@@ -22,6 +22,15 @@ module.exports = function(app) {
         next();
     });
 
+    router.get('/holaprueba',function(req,res){
+        setHeaders(res);
+        var headers = {};
+        var contentType = contentTypesByExtension["html"];
+        if (contentType) headers["Content-Type"] = contentType;
+        res.writeHead(200, headers);
+        res.write('hola');
+        res.end();
+    });
 
     router.get('/VerifyToken/:id', function(req, res) {
       setHeaders(res);
