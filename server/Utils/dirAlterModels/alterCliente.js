@@ -362,7 +362,7 @@ module.exports = function(app) {
                                         cb(null, response);
                                     }
 
-                                        if (subcategoria != null && subcategoria.idcliente != user.idcliente) {
+                                        if (subcategoria != null && subcategoria.idcliente == user.idcliente) {
                                             var nombre = "" + user.idcliente + ""
                                                     + categoria.idcategoria + ""
                                                     + subcategoria.idsubcategoria + ""
