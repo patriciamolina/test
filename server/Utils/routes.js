@@ -15,9 +15,9 @@ module.exports = function(app) {
     router.get('*',function(req, res, next) {
         var host = app.get('host');
         if(host == 'barman-nimbutravel.rhcloud.com') {
-            if (!req.secure) {
+            //if (!req.secure) {
                 return res.redirect('https://' + host + ':443' + req.url);
-            }
+            //}
         }
         next();
     });
