@@ -14,21 +14,21 @@ module.exports = function(app) {
 
     router.get('*',function(req, res, next) {
         var host = app.get('host');
-        if(host == '127.8.155.1') {
-            if (!req.secure) {
-                return res.redirect('https://barman-nimbutravel.rhcloud.com' + req.url);
-            }
-        }
+//        if(host == '127.8.155.1') {
+//            if (!req.secure) {
+//                return res.redirect('https://barman-nimbutravel.rhcloud.com' + req.url);
+//            }
+//        }
         next();
     });
 
     router.get('/holaprueba',function(req,res){
         setHeaders(res);
         var headers = {};
-        var contentType = contentTypesByExtension["html"];
+        var contentType = contentTypesByExtension["json"];
         if (contentType) headers["Content-Type"] = contentType;
         res.writeHead(200, headers);
-        res.write(app.get('host'));
+        res.write(req);
         res.end();
     });
 
