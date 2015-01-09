@@ -62,7 +62,7 @@ module.exports = function(app) {
                                     response.elements.push(elemento);
                                     callback();
                                 }
-                                if(categoria == null){
+                                if(categoria == null && categoria.idcliente != user.idcliente){
                                     if (response.result === undefined
                                         && response.elements === undefined) {
 
@@ -90,7 +90,7 @@ module.exports = function(app) {
                                             callback();
                                         }
 
-                                        if (subcategoria != null) {
+                                        if (subcategoria != null && subcategoria.idcliente != user.idcliente) {
                                             var nombre = "" + user.idcliente + ""
                                                     + categoria.idcategoria + ""
                                                     + subcategoria.idsubcategoria + ""
@@ -337,7 +337,7 @@ module.exports = function(app) {
                                 response.elements.push(elemento);
                                 cb(null, response);
                             }
-                            if(categoria == null){
+                            if(categoria == null && categoria.idcliente != user.idcliente){
                                 if (response.result === undefined
                                     && response.elements === undefined) {
 
@@ -362,7 +362,7 @@ module.exports = function(app) {
                                         cb(null, response);
                                     }
 
-                                        if (subcategoria != null) {
+                                        if (subcategoria != null && subcategoria.idcliente != user.idcliente) {
                                             var nombre = "" + user.idcliente + ""
                                                     + categoria.idcategoria + ""
                                                     + subcategoria.idsubcategoria + ""
