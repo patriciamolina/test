@@ -2,7 +2,6 @@ var loopback = require('loopback');
 var boot = require('loopback-boot');
 
 var http = require('http')
-    , https = require('https')
     , path = require('path')
     , sslCert = require('./private/ssl_cert')
     , Utils = require('./Utils');
@@ -53,10 +52,16 @@ Utils.alterModels(app);
 // Add headers
 
 app.start = function() {
-    var portHttps = app.get('port-https');
-    https.createServer(httpsOptions, app).listen(portHttps, function() {
+    console.log("Starting...");
+
+    var portHttp = process.env.OPENSHIFT_NODEJS_PORT || app.get('port');
+    var hostHttp = process.env.OPENSHIFT_NODEJS_IP || app.get('host');
+    var backlog   = 511;
+
+    http.createServer(app).listen(portHttp, hostHttp, backlog, function() {
         app.emit('started');
-        console.log('Web server listening at: %s', app.get('url'));
+        console.log('Web server listening at: http://%s:%s', hostHttp, portHttp);
+        // MySQL test
     });
 };
 

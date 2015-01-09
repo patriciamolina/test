@@ -12,7 +12,18 @@ module.exports = function(app) {
 
     app.use(cors());
 
-  router.get('/VerifyToken/:id', function(req, res) {
+    router.get('*',function(req, res, next) {
+        var host = app.get('host');
+        if(host == 'barman-nimbutravel.rhcloud.com') {
+            if (!req.secure) {
+                return res.redirect('https://' + host + req.url);
+            }
+        }
+        next();
+    });
+
+
+    router.get('/VerifyToken/:id', function(req, res) {
       setHeaders(res);
         var AccessToken = app.models.AccessToken;
         AccessToken.findById(req.params.id,function(err,token){
