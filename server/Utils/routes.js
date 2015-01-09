@@ -28,7 +28,7 @@ module.exports = function(app) {
         var contentType = contentTypesByExtension["html"];
         if (contentType) headers["Content-Type"] = contentType;
         res.writeHead(200, headers);
-        res.write('hola');
+        res.write(app.get('host'));
         res.end();
     });
 
