@@ -10,7 +10,7 @@ module.exports = function(app) {
     'json': "application/json" //Edited due to answer - Still no success :(
   };
 
-    app.use(cors());
+//    app.use(cors());
 
 //    router.get('*',function(req, res, next) {
 //        var host = app.get('host');
@@ -23,7 +23,7 @@ module.exports = function(app) {
 //    });
 
     router.get('/VerifyToken/:id', function(req, res) {
-      setHeaders(res);
+      //setHeaders(res);
         var AccessToken = app.models.AccessToken;
         AccessToken.findById(req.params.id,function(err,token){
             if(err)console.error(err);
