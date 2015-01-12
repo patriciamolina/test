@@ -39,15 +39,15 @@
     },
     "Atajomapa": {
         "dataSource": "INFOGEO",
-        "public": false
+        "public": true
     },
   "Audio": {
     "dataSource": "INFOGEO",
-    "public": false
+    "public": true
   },
   "Categoria": {
     "dataSource": "INFOGEO",
-    "public": false
+    "public": true
   },
   "Cliente": {
     "dataSource": "INFOGEO",
@@ -55,7 +55,7 @@
   },
   "Codigoqr": {
     "dataSource": "INFOGEO",
-    "public": false
+    "public": true
   },
   "DestinoMasivo":{
       "dataSource": "db",
