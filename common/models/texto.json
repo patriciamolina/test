@@ -56,7 +56,13 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "lenguaje": {
+        "type": "belongsTo",
+        "model": "Lenguaje",
+        "foreignKey": "idlenguaje"
+    }
+  },
   "acls": [
     {
           "accessType": "*",
@@ -89,6 +95,24 @@
           "principalId": "ESCRITOR",
           "permission": "ALLOW",
           "property": "*"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "ADMIN",
+          "permission": "ALLOW",
+          "property": "__get__subcategoria"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "SUPERADMIN",
+          "permission": "ALLOW",
+          "property": "__get__subcategoria"
+      },
+      {
+          "principalType": "ROLE",
+          "principalId": "LECTOR",
+          "permission": "ALLOW",
+          "property": "__get__subcategoria"
       }
   ],
   "methods": []
