@@ -10,7 +10,7 @@ module.exports = function(app) {
     'json': "application/json" //Edited due to answer - Still no success :(
   };
 
-//    app.use(cors());
+    app.use(cors());
 
 //    router.get('*',function(req, res, next) {
 //        var host = app.get('host');
