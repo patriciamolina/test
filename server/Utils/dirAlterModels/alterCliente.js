@@ -90,7 +90,7 @@ module.exports = function(app) {
                                             callback();
                                         }
 
-                                        if (subcategoria != null && subcategoria.idcliente != user.idcliente) {
+                                        if (subcategoria != null && subcategoria.idcliente == user.idcliente) {
                                             var nombre = "" + user.idcliente + ""
                                                     + categoria.idcategoria + ""
                                                     + subcategoria.idsubcategoria + ""
