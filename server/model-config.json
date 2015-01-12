@@ -67,7 +67,7 @@
     },
   "Destino": {
     "dataSource": "INFOGEO",
-    "public": false
+    "public": true
   },
   "Estadodestino": {
     "dataSource": "INFOGEO",
@@ -75,7 +75,7 @@
   },
   "Imagen": {
     "dataSource": "INFOGEO",
-    "public": false
+    "public": true
   },
   "Lenguaje": {
     "dataSource": "INFOGEO",
@@ -83,11 +83,11 @@
   },
   "Subcategoria": {
     "dataSource": "INFOGEO",
-    "public": false
+    "public": true
   },
   "Texto": {
     "dataSource": "INFOGEO",
-    "public": false
+    "public": true
   },
   "Tipotexto": {
     "dataSource": "INFOGEO",
@@ -95,7 +95,7 @@
   },
   "Video": {
     "dataSource": "INFOGEO",
-    "public": false
+    "public": true
   },
   "AudioTieneTexto": {
     "dataSource": "INFOGEO",
