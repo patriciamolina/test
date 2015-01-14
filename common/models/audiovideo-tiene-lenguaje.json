@@ -4,7 +4,6 @@
   "base": "PersistedModel",
   "idInjection": false,
   "mysql": {
-    "schema": "infogeo",
     "table": "audiovideo_tiene_lenguaje"
   },
   "config,public": false,

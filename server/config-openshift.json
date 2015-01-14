@@ -1,0 +1,6 @@
+{
+    "restApiRoot": "/api",
+    "host": "barman-nimbutravel.rhcloud.com",
+    "port": 5000,
+    "url": "https://barman-nimbutravel.rhcloud.com"
+}

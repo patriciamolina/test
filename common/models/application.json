@@ -4,7 +4,6 @@
     "base": "Application",
     "idInjection": false,
     "mysql": {
-        "schema": "infosesion",
         "table": "application"
     },
     "acls": [

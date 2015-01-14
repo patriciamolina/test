@@ -4,7 +4,6 @@
   "base": "PersistedModel",
   "idInjection": false,
   "mysql": {
-    "schema": "infogeo",
     "table": "codigoqr_tiene_texto"
   },
   "config,public": false,

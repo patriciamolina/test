@@ -1,30 +1,30 @@
 {
-    "db": {
-        "name": "db",
-        "connector": "memory"
-    },
-    "INFOGEO": {
-        "host": "127.8.155.2",
-        "port": 3306,
-        "database": "barman",
-        "password": "K9HRDHdnn_j-",
-        "name": "INFOGEO",
-        "user": "admin6Lvk21V",
-        "connector": "mysql"
-    },
-    "INFOSESION": {
-        "host": "127.8.155.2",
-        "port": 3306,
-        "database": "barman",
-        "password": "K9HRDHdnn_j-",
-        "name": "INFOSESION",
-        "user": "admin6Lvk21V",
-        "connector": "mysql"
-    },
-    "storage": {
-        "name": "storage",
-        "connector": "loopback-component-storage",
-        "provider": "filesystem",
-        "root": "./server/storage"
-    }
+  "db": {
+    "name": "db",
+    "connector": "memory"
+  },
+  "INFOGEO": {
+    "host": "localhost",
+    "port": 3333,
+    "database": "infogeo",
+    "password": "",
+    "name": "INFOGEO",
+    "user": "root",
+    "connector": "mysql"
+  },
+  "INFOSESION": {
+    "host": "localhost",
+    "port": 3333,
+    "database": "infosesion",
+    "password": "",
+    "name": "INFOSESION",
+    "user": "root",
+    "connector": "mysql"
+  },
+  "storage": {
+    "name": "storage",
+    "connector": "loopback-component-storage",
+    "provider": "filesystem",
+    "root": "./server/storage"
+  }
 }

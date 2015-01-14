@@ -4,7 +4,6 @@
     "base": "PersistedModel",
     "idInjection": false,
     "mysql": {
-        "schema": "infosesion",
         "table": "customer"
     },
     "properties": {

@@ -4,7 +4,6 @@
     "base": "RoleMapping",
     "idInjection": false,
     "mysql": {
-        "schema": "infosesion",
         "table": "rolemapping"
     },
     "properties": {},
